@@ -27,6 +27,11 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1741,8 +1746,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\DBBak\" />
-    <Folder Include="日志\张宇欣\" />
-    <Folder Include="日志\李周良\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Reports\Finance\APDetails.rdlc" />
