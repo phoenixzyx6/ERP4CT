@@ -1,0 +1,522 @@
+﻿@model ZLERP.Model.ViewModels.ContractAndItems
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/ajaxfileupload.js")" type="text/javascript" language="javascript"> </script>
+    <script src="@Url.Content("~/Scripts/Views/Contract/Contract.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        var limitObj = { limit0: "limit0", limit1: "limit1", limit2: "limit2", limit3: "limit3" };
+        $(function () {
+            contractIndexInit({
+                ContractStoreUrl: '@Url.Action("Find")',
+                contractUnAuditUrl: '@Url.Action("UnAudit")',
+                itemDeleteUrl: '@Url.Action("Delete", "ContractItem")',
+                itemStoreUrl: '@Url.Action("Find", "ContractItem")',
+                itemUpdateUrl: '@Url.Action("Update", "ContractItem")',
+                identityStoreUrl: '@Url.Action("Find", "IdentitySetting")',
+                identityAddUrl: '@Url.Action("Add", "IdentitySetting")',
+                identityUpdateUrl: '@Url.Action("Update", "IdentitySetting")',
+                identityRowDeleteUrl: '@Url.Action("Delete", "IdentitySetting")',
+                listDataUrl: '@Url.Action("ListData", "Identity")',
+                contractOtherPriceStoreUrl: '@Url.Action("Find", "ContractOtherPrice")',
+                otherPriceRowDeleteUrl: '@Url.Action("Delete", "ContractOtherPrice")',
+                otherPriceAddUrl: '@Url.Action("Add", "ContractOtherPrice")',
+                otherPriceUpdateUrl: '@Url.Action("Update", "ContractOtherPrice")',
+                saveLockUrl: '@Url.Action("QuickLock")',
+                getIdentityPriceUrl: '@Url.Action("getIdentityPrice")',
+                uploadUrl: '@Url.Action("Upload", "Attachment")',
+                deleteAttachmentUrl: '@Url.Action("Delete", "Attachment")',
+                ProjectStoreUrl: '@Url.Action("Find", "Project")',
+                ProjectUpdateUrl: '@Url.Action("Update", "Project")',
+                listContractItemUrl: '@Url.Action("ListData", "ContractItem")',
+                saveTaskIdentitiesUrl: '@Url.Action("SaveTaskIdentities", "ProduceTask")',
+                findIdentitySettingsUrl: '@Url.Action("FindIdentitySettings", "Identitysetting")',
+                handleBatchAuditUrl: '@Url.Action("BatchAudit")'
+            });
+        });
+    </script>
+    <style type="text/css">
+        fieldset
+        {
+            padding: 1px;
+            margin: 1px;
+            width: 100%;
+            color: #333;
+            border: #06c dashed 1px;
+        }
+        legend
+        {
+            color: #1D5987;
+            
+            font-weight: bold;
+            background: #fff;
+            border: #b6b6b6 solid 1px;
+            padding: 3px 6px;
+        }
+    </style>
+}
+@*合同表单*@
+<div id="ContractForm" style="display: none;">
+    @using (Html.BeginForm("", "", FormMethod.Post, new { encrypt = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.TextBoxFor(m => m.Contract.ID, new { @class = "text", style = "display:none;" })@Html.LabelFor(m => m.Contract.CustName)@Html.AutoComplete("Contract.CustomerID", "Contract.CustName", "ComboByKey", "Customer", "ID", "ShortName", "CustName", "IsUse=1", null)
+                </td>
+                
+                <td>@Html.LabelFor(m => m.Contract.ContractST)@Html.EditorFor(m => m.Contract.ContractST, "DateTimeWithTime")
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.ContractET)@Html.EditorFor(m => m.Contract.ContractET, "DateTimeWithTime")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.ContractName)@Html.TextBoxFor(m => m.Contract.ContractName, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.ContractNo)@Html.TextBoxFor(m => m.Contract.ContractNo, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.PaymentDate1)@Html.EditorFor(m => m.Contract.PaymentDate1, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.BuildUnit)@Html.TextBoxFor(m => m.Contract.BuildUnit, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.ProjectAddr)@Html.TextBoxFor(m => m.Contract.ProjectAddr, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.FootDate1)@Html.EditorFor(m => m.Contract.FootDate1, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.SignTotalCube)@Html.TextBoxFor(m => m.Contract.SignTotalCube, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.SignDate)@Html.EditorFor(m => m.Contract.SignDate, "DateTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.PayBackMan)@Html.TextBoxFor(m => m.Contract.PayBackMan, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.SignTotalMoney)@Html.TextBoxFor(m => m.Contract.SignTotalMoney, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.ContractType)@Html.DicEditorFor(m => m.Contract.ContractType, DicEnum.ContractType, new { style = "width:138px;" })
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.PayBackTel)@Html.TextBoxFor(m => m.Contract.PayBackTel, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.ValuationType)@Html.DicEditorFor(m => m.Contract.ValuationType, DicEnum.ValuationType)
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.PaymentType)@Html.DicEditorFor(m => m.Contract.PaymentType, DicEnum.PaymentType)
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.MatCube)@Html.TextBoxFor(m => m.Contract.MatCube)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.ContractStatus)@Html.DicEditorFor(m => m.Contract.ContractStatus, DicEnum.ContractStatus)
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.ContractLimitType)@Html.DicEditorFor(m => m.Contract.ContractLimitType, DicEnum.CubeLimit)
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.PrepayCube)@Html.TextBoxFor(m => m.Contract.PrepayCube)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.Salesman)@Html.TextBoxFor(m => m.Contract.Salesman, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.ALinkMan)@Html.TextBoxFor(m => m.Contract.ALinkMan, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.ALinkTel)@Html.TextBoxFor(m => m.Contract.ALinkTel, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.BLinkMan)@Html.TextBoxFor(m => m.Contract.BLinkMan, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.BLinkTel)@Html.TextBoxFor(m => m.Contract.BLinkTel, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.yuejie)@Html.TextBoxFor(m => m.Contract.yuejie, new { @class = "text" })
+                </td>
+            </tr>
+
+            <tr>
+                 <td>@Html.LabelFor(m => m.Contract.CreditMoney)@Html.TextBoxFor(m => m.Contract.CreditMoney, new { Value="0" })
+                </td>
+                 <td>@Html.LabelFor(m => m.Contract.BusinessType)@Html.DicEditorFor(m => m.Contract.BusinessType, DicEnum.BusinessType)
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.Remark)@Html.TextBoxFor(m => m.Contract.Remark, new { @class = "text" })
+                </td>
+                
+            </tr>
+            <tr>
+                 <td>@Html.LabelFor(m => m.Contract.JsCoefficient)@Html.TextBoxFor(m => m.Contract.JsCoefficient, new { Value = "0" })
+                </td>
+                 <td>@Html.LabelFor(m => m.Contract.QyCoefficient)@Html.TextBoxFor(m => m.Contract.QyCoefficient, new { Value = "0" })
+                </td>
+                <td>@Html.LabelFor(m => m.Contract.HkCoefficient)@Html.TextBoxFor(m => m.Contract.HkCoefficient, new { Value = "0" })
+                </td>
+                
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.DianziString)@Html.EditorFor(m => m.Contract.DianziString)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.DeductPerPrice)@Html.TextBoxFor(m => m.Contract.DeductPerPrice, new { Value = "0" })
+                </td>
+               <td colspan="2">
+                    <label>
+                        合同附件
+                    </label><input type="file" id="uploadFile" name="upload" />
+                    <div id="Attachments" style="clear: both;">
+                    </div>
+                </td>
+               
+            </tr>
+        </table>
+        
+        @*<div id="jjxx" style="float:left;text-align:left;padding:5px 0 ;cursor:pointer;color:#449ADC;">详细信息</div>
+        <span class="ui-icon ui-icon-arrowthickstop-1-n" style="display:inline-block; margin-top:6px;">&nbsp;</span>
+        <span class="ui-icon ui-icon-arrowthickstop-1-n" style="display:inline-block; margin-top:6px;">&nbsp;</span>
+        <div id="mailinfo" style="line-height:1.7em; padding-left:15px; clear:both;">
+            <fieldset>
+            <legend>合同约定付款方式</legend>
+            <br />
+            <p>
+                垫资 @Html.EditorFor(m => m.Contract.Dianzi1, new { style = "width:80px;" }) 万元，垫满一次付 @Html.EditorFor(m => m.Contract.Dianzi2) %。供应量月结 @Html.EditorFor(m => m.Contract.Dianzi3) %，
+                推迟 @Html.EditorFor(m => m.Contract.Dianzi4) 月付。供应量垫资月结 @Html.EditorFor(m => m.Contract.Dianzi6) %，推迟 @Html.EditorFor(m => m.Contract.Dianzi7) 月付。
+                尾款在工程完工后 @Html.EditorFor(m => m.Contract.Dianzi5) 个月内按月等额支付完毕。
+            </p>
+            <br />
+            <font color="red">注:工程置为完工时请填写置为完工时间，完工工程月结100%</font>
+            </fieldset>
+        </div>*@
+    }
+</div>
+
+@*合同审核*@
+<div id="AuditForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.TextBoxFor(m => m.Contract.ID, new { @class = "text", style = "display:none;" })@Html.LabelFor(m => m.Contract.ContractName)@Html.TextBoxFor(m => m.Contract.ContractName, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.SignTotalCube)@Html.TextBoxFor(m => m.Contract.SignTotalCube, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.SignTotalMoney)@Html.TextBoxFor(m => m.Contract.SignTotalMoney, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.ContractStatus)@Html.DicEditorFor(m => m.Contract.ContractStatus, DicEnum.ContractStatus)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.AuditStatus)@Html.DicEditorFor(m => m.Contract.AuditStatus, DicEnum.AuditStatus)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.AuditInfo)@Html.TextAreaFor(m => m.Contract.AuditInfo)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*合同明细表单*@
+<div id="ContractItemForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        <table class="mvcform">
+            <tr>
+                <td>@Html.HiddenFor(m => m.ContractItem.ID, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractItem.Contract.ContractName)@Html.HiddenFor(m => m.ContractItem.ContractID, new { @class = "text" })<span
+                    id="ContractName_span" style="color: Red;"></span>@Html.DisplayTextFor(m => m.ContractItem.ContractID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractItem.ConStrength)@Html.DropDownListFor(m => m.ContractItem.ConStrength, (IEnumerable<SelectListItem>)ViewBag.ConStrength)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractItem.UnPumpPrice)@Html.TextBoxFor(m => m.ContractItem.UnPumpPrice, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractItem.PumpCost)@Html.TextBoxFor(m => m.ContractItem.PumpCost, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractItem.SlurryPrice)@Html.TextBoxFor(m => m.ContractItem.SlurryPrice, new { @class = "text" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*特性设定表单*@
+<div id="IdentitySetForm" style="display: none;">
+    @using (Html.BeginForm("Add1", "IdentitySetting", FormMethod.Post, new { id = "IdentitySetForms" }))
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform paddingStyle">
+            <tr>
+                <td colspan="3">@Html.TextBoxFor(m => m.IdentitySetting.ID, new { @class = "text", style = " display:none;" })@Html.LabelFor(m => m.IdentitySetting.ContractItemsID)@Html.HiddenFor(m => m.IdentitySetting.ContractItemsID, new { @class = "text" })<span
+                    id="DisplayContractItemsID"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.IdentitySetting.IdentityType)
+                </td>
+                <td>@Html.LabelFor(m => m.IdentitySetting.IdentityName)
+                </td>
+                <td>@Html.LabelFor(m => m.IdentitySetting.IdentityPrice)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.DicEditorFor(m => m.IdentitySetting.IdentityType, DicEnum.IdenType, "")
+                </td>
+                <td>@Html.DropDownListFor(m => m.IdentitySetting.IdentityName, Enumerable.Empty<SelectListItem>())
+                </td>
+                <td>@Html.TextBoxFor(m => m.IdentitySetting.IdentityPrice, new { @class = "text" })
+                </td>
+            </tr>
+        </table>
+    }
+    <div style="height: 2px;">
+    </div>
+    <button class="tbtn add" title="合同管理/保存特性" role="button" aria-disabled="false" type="button"
+        onclick="identitySave();return false;">
+        <span class="ui-button-icon-primary ui-icon ui-icon-plus"></span><span class="ui-button-text">
+            保存</span></button>
+    <div id="identitySettingGrid">
+    </div>
+</div>
+
+@*其他加价设定表格与表单*@
+<div id="ContractOtherpriceGridAndForm" style="display: none;">
+    <div id="contractOtherpriceGrid">
+    </div>
+    <div id="blank" style="height: 2px;">
+    </div>
+    <div id="contractOtherpriceForm" class="mvcform" style="width: 98%">
+        @using (Html.BeginForm("Add1", "ContractOtherPrice", FormMethod.Post, new { id = "otherPriceForms" }))
+        {@Html.ValidationSummary()
+            <table class="mvcform paddingStyle">
+                <tr>
+                    <td>@Html.LabelFor(m => m.ContractOtherPrice.PriceType)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ContractOtherPrice.CalcType)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ContractOtherPrice.UnitPrice)
+                    </td>
+                    <td>
+                        <div id="amountorper">@Html.LabelFor(m => m.ContractOtherPrice.Amount)</div>
+                    </td>
+                    <td align="center">@Html.LabelFor(m => m.ContractOtherPrice.IsAll)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DicEditorFor(m => m.ContractOtherPrice.PriceType, DicEnum.PriceType, "")
+                    </td>
+                    <td>@Html.DicEditorFor(m => m.ContractOtherPrice.CalcType, DicEnum.CalcType, "")
+                    </td>
+                    <td>@Html.TextBoxFor(m => m.ContractOtherPrice.UnitPrice, new { Value = 0 })
+                    </td>
+                    <td>@Html.TextBoxFor(m => m.ContractOtherPrice.Amount, new { Value = 0 })
+                    </td>
+                    <td align="center">@Html.CheckBoxFor(m => m.ContractOtherPrice.IsAll, new { @checked = "true" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        @Html.TextBoxFor(m => m.ContractOtherPrice.ID, new { @class = "text", style = "display:none;" })
+                        @Html.HiddenFor(m => m.ContractOtherPrice.ContractID)
+                        <button class="tbtn add" title="合同管理/保存其他加价" role="button" aria-disabled="false"
+                            type="button" onclick="otherPriceSave();return false;">
+                            <span class="ui-button-icon-primary ui-icon ui-icon-plus"></span><span class="ui-button-text">
+                                保存</span></button>
+                    </td>
+                </tr>
+            </table>
+
+        }
+    </div>
+</div>
+
+<div id="lockReasonForm" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td valign="top" style="width: 60px;">
+                    锁定理由
+                </td>
+                <td>@Html.Hidden("ContractIDlock") @Html.TextAreaFor(m => m.Contract.Remark, 6, 40, new { @class = "text", id = "lockReason" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right">
+                    <button class="tbtn add" title="合同管理/锁定合同" role="button" aria-disabled="false" type="button"
+                        onclick="lockSave();return false;">
+                        <span class="ui-button-icon-primary ui-icon ui-icon-plus"></span><span class="ui-button-text">
+                            确定</span></button>
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*导入合同明细表单*@
+<div id="ImportForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractItem.Contract.ContractName)@Html.Hidden("contractID", null, new { @class = "text" })<span
+                    id="ContractNameForImportForm" style="color: Red;"></span>@Html.DisplayTextFor(m => m.ContractItem.ContractID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractItem.ConStrength)@Html.ListBox("conStrength", (IEnumerable<SelectListItem>)ViewBag.ConStrength, new { style = "width:180px; height:180px" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*任务单表单*@
+<div id="ProduceTaskForm" style="display: none;">
+    <div id="ProduceTaskFormLeftDiv" >
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <table class="mvcform">
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProduceTask.CustName)@Html.TextBoxFor(m => m.ProduceTask.CustName, new { @class = "text", readOnly = true })
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.ContractName)@Html.TextBoxFor(m => m.ProduceTask.ContractName, new { @class = "text", readOnly = true })@Html.HiddenFor(m => m.ProduceTask.ContractID)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.ContractItemsID)@Html.DropDownListFor(m => m.ProduceTask.ContractItemsID, Enumerable.Empty<SelectListItem>(), new { @data_val_required = "合同明细 字段是必需的", data_val = "true" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProduceTask.ProjectName)@Html.TextBoxFor(m => m.ProduceTask.ProjectName, new { @class = "text", readOnly = true })@Html.HiddenFor(m => m.ProduceTask.ProjectID)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.ProjectAddr)@Html.TextBoxFor(m => m.ProduceTask.ProjectAddr)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.RegionID)@Html.DropDownListFor(m => m.ProduceTask.RegionID, (IEnumerable<SelectListItem>)ViewBag.Regions, new { @data_val_required = "区间 字段是必需的", data_val = "true" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProduceTask.ConstructUnit)@Html.TextBoxFor(m => m.ProduceTask.ConstructUnit, new { @data_val_required = "施工单位 字段是必需的" })
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.BuildUnit)@Html.TextBoxFor(m => m.ProduceTask.BuildUnit)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.SupplyUnit)@Html.DicEditorFor(m => m.ProduceTask.SupplyUnit, DicEnum.SupplyUnitSupplyUnit, new { Style = "width:127px;" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        若供应单位未录入，可新增供应单位 <input id="AddUnit" type="text" value="" /> @Html.Button("新增", "onclick='AddUnit()'")
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProduceTask.LinkMan)@Html.DropDownListFor(m => m.ProduceTask.LinkMan, (IEnumerable<SelectListItem>)ViewBag.LinkManList, new { zlerp = "combobox" })
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.Tel)@Html.TextBoxFor(m => m.ProduceTask.Tel)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.SupplyUnitTel)@Html.TextBoxFor(m => m.ProduceTask.SupplyUnitTel)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProduceTask.CastMode)@Html.DicComboBoxFor(m => m.ProduceTask.CastMode, DicEnum.CastMode, new { Style = "width:102px;" })
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.PumpType)@Html.DicEditorFor(m => m.ProduceTask.PumpType, DicEnum.PumpType, "")
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.Slump)@Html.DicComboBoxFor(m => m.ProduceTask.Slump, DicEnum.Slump, new { Style = "width:102px;" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProduceTask.NeedDate)@Html.EditorFor(m => m.ProduceTask.NeedDate, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.PlanCube)@Html.TextBoxFor(m => m.ProduceTask.PlanCube)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.NeedTimes)@Html.TextBoxFor(m => m.ProduceTask.NeedTimes)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProduceTask.TaskType) 合同任务单 @Html.TextBoxFor(m => m.ProduceTask.TaskType, new { style = "display:none", Value = "TCon" })
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.ConsPosType)@Html.DicEditorFor(m => m.ProduceTask.ConsPosType, DicEnum.ConsPos)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.ConsPos)@Html.TextBoxFor(m => m.ProduceTask.ConsPos)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProduceTask.CarpGrade)@Html.DicEditorFor(m => m.ProduceTask.CarpGrade, DicEnum.JP)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.IsSlurry)@Html.CheckBoxFor(m => m.ProduceTask.IsSlurry)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.BetonTag)@Html.TextBoxFor(m => m.ProduceTask.BetonTag)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProduceTask.CementType)@Html.DicEditorFor(m => m.ProduceTask.CementType, DicEnum.CType)
+                    </td>
+                    <td colspan="2">@Html.LabelFor(m => m.ProduceTask.OtherDemand)@Html.TextAreaFor(m => m.ProduceTask.OtherDemand, 1, 50, null)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProduceTask.CompPrincipal)@Html.TextBoxFor(m => m.ProduceTask.CompPrincipal)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.ProductPrincipal)@Html.TextBoxFor(m => m.ProduceTask.ProductPrincipal)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.Seller)@Html.DropDownListFor(m => m.ProduceTask.Seller, (IEnumerable<SelectListItem>)ViewBag.Sales, null, null)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProduceTask.IsCommission)@Html.CheckBoxFor(m => m.ProduceTask.IsCommission)
+                    </td>
+                    <td colspan="2">@Html.LabelFor(m => m.ProduceTask.Remark)@Html.TextAreaFor(m => m.ProduceTask.Remark, 1, 50, new { @class = "text" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProduceTask.IdentityValue)@Html.TextBoxFor(m => m.ProduceTask.IdentityValue)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.ImpGrade)@Html.TextBoxFor(m => m.ProduceTask.ImpGrade)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.ImyGrade)@Html.TextBoxFor(m => m.ProduceTask.ImyGrade)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProduceTask.ImdGrade)@Html.TextBoxFor(m => m.ProduceTask.ImdGrade)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.ForkLift)@Html.AutoComplete("ProduceTask.TrueName", "ProduceTask.ForkLift", "Combo", "User", "TrueName", "TrueName", "IsUsed=1 AND  UserType='50'", new { allowCache = false })
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProduceTask.PlanClass)@Html.DicEditorFor(m => m.ProduceTask.PlanClass, DicEnum.PlanClass, "")
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    <div id="ProduceTaskFormRightDiv" style="float: right; width: 19%">
+    </div>
+</div>
+
+<div id="buttonToolbar">
+</div>
+
+@*合同列表*@
+<div id="Contractid" style="float: left; width: 85%;">
+</div>
+
+@*合同砼强度明细列表*@
+<div id="ContractItemGrid" style="float: right; width: 14.5%">
+</div>
+
+@*工程明细列表*@
+<div id="ProjectGrid" style="float: right; width: 14.5%"></div>

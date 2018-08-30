@@ -1,0 +1,92 @@
+﻿@model ZLERP.Model.SiloProductLine
+ 
+
+<div id="My-FormDiv" style="display:none;"></div>
+<div id="My-JqGrid"></div>
+<script type="text/javascript">
+    $(function () {
+        var myJqGrid = new MyGrid({
+            renderTo: 'My-JqGrid'
+		    , title: '管理列表'
+            //, width: '100%'
+            , autoWidth: true
+            , buttons: @ViewBag.Buttons0
+            , height: 300
+		    , storeURL: '@Url.Action("Find")'
+		    , sortByField: 'OrderNum'
+		    , primaryKey: 'SiloID'
+            , dialogWidth:500
+            , dialogHeight:300
+		    //, groupField: 'UserType'
+		    , setGridPageSize: 30
+		    , showPageBar: true
+            , sortOrder: 'ASC'
+            //, singleSelect: true
+            //, editSaveUrl: '@Url.Action("Update")'
+		    , initArray: [
+                {label:' 筒仓编号', name: 'ID', index:'ID', editable:true ,editrules: {required: true}}   	 
+                ,{label:' 搅拌机组编号', name: 'ProductLineID', index:'ProductLineID', editable:true ,editrules: {required: true}}   	 
+                ,{label:' 筒仓顺序', name: 'OrderNum', index:'OrderNum', editable:true }   	 
+                ,{label:' 比率', name: 'Rate', index:'Rate', editable:true }   	 
+                ,{label:' 创建人', name: 'Builder', index:'Builder', editable:true }   	 
+                ,{label:' 创建时间', name: 'BuildTime', index:'BuildTime', editable:true }   	 
+                ,{label:' 修改人', name: 'Modifier', index:'Modifier', editable:true }   	 
+                ,{label:' 修改时间', name: 'ModifyTime', index:'ModifyTime', editable:true }   	 
+                ,{label:' 版本', name: 'Version', index:'Version', editable:true }   	 
+                ,{label:' 状态', name: 'Lifecycle', index:'Lifecycle', editable:true }   	 
+                ,{label:' 编号', name: 'AutoID', index:'AutoID', editable:true ,editrules: {required: true}}   	 
+		    ]
+            , functions: {
+                handleReload: function (btn) {
+                    myJqGrid.reloadGrid();
+                },
+                handleRefresh: function (btn) {
+                    myJqGrid.refreshGrid();
+                },
+                handleAdd: function (btn) {
+                    myJqGrid.handleAdd({
+                        title: '新建'
+                        ,loadFrom: 'My-FormDiv'
+                        ,postUrl: '@Url.Action("Add")'
+                        /*,width: 600
+                        ,height: 400
+                        ,formId: 'myform'
+                        ,postCallBack: function (response) { }*/
+                    });
+                },
+                handleEdit: function (btn) {
+                    myJqGrid.handleEdit({
+                        title: '编辑'
+                        ,loadFrom: 'My-FormDiv'
+                        ,postUrl: '@Url.Action("Update")'
+                        /*,width: 600
+                        ,height: 400 
+                        ,getUrl: ''
+                        ,postCallBack: function (response) { alert('handle edit callback..'+response.Message); }
+                        ,reloadGrid: false*/
+                    });
+                }
+                , handleDelete: function (btn) {
+                    myJqGrid.deleteRecord({
+                        deleteUrl: '@Url.Action("Delete")'
+                        /*,singleDelete:false
+                        , reloadGrid: true
+                        , postCallBack: function (response) { alert('delete callback ' + response.Message); }*/
+                    });
+                }
+            }
+        });
+         
+    });
+</script>
+
+
+ 
+
+ 
+
+
+ 
+
+
+

@@ -1,0 +1,126 @@
+﻿@model ZLERP.Model.ViewModels.FormulaAndItems 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/Formula.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            formulaIndexInit({storeUrl:'@Url.Action("Find")', //storeUrl
+                             formulaItemStoreUrl:'@Url.Action("Find", "FormulaItem")', //formulaItemStoreUrl
+                             itemUpdateUrl:'@Url.Action("Update", "FormulaItem")', //itemUpdateUrl
+                             getFormulaUrl:'@Url.Action("Get", "Formula")', //getFormulaUrl
+                             exportStuffUrl:'@Url.Action("ExportStuff", "Formula")',
+                             conStrengthSelectUrl: '@Html.Raw(Url.Action("SearchSelect", "ConStrength", new{textField="ConStrengthCode", valueField="ConStrengthCode", orderby="ConStrengthCode"}))'
+                         }); //ExportStuffUrl
+        });
+    </script>
+}
+<div id="FormulaFormDiv" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.Formula.FormulaName)@Html.TextBoxFor(m => m.Formula.FormulaName, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.FormulaType)@Html.DicEditorFor(m => m.Formula.FormulaType, DicEnum.FType)
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.CementBreed)@Html.DicEditorFor(m => m.Formula.CementBreed, DicEnum.ST, "")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Formula.ConStrength)@Html.fixedDropDownListFor(m => m.Formula.ConStrength, (IEnumerable<SelectListItem>)ViewBag.ConStrength)
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.Slump)@Html.DicComboBoxFor(m => m.Formula.Slump, DicEnum.Slump)
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.SlumpError)@Html.EditorFor(m => m.Formula.SlumpError)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Formula.SeasonType)@Html.DicEditorFor(m => m.Formula.SeasonType, DicEnum.Season)
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.CementType)@Html.DicEditorFor(m => m.Formula.CementType, DicEnum.CType)
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.Weight)@Html.TextBoxFor(m => m.Formula.Weight, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Formula.TuneWeight)@Html.TextBoxFor(m => m.Formula.TuneWeight, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.WCRate)@Html.TextBoxFor(m => m.Formula.WCRate, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.SCRate)@Html.TextBoxFor(m => m.Formula.SCRate, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Formula.Mesh)@Html.TextBoxFor(m => m.Formula.Mesh, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.ImpGrade)@Html.TextBoxFor(m => m.Formula.ImpGrade, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.FlexStrength)@Html.TextBoxFor(m => m.Formula.FlexStrength, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Formula.CarpRadii)@Html.TextBoxFor(m => m.Formula.CarpRadii, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.BetonTag)@Html.TextBoxFor(m => m.Formula.BetonTag, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.MixingTime)@Html.TextBoxFor(m => m.Formula.MixingTime, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Formula.CastMode)@Html.DicEditorFor(m => m.Formula.CastMode, DicEnum.CastMode)
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.Purpose)@Html.TextBoxFor(m => m.Formula.Purpose, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.Remark)@Html.TextBoxFor(m => m.Formula.Remark, new { @class = "text" })
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.Formula.ID)@Html.TextBoxFor(m => m.Formula.ID, new { @class = "text" })
+                </td>
+            </tr>
+        </table>
+        <table class="subgridform">
+            <tr>
+                <td>
+                    <div id="SubGridDiv">
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+<div id="FormulaGridDiv" style="float: left; width: 68%">
+</div>
+<div id="ItemsGridDiv" style="float: right; width: 30%">
+</div>
+
+
+
+<div id="ItemsDiv" style="display: none; width: 400">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.ForItem.ID)@Html.TextBoxFor(m => m.ForItem.ID, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ForItem.FormulaID)@Html.TextBoxFor(m => m.ForItem.FormulaID, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ForItem.StuffTypeID)@Html.DropDownListFor(m => m.ForItem.StuffTypeID, (IEnumerable<SelectListItem>)ViewBag.StuffType)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ForItem.StuffAmount)@Html.TextBoxFor(m => m.ForItem.StuffAmount, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ForItem.StandardAmount)@Html.TextBoxFor(m => m.ForItem.StandardAmount, new { @class = "text" })
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

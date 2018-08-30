@@ -1,0 +1,130 @@
+﻿@model ZLERP.Model.ViewModels.CommissionAndItems 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/Commission/Commission.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            commissionIndexInit({                
+                storeUrl: '@Url.Action("Find", "Commission")',
+                itemstoreUrl: '@Url.Action("Find", "CommissionItem")',
+                itemupdate: '@Url.Action("Update", "CommissionItem")',
+                listCEExamUrl: '@Url.Action("ListData", "CEExam")',
+                listFAExamUrl: '@Url.Action("ListData", "FAExam")',
+                listCAExamUrl: '@Url.Action("ListData", "CAExam")',
+                listAIR1ExamUrl: '@Url.Action("ListData", "AIR1Exam")',
+                listAIR2ExamUrl: '@Url.Action("ListData", "AIR2Exam")',
+                listADMExamUrl: '@Url.Action("ListData", "ADMExam")',
+                listADM2ExamUrl: '@Url.Action("ListData", "ADM2Exam")',
+                listCustUrl: '@Url.Action("ListData", "CustMixprop")',
+                listKYExamUrl:'@Url.Action("ListData", "QualityExam")',
+            });
+        });
+    </script>
+}
+<div id="CommissionGrid" style="float: left; width: 55%">
+</div>
+<div style="float: right; width: 43%; height: 100%;">
+    <div class="mvcform" id="CommissionForm">
+        @using (Html.BeginForm())
+        { 
+            @Html.ValidationSummary(true)
+            <table class="mvcform paddingStyle" style="margin: 3px;">
+                <tr>
+                    <td>@Html.LabelFor(m => m.Commission.CommissionDate)@Html.TextBoxFor(m => m.Commission.CommissionDate, new { disabled = "true" })
+                    </td>
+                    <td>
+                        @Html.Label("委托编号") @Html.TextBoxFor(m => m.Commission.ID, new { disabled = "true" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">@Html.LabelFor(m => m.Commission.TaskID)@Html.TextBoxFor(m => m.Commission.TaskID, new { disabled = "true", style = "width:250px;" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">@Html.LabelFor(m => m.Commission.FormulaID)@Html.TextBoxFor(m => m.Commission.FormulaID, new { disabled = "true", style = "width:250px;" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    @*导入明细弹出框*@
+    <div id="CommissionItemsForm">
+        @using (Html.BeginForm("", "", FormMethod.Post, new { id = "CommissionItemsForms" }))
+        { 
+            @Html.ValidationSummary(true)
+            <table class="mvcform paddingStyle" style="margin: 3px;">
+                <tr>
+                    <td>@Html.LabelFor(m => m.CommissionItem.ExamineItemName)@Html.DicEditorFor(m => m.CommissionItem.ExamineItemName, DicEnum.ExamType, "")
+                    </td>
+                    <td>@Html.LabelFor(m => m.CommissionItem.ExamineItemNameID)@Html.fixedDropDownListFor(m => m.CommissionItem.ExamineItemNameID, Enumerable.Empty<SelectListItem>())
+                    </td>
+                    <td style="display: none">
+                        @Html.LabelFor(m => m.CommissionItem.CommissionID)@Html.EditorFor(m => m.CommissionItem.CommissionID)
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    <div id="CommissionItemsGrid" style="margin: 3px;">
+    </div>
+</div>
+@*委托单表单*@
+<div id="CommissionFormDiv" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.Commission.TaskID)@Html.AutoComplete("Commission.TaskID", "ProjectName", "Combo", "ProduceTask", "ID", "ProjectName", "IsDatum='0'")
+                </td>
+                
+                <td style="display: none">@Html.LabelFor(m => m.Commission.ID)@Html.TextBoxFor(m => m.Commission.ID, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Commission.ConStrength)@Html.fixedDropDownListFor(m => m.Commission.ConStrength, (IEnumerable<SelectListItem>)ViewBag.ConStrength)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Commission.CommissionDate)@Html.EditorFor(m => m.Commission.CommissionDate, "DateTime", new { id = "Add_CommissionDate", defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })
+                </td>
+                <td>@Html.LabelFor(m => m.Commission.FormulaID)@Html.fixedDropDownListFor(m => m.Commission.CustMixpropID, (IEnumerable<SelectListItem>)ViewBag.CustMixprop)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.LabelFor(m => m.Commission.Remark)@Html.TextAreaFor(m => m.Commission.Remark, 2, 60, new { })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+<div id="CommissionEditFormDiv" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.Commission.TaskID)@Html.TextBoxFor(m => m.Commission.TaskID, new { disabled = "true"})
+                </td>
+                <td>@Html.LabelFor(m => m.Commission.ConStrength)@Html.fixedDropDownListFor(m => m.Commission.ConStrength, (IEnumerable<SelectListItem>)ViewBag.ConStrength)
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.Commission.ID)@Html.TextBoxFor(m => m.Commission.ID, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>                
+                <td>@Html.LabelFor(m => m.Commission.CommissionDate)@Html.EditorFor(m => m.Commission.CommissionDate, "DateTime", new { id = "Edit_CommissionDate", defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })
+                </td>
+                <td>@Html.LabelFor(m => m.Commission.FormulaID)@Html.fixedDropDownListFor(m => m.Commission.CustMixpropID, (IEnumerable<SelectListItem>)ViewBag.CustMixprop)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.LabelFor(m => m.Commission.Remark)@Html.TextAreaFor(m => m.Commission.Remark, 2, 60, new { })
+                </td>
+            </tr>
+        </table>
+    }
+</div>

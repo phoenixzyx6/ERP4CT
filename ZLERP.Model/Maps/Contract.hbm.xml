@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Contract, ZLERP.Model" table="Contract" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="ContractID">
+		 	<generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="ContractNo" column="ContractNo" />
+		<property name="ContractName" column="ContractName" />
+		<property name="BuildUnit" column="BuildUnit" />
+		<property name="ProjectAddr" column="ProjectAddr" />
+		<property name="SignTotalCube" column="SignTotalCube" />
+		<property name="SignDate" column="SignDate" />
+		<property name="SignTotalMoney" column="SignTotalMoney" />
+		<property name="ContractType" column="ContractType" />
+		<property name="ValuationType" column="ValuationType" />
+		<property name="PaymentType" column="PaymentType" />
+		<property name="ContractStatus" column="ContractStatus" />
+		<property name="Remark" column="Remark" />
+		<property name="yuejie" column="yuejie" />
+		<property name="Auditor" column="Auditor" />
+		<property name="AuditTime" column="AuditTime" />
+		<property name="AuditStatus" column="AuditStatus" />
+    <property name="AuditInfo" column="AuditInfo" />
+		<property name="Salesman" column="Salesman" />
+		<property name="ALinkMan" column="ALinkMan" />
+		<property name="ALinkTel" column="ALinkTel" />
+		<property name="BLinkMan" column="BLinkMan" />
+		<property name="BLinkTel" column="BLinkTel" />
+		<property name="ContractLimitType" column="ContractLimitType" />
+		<property name="ContractST" column="ContractST" />
+    <property name="ContractET" column="ContractET" />
+    <property name="Dianzi1" column="Dianzi1" />
+    <property name="Dianzi2" column="Dianzi2" />
+    <property name="Dianzi3" column="Dianzi3" />
+    <property name="Dianzi4" column="Dianzi4" />
+    <property name="Dianzi5" column="Dianzi5" />
+    <property name="Dianzi6" column="Dianzi6" />
+    <property name="Dianzi7" column="Dianzi7" />
+    <property name="FootDate" column="FootDate" />
+    <property name="FootDate1" column="FootDate1" />
+		<property name="DianziString" column="DianziString" />
+    <property name="PaymentDate" column="PaymentDate" />
+    <property name="PaymentDate1" column="PaymentDate1" />
+		<property name="PayBackMan" column="PayBackMan" />
+		<property name="PayBackTel" column="PayBackTel" />
+		<property name="MatCube" column="MatCube" />
+		<property name="PrepayCube" column="PrepayCube" />
+    <property name="IsLimited" column="IsLimited" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="CustomerID" column="CustomerID" />
+
+    <property name="TotalComeMoney" column="TotalComeMoney" />
+    <property name="TotalJSMoney" column="TotalJSMoney" />
+    <property name="PayMoney" column="PayMoney" />
+    <property name="Balance" column="Balance" />
+    <property name="CreditMoney" column="CreditMoney" />
+    <property name="BusinessType" column="BusinessType" />
+
+    <property name="JsCoefficient" column="JsCoefficient" />
+    <property name="QyCoefficient" column="QyCoefficient" />
+    <property name="HkCoefficient" column="HkCoefficient" />
+    <property name="DeductPerPrice" column="DeductPerPrice" />
+    
+		<many-to-one name="Customer" column="CustomerID" fetch="join" class="Customer" insert="false" update="false"/>
+
+    <bag name="AdvanceMoneys" lazy="true" batch-size="30"  inverse="true" >
+      <key column="ContractID"></key>
+      <one-to-many class="AdvanceMoney"></one-to-many>
+    </bag>
+    
+		<bag name="ContractItems" lazy="true" batch-size="30"  inverse="true" >
+			<key column="ContractID"></key>
+			<one-to-many class="ContractItem"></one-to-many>
+		</bag>
+		<bag name="ContractPumps" lazy="true" batch-size="30" inverse="true" >
+			<key column="ContractID"></key>
+			<one-to-many class="ContractPump"></one-to-many>
+		</bag>
+		<bag name="ProduceTasks" lazy="true" batch-size="30" inverse="true" >
+			<key column="ContractID"></key>
+			<one-to-many class="ProduceTask"></one-to-many>
+		</bag>
+		<bag name="Projects" lazy="true" batch-size="30" inverse="true" >
+			<key column="ContractID"></key>
+			<one-to-many class="Project"></one-to-many>
+		</bag>
+    <bag name="OtherPrice" lazy="true" batch-size="30" inverse="true" >
+      <key column="ContractID"></key>
+      <one-to-many class="ContractOtherPrice"></one-to-many>
+    </bag>
+		<bag name="PumpWorks" lazy="true" batch-size="30" inverse="true" >
+			<key column="ContractID"></key>
+			<one-to-many class="PumpWork"></one-to-many>
+		</bag>
+		<bag name="EquipMtLies" lazy="true" batch-size="30" inverse="true" >
+			<key column="ContractID"></key>
+			<one-to-many class="EquipMtLy"></one-to-many>
+		</bag>
+
+    <bag name="Attachments" where="ObjectType='Contract'" batch-size="30" cascade="delete" >
+      <key column="ObjectId"/>
+      <one-to-many class="Attachment" />
+    </bag>
+
+  </class> 
+</hibernate-mapping>

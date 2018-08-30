@@ -1,0 +1,134 @@
+﻿@model ZLERP.Model.CEExam 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/CEExam/CEExam.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            ceexamIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("水泥编号")@Html.EditorFor(m => m.ID)
+                </td>
+                
+                <td>@Html.LabelFor(m => m.ExamTime)@Html.EditorFor(m => m.ExamTime)
+                </td>
+                <td>@Html.LabelFor(m => m.ReportTime)@Html.EditorFor(m => m.ReportTime)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.StuffID)@Html.fixedDropDownListFor(m => m.StuffID, (IEnumerable<SelectListItem>)ViewBag.CEStuff)
+                </td>
+                <td>@Html.LabelFor(m => m.DeputyNum)@Html.TextBoxFor(m => m.DeputyNum, new { Value = 0 })
+                </td>
+                <td>@Html.Label("水泥批号")@Html.EditorFor(m => m.RadioExamID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Invariability)@Html.EditorFor(m => m.Invariability)
+                </td>
+                <td>@Html.LabelFor(m => m.FineDegree)@Html.TextBoxFor(m => m.FineDegree, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.StanWaRate)@Html.TextBoxFor(m => m.StanWaRate, new { Value = 0 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.BurnLossNum)@Html.TextBoxFor(m => m.BurnLossNum, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.BeginFreTime)@Html.EditorFor(m => m.BeginFreTime, "DateTimeWithTime",null)
+                </td>
+                <td>@Html.LabelFor(m => m.EndFreTime)@Html.EditorFor(m => m.EndFreTime, "DateTimeWithTime", null)
+                </td>
+            </tr>
+            <tr>
+            <td colspan="3" align=center>
+            <h2>抗   折   强   度</h2>
+            </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.KZd3_1)@Html.TextBoxFor(m => m.KZd3_1, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.KZd3_2)@Html.TextBoxFor(m => m.KZd3_2, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.KZd3_3)@Html.TextBoxFor(m => m.KZd3_3, new { Value = 0 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.KZd28_1)@Html.TextBoxFor(m => m.KZd28_1, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.KZd28_2)@Html.TextBoxFor(m => m.KZd28_2, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.KZd28_3)@Html.TextBoxFor(m => m.KZd28_3, new { Value = 0 })
+                </td>
+            </tr>
+            <tr>
+            <td colspan="3" align=center>
+            <h2>抗   压   强   度</h2>
+            </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.KYd3_1)@Html.TextBoxFor(m => m.KYd3_1, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.KYd3_2)@Html.TextBoxFor(m => m.KYd3_2, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.KYd3_3)@Html.TextBoxFor(m => m.KYd3_3, new { Value = 0 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.KYd3_4)@Html.TextBoxFor(m => m.KYd3_4, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.KYd3_5)@Html.TextBoxFor(m => m.KYd3_5, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.KYd3_6)@Html.TextBoxFor(m => m.KYd3_6, new { Value = 0 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.KYd28_1)@Html.TextBoxFor(m => m.KYd28_1, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.KYd28_2)@Html.TextBoxFor(m => m.KYd28_2, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.KYd28_3)@Html.TextBoxFor(m => m.KYd28_3, new { Value = 0 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.KYd28_4)@Html.TextBoxFor(m => m.KYd28_4, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.KYd28_5)@Html.TextBoxFor(m => m.KYd28_5, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.KYd28_6)@Html.TextBoxFor(m => m.KYd28_6, new { Value = 0 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AvaTime)@Html.EditorFor(m => m.AvaTime)
+                </td>
+                <td>@Html.LabelFor(m => m.StandJudge)@Html.DicEditorFor(m => m.StandJudge, DicEnum.Judge, "请选择", "请选择")
+                </td>
+                <td>@Html.LabelFor(m => m.Assessor)@Html.EditorFor(m => m.Assessor)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Principal)@Html.EditorFor(m => m.Principal)
+                </td>
+                <td>@Html.LabelFor(m => m.IsUse)@Html.CheckBoxFor(m => m.IsUse)
+                </td>
+                <td>@Html.LabelFor(m => m.CommissionID)@Html.fixedDropDownListFor(m => m.CommissionID, (IEnumerable<SelectListItem>)ViewBag.Commission)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">@Html.LabelFor(m => m.ExamGist)@Html.TextArea("ExamGist",Lang.Msg_ExamGistForCE,1,90,new {})
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">@Html.LabelFor(m => m.ExamResult)@Html.TextArea("ExamResult", Lang.Msg_ExamResultForCe, 1, 90, new { })
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

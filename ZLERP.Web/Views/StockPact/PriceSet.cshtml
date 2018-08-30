@@ -1,0 +1,42 @@
+﻿@model ZLERP.Model.StockPactPriceSet
+
+@*价格变动表单*@
+<div id="PriceSetForm" style="display: none;">
+    <div id="sss">
+        @using (Html.BeginForm("Add1", "StockPactPriceSet", FormMethod.Post, new { id = "ssssss", name = "SPriceSetForm", }))
+        {
+            @Html.ValidationSummary()
+            <table class="mvcform paddingStyle">
+                <tr>
+                    <td colspan="4">
+                    @*@Html.TextBoxFor(m => m.StockPactPriceSet.ID, new { @class = "text", style = " display:none;" })*@
+                    @Html.LabelFor(m => m.StockPactID)@Html.TextBoxFor(m => m.StockPactID, new { @class = "text", ReadOnly=true, Style="color:red"})
+                    @Html.LabelFor(m => m.StuffID)@Html.TextBoxFor(m => m.StuffID, new { @class = "text", ReadOnly = true, Style="color:red"})
+
+                    @Html.HiddenFor(m => m.BuildTime, new { @class = "text", defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })
+                    @Html.TextBoxFor(m => m.ID, new { @class = "text", style = " display:none;" })
+                            
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ChangeTime)@Html.EditorFor(m => m.ChangeTime, "DateTime")
+                    </td>
+                   
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.Price)@Html.TextBoxFor(m => m.Price)
+                   </td>
+                </tr>
+            </table>
+        
+        }
+        <div style="height: 2px;">
+        </div>
+        <button class="tbtn add" title="合同管理/保存价格" role="button" aria-disabled="false" type="button" onclick="priceSave();return false;">
+            <span class="ui-button-icon-primary ui-icon ui-icon-plus"></span><span class="ui-button-text">保存</span>
+        </button>
+        <div id="priceSettingGrid">
+        </div>
+    </div>
+    
+</div>

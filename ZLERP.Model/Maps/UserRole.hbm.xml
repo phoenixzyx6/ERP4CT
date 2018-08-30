@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.UserRole, ZLERP.Model" table="UserRole" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="UserRoleID">
+      <generator class="identity" />
+    </id>
+    <property name="UserID" column="UserID" type="string"  />
+    <property name="RoleID" column="RoleID" type="string"  />
+    <many-to-one name="User">
+      <column name="UserID" sql-type="nvarchar" not-null="false" />
+    </many-to-one>
+    
+    <many-to-one name="Role">
+      <column name="RoleID" sql-type="nvarchar" not-null="false" />
+    </many-to-one>
+    
+
+  </class>
+</hibernate-mapping>

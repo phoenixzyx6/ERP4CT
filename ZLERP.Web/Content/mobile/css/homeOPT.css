@@ -1,0 +1,281 @@
+/************** especial webkit (iOS, Androids, etc...) *******************/
+ * {-webkit-text-size-adjust: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: rgba(255,102,0,0.2)}
+.instructions {-webkit-user-select: text}
+
+/************** ajustes generales *******************/
+html {margin: 0 auto; min-height: 415px; background: #000; /* width: 150px; */}
+body {font-size: 63%; font-family:微软雅黑,Arial, Helvetica, Verdana, sans-serif; line-height:normal; margin: 0px auto; background: #000}
+a:hover {text-decoration: none}
+.grupo {overflow: hidden !important}
+.listaenlaces{overflow: hidden}
+.right{float: right}
+.left{float: left}
+h2{float: none; background: none; border: 0px; margin: 0px; padding: 0px}
+h2 span,h3 span {margin: 0px; padding: 0px}
+
+/************** bienvenida *******************/
+.bienvenido{overflow: hidden;padding: 0px 0px 0.4em 0.5em;background: #fff;background: -webkit-gradient(linear,0% 0%,0% 100%,from(#ffffff), to(#dddddd)); background: -moz-linear-gradient(top, #ffffff, #dddddd) }
+.bienvenido h2 span {margin: 0px; padding: 0px; font-size: 2.2em; font-style: normal; font-weight: normal; display: block; color: #ff6600; display: none}
+.bienvenido h2 {margin: 5px 0px 5px 0px; padding: 0px; width: 61px; height: 27px; background: url(../imgs/hola.png) no-repeat}
+@media screen and (-webkit-device-pixel-ratio: 2), only screen and (-webkit-device-pixel-ratio:1.5) {
+  .bienvenido h2 {background: url(../imgs/hola@2x.png) no-repeat;background-size: 61px 27px}
+}
+@media screen and (device-pixel-ratio: 2), only screen and (device-pixel-ratio:1.5) {
+  .bienvenido h2 {background: url(../imgs/hola@2x.png) no-repeat; background-size: 61px 27px}
+}
+.bienvenido p{color: #666; text-shadow: 1px 1px 0px #fff; font-size: 1.3em; display: block; margin: 5px; padding: 0px}
+
+/************** herobox *******************/
+.herobox{width: 100%; background: #666; overflow: hidden; position: relative; height: 125px; text-align: center}
+.herobox {background: #666 url(../imgs/loader.gif) no-repeat 50% 50%}
+.herobox li, .herobox ul {list-style: none; list-style-image: none;padding: 0px; margin: 0px}
+
+.herobox #diapos-on {margin: 5px auto; width: 260px; height: 120px; border: 0px solid yellow;}
+.herobox #diapos-on li {/*width: 260px; height: 100px; */ padding: 0px; /* position: absolute; top: 10px;*/ /*left: 50%; margin-left: -13.0em;*/ z-index: 99}
+.herobox #diapos-on li a{padding: 0px; margin: 0px; z-index: 150; position: absolute; top: 10px; left: 0px; left: 50%; margin-left: -130px; overflow: hidden; box-shadow: 1px 1px 6px #222; -webkit-box-shadow: 1px 1px 6px #222;border: 1px solid #fff; width: 260px; height: 100px;}
+.herobox #diapos-on li a img{width: 260px; height: 100px;}
+.herobox #diapos-on span.titulo{display: none}
+
+.herobox .viewstatic a img{width: 26.0em; height: 10.0em}
+.herobox .viewstatic a span{display: none}
+.herobox .viewstatic a{padding: 0px; margin: 0px; z-index: 100}
+.herobox .viewstatic a{border: 1px solid #fff; width: 26.0em; height: 10.0em; padding: 0px; overflow: hidden; box-shadow: 1px 1px 6px #222; -webkit-box-shadow: 1px 1px 6px #222; position: absolute; top: 50%; left: 50%; margin-top: -5.0em; margin-left: -13.0em; z-index: 99}
+
+.herobox #contador {position: absolute; bottom: 0px; left: 50%; margin-left: -3.1em; background: #444; border-radius: 8px; -webkit-border-radius: 8px; overflow: hidden; padding: 0px 6px}
+.herobox #contador li, .herobox #contador ul{list-style: none; list-style-image: none;padding: 0px; margin: 0px}
+.herobox #contador li{float: left; width: 5px; height: 5px; text-indent: -999em; background: #fff; margin: 4px 5px; -webkit-border-radius: 8px; border-radius: 8px}
+.herobox #contador li.actual{background: #ff6600}
+.herobox #contador li a{background: #fff}
+
+.herobox #buttons_prev, .herobox #buttons_next{background: #fff; background:-webkit-gradient(linear,0% 0%,0% 100%,from(#ffffff), to(#eeeeee)); background: -moz-linear-gradient(top, #ffffff, #eeeeee)}
+.herobox #buttons_prev {-webkit-border-radius: 4px; border-radius: 4px; position: absolute; top: 50%; height: 60px; left: -14px; margin-top: -30px; width: 40px}
+.herobox #buttons_prev a{position: absolute; height: 60px; left: 0px; text-indent: -999em; width: 40px; -webkit-box-shadow: 1px 1px 6px #333; box-shadow: 1px 1px 6px #333;
+  background: url(../imgs/arrowbackgrey.png) no-repeat 70% 50%;
+}
+@media screen and (-webkit-device-pixel-ratio: 2), only screen and (-webkit-device-pixel-ratio:1.5) {
+  .herobox #buttons_prev a{  background: url(../imgs/arrowbackgrey@2x.png) no-repeat 70% 50%;background-size: 9px 11px}
+}
+.herobox #buttons_next {-webkit-border-radius: 4px; border-radius: 4px; position: absolute; top: 50%; height: 60px; right: -16px; margin-top: -30px; width: 40px}
+.herobox #buttons_next a{position: absolute; height: 60px; right: 0px; text-indent: -999em; width: 40px; box-shadow: 1px 1px 6px #333; -webkit-box-shadow: 1px 1px 6px #333;
+  background: url(../imgs/arrowgrey.png) no-repeat 30% 50%;
+}
+@media screen and (-webkit-device-pixel-ratio: 2), only screen and (-webkit-device-pixel-ratio:1.5) {
+  .herobox #buttons_next a{  background: url(../imgs/arrowgrey@2x.png) no-repeat 30% 50%;background-size: 9px 11px}
+}
+
+/************** destacados y gallery de la home*******************/
+#p_home .destacado li{text-shadow: 1px 1px 0px #fff; border-top: 1px solid #fff; background: url(../imgs/linkimpBG.png) repeat-x bottom; background:-webkit-gradient(linear,0% 0%,0% 100%,from(#ffffff), to(#eeeeee)); background: -moz-linear-gradient(top, #ffffff, #eeeeee)}
+#p_home .destacado .li a{padding: 13px !important}
+
+#p_home .gallery {background: #555}
+#p_home .gallery img{box-shadow: 1px 1px 3px #000}
+
+#p_home .destacado div.normal.last {background: #ccc; border-top: 1px solid #aaa; font-size: .9em; overflow: hidden; box-shadow:inset 0 2px 6px #888}
+#p_home .destacado div.normal.last img{width: 150px; height: 70px; border: 1px solid #EEE;margin: 5px 0px 5px 0px;box-shadow: 1px 1px 3px #666;-webkit-box-shadow: 1px 1px 3px #666}
+
+#p_home .destacado div.normal.last .titular{font-size: 1.4em !important; font-weight: bold; color: #000; font-size: 14px; display: block; padding-left: 8px; padding-bottom: 4px; margin-top: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 0px !important; margin-right: 25px; text-shadow: 0px 1px 0px #fff}
+#p_home .destacado div.normal.last p{color: #666;font-size: 1.4em !important; margin: 0px; padding-left: 8px; padding-right: 30px; margin-bottom: 10px; text-shadow: 0px 1px 0px #fff;overflow: hidden} 
+#p_home .destacado div.normal.last a {overflow: hidden; padding: 5px; display: block; background: url(../imgs/arrowf.png) no-repeat 100% 50%}
+@media screen and (-webkit-device-pixel-ratio: 2), only screen and (-webkit-device-pixel-ratio:1.5) {
+  #p_home .destacado div.normal.last a {background: url(../imgs/arrowf@2x.png) no-repeat 100% 50%; background-size: 19px 11px}
+}
+/*destacado de la home */
+
+#p_home .destacado div.destacadohome {background: #ccc; border-top: 1px solid #aaa; font-size: .9em; overflow: hidden; box-shadow:inset 0 2px 6px #888}
+#p_home .destacado div.destacadohome img{width: 150px; height: 70px; border: 1px solid #EEE;margin: 5px 0px 5px 0px;box-shadow: 1px 1px 3px #666;-webkit-box-shadow: 1px 1px 3px #666}
+
+#p_home .destacado div.destacadohome .titular{font-size: 1.4em !important; font-weight: bold; color: #000; font-size: 14px; display: block; padding-left: 8px; padding-bottom: 4px; margin-top: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 0px !important; margin-right: 25px; text-shadow: 0px 1px 0px #fff}
+#p_home .destacado div.destacadohome p{color: #666;font-size: 1.4em !important; margin: 0px; padding-left: 8px; padding-right: 30px; margin-bottom: 10px; text-shadow: 0px 1px 0px #fff;overflow: hidden} 
+#p_home .destacado div.destacadohome a {overflow: hidden; padding: 5px; display: block; background: url(../imgs/arrowf.png) no-repeat 100% 50%}
+@media screen and (-webkit-device-pixel-ratio: 2), only screen and (-webkit-device-pixel-ratio:1.5) {
+  #p_home .destacado div.destacadohome a {background: url(../imgs/arrowf@2x.png) no-repeat 100% 50%; background-size: 19px 11px}
+}
+
+
+/*destacado de la home */
+
+/************** cintas seccion *******************/
+.normal{border-top: 0px solid #333}
+.normal h2{margin: 0px; padding: 0px}
+.normal h2 span{color: #fff; padding: 8px 10px; font-size: 15px; border-bottom: 1px solid #111; text-shadow: 0px -1px 1px #000; display: block; background: #333333; background:-webkit-gradient(linear,0% 0%,0% 100%,from(#5d5d5d),to(#2f2f2f)); background: -moz-linear-gradient(top, #5d5d5d, #2f2f2f)}
+
+/************** listas de enlaces y gallerys *******************/
+.listaenlaces p, .titular p{margin:15px; font-size: 1.2em; text-shadow: 0px 1px 0px #fff; text-shadow: 0px 1px 0px #fff}
+.listaenlaces .title{border-top: 0px solid #333; background:-webkit-gradient(linear,0% 0%,0% 100%,from(#5d5d5d),to(#2f2f2f)); background: -moz-linear-gradient(top, #5d5d5d, #2f2f2f)}
+.listaenlaces .title a{color: #fff; padding: 8px 10px; font-size: 15px; border-bottom: 1px solid #111; text-shadow: 0px -1px 1px #000}
+.listaenlaces .title a {background: url(../imgs/arroww.png) no-repeat 97% 50%}
+@media screen and (-webkit-device-pixel-ratio: 2), only screen and (-webkit-device-pixel-ratio:1.5) {
+	.listaenlaces .title a {background: url(../imgs/arroww@2x.png) no-repeat 97% 50%; background-size: 9px 11px}
+}
+.listaenlaces{background: #fff}
+.listaenlaces ul {margin: 0px; padding: 0px}
+.listaenlaces ul li {list-style: none; list-style-image: none}
+.listaenlaces ul li a {text-decoration: none; color: #444; display: block; border-bottom: 1px solid #ccc}
+.listaenlaces ul li a {background: url(../imgs/arrowf.png) no-repeat 100% 50%}
+@media screen and (-webkit-device-pixel-ratio: 2), only screen and (-webkit-device-pixel-ratio:1.5) {
+	.listaenlaces ul li a {background: url(../imgs/arrowf@2x.png) no-repeat 100% 50%; background-size: 19px 11px}
+}
+.listaenlaces li a{padding: 15px 16px 15px 10px; font-size: 14px}
+
+#p_home .destacado li{text-shadow: 1px 1px 0px #fff; border-top: 1px solid #fff; background: url(../imgs/linkimpBG.png) repeat-x bottom; background:-webkit-gradient(linear,0% 0%,0% 100%,from(#ffffff), to(#eeeeee)); background: -moz-linear-gradient(top, #ffffff, #eeeeee)}
+#p_home .destacado .li a{padding: 13px !important}
+
+.listaenlaces li {position: relative}
+.listaenlaces .enlace_img {width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; margin-top: -15px; border: 0px}
+.listaenlaces .img_e a{padding-left: 50px !important}
+
+#p_home .gallery {background: #555}
+#p_home .gallery img{box-shadow: 1px 1px 3px #000}
+.gallery {border: 0px !important; text-align: center; overflow: hidden}
+.gallery img{border: 1px solid #eee; margin: 5px 0px 5px 0px; box-shadow: 1px 1px 3px #666; -webkit-box-shadow: 1px 1px 3px #666}
+.gallery a{display: block}
+
+/************** elementos al 50% *******************/
+.w50 ul li {width: 50%; box-sizing: border-box; -webkit-box-sizing: border-box;-moz-box-sizing: border-box}
+.w50 ul {overflow: hidden}
+.w50 li.par{float: left; width: 49.5%}
+.w50 li.impar{float: left; border-right: 1px solid #ccc}
+
+.gallery.w50{width: 49.7% !important; float: left; overflow: hidden; text-align: center;box-sizing: border-box; -webkit-box-sizing: border-box;-moz-box-sizing: border-box}
+
+/************** listas del menú y landings *******************/
+#p_home .subtabs, #p_menu .subtabs,#p_ocio .subtabs,#p_ayuda .subtabs,#p_tienda .subtabs,#p_miorange .subtabs {display: none}
+
+#p_menu,#p_ocio,#p_ayuda,#p_tienda,#p_miorange {background: #eee; overflow: hidden}
+
+.titular p{margin-top: 0px}
+
+.listaredondeada h2, .titular h2, .access h4{color: #111; text-shadow: 1px 1px 0px #fff; font-size: 14px; font-weight: bold; padding: 0px; padding-bottom: 10px; display: block;margin: 15px; margin-bottom: 0px}
+.listaredondeada .listaenlaces li a {font-size: 1.3em; padding: 10px;display: block; text-decoration: none; color: #222;background: url(../imgs/arrowf.png) no-repeat 100% 50%}
+@media screen and (-webkit-device-pixel-ratio: 2), only screen and (-webkit-device-pixel-ratio:1.5) {
+  .listaredondeada .listaenlaces li a {background: url(../imgs/arrowf@2x.png) no-repeat 100% 50%; background-size: 19px 11px}
+}
+.listaredondeada {padding-bottom: 2px}
+.listaredondeada .listaenlaces li.impar{box-sizing: border-box; -webkit-box-sizing: border-box;-moz-box-sizing: border-box}
+.listaredondeada .listaenlaces li.par{box-sizing: border-box; -webkit-box-sizing: border-box;-moz-box-sizing: border-box}
+.listaredondeada .listaenlaces li.impar.last {width: 100%; border-right: 0px}
+.listaredondeada .listaenlaces ul li.last a {border-bottom: 0px}
+.listaredondeada .listaenlaces.w50 ul li.impar.prelast a {border-bottom: 0px}
+.listaredondeada .w50 li.par {float: left}
+.listaredondeada .w50 li.impar {float: left; border-right: 1px solid #ccc}
+.listaredondeada {background: none; margin: 0 10px 10px 10px; overflow: hidden}
+.listaredondeada .listaenlaces li{background: none}
+.listaredondeada .listaenlaces{border: 1px solid #ccc; border-radius: 4px; -webkit-border-radius: 4px; overflow: hidden; background: #fff; box-shadow: 0px 1px 0px #fff}
+.listaredondeada .listaenlaces{border-radius: 4px; -webkit-border-radius: 4px; overflow: hidden}
+
+#p_menu .gallery,#p_ocio .gallery,#p_ayuda .gallery,#p_tienda .gallery,#p_miorange .gallery {height: 110px}
+
+/** miorange **/
+.access fieldset {border: 0px; margin: 0px 10px}
+.access fieldset label{display: block; margin: 0px; padding: 0px; font-size: 1.2em; color: #333; text-shadow: 0px 1px 0px #fff}
+.access fieldset input {width: 100%; display: block; box-sizing: border-box; -webkit-box-sizing: border-box;-moz-box-sizing: border-box;border: 1px solid #AAA; font-family: Arial; font-size: 18px;padding: 8px;margin-bottom: 5px;color: #333; border-radius: 5px; -webkit-border-radius: 5px}
+.access{overflow: hidden; width: 100%; position: relative}
+.access .boton a, .access .botonlink input{width: 9.0em; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; display: block; padding: 10px; border: 2px solid #999; float: left; text-decoration: none; color: #444; text-align: center; background: #ebebeb; background:-webkit-gradient(linear,0% 0%,0% 100%,from(#ffffff), to(#dedede)); background: -moz-linear-gradient(top, #ffffff, #dedede); font-weight: bold; text-shadow: 1px 1px 0px #fff; font-size: 14px;margin-top: 5px;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px}
+.access .boton, .access .boton a{width: 9.0em; text-decoration: none; color: #555}
+.access .boton, .access .botonlink input{color: #ff6600; float: right; margin-right: 15px; margin-bottom: 15px}
+.access .boton a {position: absolute; right: 160px}
+
+/* WinPhone 7 */ *+html .access fieldset input {width: 87%} 
+/* WinPhone 7 */ .access .botonlink input, .access .botonlink input:focus, .access .botonlink input:active, .access .botonlink input:over {border: 2px solid #999; outline: none}
+
+.access fieldset input {box-shadow:inset 0 2px 1px #ccc; -webkit-box-shadow:inset 0 2px 1px #ccc; -mox-box-shadow:inset 0 2px 1px #ccc}
+/************** bloque OCIO *******************/
+.listaenlaces.ppal{clear: both; overflow: hidden}
+.listaenlaces.ppal .normal{border-top: 0px solid #333}
+.listaenlaces.ppal .normal h2{margin: 0px; padding: 0px}
+.listaenlaces.ppal .normal h2 span{color: #666; padding: 4px 10px; font-size: 14px; text-shadow: 0px 1px 0px #eee; display: block; background: #ccc; border-bottom: 1px solid #aaa}
+.listaenlaces.ppal .normal a{text-decoration: none; position: relative; border-bottom: 1px solid #ccc; overflow: hidden; display: block; background: url(../imgs/arrowf.png) no-repeat 100% 50%}
+.listaenlaces.ppal .normal .img {height: 60px;width: 70px;float: left;border: 1px solid #fff;-webkit-box-shadow: 1px 1px 5px #999;box-shadow: 1px 1px 5px #999;margin: 10px;overflow: hidden}
+.listaenlaces.ppal .normal .titular{font-size: 1.4em !important; font-weight: bold; color: #000; font-size: 14px; display: block; padding-bottom: 4px; margin-top: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 0px !important; margin-right: 25px}
+.listaenlaces.ppal .normal p{color: #666;font-size: 1.4em !important; margin: 0px; padding-right: 30px; margin-bottom: 10px} 
+
+/*Estilos boton puntos orange*/
+.listaredondeada_or { background: none; margin: 0 10px 10px; overflow: hidden;padding-bottom: 2px;}
+.listaredondeada_or .listaenlaces {border-radius:4px 4px 4px 4px; border:1px solid #ccc; box-shadow: 0 1px 0 #FFF; overflow: hidden;}
+.listaredondeada_or .listaenlaces li a { padding:10px; border-bottom: none; font-size:12px}
+.listaredondeada_or .listaenlaces ul li.last a { color: #f60; font-weight:bold}
+
+/*Estilos para Redirect Home*/
+.call .ofertas .normal img{width:100%;}
+form input{width:100%}  /*click to call para botones que son una imagen*********/
+.call .ofertas .normal a{width:100%;background: -webkit-gradient(linear,0% 0%,0% 100%,from(#333333), to(#000000));background: -moz-linear-gradient(top, #333333, #000000);float:left;}
+.call .ofertas .normal a .titular{display:block;background-image: url(../imgs/arrowf.png);background-repeat: no-repeat;background-position: 98% 50%;color:#ff6600;font-size:16px;font-weight:bold;padding: 15px 16px 15px 10px;}
+.call .mas, .enlacehome{background: -webkit-gradient(linear,0% 0%,0% 100%,from(#FFFFFF), to(#EEEEEE));background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE);border-top: 1px solid #FFFFFF;width:100%;float:left;border-bottom:1px solid #cccccc;}
+.call .mas a, .enlacehome a{display:block;background-image: url(../imgs/arrowf.png);background-repeat: no-repeat;background-position: 98% 50%;color:#333;font-size:16px;padding: 15px 16px 15px 10px;text-shadow: 1px 1px 0 #FFFFFF;}
+.enlacehome p{color:#ff6600;}
+/**/
+
+/* Powered */
+	#powered
+	{  
+	background:url('http://m.orange.es/UpImages/2297/logog_767389f71d5babcded2fb72b9.jpg') no-repeat 30% 10% #000;
+	border-radius:5px 5px 5px 5px;
+	height:auto;
+	width:100px;
+	padding:40px 10px 10px 10px;
+	position:fixed;
+	color:#FFF;
+	text-decoration:none;
+	top:70%;
+	font-size:12px;
+	z-index:1000;
+	right:-5px;
+	}
+	#powered span { color:#F60; }    
+
+/** nuevos destacados pagina inicio **/
+#p_inicio .destacado div.destacadohome {background: #ccc; border-top: 1px solid #aaa; font-size: .9em; overflow: hidden; box-shadow:inset 0 2px 6px #888}
+#p_inicio .destacado div.destacadohome img{width: 150px; height: 70px; border: 1px solid #EEE;margin: 5px 0px 5px 0px;box-shadow: 1px 1px 3px #666;-webkit-box-shadow: 1px 1px 3px #666}
+#p_inicio .destacado div.destacadohome .titular{font-size: 1.4em !important; font-weight: bold; color: #000; font-size: 14px; display: block; padding-left: 8px; padding-bottom: 4px; margin-top: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 0px !important; margin-right: 25px; text-shadow: 0px 1px 0px #fff}
+#p_inicio .destacado div.destacadohome p{color: #666;font-size: 1.4em !important; margin: 0px; padding-left: 8px; padding-right: 30px; margin-bottom: 10px; text-shadow: 0px 1px 0px #fff;overflow: hidden} 
+#p_inicio .destacado div.destacadohome a {overflow: hidden; padding: 5px; display: block; background: url(../imgs/arrowf.png) no-repeat 100% 50%}
+@media screen and (-webkit-device-pixel-ratio: 2), only screen and (-webkit-device-pixel-ratio:1.5) {
+  #p_inicio .destacado div.destacadohome a {background: url(../imgs/arrowf@2x.png) no-repeat 100% 50%; background-size: 19px 11px}
+}
+
+#p_inicio .gallery {background: #555}
+#p_inicio .gallery img{box-shadow: 1px 1px 3px #000}
+
+#p_inicio .enlacehome ul.links_imagen { float:left; display:inline; margin:0; padding:0; width:100%;}
+#p_inicio .enlacehome ul.links_imagen li { float:left; display:inline; margin:0; padding:0; width:100%;}
+#p_inicio .enlacehome ul.links_imagen li a{ float:left; display:inline; margin:0; padding:11px 5px 11px 10px; font-size:14px; text-shadow:none; width:95%; color:#444; }
+#p_inicio .enlacehome ul.links_imagen li a img{ float:left; display:inline; margin:0; padding:0 5px 0 0; width:8%; height:auto; }
+
+
+
+/** nuevos modulos servicios en home **/
+.serv_mod_dos {background-color: #666665; border-bottom: 1px solid #000000; border-top: 1px solid #000000; display: table;width: 100%}
+.serv_mod_dos .img{border: 1px solid #888;float:left; margin-top: 0.3em; margin-bottom: 0.3em; height:40px; width:145px;}
+.serv_mod_dos a{float:left; width:50%; margin:0px auto; text-align: center}
+.serv_mod_tres {background-color: #666665; border-bottom: 1px solid #000000; border-top: 1px solid #000000; display: table;width: 100%;}
+.serv_mod_tres .img{border: 1px solid #888888; float: left; margin-bottom: 0.3em; margin-left: 2%; margin-top: 0.3em;}
+.serv_mod_tres a{float: left; margin: 0 auto; text-align: center; width: 33.3%;}
+
+.field-validation-error{color:#f00;}
+.inputtxt{width:100px;  padding:6px; box-shadow: 0 2px 1px #CCCCCC inset;
+          -moz-box-sizing: border-box;
+    border: 1px solid #AAAAAA;
+    border-radius: 5px 5px 5px 5px;
+    color: #333333; 
+    font-family: Arial;
+    font-size: 12px;
+    margin-bottom: 5px;
+    padding: 8px;}
+   
+.btn{-moz-box-sizing: border-box;
+    background: -moz-linear-gradient(center top , #FFFFFF, #DEDEDE) repeat scroll 0 0 transparent;
+    border: 2px solid #999999;
+    border-radius: 4px 4px 4px 4px;
+    color: #444444;
+  
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 5px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 #FFFFFF;
+    width: 6em;}
+h1{font-size:18px;}
+table th{text-align:left;}
+.access fieldset .input-validation-error{border-color:#f00;}

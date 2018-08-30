@@ -1,0 +1,62 @@
+﻿@model ZLERP.Model.PartInfo 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/PartInfo/PartInfo.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        var options = {
+            storeUrl: '@Url.Action("Find")',
+            listClassMUrl: '@Url.Action("ListData", "ClassM")',
+            listClassSUrl: '@Url.Action("ListData", "ClassS")',
+            classTypeID: '@Request.RequestContext.RouteData.Values["id"]'
+        };
+        $(function () {
+            partinfoIndexInit(options);
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        @Html.HiddenFor(m => m.ID)
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.PartName)@Html.EditorFor(m => m.PartName)
+                </td>
+                <td>@Html.LabelFor(m => m.PartSpec)@Html.EditorFor(m => m.PartSpec)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.GreatClassID)@Html.DropDownListFor(m => m.GreatClassID, (IEnumerable<SelectListItem>)ViewBag.ClassBList, "", new { @class = "text", style = "width:120px;", id = "GreatClassID" })
+                </td>
+                <td>@Html.LabelFor(m => m.MiddClassID)@Html.DropDownListFor(m => m.MiddClassID, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:120px;", id = "MiddClassID" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.MinClassID)@Html.DropDownListFor(m => m.MinClassID, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:120px;", id = "MinClassID" })
+                </td>
+                <td>@Html.LabelFor(m => m.SupplyName)@Html.DropDownListFor(m => m.SupplyName, (SelectList)ViewBag.PartSupply, "", new { style = "width:140px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.BreadName)@Html.DicEditorFor(m => m.BreadName, DicEnum.Production, "", "")
+                </td>
+                <td>@Html.LabelFor(m => m.UnitID)@Html.DicComboBoxFor(m => m.UnitID, DicEnum.SystemUnit)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.UpperLimit)@Html.TextBoxFor(m => m.UpperLimit, new { @class = "text",@Value="0" })
+                </td>
+                <td>@Html.LabelFor(m => m.LowerLimit)@Html.TextBoxFor(m => m.LowerLimit, new { @class = "text", @Value = "100" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.IsOften)@Html.CheckBoxFor(m => m.IsOften)
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+    }
+</div>

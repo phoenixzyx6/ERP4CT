@@ -1,0 +1,44 @@
+﻿@model ZLERP.Model.ProducePlan
+<div id="MyJqGrid">
+</div>
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/ProducePlan.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            producePlanIndexInit('@Url.Action("Find")', '@Url.Action("PromptTodayTasks")');
+        });
+    </script>
+}
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display:none">@Html.TextBoxFor(m=>m.ID)</td>
+                <td>@Html.LabelFor(m => m.TaskID)
+                @Html.AutoComplete("TaskID", "ProjectName", "Combo", "ProduceTask", "ID", "", "")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.PlanDate)@Html.EditorFor(m => m.PlanDate, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.PlanCube)@Html.TextBoxFor(m => m.PlanCube, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.PlanClass)@Html.DicEditorFor(m => m.PlanClass, DicEnum.PlanClass)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ForkLift)@Html.TextBoxFor(m => m.ForkLift, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.OrderNum)@Html.TextBoxFor(m => m.OrderNum, new { @class = "text" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>

@@ -1,0 +1,54 @@
+﻿@model ZLERP.Model.Msg 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/Msg/Msg.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            msgIndexInit({ 
+                storeUrl: '@Url.Action("Find")',
+                yfpuser: '@Url.Action("Find", "MsgUser")',
+                dfpuser: '@Url.Action("Find", "User")',
+                userDeleteUrl: '@Url.Action("Delete", "MsgUser")',
+                assignUserUrl: '@Url.Action("Add", "MsgUser")',
+                batchImportUser: '@Url.Action("BatchImportUser", "MsgUser")'
+             });
+        });
+</script>
+}
+
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td style=" color:Red;">@Html.LabelFor(m=>m.ID,"消息编号")@Html.TextBoxFor(m => m.ID, new { @class="text",style="width:80px;"})&nbsp;*消息编号一经确定就不允许修改</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.MsgTitle)@Html.EditorFor(m=>m.MsgTitle)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.MsgType)@Html.EditorFor(m=>m.MsgType)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.BelongFuncID)@Html.DropDownTreeFor(m => m.BelongFuncID, "FindTreeExcludeButton", "SysFunc", null, "")</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Remark)@Html.TextAreaFor(m => m.Remark, 5, 40, new { @class="text"})</td>
+    </tr>
+</table>
+}
+</div>
+<div id="buttonToolbar">
+</div>
+<div id="MsgGrid" style="float: left; width: 65%;"></div>
+<div id="YFPUserGrid" style="float: right; width: 34.9%"></div>
+<div style="float: right; width: 34.9%;border-top:none;">
+    <div class="mvcform" style="width: 100%; padding-top:4px;height:25px; ">
+    @Html.DropDownList("DepartmentID", (IEnumerable<SelectListItem>)ViewBag.DepartmentList, new { @class = "text", style = "border-bottom:none;width:120px;height:25px;vertical-align:bottom;" })
+    <button class="tbtn add" style="border-bottom:none;" title="分配用户" role="button" aria-disabled="false" type ="button" onclick="ImportUser();return false;">选择用户后点击我</button>
+    </div>
+    <div id="DFPUserGrid" style="width: 100%;"></div>
+</div>

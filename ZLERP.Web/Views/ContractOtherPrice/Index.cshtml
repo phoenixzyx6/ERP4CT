@@ -1,0 +1,38 @@
+﻿@model ZLERP.Model.ContractOtherPrice 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/ContractOtherPrice.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            contractotherpriceIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="contractpriceform" class="mvcform" style=" display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform paddingStyle">
+    <tr>
+        <td>@Html.LabelFor(m=>m.PriceType)</td>
+        <td>@Html.LabelFor(m=>m.CalcType)</td>
+        <td>@Html.LabelFor(m=>m.UnitPrice)</td>
+        <td>@Html.LabelFor(m=>m.Amount)</td>
+        <td>@Html.LabelFor(m=>m.IsAll)</td>
+    </tr>
+    <tr> 
+        <td>@Html.EditorFor(m=>m.PriceType)</td>
+        <td>@Html.DicEditorFor(m => m.CalcType, DicEnum.CalcType, "")</td>
+        <td>@Html.EditorFor(m=>m.UnitPrice)</td>
+        <td>@Html.EditorFor(m=>m.Amount)</td>
+        <td>@Html.CheckBoxFor(m=>m.IsAll)</td>
+    </tr>
+    <tr> 
+        <td colspan="5">
+        @Html.LabelFor(m=>m.ID)@Html.EditorFor(m=>m.ID)
+        @Html.LabelFor(m=>m.ContractID)@Html.EditorFor(m=>m.ContractID)
+        </td>
+    </tr>
+</table>
+
+}
+</div>

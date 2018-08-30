@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Bank, ZLERP.Model" table="Bank" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="BankID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="BankName" column="BankName" />
+    <property name="AccountName" column="AccountName" />
+		<property name="Account" column="Account" />
+    <property name="IsGuarantee" column="IsGuarantee" />
+    <property name="IsUsed" column="IsUsed" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="CustomerID" column="CustomerID" />
+		<many-to-one name="Customer" column="CustomerID" class="Customer" />
+	</class>
+</hibernate-mapping>

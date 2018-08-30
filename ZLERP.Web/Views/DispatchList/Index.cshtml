@@ -1,0 +1,376 @@
+﻿@model ZLERP.Model.ViewModels.SchedulerViewModel
+@using ZLERP.Model          
+@{ 
+    Company companyInfo = (Company)ViewBag.CompanyInfo;
+    
+}
+@section HeaderSection{ 
+
+<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/Views/DispatchList/DispatchList.js")"> </script>
+<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.dragsort-0.5.1.js")"></script>
+<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/commonmap.js")"></script>
+<script type="text/javascript" language="javascript" src="@Url.Content("~/scripts/abc/mapabc.custom.v1.1.js")"></script>
+
+	    
+<script type="text/javascript">
+    $(function () {
+        $("#tabs").tabs();
+             
+        var options = {
+            getRangeTimeTaskUrl: '@Url.Action("GetRangeTimeTasks", "ProduceTask")'
+            , getNotRangeTimeTaskUrl: '@Url.Action("GetNotRangeTimeTasks", "ProduceTask")'            
+            , saveDispatchUrl: '@Url.Action("Save", "DispatchList")'
+            , findDispatchUrl: '@Url.Action("Find", "DispatchList")'
+            , getCarInfoUrl: '@Url.Action("GetInfo", "Car")'
+            , getInsteadProduct: '@Url.Action("Find", "InsteadProduct")'
+            , changeProductLineUrl: '@Url.Action("ChangeProductLine", "DispatchList")'
+            , changeCubeUrl: '@Url.Action("ChangeCube", "DispatchList")'
+            , changeCarUrl: '@Url.Action("ChangeCar", "DispatchList")'
+            , changeProvidedUrl: '@Url.Action("UpdateProvided")'
+            , getDispatchUrl: '@Url.Action("GetInfoByDJH", "DispatchList")'
+            , getLatestDocs: '@Url.Action("Find", "ShippingDocument")'
+            , getLastDocUrl: '@Url.Action("GetLastDocByTaskId", "ShippingDocument")'
+            , newDocUrl: '@Url.Action("NewShipDoc", "ShippingDocument")'
+            , newDocUrl1: '@Url.Action("NewQitaShipDoc", "ShippingDocument")'
+            , getCarStatusUrl: '@Url.Action("GetMixerCarStatus", "Car")'
+            , shiftCarStatusUrl: '@Url.Action("ShiftMixerCarStatus", "Car")'
+            , setCompleteUrl: '@Url.Action("SetComplete", "ProduceTask")'
+            , getLastDocByCarUrl: '@Url.Action("GetLastDocByCarId", "TZRalation")'
+            , completedUrl: '@Url.Action("SetCompleted", "DispatchList")'
+            , moveUpUrl: '@Url.Action("MoveUp", "DispatchList")'
+            , createDocUrl: '@Url.Action("CreateDoc", "ShippingDocument")'
+            , carReturnUrl: '@Url.Action("CarReturn", "ShippingDocument")'
+            , dragCarUrl: '@Url.Action("DragMixerCar", "Car")'
+            , getRemaincubeUrl: '@Url.Action("GetRemaincubeByCarId", "TZRalation")'
+            , getTzMarkActionUrl: '@Url.Action("MarkAction", "TZRalation")'
+            , getLastDocAutoByCarId: '@Url.Action("GetLastDocAutoByCarId", "TZRalation")'
+            , currentUser: '@User.UserName()'
+            , HandleTodayPlanUrl: '@Url.Action("UpdateTodayPlan","ProduceTask")'
+	        , carInMapUrl: '@Url.Action("GetCarDataInfoForTask","ABC")'
+
+            , remindinfoUrl: '@Url.Action("GetRemindinfo","Remindinfo")'
+            , remindinfoUpdateUrl: '@Url.Action("UpdateStatus","Remindinfo")'
+        };
+
+        dispatchListIndexInit(options);
+        
+    });
+
+
+ </script>
+
+ <script id="tmplShipDoc" type="text/x-jquery-tmpl">
+<table class="info">
+<tr><td colspan="4"><strong>上车发货信息 [${TaskID}]</strong></td></tr>
+    <tr>
+    <td>客户名称：</td><td>${CustName}</td><td>工程名称：</td><td>${ProjectName}</td>
+    </tr>
+    <tr>
+    <td> 砼强度：</td><td>${ConStrength}</td><td>浇筑方式：</td><td> ${CastMode}</td>
+    </tr>
+    <tr>
+    <td>施工部位：</td><td> ${ConsPos}</td><td>运输方量：</td><td><span id='spSendCube'>${ShippingCube}</span></td>
+    </tr>
+</table> 
+</script>
+ <style type="text/css">
+    .carlist label {width:40px; display:inline-block; text-align:center;}
+    #left-panel fieldset{ border-radius:5px;}
+    /* 拖放css定义*/
+    ul { margin:0px; padding:0px; margin-left:20px; }
+	#AllowShipCar, #RestCar,#ShippingCar {  list-style-type:none; margin:0px; }
+	#AllowShipCar li, #RestCar li , #ShippingCar li{ float:left; padding:1px;}
+	#AllowShipCar div, #RestCar div, #ShippingCar div { width:80px; height:30px; border:solid 1px black; background:#DFEFFC url(@Url.Content("~/Content/themes/default/images/ui-bg_glass_85_dfeffc_1x400.png")) repeat-x scroll 50% 50%; text-align:center; padding-top:1px; }
+	.placeHolder div { background-color:white !important; border:dashed 1px gray !important; }
+    .clickCarCls { color:Red;font-size:12pt; font-weight:bolder; overflow:hidden;} 
+ </style>
+ 
+
+} 
+<script type ="text/javascript">
+
+    var companyinfo = { name:"@companyInfo.CompName",lon:@companyInfo.Longtide ,lat: @companyInfo.Latitude,range:@companyInfo.Range };
+</script>
+<div id="top-layout" style="float:left;width:100%;">
+<div id="task-grid" style="width:70%;float:left;"></div>
+<div id="latestShip" style="width:29%;float:right;"></div>
+<div id="insteadProductGrid" style="width:29%;float:right;"></div>
+</div>
+
+
+
+
+<div id="exception-dialog" style="display:none;">
+    <input type="hidden" name="exDJH" id="exception-djh" />
+    <div id="exception-tabs" class="mvcform">
+	    <ul>
+		    @* <li><a href="#tabs-1">换线生产</a></li>
+		   <li><a href="#tabs-2"> 扣 补 方 </a></li>*@
+		    <li><a href="#tabs-3"> 换 车 </a></li>
+            <li><a href="#tabs-4">修改累计</a></li>
+	    </ul>
+	    @* <div id="tabs-1">
+            当前生产线:<span id="exception-curproductline"></span>
+		    可转生产线:<select name="exProductLine" id="exception-productline"></select>
+            <input type="button" id="exception-cpbtn" value="保存" />     
+	    </div>
+	   <div id="tabs-2">
+            <input type="radio" name="exRepare" id="exception-fill" value="1" checked="checked" />补方
+            <input type="radio" name="exRepare" id="exception-subtract" value="0" />扣方
+            请输入方量:<input name="exCube" id="exception-cube" />
+            <input type="button" id="exception-cubebtn" value="保存" />     
+
+	    </div>*@
+	    <div id="tabs-3">
+            当前车号：<span id="exception-curcarid"></span>
+            可选车号:@Html.DropDownListFor(m => m.ShippingDocument.CarID, (SelectList)ViewBag.CarDics, new { @class = "text", style = "width:110px;", id = "exception-carid" }) 
+            司机姓名:<select name="exDriver" id="exception-driver"></select> 
+            <input type="button" id="exception-carbtn" value="保存" />     
+	    </div>
+        <div id = "tabs-4">
+             已供车数：@Html.TextBoxFor(m => m.ShippingDocument.ProvidedTimes, new { style = "width:60px", id = "exception-ProvidedTimes" }) 
+             已供方量：@Html.TextBoxFor(m => m.ShippingDocument.ProvidedCube, new { style = "width:60px", id = "exception-ProvidedCube" }) 
+             <input type="button" id="exception-providedbtn" value="保存" />
+        </div>
+    </div>
+</div>
+
+
+<div id="MyFormDiv_dispatch" class="mvcform" style="display:none;">
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "dispatch-tz-form" }))
+{@Html.ValidationSummary()
+<table class="mvcform">
+  
+    <tr> 
+        <td>@Html.LabelFor(m => m.TZRalation.CarID)@Html.TextBoxFor(m => m.TZRalation.CarID, new { ReadOnly = true })
+         @Html.HiddenFor(m => m.TZRalation.ID) @Html.HiddenFor(m => m.TZRalation.ID)
+        </td>
+ 
+        <td>@Html.LabelFor(m => m.TZRalation.Cube)@Html.TextBoxFor(m => m.TZRalation.Cube, new { @class = "noime stext" })</td>
+ 
+        <td>@Html.LabelFor(m => m.TZRalation.Driver)@Html.TextBoxFor(m => m.TZRalation.Driver, new { ReadOnly = true })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.TZRalation.ReturnType)@Html.DicEditorFor(m => m.TZRalation.ReturnType, DicEnum.ReturnType, "")</td>
+ 
+        <td>@Html.LabelFor(m => m.TZRalation.ActionType)@Html.DicEditorFor(m => m.TZRalation.ActionType, DicEnum.ActionType, "")</td>
+ 
+        <td>
+        @Html.HiddenFor(m => m.TZRalation.IsCompleted, new { Value = false })
+        </td>
+   
+    </tr>
+     <tr>
+     <td colspan="3" valign="top">@Html.LabelFor(m => m.TZRalation.ReturnReason) 
+        
+        @Html.TextAreaFor(m => m.TZRalation.ReturnReason, new { style = "width:70%" })
+        </td>
+        
+     </tr>
+
+</table>
+}
+</div>
+
+@*代我司生产*@
+<div id="InsteadProductForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    <table class="mvcform">
+        <tr>
+            <td>@Html.LabelFor(m => m.InsteadProduct.TaskID)@Html.TextBoxFor(m => m.InsteadProduct.TaskID, new { ReadOnly = true })
+                @Html.HiddenFor(m => m.InsteadProduct.ID) @Html.HiddenFor(m => m.InsteadProduct.ID)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.InsteadProduct.ProductName)@Html.DicEditorFor(m => m.InsteadProduct.ProductName, DicEnum.SupplyUnitSupplyUnit, "")
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.InsteadProduct.ProductTime)@Html.EditorFor(m => m.InsteadProduct.ProductTime, "DateTime", new { defaultValue = DateTime.Now.ToString("yyyy-MM-dd") })
+            </td>
+            @*<td>@Html.LabelFor(m => m.InsteadProduct.ProductTotalPrice)@Html.EditorFor(m => m.InsteadProduct.ProductTotalPrice)</td>*@
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.InsteadProduct.ProductNum)@Html.TextBoxFor(m => m.InsteadProduct.ProductNum, new { type = "number", min = "0", Value = "" })
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.InsteadProduct.ProductSinglePrice)@Html.TextBoxFor(m => m.InsteadProduct.ProductSinglePrice, new { type = "number", min = "0", Value = "" })
+            </td>
+        </tr>
+
+    </table>
+    <fieldset>
+        <legend>若搅拌站未录入，可新增搅拌站</legend>
+        <br />
+        <input id="AddUnit" type="text" value=""/>
+         <button type="button" 
+         class="null ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary ui-state-hover" onclick='addUnit();'>
+         <span class="ui-button-text">新增</span>
+         </button>
+        <br />
+    </fieldset>
+}
+</div>
+
+@*开盘异常*@
+<div id="ExForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    <table class="mvcform">
+         <tr>
+            <td>@Html.HiddenFor(m => m.ProduceTask.ID)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.ProduceTask.Exception)@Html.TextBoxFor(m => m.ProduceTask.Exception)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.ProduceTask.ResponsibleParty)@Html.TextBoxFor(m => m.ProduceTask.ResponsibleParty)
+            </td>
+        </tr>
+    </table>
+}
+</div>
+
+@*调度管理*@
+<div id="bottom-layout" style="float:left;width:100%;">
+    <div style="width:50%;float:left;"   id="left-panel">
+        <div id="operate-buttons" style="padding-top:5px;"></div>
+        <div id="scdjFormDiv">
+            @using (Html.BeginForm("", "", FormMethod.Post, new { id = "scdj-form" }))
+            {
+                @Html.ValidationSummary();
+                <fieldset style="border:solid 1px; border-color:#aaa;">
+                    <legend id="border-title"><b>生产调度</b></legend>
+                    @Html.HiddenFor(m => m.ShippingDocument.ID)
+                    @Html.HiddenFor(m => m.ShippingDocument.DeliveryTime) @*出站时间*@
+                    @Html.HiddenFor(m => m.DispatchList.ID)
+                    @Html.HiddenFor(m => m.ShippingDocument.TaskID)
+                    @Html.Hidden("IsLubricatingSlurry")
+                    <table class="mvcform short" >
+                        <tr>
+                            <td>@Html.LabelFor(m => m.ShippingDocument.ProjectName)@Html.TextBoxFor(m => m.ShippingDocument.ProjectName, new { @class = "text", readOnly = true })
+                            </td>
+                            <td> 
+                            <div id="shipCardDiv" style="display:block">
+                            @Html.LabelFor(m => m.ShippingDocument.CarID)@Html.DropDownListFor(m => m.ShippingDocument.CarID, (SelectList)ViewBag.CarDics, ""
+                            , new { style = "width:110px;"})
+                            
+                            </div>
+                            <div id="shipCardDiv2" style="display:none">
+                               <label for="shipcar">运输车号</label><input id="shipCarNo" type="text" style = "width:100px;" readOnly="readonly"/>
+                            </div>
+                            
+                            </td>  
+                            <td>@Html.LabelFor(m => m.ShippingDocument.PumpName)@Html.DropDownListFor(m => m.ShippingDocument.PumpName, (SelectList)ViewBag.PumpList, "", new { style = "width:110px;" })
+                            </td>     
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(m => m.DispatchList.ProductLineID)@Html.DropDownListFor(m => m.DispatchList.ProductLineID, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:110px;" })
+                            </td>
+                            <td>@Html.LabelFor(m => m.ShippingDocument.Driver)@Html.DropDownListFor(m => m.ShippingDocument.Driver, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:110px;" }) 
+                            </td>
+                            <td>@Html.LabelFor(m => m.ShippingDocument.PlanCube)@Html.TextBoxFor(m => m.ShippingDocument.PlanCube, new { @class = "text", readOnly = true })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(m => m.DispatchList.PCRate)@Html.DropDownListFor(m => m.DispatchList.PCRate, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:110px;" }) 
+                            </td>
+                            <td> <center>@Html.Label("本车容量")<input type="text" name="MaxCube" value = "0" readonly="readonly" style="width:100px;" /></center>
+                            </td>
+                            <td>@Html.LabelFor(m => m.ShippingDocument.ProvidedCube)@Html.TextBoxFor(m => m.ShippingDocument.ProvidedCube, new { @class = "text" })
+                            </td>    
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(m => m.DispatchList.BetonCount)@Html.TextBoxFor(m => m.DispatchList.BetonCount, new { @class = "text" })
+                            </td>
+                            <td style="display:none">@Html.LabelFor(m => m.DispatchList.IsAverage)@Html.CheckBoxFor(m => m.DispatchList.IsAverage, new { @class = "text", style = "width:auto; display:block;", @checked = true })
+                            </td>
+                            
+                            <td>@Html.LabelFor(m => m.DispatchList.SlurryCount)@Html.TextBoxFor(m => m.DispatchList.SlurryCount, new { @class = "text" })
+                            </td>
+                            <td>@Html.LabelFor(m => m.ShippingDocument.ProvidedTimes)@Html.TextBoxFor(m => m.ShippingDocument.ProvidedTimes, new { @class = "text" }) 
+                            </td>
+                        </tr>
+                        <tr>
+                        <td>@Html.Label("RemainCube", "上车余料")@Html.TextBoxFor(m => m.ShippingDocument.RemainCube, new { @class = "text" }) 
+                            </td>                            
+                            <td>@Html.LabelFor(m => m.ShippingDocument.OtherCube)@Html.TextBoxFor(m => m.ShippingDocument.OtherCube, new { @class = "text" }) 
+                            </td>
+                             <td> <center>
+                                @Html.Label("出站时间")<input type="text" id="DeliveryTime" name="DeliveryTime" value="" style="width: 100px;" /></center>
+                        </td>
+                        @*<td>@Html.LabelFor(m => m.ShippingDocument.DeliveryTime)@Html.TextBoxFor(m => m.ShippingDocument.DeliveryTime, new { @class = "text" })
+                        </td>*@
+                        </tr>
+                        <tr>
+                        <td colspan="2">@Html.Label("Remark", "备注")@Html.TextBoxFor(m => m.ShippingDocument.Remark, new { @class = "text", style = "width:285px;" })</td>
+                        
+                        </tr>
+                        <tr>
+                        <td>@Html.LabelFor(m => m.ShippingDocument.PumpMan)@Html.DropDownListFor(m => m.ShippingDocument.PumpMan, (IEnumerable<SelectListItem>)ViewBag.PumpManList, new { style = "width:110px" })</td>
+                        <td>@Html.LabelFor(m => m.ShippingDocument.XuCube)@Html.TextBoxFor(m => m.ShippingDocument.XuCube)</td>
+                        <td>
+                        <label id="parcube_red" style="width: 4em; color:Red; font-size:32pt; font-weight:bolder">0</label>方
+                        </td>
+                        @*<td>@Html.LabelFor(m => m.ShippingDocument.IsDaishengchan)@Html.CheckBoxFor(m => m.ShippingDocument.IsDaishengchan)
+                        </td>*@
+                        </tr>
+                    </table>
+                </fieldset>
+            }
+
+        </div>
+       
+        <div class="carlist" style="margin-top:10px;">
+            <fieldset style=" border:solid 1px; border-color :Green;">
+                <legend><b>可调度车辆</b></legend>
+                <div style="float:left;width:100%;">
+                    <div style="float:left;width:85%;min-height:80px;">
+                        <ul id="AllowShipCar"></ul>
+                    </div>
+                    <div id="allow-ship-car-btn" style="float:left;width:13%"">
+                       @* <button type="button" title="置顶" class="tbtn ui-icon-arrowstop-1-n" opertype="Top" btngroup="AllowShipCar" carstatus="0">置顶</button>
+                        <button type="button" title="优先" class="tbtn ui-icon-arrowthick-1-n" opertype="Up" btngroup="AllowShipCar" carstatus="0">提前</button>
+                        <button type="button" title="下移" class="tbtn ui-icon-arrowthick-1-s" opertype="Down" btngroup="AllowShipCar" carstatus="0">挪后</button>*@
+                        @*<button type="button" title="休息" class="tbtn ui-icon-arrowthickstop-1-s" style="margin-bottom:5px;" opertype="Down" btngroup="AllowShipCar" carstatus="1">休息</button>
+                        <button type="button" title="出厂" class="tbtn ui-icon-arrowthickstop-1-s" opertype="Handle" btngroup="AllowShipCar" carstatus="0">出厂</button>*@
+
+                        <button type="button" title="置顶" class="tbtn ui-icon-arrowstop-1-n" opertype="Top" btngroup="AllowShipCar" carstatus="0">置顶</button>
+                        <button type="button" title="优先" class="tbtn ui-icon-arrowthick-1-n" opertype="Up" btngroup="AllowShipCar" carstatus="0">提前</button>
+                        <button type="button" title="下移" class="tbtn ui-icon-arrowthick-1-s" opertype="Down" btngroup="AllowShipCar" carstatus="0">挪后</button>
+                        <button type="button" title="休息" class="tbtn ui-icon-arrowthickstop-1-s" opertype="Down" btngroup="AllowShipCar" carstatus="1">休息</button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset style="border:solid 1px;border-color:red;">
+                <legend><b>出货车辆</b></legend>
+                <div style="float:left;width:100%;">
+                    <div style="float:left;width:85%;min-height:80px;">
+                        <ul id="ShippingCar"></ul>
+                    </div>
+                    <div id="shipping-car-btn" style="float:left;width:13%;">
+                        <button type="button" title="回厂继续工作" class="tbtn ui-icon-home" opertype="Up" btngroup="ShippingCar" carstatus="1">回厂</button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset style="border:solid 1px;border-color:blue;">
+                <legend><b>休息车辆</b></legend>
+                <div style="float:left;width:100%;">
+                    <div style="float:left;width:85%;min-height:54px;">
+                        <ul id="RestCar"></ul>
+                    </div>
+                    <div id="rest-car-btn" style="float:left;width:13%"">
+                        <button type="button" title="开工" class="tbtn ui-icon-unlocked" opertype="Up" btngroup="RestCar" carstatus="2">开工</button>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div style="width:50%;float:right;height:300px;padding-top:5px;" id="scdj-grid"></div>
+</div>
+ 

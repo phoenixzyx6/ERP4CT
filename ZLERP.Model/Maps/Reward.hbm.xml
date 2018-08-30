@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Reward, ZLERP.Model" table="Rewards" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="RewardsID">
+		 	<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="UserID" column="UserID" />
+		<property name="RewardsType" column="RewardsType" />
+		<property name="RewardsReason" column="RewardsReason" />
+		<property name="ExcuteDate" column="ExcuteDate" />
+		<property name="ExcuteMan" column="ExcuteMan" />
+		<property name="RewardsMode" column="RewardsMode" />
+		<property name="ProcessingResult" column="ProcessingResult" />
+    <property name="IsNotice" column="IsNotice" />
+    <property name="NoticeID" column="NoticeID" />
+    <property name="ApproveDate" column="ApproveDate" />
+    <property name="ApproveMan" column="ApproveMan" />
+    <property name="RevocationDate" column="RevocationDate" />
+    <property name="RevocationReason" column="RevocationReason" />
+    <property name="Remark" column="Remark" />
+    <property name="IsEffective" column="IsEffective" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+
+    <many-to-one name="User" column="UserID" fetch="join" class="User" insert="false" update="false"/>
+	</class>
+</hibernate-mapping>

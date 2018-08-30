@@ -1,0 +1,54 @@
+﻿@model ZLERP.Model.ViewModels.CarClassAndItems 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/CarClass/CarClass.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            carclassIndexInit('@Url.Action("Find", "CarClass")', '@Url.Action("Find", "CarClassItem")');
+        });
+    </script>
+}
+<div id="MyJqGrid" style="float: left; width: 48%">
+</div>
+<div id="MyItemGrid" style="float: right; width: 48%">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.CarClass.ID)@Html.EditorFor(m => m.CarClass.ID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarClass.CarClassName)@Html.EditorFor(m => m.CarClass.CarClassName)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarClass.DetailRemark)@Html.TextAreaFor(m => m.CarClass.DetailRemark, new { @class = "text",style = "width:260px" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="MyItemFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.CarClassItem.ID)@Html.EditorFor(m => m.CarClassItem.ID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarClassItem.CarClassID)@Html.AutoComplete("CarClassItem.CarClassID", "CarClassName", "Combo", "CarClass", "ID", "CarClassName")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarClassItem.TyrPlace)@Html.DicComboBoxFor(m => m.CarClassItem.TyrPlace, DicEnum.TyrePos)
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+
+ 

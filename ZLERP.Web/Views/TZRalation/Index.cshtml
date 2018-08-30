@@ -1,0 +1,415 @@
+﻿@model ZLERP.Model.TZRalation
+@section HeaderSection{ 
+ <script src="@Url.Content("~/Scripts/Views/TZRelation.js")" type="text/javascript" language="javascript"> </script>
+<script type="text/javascript">
+        $(function () {
+            tzrelationInit({
+                storeUrl: '@Url.Action("Find")',
+                getLastDocUrl: '@Url.Action("GetLastDocByCarId")',
+                getLastDocUrl1: '@Url.Action("GetLastDocByCarId1")',
+                GetUnCompletedUrl: '@Url.Action("GetUnCompletedByCarId")',
+                GetUnCompletedUrl1: '@Url.Action("GetUnCompletedByCarId1")',
+                GetUnCompletedUrl2: '@Url.Action("GetUnCompletedByCarId2")',
+                findShipDocHisUrl: '@Url.Action("Find", "TZRalationHistory")'
+            });
+        });
+</script>
+<script id="tmplShipDoc" type="text/x-jquery-tmpl">
+<table class="info">
+<tr><td colspan="4"><strong>上车发货信息 [${TaskID}]</strong></td></tr>
+    <tr>
+    <td>客户名称：</td><td>${CustName}</td><td>工程名称：</td><td>${ProjectName}</td>
+    </tr>
+    <tr>
+    <td> 砼强度：</td><td>${ConStrength}</td><td>浇筑方式：</td><td> ${CastMode}</td>
+    </tr>
+    <tr>
+    <td>施工部位：</td><td> ${ConsPos}</td><td>运输方量：</td><td><span id='spSendCube'>${ShippingCube}</span></td>
+    </tr>
+</table> 
+</script>
+}
+
+
+<div id="top-layout" style="float:left;width:100%;">
+    <div id="MyJqGridM" style="width:0%;float:left;"></div> @*左边*@
+    <div id="MyJqGrid" style="width:100%;float:right;"></div> @*右上*@
+    <div id="MyJqGridH" style="width:100%;float:right;"></div> @*右下*@
+</div>
+
+<div id="shipDocHisWindow" style="display: none;">
+    <div id="shipDocHisGrid">
+    </div>
+</div>
+
+
+@*退转料-窗体*@
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<center>
+<table class="mvcform">
+  
+    <tr> 
+        <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarList, new { style = "width:110px" })
+         @Html.HiddenFor(m => m.ID) @Html.HiddenFor(m => m.SourceShipDocID)
+        </td>
+   
+    </tr>
+    <tr>            
+        <td>@Html.LabelFor(m => m.Cube)@Html.TextBoxFor(m => m.Cube, new {type="number", @class = "noime stext", style = "width:100px" })</td>
+    </tr>
+    <tr>
+        @*<td>@Html.LabelFor(m => m.Driver)@Html.TextBoxFor(m => m.Driver, new { ReadOnly = true, style = "width:100px" })</td>*@
+        <td>@Html.LabelFor(m => m.Driver)@Html.AutoComplete("UserID", "TrueName", "Combo", "User", "ID", "TrueName", "", new {style = "width:75px" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.ReturnType)@Html.DicEditorFor(m => m.ReturnType, DicEnum.ReturnType, "")</td>      
+   
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.ActionType)@Html.DicEditorFor(m => m.ActionType, DicEnum.ActionType, "")</td>
+ 
+        <td>
+        @Html.HiddenFor(m => m.IsCompleted, new { Value = false })
+        </td>
+    </tr>
+     <tr>
+        <td valign="top">@Html.LabelFor(m => m.ReturnReason)@Html.TextAreaFor(m => m.ReturnReason, new { @data_val_required = "剩退原因 字段是必需的", data_val = "true", style = "width:286px" })
+        </td>
+     </tr>
+
+</table>
+</center>
+}
+</div>
+<div id="forwardForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+  
+    <tr> 
+        <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarList, new { style = "width:110px" })
+         @Html.HiddenFor(m => m.ID) @Html.HiddenFor(m => m.SourceShipDocID)
+        </td>
+
+        <td>@Html.Label("TargetTaskName","转至任务单")@Html.AutoComplete("TargetTaskId", "ProjectName", "Combo", "ProduceTask", "ID", "", "", new { style = "width:160px" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.Label("IsOriginComplete", "不转料后补")@Html.CheckBox("IsOriginComplete")</td>
+ 
+        <td>@Html.Label("IsTrashOrigin", "原运输单作废")@Html.CheckBox("IsTrashOrigin")
+        @Html.HiddenFor(m => m.ReturnType, new{Value="RT0"})@Html.HiddenFor(m => m.ActionType, new { Value = "AT1" }) 
+        @Html.HiddenFor(m => m.IsCompleted, new { Value = true })
+        </td>
+   
+    </tr>
+    <tr>
+    <td colspan="3" style="display:none;">
+        @Html.Label("换车(待选)")@Html.DropDownList("CarID1", (SelectList)ViewBag.CarList, new { style = "width:110px" })
+    </td>
+    </tr>
+     <tr>
+         <td colspan="2" valign="top">@Html.LabelFor(m => m.ReturnReason, "转发原因")@Html.TextAreaFor(m => m.ReturnReason, new { @data_val_required = "转发原因 字段是必需的", data_val = "true", style = "width:373px" })
+         </td>
+     </tr>
+
+</table>
+}
+</div>
+
+<div id="splitForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <table class="mvcform">
+        <tr> 
+            <td>@Html.LabelFor(m => m.SourceCarID)@Html.DropDownListFor(m => m.SourceCarID, (SelectList)ViewBag.CarList, new { data_val_required = "源运输车号 字段是必需的", data_val = "true", style = "width:110px" })
+             @Html.HiddenFor(m => m.ID) 
+             @Html.HiddenFor(m => m.SourceShipDocID)
+            </td>
+            
+            <td>@Html.LabelFor(m => m.SourceCube)@Html.TextBoxFor(m => m.SourceCube, new { @class = "noime stext", style = "width:100px" })</td>
+            
+            @*<td>@Html.LabelFor(m => m.ReturnType)@Html.DicEditorFor(m => m.ReturnType, DicEnum.ReturnType, "")</td>*@
+            <td>@Html.LabelFor(m => m.ReturnType)@Html.DropDownListFor(m => m.ReturnType, (IEnumerable<SelectListItem>)ViewBag.ReturnTypeList, new { data_val_required = "剩退类别 字段是必需的", data_val = "true", style = "width:110px" })</td>
+        </tr>
+        
+        <tr>             
+            <td>@Html.Label("分装一：车号")@Html.DropDownList("CarID1", (SelectList)ViewBag.CarList, new { style = "width:110px" })</td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube1", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+
+            <td>@Html.Label("处理方式")@Html.DropDownList("ActionType1", (IEnumerable<SelectListItem>)ViewBag.ActionTypeList, new { style = "width:110px" })</td> 
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("分装二：车号")@Html.DropDownList("CarID2", (SelectList)ViewBag.CarList, new { style = "width:110px" })</td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube2", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+        
+        <td>@Html.Label("处理方式")@Html.DropDownList("ActionType2", (IEnumerable<SelectListItem>)ViewBag.ActionTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("分装三：车号")@Html.DropDownList("CarID3", (SelectList)ViewBag.CarList, new { style = "width:110px" })</td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube3", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+
+            <td>@Html.Label("处理方式")@Html.DropDownList("ActionType3", (IEnumerable<SelectListItem>)ViewBag.ActionTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("分装四：车号")@Html.DropDownList("CarID4", (SelectList)ViewBag.CarList, new { style = "width:110px" })</td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube4", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+
+            <td>@Html.Label("处理方式")@Html.DropDownList("ActionType4", (IEnumerable<SelectListItem>)ViewBag.ActionTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("分装五：车号")@Html.DropDownList("CarID5", (SelectList)ViewBag.CarList, new { style = "width:110px" })</td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube5", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+        
+            <td>@Html.Label("处理方式")@Html.DropDownList("ActionType5", (IEnumerable<SelectListItem>)ViewBag.ActionTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr>
+            <td colspan="3" valign="top">@Html.LabelFor(m => m.ReturnReason, "分装原因")@Html.TextAreaFor(m => m.ReturnReason, new { @data_val_required = "分装原因 字段是必需的", data_val = "true", style = "width:474px" })</td>
+        </tr>
+
+    </table>
+}
+</div>
+
+
+<div id="mergeForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <table class="mvcform">
+        @Html.HiddenFor(m => m.ID)       
+        <tr>             
+            <td>@Html.Label("合并一：车号")@Html.DropDownList("CarID1", (SelectList)ViewBag.CarList, new { style = "width:110px" })
+                @Html.Hidden("SourceShipDocID1")
+                @Html.Hidden("LastCube1")
+            </td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube1", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+
+            <td>@Html.Label("剩退类别")@Html.DropDownList("ReturnType1", (IEnumerable<SelectListItem>)ViewBag.ReturnTypeList, new { style = "width:110px" })</td> 
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("合并二：车号")@Html.DropDownList("CarID2", (SelectList)ViewBag.CarList, new { style = "width:110px" })
+                @Html.Hidden("SourceShipDocID2")
+                @Html.Hidden("LastCube2")
+            </td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube2", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+        
+        <td>@Html.Label("剩退类别")@Html.DropDownList("ReturnType2", (IEnumerable<SelectListItem>)ViewBag.ReturnTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("合并三：车号")@Html.DropDownList("CarID3", (SelectList)ViewBag.CarList, new { style = "width:110px" })
+                @Html.Hidden("SourceShipDocID3")
+                @Html.Hidden("LastCube3")
+            </td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube3", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+
+            <td>@Html.Label("剩退类别")@Html.DropDownList("ReturnType3", (IEnumerable<SelectListItem>)ViewBag.ReturnTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("合并四：车号")@Html.DropDownList("CarID4", (SelectList)ViewBag.CarList, new { style = "width:110px" })
+                @Html.Hidden("SourceShipDocID4")
+                @Html.Hidden("LastCube4")
+            </td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube4", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+
+            <td>@Html.Label("剩退类别")@Html.DropDownList("ReturnType4", (IEnumerable<SelectListItem>)ViewBag.ReturnTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("合并五：车号")@Html.DropDownList("CarID5", (SelectList)ViewBag.CarList, new { style = "width:110px" })
+                @Html.Hidden("SourceShipDocID5")
+                @Html.Hidden("LastCube5")
+            </td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube5", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+        
+            <td>@Html.Label("剩退类别")@Html.DropDownList("ReturnType5", (IEnumerable<SelectListItem>)ViewBag.ReturnTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr> 
+            <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarList, new { data_val_required = "源运输车号 字段是必需的", data_val = "true", style = "width:110px" })
+            </td>
+            
+            <td>@Html.LabelFor(m => m.Cube)@Html.TextBoxFor(m => m.Cube, new { @class = "noime stext", style = "width:100px" })</td>
+            <td>@Html.LabelFor(m => m.ActionType)@Html.DropDownListFor(m => m.ActionType, (IEnumerable<SelectListItem>)ViewBag.ActionTypeList, new { data_val_required = "处理方式 字段是必需的", data_val = "true", style = "width:110px" })</td>
+        </tr>
+
+        <tr>
+            <td colspan="3" valign="top">@Html.LabelFor(m => m.ReturnReason, "合并原因")@Html.TextAreaFor(m => m.ReturnReason, new { @data_val_required = "合并原因 字段是必需的", data_val = "true", style = "width:474px" })</td>
+        </tr>
+
+    </table>
+}
+</div>
+ 
+
+<div id="mergeFormZT" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <table class="mvcform">
+        @Html.HiddenFor(m => m.ID)       
+        <tr>             
+            <td>@Html.Label("合并一：车号")@Html.DropDownList("CarID1", (SelectList)ViewBag.CarList, new { style = "width:110px" })
+                @Html.Hidden("SourceShipDocID1")
+                @Html.Hidden("LastCube1")
+            </td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube1", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+
+            <td>@Html.Label("剩退类别")@Html.DropDownList("ReturnType1", (IEnumerable<SelectListItem>)ViewBag.ReturnTypeList, new { style = "width:110px" })</td> 
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("合并二：车号")@Html.DropDownList("CarID2", (SelectList)ViewBag.CarList, new { style = "width:110px" })
+                @Html.Hidden("SourceShipDocID2")
+                @Html.Hidden("LastCube2")
+            </td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube2", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+        
+        <td>@Html.Label("剩退类别")@Html.DropDownList("ReturnType2", (IEnumerable<SelectListItem>)ViewBag.ReturnTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("合并三：车号")@Html.DropDownList("CarID3", (SelectList)ViewBag.CarList, new { style = "width:110px" })
+                @Html.Hidden("SourceShipDocID3")
+                @Html.Hidden("LastCube3")
+            </td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube3", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+
+            <td>@Html.Label("剩退类别")@Html.DropDownList("ReturnType3", (IEnumerable<SelectListItem>)ViewBag.ReturnTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("合并四：车号")@Html.DropDownList("CarID4", (SelectList)ViewBag.CarList, new { style = "width:110px" })
+                @Html.Hidden("SourceShipDocID4")
+                @Html.Hidden("LastCube4")
+            </td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube4", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+
+            <td>@Html.Label("剩退类别")@Html.DropDownList("ReturnType4", (IEnumerable<SelectListItem>)ViewBag.ReturnTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("合并五：车号")@Html.DropDownList("CarID5", (SelectList)ViewBag.CarList, new { style = "width:110px" })
+                @Html.Hidden("SourceShipDocID5")
+                @Html.Hidden("LastCube5")
+            </td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube5", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+        
+            <td>@Html.Label("剩退类别")@Html.DropDownList("ReturnType5", (IEnumerable<SelectListItem>)ViewBag.ReturnTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr> 
+            <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarList, new { data_val_required = "源运输车号 字段是必需的", data_val = "true", style = "width:110px" })
+            </td>
+            
+            <td>@Html.LabelFor(m => m.Cube)@Html.TextBoxFor(m => m.Cube, new { @class = "noime stext", style = "width:100px" })</td>
+            <td>@Html.LabelFor(m => m.ActionType)@Html.DropDownListFor(m => m.ActionType, (IEnumerable<SelectListItem>)ViewBag.ActionTypeList, new { data_val_required = "处理方式 字段是必需的", data_val = "true", style = "width:110px" })</td>
+        </tr>
+
+        <tr id='tr1' style='display:none;'>
+        <td>@Html.Label("剩退类别")@Html.DropDownList("ReturnType6", (IEnumerable<SelectListItem>)ViewBag.ReturnTypeList, new { style = "width:110px" })</td>
+        @*<td  align="left" style="color:Red;">此车有转退料记录，请选择剩退类别</td>*@
+        </tr>
+
+        <tr>
+            <td colspan="3" valign="top">@Html.LabelFor(m => m.ReturnReason, "合并原因")@Html.TextAreaFor(m => m.ReturnReason, new { @data_val_required = "合并原因 字段是必需的", data_val = "true", style = "width:474px" })
+            @Html.Hidden("maxcube")
+            </td>
+        </tr>
+
+    </table>
+}
+</div>
+
+<div id="splitFormByZT" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <table class="mvcform">
+        <tr> 
+            <td>
+            @Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })
+            @Html.LabelFor(m => m.SourceCarID)@Html.DropDownListFor(m => m.SourceCarID, (SelectList)ViewBag.CarList, new { data_val_required = "源运输车号 字段是必需的", data_val = "true", style = "width:110px", disabled =true})
+             @Html.HiddenFor(m => m.ID) 
+             @Html.HiddenFor(m => m.SourceShipDocID)
+            </td>
+            
+            <td>@Html.LabelFor(m => m.SourceCube)@Html.TextBox("SourceCube","", new { @class = "text", style = "width:100px"})</td>
+            
+            @*<td>@Html.LabelFor(m => m.ReturnType)@Html.DicEditorFor(m => m.ReturnType, DicEnum.ReturnType, "")</td>*@
+            <td>@Html.LabelFor(m => m.ReturnType)@Html.DropDownListFor(m => m.ReturnType, (IEnumerable<SelectListItem>)ViewBag.ReturnTypeList, new { data_val_required = "剩退类别 字段是必需的", data_val = "true", style = "width:110px" })</td>
+        </tr>
+        
+        <tr>             
+            <td>@Html.Label("分装一：车号")@Html.DropDownList("CarID1", (SelectList)ViewBag.CarList, new { style = "width:110px" })</td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube1", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+
+            <td>@Html.Label("处理方式")@Html.DropDownList("ActionType1", (IEnumerable<SelectListItem>)ViewBag.ActionTypeList, new { style = "width:110px" })</td> 
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("分装二：车号")@Html.DropDownList("CarID2", (SelectList)ViewBag.CarList, new { style = "width:110px" })</td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube2", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+        
+        <td>@Html.Label("处理方式")@Html.DropDownList("ActionType2", (IEnumerable<SelectListItem>)ViewBag.ActionTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("分装三：车号")@Html.DropDownList("CarID3", (SelectList)ViewBag.CarList, new { style = "width:110px" })</td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube3", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+
+            <td>@Html.Label("处理方式")@Html.DropDownList("ActionType3", (IEnumerable<SelectListItem>)ViewBag.ActionTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("分装四：车号")@Html.DropDownList("CarID4", (SelectList)ViewBag.CarList, new { style = "width:110px" })</td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube4", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+
+            <td>@Html.Label("处理方式")@Html.DropDownList("ActionType4", (IEnumerable<SelectListItem>)ViewBag.ActionTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr>             
+            <td>@Html.Label("分装五：车号")@Html.DropDownList("CarID5", (SelectList)ViewBag.CarList, new { style = "width:110px" })</td>
+            
+            <td>@Html.Label("方量")@Html.TextBox("Cube5", "", new { data_val_number = "字段 方量 必须是一个数字", data_val = "true", style = "width:100px" })</td>
+        
+            <td>@Html.Label("处理方式")@Html.DropDownList("ActionType5", (IEnumerable<SelectListItem>)ViewBag.ActionTypeList, new { style = "width:110px" })</td>
+        </tr>
+
+        <tr>
+            <td colspan="3" valign="top">@Html.LabelFor(m => m.ReturnReason, "分装原因")@Html.TextAreaFor(m => m.ReturnReason, new { @data_val_required = "分装原因 字段是必需的", data_val = "true", style = "width:474px" })</td>
+        </tr>
+
+    </table>
+}
+</div>

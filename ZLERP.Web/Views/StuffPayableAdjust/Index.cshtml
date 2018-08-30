@@ -1,0 +1,42 @@
+﻿@model ZLERP.Model.StuffPayableAdjust
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/StuffPayableAdjust/StuffPayableAdjust.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            IndexInit({
+                storeUrl: '@Url.Action("Find")',
+                updateUrl: '@Url.Action("Update")'
+            });
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(m => m.ID);
+        @Html.ValidationSummary()
+        <table class="mvcform">
+           <tr>
+              <td>@Html.LabelFor(m => m.StockPactID)@Html.AutoComplete("StockPactID", "StockPactNo", "Combo", "StockPact", "ID", "StockPactNo")
+              </td>
+              <td>@Html.LabelFor(m => m.AdjustDate)@Html.EditorFor(m => m.AdjustDate, "DateTime")
+              </td>
+           </tr>
+           <tr>
+                <td>@Html.LabelFor(m => m.SupplyID)@Html.AutoComplete("SupplyID", "SupplyName", "Combo", "SupplyInfo", "ID", "SupplyName")
+                </td>
+                
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.PayBalance)@Html.TextBoxFor(m => m.PayBalance)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.DzMoney)@Html.TextBoxFor(m => m.DzMoney)
+                </td>
+            </tr>
+        </table>
+    }
+</div>

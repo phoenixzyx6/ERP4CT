@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.SupplyInfo, ZLERP.Model" table="SupplyInfo" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="SupplyID">
+		 	<generator class="assigned" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="ShortName" column="ShortName" />
+		<property name="SupplyKind" column="SupplyKind" />
+		<property name="SupplyName" column="SupplyName" />
+		<property name="Principal" column="Principal" />
+		<property name="SupplyAddr" column="SupplyAddr" />
+		<property name="InvoiceAddr" column="InvoiceAddr" />
+		<property name="BankName" column="BankName" />
+		<property name="BankAccount" column="BankAccount" />
+		<property name="BusinessTel" column="BusinessTel" />
+		<property name="BusinessFax" column="BusinessFax" />
+		<property name="PostCode" column="PostCode" />
+		<property name="PrincipalTel" column="PrincipalTel" />
+		<property name="LinkMan" column="LinkMan" />
+		<property name="LinkTel" column="LinkTel" />
+		<property name="SupplyType" column="SupplyType" />
+		<property name="CreditWorthiness" column="CreditWorthiness" />
+		<property name="Email" column="Email" />
+		<property name="IsUsed" column="IsUsed" />
+		<property name="IsTax" column="IsTax" />
+    <property name="IsNz" column="IsNz" />
+    <property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<bag name="StockPacts" lazy="true" batch-size="30"  inverse="true" >
+			<key column="SupplyID"></key>
+			<one-to-many class="StockPact"></one-to-many>
+		</bag>
+		<bag name="StockPlans" lazy="true"  batch-size="30"  inverse="true" >
+			<key column="SupplyID"></key>
+			<one-to-many class="StockPlan"></one-to-many>
+		</bag>
+		<bag name="StuffIns1" lazy="true" batch-size="30"  inverse="true" >
+			<key column="SupplyID"></key>
+			<one-to-many class="StuffIn"></one-to-many>
+		</bag>
+		<bag name="StuffIns2" lazy="true" batch-size="30"   inverse="true" >
+			<key column="TransportID"></key>
+			<one-to-many class="StuffIn"></one-to-many>
+		</bag>
+		<bag name="StuffInfos" lazy="true" batch-size="30"  inverse="true" >
+			<key column="SupplyID"></key>
+			<one-to-many class="StuffInfo"></one-to-many>
+		</bag>
+		<bag name="Equipments" lazy="true" batch-size="30"   inverse="true" >
+			<key column="SupplyID"></key>
+			<one-to-many class="Equipment"></one-to-many>
+		</bag>
+		
+		<bag name="StuffPayableAdjusts" lazy="true" cascade="all" inverse="true" >
+			<key column="SupplyID"></key>
+			<one-to-many class="StuffPayableAdjust"></one-to-many>
+		</bag>
+    <bag name="Lab_Records" lazy="true" cascade="all" inverse="true" >
+      <key column="Siloid"></key>
+      <one-to-many class="Lab_Record"></one-to-many>
+    </bag>
+	</class>
+</hibernate-mapping>

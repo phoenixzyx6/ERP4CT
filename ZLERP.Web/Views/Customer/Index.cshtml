@@ -1,0 +1,85 @@
+﻿@model ZLERP.Model.Customer
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/Customer.js")" type="text/javascript" language="javascript"> </script>
+
+    <script type="text/javascript">
+        $(function () {
+            customerIndexInit('@Url.Action("Find")', '@Url.Action("GetFirstPinYin")');  
+        });
+    </script>
+}
+<div id="custForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })@Html.LabelFor(m => m.CustName)@Html.TextBoxFor(m => m.CustName)
+                </td>
+                <td>@Html.LabelFor(m => m.TaxCode)@Html.TextBoxFor(m => m.TaxCode)
+                </td>
+                <td>@Html.LabelFor(m => m.ShortName)@Html.TextBoxFor(m => m.ShortName)
+                </td>
+            </tr>
+            <tr>
+                
+                <td>@Html.LabelFor(m => m.CustType)@Html.DicEditorFor(m => m.CustType, DicEnum.CustType)
+                </td>
+                <td>@Html.LabelFor(m => m.RegFund)@Html.TextBoxFor(m => m.RegFund)
+                </td>
+                <td>@Html.LabelFor(m => m.CreditQuota)@Html.TextBoxFor(m => m.CreditQuota)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.BusinessAddr)@Html.TextBoxFor(m => m.BusinessAddr)
+                </td>
+                <td>@Html.LabelFor(m => m.InvoiceAddr)@Html.TextBoxFor(m => m.InvoiceAddr)
+                </td>
+                <td>@Html.LabelFor(m => m.BusinessTel)@Html.TextBoxFor(m => m.BusinessTel)
+                </td>
+            </tr>
+            <tr>
+                
+                <td>@Html.LabelFor(m => m.BusinessFax)@Html.TextBoxFor(m => m.BusinessFax)
+                </td>
+                <td>@Html.LabelFor(m => m.Email)@Html.TextBoxFor(m => m.Email)
+                </td>
+                <td>@Html.LabelFor(m => m.PostCode)@Html.TextBoxFor(m => m.PostCode)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.PrincipalSex)@Html.DicEditorFor(m => m.PrincipalSex, DicEnum.Gender)
+                </td>
+                <td>@Html.LabelFor(m => m.Principal)@Html.TextBoxFor(m => m.Principal)
+                </td>
+                <td>@Html.LabelFor(m => m.PrincipalTel)@Html.TextBoxFor(m => m.PrincipalTel)
+                </td>
+            </tr>
+            <tr>
+                
+                <td>@Html.LabelFor(m => m.LinkMan)@Html.TextBoxFor(m => m.LinkMan)
+                </td>
+                <td>@Html.LabelFor(m => m.LinkTel)@Html.TextBoxFor(m => m.LinkTel)
+                </td>
+               
+                <td>
+                @Html.LabelFor(m => m.Buyer)@Html.DropDownListFor(m => m.Buyer, (IEnumerable<SelectListItem>)ViewBag.BuyerList, "", new { @class = "text", style = "width:120px;", id = "Buyer" })
+            </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AddrCode)@Html.TextBoxFor(m => m.AddrCode)
+                </td>
+                <td>@Html.LabelFor(m => m.IsUse)@Html.CheckBoxFor(m => m.IsUse, new { Checked = true })
+                </td>
+                <td>@Html.LabelFor(m => m.IsAudit)@Html.CheckBoxFor(m => m.IsAudit)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 3, 80, new { @class = "text" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="custid">
+</div>

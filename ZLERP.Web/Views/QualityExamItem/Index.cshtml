@@ -1,0 +1,115 @@
+﻿@model ZLERP.Model.QualityExamItem
+@section HeaderSection{
+<script type="text/javascript">
+    function qualityexamitemsIndexInit(storeUrl) {
+        var myJqGrid = new MyGrid({
+            renderTo: 'MyJqGrid'
+            //, width: '100%'
+            , autoWidth: true
+            , buttons: buttons0
+            , height: gGridHeight
+		    , storeURL: storeUrl
+		    , sortByField: 'ID'
+		    , primaryKey: 'ID'
+		    , setGridPageSize: 30
+		    , showPageBar: true
+		    , initArray: [
+                { label: '试块编号', name: 'ID', index: 'ID' }
+                , { label: '品质编号', name: 'QualityExamID', index: 'QualityExamID' }
+                , { label: '试块组号', name: 'ExamBlockGroupID', index: 'ExamBlockGroupID' }
+                , { label: '试体编号', name: 'ExamBodyID', index: 'ExamBodyID' }
+                , { label: '制作时间', name: 'DoTime', index: 'DoTime', formatter: 'date' }
+                , { label: '测试时间', name: 'TestTime', index: 'TestTime', formatter: 'date' }
+                , { label: '荷载1', name: 'Load1', index: 'Load1' }
+                , { label: '强度1', name: 'Strength1', index: 'Strength1' }
+                , { label: '荷载2', name: 'Load2', index: 'Load2' }
+                , { label: '强度2', name: 'Strength2', index: 'Strength2' }
+                , { label: '龄期', name: 'AgeTime', index: 'AgeTime' }
+		    ]
+		    , autoLoad: true
+            , functions: {
+                handleReload: function (btn) {
+                    myJqGrid.reloadGrid();
+                },
+                handleRefresh: function (btn) {
+                    myJqGrid.refreshGrid('1=1');
+                },
+                handleAdd: function (btn) {
+                    myJqGrid.handleAdd({
+                        loadFrom: 'MyFormDiv',
+                        btn: btn
+                    });
+                },
+                handleEdit: function (btn) {
+                    myJqGrid.handleEdit({
+                        loadFrom: 'MyFormDiv',
+                        btn: btn
+                    });
+                }
+                , handleDelete: function (btn) {
+                    myJqGrid.deleteRecord({
+                        deleteUrl: btn.data.Url
+                    });
+                }
+            }
+        });
+
+    }
+</script>
+<script src="@Url.Content("~/Scripts/Views/QualityExamItems/QualityExamItems.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            qualityexamitemsIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ID)@Html.EditorFor(m=>m.ID)</td>
+ 
+        <td>@Html.LabelFor(m=>m.QualityExamID)@Html.EditorFor(m=>m.QualityExamID)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ExamBlockGroupID)@Html.EditorFor(m=>m.ExamBlockGroupID)</td>
+ 
+        <td>@Html.LabelFor(m=>m.ExamBodyID)@Html.EditorFor(m=>m.ExamBodyID)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.DoTime)@Html.EditorFor(m=>m.DoTime)</td>
+ 
+        <td>@Html.LabelFor(m=>m.TestTime)@Html.EditorFor(m=>m.TestTime)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Load1)@Html.EditorFor(m=>m.Load1)</td>
+ 
+        <td>@Html.LabelFor(m=>m.Strength1)@Html.EditorFor(m=>m.Strength1)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Load2)@Html.EditorFor(m=>m.Load2)</td>
+ 
+        <td>@Html.LabelFor(m=>m.Strength2)@Html.EditorFor(m=>m.Strength2)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.AgeTime)@Html.EditorFor(m=>m.AgeTime)</td>
+        <td></td>
+    </tr>
+</table>
+
+}
+</div>
+<!--
+建立sysfuncs
+INSERT INTO [dbo].[SysFunc] ([SysFuncID], [FuncName], [FuncDesc], [ParentID], [IsLeaf], [ButtonPos], [IsButton], [Icon], [URL], [IsDisabled], [HandlerName], [HandlerFile], [Flag], [OrderNum], [Builder], [BuildTime], [Modifier], [ModifyTime], [Version], [Lifecycle]) VALUES (N'4104', N'品质试块明细', N'品质试块明细', N'41', 1, 0, 0, NULL, N'/QualityExamItems.mvc/Index', 0, NULL, NULL, 0, 0, N'admin', '2012-02-29 08:37:04.000', NULL, '2012-02-29 08:48:21.000', 2, 0)
+INSERT INTO [dbo].[SysFunc] ([SysFuncID], [FuncName], [FuncDesc], [ParentID], [IsLeaf], [ButtonPos], [IsButton], [Icon], [URL], [IsDisabled], [HandlerName], [HandlerFile], [Flag], [OrderNum], [Builder], [BuildTime], [Modifier], [ModifyTime], [Version], [Lifecycle]) VALUES (N'410401', N'增加', N'增加品质试块明细', N'4104', 1, 0, 1, N'add', N'/QualityExamItems.mvc/Add', 0, N'handleAdd', NULL, 0, 0, N'admin', '2012-02-29 08:38:37.000', NULL, '2012-02-29 08:42:04.000', 2, 0)
+INSERT INTO [dbo].[SysFunc] ([SysFuncID], [FuncName], [FuncDesc], [ParentID], [IsLeaf], [ButtonPos], [IsButton], [Icon], [URL], [IsDisabled], [HandlerName], [HandlerFile], [Flag], [OrderNum], [Builder], [BuildTime], [Modifier], [ModifyTime], [Version], [Lifecycle]) VALUES (N'410402', N'修改', N'修改品质试块明细', N'4104', 1, 0, 1, NULL, N'/QualityExamItems.mvc/Update', 0, N'handleEdit', NULL, 0, 0, N'admin', '2012-02-29 08:40:53.000', NULL, '2012-02-29 08:48:21.000', 2, 0)
+INSERT INTO [dbo].[SysFunc] ([SysFuncID], [FuncName], [FuncDesc], [ParentID], [IsLeaf], [ButtonPos], [IsButton], [Icon], [URL], [IsDisabled], [HandlerName], [HandlerFile], [Flag], [OrderNum], [Builder], [BuildTime], [Modifier], [ModifyTime], [Version], [Lifecycle]) VALUES (N'410403', N'删除', N'删除品质试块明细', N'4104', 1, 0, 1, N'delete', N'/QualityExamItems.mvc/Delete', 0, N'handleDelete', NULL, 0, 0, N'admin', '2012-02-29 08:42:52.000', NULL, '2012-02-29 08:48:21.000', 2, 0)
+-->

@@ -1,0 +1,63 @@
+﻿@model ZLERP.Model.Reward 
+@section HeaderSection{
+
+<script src="@Url.Content("~/Scripts/Views/Rewards/Rewards.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            rewardsIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td colspan="2">@Html.HiddenFor(m=>m.ID)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.UserID)@Html.AutoComplete("UserID", "TrueName", "Combo", "User", "ID", "TrueName", "")@Html.HiddenFor(m=>m.DepartmentName)</td>
+        <td>@Html.LabelFor(m=>m.RewardsType)@Html.DicComboBoxFor(m=>m.RewardsType,DicEnum.RewardsType)</td>
+    </tr>
+    <tr> 
+        <td colspan="2"><span style="vertical-align:top; text-align:right; margin-right:5px; display:inline-block; width:6em;">奖惩事由</span>@Html.TextAreaFor(m => m.RewardsReason, 3, 54, new { @class = "text" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.RewardsMode)@Html.DicComboBoxFor(m => m.RewardsMode, DicEnum.RewardsMode)</td>
+        <td>@Html.LabelFor(m => m.ExcuteDate)@Html.EditorFor(m => m.ExcuteDate)@Html.HiddenFor(m => m.ExcuteMan)@Html.HiddenFor(m => m.NoticeID)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.ApproveMan)@Html.AutoComplete("ApproveMan", "ApproveMan2", "Combo", "User", "TrueName", "TrueName", "")</td>
+        <td>@Html.LabelFor(m => m.ApproveDate)@Html.EditorFor(m => m.ApproveDate)</td>
+    </tr>
+    <tr> 
+        <td colspan="2"><span style="vertical-align:top; text-align:right; margin-right:5px; display:inline-block; width:6em;">处理结果</span>@Html.TextAreaFor(m => m.ProcessingResult, 3, 54, new { @class = "text" })</td>
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.Label("是否发送到通知公告(置顶)")@Html.CheckBox("IsNotice")<span id="Tip" style="vertical-align:baseline; color:Red;"></span></td>
+    </tr>
+</table>
+}
+</div>
+<div id="RevocationFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.ID, "编号")@Html.TextBoxFor(m => m.ID, new { @ReadOnly = true, style = "border:none;color:red;" })</td>
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.RevocationDate)@Html.EditorFor(m => m.RevocationDate)@Html.HiddenFor(m => m.IsEffective, new { Value = false })</td>
+    </tr>
+    <tr> 
+        <td colspan="2"><span style="vertical-align:top; text-align:right; margin-right:5px; display:inline-block; width:6em;">撤销原由</span>@Html.TextAreaFor(m => m.RevocationReason, 3, 40, new { @class = "text" })</td>
+    </tr>
+    <tr> 
+        <td colspan="2"><span style="vertical-align:top; text-align:right; margin-right:5px; display:inline-block; width:6em;color:Red">说明</span>如果撤销了该奖惩信息，将会自动删除对应的公告信息</td>
+    </tr>
+</table>
+}
+</div>

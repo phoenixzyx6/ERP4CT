@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.EquipMtLyItem, ZLERP.Model" table="EquipMtLyItem" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="EquipMtLyItemID">
+		 	<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="Amount" column="Amount" />
+		<property name="PurposeMill" column="PurposeMill" />
+		<property name="IsAssess" column="IsAssess" />
+		<property name="Remark" column="Remark" />
+		<property name="MntZlItemID" column="MntZlItemID" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="DepartmentID" column="DepartmentID" />
+    <property name="EquipMtLyID" column="EquipMtLyID" />
+    <property name="MaintenanceID" column="MaintenanceID" />
+    <property name="PartID" column="PartID" />
+    <property name="UserID" column="UserID" />
+    <many-to-one name="Department" column="DepartmentID" class="Department" update="false" insert="false"/>
+		<many-to-one name="EquipMtLy" column="EquipMtLyID" class="EquipMtLy" update="false" insert="false"/>
+		<many-to-one name="Maintenance" column="MaintenanceID" class="Maintenance" update="false" insert="false"/>
+		<many-to-one name="PartInfo" column="PartID" class="PartInfo" update="false" insert="false"/>
+		<many-to-one name="User" column="UserID" class="User" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

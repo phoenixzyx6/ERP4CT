@@ -1,0 +1,47 @@
+﻿@model ZLERP.Model.PartPlan 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/PartPlan/PartPlan.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            var options = {
+                storeUrl: '@Url.Action("Find")'
+                , auditUrl: '@Url.Action("Auditing")'
+                , getUrl: '@Url.Action("Get","PartInfo")'
+            };
+            partplanIndexInit(options);
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    @Html.HiddenFor(m => m.ID)
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.PlanDate)@Html.EditorFor(m => m.PlanDate)</td>
+ 
+        <td>@Html.LabelFor(m => m.PlanMan)@Html.EditorFor(m => m.PlanMan)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.DepartmentID)@Html.DropDownListFor(m => m.DepartmentID, (SelectList)ViewBag.DepartDics, new { @class = "text" })</td>
+ 
+        <td>@Html.LabelFor(m => m.PartID)@Html.DropDownListFor(m => m.PartID, (SelectList)ViewBag.PartInfoDics,"", new { id="PartID", @class = "text",style="width:120px;" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.Label("单位")<input type="text" class="text-box single-line" id="UnitID" disabled="disabled" /></td>
+        <td>@Html.Label("当前库存")<input type="text" class="text-box single-line" id="Inventory" disabled="disabled" /></td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PlanNum)@Html.EditorFor(m => m.PlanNum)</td>        
+   
+    </tr>
+    <tr>
+    <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 1, 50, new { @class = "text" })</td>
+    </tr>
+    
+</table>
+}
+</div>

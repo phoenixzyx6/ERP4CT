@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.GoodsBorrow, ZLERP.Model" table="GoodsBorrow" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="GoodsRentID">
+		 	<generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+    <property name="GoodsID" column="GoodsID" />
+    <property name="DepartmentID" column="DepartmentID" />
+		<property name="BorrowMan" column="BorrowMan" />
+		<property name="BorrowNum" column="BorrowNum" />
+		<property name="BorrowTime" column="BorrowTime" />
+		<property name="BorrowReason" column="BorrowReason" />
+		<property name="Operator" column="Operator" />
+		<property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<many-to-one name="GoodsInfo" column="GoodsID" class="GoodsInfo" update="false" insert="false"/>
+    <many-to-one name="Department" column="DepartmentID" class="Department" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

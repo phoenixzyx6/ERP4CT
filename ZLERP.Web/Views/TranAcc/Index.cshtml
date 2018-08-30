@@ -1,0 +1,53 @@
+﻿@model ZLERP.Model.TranAcc 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/TranAcc/TranAcc.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            tranaccIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.AccTime)@Html.EditorFor(m => m.AccTime, "DateTimeWithTime", new { })
+                </td>
+                <td>@Html.LabelFor(m => m.AccAddr)@Html.EditorFor(m => m.AccAddr)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AccClass)@Html.DropDownListFor(m => m.AccClass, (IEnumerable<SelectListItem>)ViewBag.AccClassList, new { @data_val_required = "事故类型 字段是必需的", data_val = "true", style = "width:100px;" })
+                </td>
+                <td colspan="2">@Html.LabelFor(m => m.AccReason)@Html.TextAreaFor(m => m.AccReason, 1, 60, new { })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    @Html.LabelFor(m => m.AccDes)@Html.TextAreaFor(m => m.AccDes, 2, 70, new { })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AccMan)@Html.TextBoxFor(m => m.AccMan)
+                </td>
+                <td>@Html.LabelFor(m => m.InsureCorp)@Html.EditorFor(m => m.InsureCorp)
+                </td>
+                <td>@Html.LabelFor(m => m.InsureNo)@Html.EditorFor(m => m.InsureNo)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AccCarID)@Html.DropDownListFor(m => m.AccCarID, (SelectList)ViewBag.CarList, new { @data_val_required = "事故车辆 字段是必需的", data_val = "true", style = "width:140px;" })
+                </td>
+                <td>@Html.LabelFor(m => m.LossPart)@Html.EditorFor(m => m.LossPart)
+                </td>
+                <td>@Html.LabelFor(m => m.LossAmount)@Html.TextBoxFor(m => m.LossAmount, new { Value = 0 })
+                </td>
+            </tr>
+        </table>
+    }
+</div>

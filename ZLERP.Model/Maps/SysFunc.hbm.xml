@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.SysFunc, ZLERP.Model" table="SysFunc" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="SysFuncID">
+		 	<generator class="assigned" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="FuncName" column="FuncName" />
+		<property name="FuncDesc" column="FuncDesc" />
+		<property name="ParentID" column="ParentID" />
+		<property name="IsLeaf" column="IsLeaf" />
+		<property name="ButtonPos" column="ButtonPos" />
+		<property name="IsButton" column="IsButton" />
+		<property name="Icon" column="Icon" />
+		<property name="URL" column="URL" />
+		<property name="IsDisabled" column="IsDisabled" />
+		<property name="HandlerName" column="HandlerName" />
+		<property name="HandlerFile" column="HandlerFile" />
+		<property name="Flag" column="Flag" />
+		<property name="OrderNum" column="OrderNum" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <!--<bag name="Users" table="SysPower">
+      <key column="SysFuncID"/>
+      <many-to-many class="User" column="UserID"/>
+    </bag>-->
+    
+  </class>
+</hibernate-mapping>

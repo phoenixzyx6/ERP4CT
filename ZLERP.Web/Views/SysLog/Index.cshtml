@@ -1,0 +1,49 @@
+﻿@model ZLERP.Model.SysLog
+@section HeaderSection{ 
+<script src="@Url.Content("~/Scripts/Views/SysLog.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            syslogsIndexInit('@Url.Action("Find")');
+        });
+</script>
+<style type="text/css">
+#dlgObjectDetail label{width:8em; overflow:hidden; margin-right:1em; font-weight:bold; display:inline-block; text-align:right;}
+</style>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ID)@Html.EditorFor(m=>m.ID)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.LogType)@Html.EditorFor(m=>m.LogType)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.UserIP)@Html.EditorFor(m=>m.UserIP)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Url)@Html.EditorFor(m=>m.Url)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ObjectId)@Html.EditorFor(m=>m.ObjectId)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ObjectType)@Html.EditorFor(m=>m.ObjectType)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ObjectData)@Html.EditorFor(m=>m.ObjectData)</td>
+    </tr>
+</table>
+
+}
+</div>
+<div id="dlgObjectDetail"></div>

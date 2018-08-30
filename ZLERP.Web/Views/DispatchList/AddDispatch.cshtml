@@ -1,0 +1,412 @@
+﻿@model ZLERP.Model.ViewModels.SchedulerViewModel
+@{Layout = null;}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>发货-按F2键可显示或隐藏未开盘的任务单</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="@Url.Content("~/Content/themes/default/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/default/jquery-ui-1.8.2.custom.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/ui.jqgrid.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/jquery.pnotify.default.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.4.4.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/i18n/grid.locale-cn.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.jqGrid.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.pnotify.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ActReport.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.zlerp.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/common.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/MyGrid.js")" type="text/javascript"></script>
+    
+    <script language="javascript" type="text/javascript">
+        document.onkeyup = function (event) {
+            var e = event || window.event;
+            var keyCode = e.keyCode || e.which;
+            switch (keyCode) {
+                case 113: //F2
+                    $("#btshow").click();
+                    break;
+                case 83:
+                    $("#btnUpload").click();
+                    break;
+                default:
+                    break;
+            }
+        }
+        $(function () {
+            var getLastUrl = '@Html.Raw(Url.Action("GetLastDocByTaskId", "ShippingDocument"))';
+            var getCarInfoUrl = '@Html.Raw(Url.Action("GetInfo", "Car"))';
+            var getRemaincubeUrl = '@Html.Raw(Url.Action("GetRemaincubeByCarId", "TZRalation"))';
+            var storeUrl = '@Html.Raw(Url.Action("Find", "ProduceTask"))'
+            var lastDocRecord;
+
+            $.post(
+            getLastUrl,
+            { id: '@ViewBag.TaskInfo.ID' },
+            function (response) {
+                if (response && response.Result) {
+                    lastDocRecord = response;
+                    bindProductLines(response.ProductLines);
+                    $('#ShippingDocument_PumpName').val(response.PumpName);
+                    $('#ShippingDocument_Remark').val(response.Remark);
+                    $('#ShippingDocument_CarID').bind('change', carListChange);                    
+                    $('#ShippingDocument_CarID').val(response.AutoCarID);
+                    $('#ShippingDocument_CarID').trigger('change');
+
+                    $('#DispatchList_BetonCount').bind('blur', reCalculateProvided);
+                    $('#DispatchList_SlurryCount').bind('blur', reCalculateProvided);
+                    $('#ShippingDocument_RemainCube').bind('blur', reCalculateProvided);
+                    $('#ShippingDocument_OtherCube').bind('blur', reCalculateProvided);
+                }
+            });
+
+
+
+            $.get('@Url.Action("GetButtons", "Home")', { funcId: '4103', flag: 0 }, function (resp) {
+                if (typeof (resp) != 'undefined' && resp.length > 0) {
+                    var html = '';
+                    for (var i = 0; i < resp.length; i++) {
+                        var btn = resp[i];
+                        if (btn.ID != '410304') {
+                            html += '<button type="button" rel="' + btn.HandlerName + '">' + btn.FuncName + '</button>'
+                        }
+                    }
+                    $('.submitbtns').append(html);
+
+                    $('button').bind('click', submitForm);
+                    $('button').button();
+                }
+            });
+
+            var mygrid = new MyGrid({
+                renderTo: 'UnOpenTasks'
+                //, autoWidth: true
+            , width: 600
+            , height: 163
+            , storeURL: storeUrl
+            , storeCondition: "IsCompleted=0"
+            , sortByField: 'ID'
+            , primaryKey: 'ID'
+            , setGridPageSize: 5
+            , showPageBar: true
+            , singleSelect: true
+            , initArray: [
+        { label: '单号', name: 'ID', index: 'ID', width: 60, searchoptions: { sopt: ['cn'] }, align: 'center' }
+        , { label: '配比', name: 'IsFormulaSend', index: 'IsFormulaSend', sortable: false, align: 'center', width: 30, formatter: booleanFmt, unformat: booleanUnFmt, stype: 'select', searchoptions: { value: booleanSearchValues()} }
+        , { label: '工程名称', name: 'ProjectName', index: 'ProjectName', searchoptions: { sopt: ['cn'] }, width: 220 }
+        , { label: '项目地址', name: 'ProjectAddr', index: 'ProjectAddr', width: 90 }
+        , { label: '客户编码', name: 'CustomerID', jsonmap: 'Contract.Customer.ID', index: 'Contract.Customer.ID', type: 'hidden', hidden: true }
+        , { label: '客户名称', name: 'CustName', jsonmap: 'Contract.Customer.CustName', index: 'Contract.Customer.CustName', searchoptions: { sopt: ['cn'] }, hidden: true }
+        , { label: '合同编码', name: 'ContractID', index: 'Contract.ID', type: 'hidden', hidden: true }
+        , { label: '施工部位', name: 'ConsPos', index: 'ConsPos', width: 80, searchoptions: { sopt: ['cn']} }
+        , { label: '方式', name: 'CastMode', index: 'CastMode', width: 50 }
+        , { label: '标号', name: 'ConStrength', index: 'ConStrength', align: 'center', width: 40 }
+        , { label: '计划时间', name: 'NeedDate', index: 'NeedDate', formatter: 'datetime', width: 130 }
+        , { label: '计划量', name: 'PlanCube', index: 'PlanCube', align: 'right', width: 50 }
+        , { label: '坍落度', name: 'Slump', index: 'Slump', align: 'center', width: 50 }
+        , { label: '含砂浆', name: 'IsSlurry', index: 'IsSlurry', align: 'center', width: 50, formatter: booleanFmt, unformat: booleanUnFmt, stype: 'select', searchoptions: { value: booleanSearchValues()} }
+        , { label: '施工单位', name: 'ConstructUnit', index: 'ConstructUnit' }
+        , { label: '合同明细编号', name: 'ContractItemsID', index: 'ContractItemsID', hidden: true }
+        , { label: '工地电话', name: 'Tel', index: 'Tel' }
+   	]
+            , autoLoad: true
+            , functions: {
+                handleReload: function (btn) {
+                    mygrid.reloadGrid();
+                },
+                handleRefresh: function (btn) {
+                    mygrid.refreshGrid('1=1');
+                }
+            }
+            });
+            mygrid.getJqGrid().jqGrid('filterToolbar', { stringResult: true, defaultSearch: 'cn' });
+            mygrid.addListeners('cellclick', function (id, record, colIndex, cellcontent) {
+                $.post(
+            getLastUrl,
+            { id: id },
+            function (response) {
+                if (response && response.Result) {
+                    lastDocRecord = response;
+                    bindProductLines(response.ProductLines);
+                    $('#ShippingDocument_TaskID').val(id);
+                    $('#ShippingDocument_ProjectName').val(record.ProjectName);
+                    $('#ShippingDocument_PlanCube').val(record.PlanCube);
+                    $('#ShippingDocument_PumpName').val(response.PumpName);
+                    $('#ShippingDocument_Remark').val(response.Remark);
+                    $('#ShippingDocument_CarID').unbind('change');
+                    $('#ShippingDocument_CarID').bind('change', carListChange);
+                    $('#ShippingDocument_CarID').val(response.AutoCarID);
+                    $('#ShippingDocument_CarID').trigger('change');
+
+                    $('#DispatchList_BetonCount').bind('blur', reCalculateProvided);
+                    $('#DispatchList_SlurryCount').bind('blur', reCalculateProvided);
+                    $('#ShippingDocument_RemainCube').bind('blur', reCalculateProvided);
+                    $('#ShippingDocument_OtherCube').bind('blur', reCalculateProvided);
+                }
+            });
+            });
+
+
+
+        function validateForm() {
+            var pvalue = $('#DispatchList_ProductLineID').val();
+            if (isEmpty(pvalue)) {
+                showError('提示', '请选择搅拌机组编号！');
+                return false;
+            }
+            var carId = $('#ShippingDocument_CarID').val();
+            if (isEmpty(carId)) {
+                showError('提示', '请选择运输车号！');
+                return false;
+            }
+            var maxCube = $('input[name=MaxCube]').val();
+            var hntfs = $('#DispatchList_BetonCount').val();
+            var sjfs = $('#DispatchList_SlurryCount').val();
+            var qtfs = $('#ShippingDocument_OtherCube').val();
+            var syfs = $('#ShippingDocument_RemainCube').val();
+            maxCube = isEmpty(maxCube) ? 0 : parseFloat(maxCube);
+            hntfs = isEmpty(hntfs) ? 0 : parseFloat(hntfs);
+            sjfs = isEmpty(sjfs) ? 0 : parseFloat(sjfs);
+            qtfs = isEmpty(qtfs) ? 0 : parseFloat(qtfs);
+            syfs = isEmpty(syfs) ? 0 : parseFloat(syfs);
+            var totalfs = hntfs + sjfs + qtfs + syfs;
+
+            if (parseFloat(totalfs) > maxCube) {
+                showError('错误', '总方量值超过了本车的最大装载量!');
+                return false;
+            }
+            if (hntfs == 0 && sjfs == 0 && qtfs == 0 && syfs == 0) {
+                showError('错误', '请设置票据方量!');
+                return false;
+            }
+            return true;
+        }
+        function submitForm(btn) {
+            if (validateForm()) {
+                var rel = $(this).attr('rel');
+                ajaxRequest($('#scdj-form').attr('action'), $('#scdj-form').serialize(), false, function (response) {
+                    if (response && response.Result) {
+                        showMessage(response.Message);
+                        $('#scdj-form')[0].reset();
+                        if (rel == 'handleAddPrint' || rel == 'handleAddPreView') {
+                            printShippingDoc(rel == "handleAddPrint" ? "print" : "preview", response.Data);
+                        }
+                        else {
+                            window.close();
+                        }
+                    }
+                    else {
+                        showError(response.Message);
+                    }
+                }, null, btn);
+            }
+        }
+
+        function bindProductLines(plist) {
+
+            if (typeof (plist) == "undefined" || plist == null || plist.length == 0) return;
+            //移除生产线下拉，重新填充.
+            var pDropDownList = $('#DispatchList_ProductLineID');
+            pDropDownList.empty();
+            var rateDropDownList = $('#DispatchList_PCRate');
+            rateDropDownList.empty();
+
+            pDropDownList.append("<option value=\"\"></option>");
+            var productLineArr = new Array();
+            for (i = 0; i < plist.length; i++) {
+                var id = plist[i].ID;
+                var name = plist[i].ProductLineName;
+                var dishNum = plist[i].DishNum;
+                //通过一次查询，将发车时间保存到了ModifyTime中，避免两次查询。
+                var deliveryTime = plist[i].ModifyTime;
+                pDropDownList.append("<option value=\"" + id + "\">" + name + "</option>");
+                productLineArr[id] = plist[i];
+            }
+            pDropDownList.unbind("change");
+            //机组下拉列表事件绑定
+            pDropDownList.bind('change', productLineArr, productLineChange);
+
+        }
+
+        //机组下拉列表事件
+        function productLineChange(select) {
+            var pid = select.target.value;
+            var rateDropDownList = $('#DispatchList_PCRate');
+            rateDropDownList.empty();
+            if (pid == "") return;
+            //重置罐容比列表
+            var productLineJson = select.data[pid];
+            var dishNum = productLineJson.DishNum;
+            rateDropDownList.append("<option value=\"" + dishNum + "\">" + dishNum + "</option>");
+            for (i = dishNum - 0.5; i >= 0.5; i = i - 0.5) {
+                rateDropDownList.append("<option value=\"" + i + "\">" + i + "</option>");
+            }
+            //重置发车时间
+            var time = productLineJson.ModifyTime;
+            time = dataTimeFormat(time, 'H:i');
+            $('#ShippingDocument_DeliveryTime').val(time);
+        }
+        //车辆选中事件处理
+        function carListChange(select) {
+            var carid = select.target.value;
+            if (isEmpty(carid)) {
+                isScrwGridClicked = false;
+                return;
+            }
+
+            var driverList = $('#ShippingDocument_Driver');
+            driverList.empty();
+            ajaxRequest(getCarInfoUrl, { id: carid }, false, function (response) {
+                var users = response.Users;
+                //设定容重，
+                var maxCube = response.MaxCube;
+                $('input[name=MaxCube]').val(maxCube);
+
+                if (!isEmpty(users)) {
+                    //设定司机
+                    for (var i = 0; i < users.length; i++) {
+                        var user = users[i];
+                        driverList.append("<option value=\"" + user.UserID + "\">" + user.TrueName + "</option>");
+                    }
+                }
+                //填充方量判断，获取配置中的数据。
+                var hntfs = maxCube;
+                var defaultCube = isEmpty('@ViewBag.DefaultManufactureCube') ? 0 : parseFloat('@ViewBag.DefaultManufactureCube');
+                if (defaultCube > 0 && maxCube > defaultCube) {
+                    hntfs = defaultCube;
+                }
+                ajaxRequest(getRemaincubeUrl, { carId: carid }, false, function (response) {
+                    var remainCube = response.Data;
+                    $('#DispatchList_BetonCount').val(hntfs - remainCube);
+                    $('#ShippingDocument_RemainCube').val(remainCube);
+                    calculatePrivided();
+                });
+
+            });
+        }
+
+        //混凝土方量、砂浆方量、剩余方量等blur事件触发。
+        function calculatePrivided() {
+            //以供数量 
+            var ygsl = isEmpty(lastDocRecord.ProvidedCube) ? 0 : parseFloat(lastDocRecord.ProvidedCube);
+            //累计车次加1
+            var cc = isEmpty(lastDocRecord.ProvidedTimes) ? 0 : parseInt(lastDocRecord.ProvidedTimes);
+            var current_cc = cc + 1;
+            var checksjfs = $('#DispatchList_SlurryCount').val();
+            var checkhntfs = $('#DispatchList_BetonCount').val();
+            var checkTLFL = $('#ShippingDocument_RemainCube').val();
+            var checkQTFL = $('#ShippingDocument_OtherCube').val();
+            checksjfs = isEmpty(checksjfs) ? 0 : parseFloat(checksjfs);
+            checkhntfs = isEmpty(checkhntfs) ? 0 : parseFloat(checkhntfs);
+            checkTLFL = isEmpty(checkTLFL) ? 0 : parseFloat(checkTLFL);
+            checkQTFL = isEmpty(checkQTFL) ? 0 : parseFloat(checkQTFL);
+            var current_ygsl = ygsl + checksjfs + checkhntfs + checkTLFL + checkQTFL;
+            //alert(ygsl + "\n" + checksjfs + "\n" + checkhntfs + "\n" + checkTLFL + "\n" + current_ygsl);
+            $('#ShippingDocument_ProvidedCube').val(current_ygsl);
+            $('#ShippingDocument_ProvidedTimes').val(current_cc);
+            $('#ShippingDocument_PumpName').val(lastDocRecord.PumpName);
+            //增加超过计划方量提示
+            var checkJHFL = $('#ShippingDocument_PlanCube').val();
+            checkJHFL = isEmpty(checkJHFL) ? 0 : parseFloat(checkJHFL);
+            var temp = current_ygsl - checkJHFL;
+            if (temp > 0) {
+                showMessage('提示', '超过计划方量' + temp + '方');
+            }
+        }
+
+        //几个方量字段增加blur事件绑定。
+
+            function reCalculateProvided() {
+                if (!isEmpty(lastDocRecord)) {
+                    calculatePrivided();
+                }
+            }
+            window.showUnOpenTask = function () {
+                $("#UnOpenTasks").slideToggle("fast", function (j) {
+                    if(!$(this).is(':hidden')){//列表展开时才刷新未开盘的任务单
+                        mygrid.reloadGrid();
+                    }
+                    //$(this).removeClass("highlight");
+                    //$(this).next("div .content").fadeIn(1000);
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="UnOpenTasks" style="display: none;">
+    </div>
+    <div style="background-color: Orange; border: 1px solid red; height: 10px; text-align: center;"
+        align="center">
+        <b><span id="btshow" style="cursor: pointer; color: White; line-height: 2px; height: 10px;"
+            title="点我显示未开盘的任务" onclick="showUnOpenTask();">………</span></b></div>
+    <div id="scdjFormDiv" style="height: 200px;">
+        @using (Html.BeginForm("Save", "DispatchList", FormMethod.Post, new { id = "scdj-form" }))
+        {
+                
+            <fieldset style="border: solid 1px; border-color: #aaa;">
+                <legend id="border-title"><b>生产调度</b></legend>
+                @Html.HiddenFor(m => m.ShippingDocument.ID)
+                @Html.HiddenFor(m => m.DispatchList.ID)
+                @Html.HiddenFor(m => m.ShippingDocument.TaskID, new { Value = @ViewBag.TaskInfo.ID })
+                <table class="mvcform short">
+                    <tr>
+                        <td>@Html.LabelFor(m => m.ShippingDocument.ProjectName)@Html.TextBoxFor(m => m.ShippingDocument.ProjectName, new { Value = @ViewBag.TaskInfo.ProjectName, @class = "text", readOnly = true })
+                        </td>
+                        <td>@Html.LabelFor(m => m.ShippingDocument.CarID)@Html.DropDownListFor(m => m.ShippingDocument.CarID, (SelectList)ViewBag.CarDics, "", new { style = "width:110px;" })
+                        </td>
+                        <td>@Html.LabelFor(m => m.ShippingDocument.PumpName)@Html.DropDownListFor(m => m.ShippingDocument.PumpName, (SelectList)ViewBag.PumpList, "", new { style = "width:110px;" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.DispatchList.ProductLineID)@Html.DropDownListFor(m => m.DispatchList.ProductLineID, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:110px;" })
+                        </td>
+                        <td>@Html.LabelFor(m => m.ShippingDocument.Driver)@Html.DropDownListFor(m => m.ShippingDocument.Driver, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:110px;" })
+                        </td>
+                        <td>@Html.LabelFor(m => m.ShippingDocument.PlanCube)@Html.TextBoxFor(m => m.ShippingDocument.PlanCube, new { @class = "text", readOnly = true, Value = @ViewBag.TaskInfo.PlanCube })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.DispatchList.PCRate)@Html.DropDownListFor(m => m.DispatchList.PCRate, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:110px;" })
+                        </td>
+                        <td>
+                            <center>
+                                本车容量
+                                <input type="text" name="MaxCube" value="0" readonly="readonly" style="width: 80px;" /></center>
+                        </td>
+                        <td>@Html.LabelFor(m => m.ShippingDocument.ProvidedCube)@Html.TextBoxFor(m => m.ShippingDocument.ProvidedCube, new { @class = "text" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.DispatchList.BetonCount)@Html.TextBoxFor(m => m.DispatchList.BetonCount, new { @class = "text" })
+                        </td>
+                        <td>@Html.LabelFor(m => m.DispatchList.IsAverage)@Html.CheckBoxFor(m => m.DispatchList.IsAverage, new { @class = "text", style = "width:auto; ", @checked = true })
+                        </td>
+                        <td>@Html.LabelFor(m => m.ShippingDocument.ProvidedTimes)@Html.TextBoxFor(m => m.ShippingDocument.ProvidedTimes, new { @class = "text" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.DispatchList.SlurryCount)@Html.TextBoxFor(m => m.DispatchList.SlurryCount, new { @class = "text", Value = 0 })
+                        </td>
+                        <td>@Html.LabelFor(m => m.ShippingDocument.OtherCube)@Html.TextBoxFor(m => m.ShippingDocument.OtherCube, new { @class = "text", Value = 0 })
+                        </td>
+                        <td>@Html.LabelFor(m => m.ShippingDocument.DeliveryTime)@Html.TextBoxFor(m => m.ShippingDocument.DeliveryTime, new { @class = "text" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.Label("上车剩余")@Html.TextBoxFor(m => m.ShippingDocument.RemainCube, new { @class = "text", Value = 0 })
+                        </td>
+                        <td colspan="2">@Html.LabelFor(m => m.ShippingDocument.Remark)@Html.TextBoxFor(m => m.ShippingDocument.Remark)
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+            <div style="padding: 10px; text-align: center;" class="submitbtns">
+            </div>
+        }
+    </div>
+</body>
+</html>

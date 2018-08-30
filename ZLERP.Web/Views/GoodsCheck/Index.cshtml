@@ -1,0 +1,48 @@
+﻿@model ZLERP.Model.GoodsCheck 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/GoodsCheck/GoodsCheck.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            goodscheckIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                getGoodsUrl: '@Url.Action("Get","GoodsInfo")'
+            });
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.GoodsID)@Html.AutoComplete("GoodsID", "GoodsName", "Combo", "GoodsInfo", "ID", "GoodsName", "isused=1", new { style = "width:102px" })</td>
+        <td>@Html.LabelFor(m => m.CheckMan)@Html.DropDownListFor(m => m.CheckMan, (IEnumerable<SelectListItem>)ViewBag.OperList, new { style = "width:100px;", zlerp = "combobox" })</td>
+   
+    </tr>
+    <tr> 
+        @*<td>@Html.Label("库存数量")@Html.TextBox("ContentNum", "0", new { readOnly = true })</td>*@  
+        <td>@Html.LabelFor(m=>m.SystemNum)@Html.TextBoxFor(m => m.SystemNum, new {ReadOnly=true})</td>      
+        <td>@Html.LabelFor(m=>m.CheckTime)@Html.EditorFor(m => m.CheckTime, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.CheckNum)@Html.EditorFor(m => m.CheckNum, new {Value=0 })</td>
+        <td>@Html.LabelFor(m => m.Operator)@Html.DropDownListFor(m => m.Operator, (IEnumerable<SelectListItem>)ViewBag.OperList, new { style = "width:100px;", zlerp = "combobox" })</td>
+
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ProfitAndLoss)@Html.EditorFor(m => m.ProfitAndLoss)</td>
+
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m=>m.Remark)@Html.TextAreaFor(m => m.Remark, new { style = "width:345px;" })
+        </td>        
+    </tr>
+</table>
+}
+</div>

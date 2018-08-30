@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.CustMixprop, ZLERP.Model" table="CustMixprop" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="CustMixpropID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="MixpropCode" column="MixpropCode" />
+    <property name="ConStrength" column="ConStrength" />
+    <property name="Slump" column="Slump" />
+    <property name="ImpGrade" column="ImpGrade" />
+    <property name="CarpRadii" column="CarpRadii" />
+    <property name="Weight" column="Weight" />
+    <property name="WCRate" column="WCRate" />
+    <property name="OXY" column="OXY" />
+    <property name="Mesh" column="Mesh" />
+    <property name="MixpropRate" column="MixpropRate" />
+    <property name="SCRate" column="SCRate" />
+    <property name="AdmixtureType" column="AdmixtureType" />
+    <property name="CementType" column="CementType" />
+    <property name="SIWRate" column="SIWRate" />
+    <property name="RIWRate" column="RIWRate" />
+    <property name="SIRRate" column="SIRRate" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <bag name="CustMixpropItems" lazy="true" batch-size="30" inverse="true" >
+      <key column="CustMixpropID"></key>
+      <one-to-many class="CustMixpropItem"></one-to-many>
+    </bag>
+    <bag name="OpenChecks" lazy="true" batch-size="30" inverse="true" >
+      <key column="CustMixpropID"></key>
+      <one-to-many class="OpenCheck"></one-to-many>
+    </bag>
+    <bag name="QualityExams" lazy="true" batch-size="30" inverse="true" >
+      <key column="CustMixpropID"></key>
+      <one-to-many class="QualityExam"></one-to-many>
+    </bag>
+    <bag name="AlkaliReports" lazy="true" batch-size="30" inverse="true" >
+      <key column="CustMixpropID"></key>
+      <one-to-many class="AlkaliReport"></one-to-many>
+    </bag>
+    <bag name="ConStrAssesses" lazy="true" batch-size="30" inverse="true" >
+      <key column="CustMixpropID"></key>
+      <one-to-many class="ConStrAssess"></one-to-many>
+    </bag>
+  </class>
+</hibernate-mapping>

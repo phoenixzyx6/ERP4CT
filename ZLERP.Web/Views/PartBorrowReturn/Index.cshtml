@@ -1,0 +1,76 @@
+﻿@model ZLERP.Model.PartBorrowReturn 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/PartBorrowReturn/PartBorrowReturn.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        var options = { storeUrl: '@Url.Action("Find")',
+            borrowListUrl: '@Url.Action("ListData","PartBorrowItem")'
+        };
+        $(function () {
+            partborrowreturnIndexInit(options);
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+         <td>@Html.LabelFor(m=>m.PartID)@Html.DropDownListFor(m => m.PartID, (SelectList)ViewBag.partInfoList)</td>
+   
+    </tr>
+    <tr> 
+       
+        <td>@Html.LabelFor(m => m.BorrowID)@Html.DropDownListFor(m => m.BorrowID, Enumerable.Empty<SelectListItem>(), new { style = "width:130px;" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ReturnDate)@Html.EditorFor(m => m.ReturnDate, new { defaultValue = DateTime.Now.ToString("yyyy-MM-dd") })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ReturnNum)@Html.EditorFor(m=>m.ReturnNum)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Returner)@Html.EditorFor(m=>m.Returner)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Remark)@Html.EditorFor(m=>m.Remark)</td>
+    </tr>
+</table>
+}
+</div>
+
+<div id="MyEditFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+@Html.HiddenFor(m=>m.ID)
+<table class="mvcform"> 
+    <tr> 
+         <td>@Html.LabelFor(m=>m.PartID)@Html.DropDownListFor(m => m.PartID, (SelectList)ViewBag.partInfoList)</td>
+   
+    </tr>
+    <tr> 
+       
+        <td>@Html.LabelFor(m => m.BorrowID)@Html.EditorFor(m => m.BorrowID)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ReturnDate)@Html.EditorFor(m=>m.ReturnDate,new { id = "edit_ReturnDate" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ReturnNum)@Html.EditorFor(m=>m.ReturnNum)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Returner)@Html.EditorFor(m=>m.Returner)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Remark)@Html.EditorFor(m=>m.Remark)</td>
+    </tr>
+</table>
+}
+</div>
+

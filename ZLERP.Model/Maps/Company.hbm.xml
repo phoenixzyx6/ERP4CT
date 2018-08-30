@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Company, ZLERP.Model" table="Company" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="CompanyID">
+		 	<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="CompName" column="CompName" />
+		<property name="CompAddr" column="CompAddr" />
+		<property name="Country" column="Country" />
+		<property name="Area" column="Area" />
+		<property name="Province" column="Province" />
+		<property name="Principal" column="Principal" />
+		<property name="LinkMan" column="LinkMan" />
+		<property name="Tel" column="Tel" />
+		<property name="Email" column="Email" />
+		<property name="Fax" column="Fax" />
+		<property name="WebSite" column="WebSite" />
+		<property name="PostCode" column="PostCode" />
+		<property name="RegAsset" column="RegAsset" />
+		<property name="Employees" column="Employees" />
+		<property name="Remark" column="Remark" />
+		<property name="Latitude" column="Latitude" />
+		<property name="Longtide" column="Longtide" />
+		<property name="Range" column="Range" />
+		<property name="Excursion" column="Excursion" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<bag name="Departments" lazy="true" batch-size="30" inverse="true" >
+			<key column="CompanyID"></key>
+			<one-to-many class="Department"></one-to-many>
+		</bag>
+    <bag name="Cars" lazy="true" batch-size="30" inverse="true" >
+      <key column="CompanyID"></key>
+      <one-to-many class="Car"></one-to-many>
+    </bag>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,242 @@
+﻿/********滑动条 begin*********/
+.ui-layout-pane
+{
+    /* all 'panes' 
+    padding: 1px 2px 8px 2px;*/
+    padding: 1px 1px 0px 1px;
+    background: #FFF;
+    border-top: 1px solid #BBB;
+    border-bottom: 1px solid #BBB;
+}
+.layout-center
+{
+    padding: 0;
+    border: 0;
+}
+.ui-layout-resizer /* all 'resizer-bars' */
+{
+    _background: #DDD;
+    background: url("erpimage/mapimage/button/dots_40x100.png") repeat scroll 0 0 #D1E6FC;
+}
+.ui-layout-resizer:hover
+{
+    /* all 'resizer-bars' */
+    background: #FED;
+}
+.ui-layout-resizer-west
+{
+    /*border-left: 1px solid #BBB;*/
+}
+.ui-layout-toggler
+{
+    /* all 'toggler-buttons' */
+    background: #AAA;
+}
+.ui-layout-toggler:hover
+{
+    /* all 'toggler-buttons' */
+    background: #FC3; /*border:1px solid #A6C9E2;*/
+}
+
+#red, #trace, #speed
+{
+    width: 74%;
+    margin: 0px 8px;
+    display: inline-block;
+}
+#red .ui-slider-range
+{
+    background: #ef2929;
+}
+#red .ui-slider-handle
+{
+    border-color: #ef2929;
+}
+#trace .ui-slider-range
+{
+    background: #8ae234;
+}
+#trace .ui-slider-handle
+{
+    border-color: #8ae234;
+}
+#speed .ui-slider-range
+{
+    background: #729fcf;
+}
+#speed .ui-slider-handle
+{
+    border-color: #729fcf;
+}
+.sliderDiv
+{
+    margin: 15px 4px;
+}
+.tagTips
+{
+    display: inline-block;
+    background-color: #FFFFCC;
+    float: right;
+    padding: 1px 4px;
+    width: 500px;
+    height: 20px;
+}
+.tipout
+{
+    width: 240px;
+    display: inline-block;
+    padding: 0 1px 3px 0px;
+    cursor: pointer;
+    height: 18px;
+}
+/********滑动条 end*********/
+
+
+
+/***地图 控件 begin**/
+.mapcontextmenu
+{
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+.mapcontextmenu tr
+{
+    height: 28px;
+    border-bottom: 1px solid LightGreen;
+}
+.mapLabel
+{
+    font-weight: bold;
+}
+.map_div .menuButton
+{
+    margin: 0;
+}
+
+.mvcform .lineDesc div
+{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+}
+.green_div
+{
+    background-color:#32CD32;
+    border:1px solid #32CD32;
+}
+.blue_div
+{
+    background-color:#8B4513;
+    border:1px solid #8B4513;
+}
+.red_div
+{
+    background-color:#DC143C;
+    border:1px solid #DC143C;
+}
+
+.mapcontextmenu{
+    border: 0px;
+}
+.mapcontextmenu tr {
+    height: 30px;
+    padding: 9px 15px;
+    border: 1px solid #E5E5E5;
+}
+.contextmenuitem {
+    color: #08C;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    padding-right: 6px;
+    min-width:150px;
+    width: 100%;
+}
+.contextmenuitem:hover {
+    color: black;
+}
+.mc_menu
+{
+    background-color:White;
+    border:1px solid gray;
+    border-radius: 5px;
+    width:170px;
+}
+.mc_menu li
+{
+    line-height:22px;
+    padding:5px;
+    border-bottom: 1px solid gray;
+    cursor:pointer;
+    height:20px;
+}
+.mc_menu li:hover
+{
+    background-color:#DCDCDC;
+}
+
+/*地图页面的提示对话框样式 begin */
+.infodlg ul li{padding:1px 6px 2px 20px;}
+nbsp{margin-left:10px;}
+bluefont{color:#0099FF }redfont{color:#FF4500 }greenfont{color:Green}orangefont{color:Orange}
+.tb_pj_img{ text-align:center;width:110px;}/*该宽度的1/2为marker的位移偏量*/
+.tb_pj_img td{ line-height:13px;}
+.tb_pj_img span{color:blue;background-color:#FFF8DC;}
+.tb_hm_img{ text-align:center;width:80px;}/*该宽度的1/2为marker的位移偏量*/
+.tb_hm_img td{ line-height:13px;}
+.tb_hm_img span{color:black;background-color:#FFF8DC;}
+.tb_cr_img {text-align:center;width:32px;}
+.tb_cr_img td{line-height:13px;}
+.tb_cr_img span{font-size:15px;font-weight:bolder;color:#FF0000;background-color:#E6E6FA;}
+/*地图页面的提示对话框样式 end */
+
+
+.alarmBlock
+{
+    width: 64px;
+    height: 64px;
+    background: url(erpimage/mapimage/map/alarm1.png) top center no-repeat;
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    bottom: 50px;
+    z-index: 3;
+    line-height: 64px;
+    text-align: center;
+    color:White;
+    font-size:20px;
+    font-weight:bolder;
+    cursor:pointer;
+}
+.alarmTips
+{
+    width: 900px;
+    height: 300px;
+    z-index: 2;
+    display: none;
+    position: absolute;
+    right: 10px;
+    bottom: 50px;
+    border:1px solid gray;
+    background-color:White;
+    border-radius: 5px 5px 5px 5px;
+}
+.tipsCloser
+{
+    float: right;
+    margin-left: .2em;
+    position: absolute;
+    display: inline-block;
+    top: 10px;
+    right:10px;
+    cursor: pointer;
+}
+.tipsCloser:hover
+{
+    background-color:yellow;
+}
+/***地图 控件 end**/
+
+

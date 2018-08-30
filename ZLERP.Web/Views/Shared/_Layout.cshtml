@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+@*<meta http-equiv="X-UA-Compatible" content="IE=8,chrome=1" />*@
+<script language="javascript" type="text/javascript">
+    var gFuncId = '@Request.QueryString["f"]'; 
+    
+    @if(ViewBag.Buttons0!=null){
+    @:var buttons0 = @ViewBag.Buttons0;
+    }
+    else{
+    @:var buttons0 = [];
+    }
+    @if(ViewBag.Buttons1!=null){
+    @:var buttons1 = @ViewBag.Buttons1;
+    }
+    else{
+    @:var buttons1 = [];
+    }
+    @if(ViewBag.Buttons2!=null){
+    @:var buttons2 = @ViewBag.Buttons2;
+    }
+    else{
+    @:var buttons2 = [];
+    } 
+
+    @if(ViewBag.Buttons3!=null){
+    @:var buttons3 = @ViewBag.Buttons3;
+    }
+    else{
+    @:var buttons3 = [];
+    } 
+
+     @if(ViewBag.Buttons4!=null){
+    @:var buttons4 = @ViewBag.Buttons4;
+    }
+    else{
+    @:var buttons4 = [];
+    } 
+    //grid高度，根据coantainer高度变化
+    var gGridHeight = $('#container').height() -90;
+    //带标题的grid的高度
+    var gGridWithTitleHeight = gGridHeight - 20;
+    var _token = '@Html.RequestVerificationToken()';
+</script>
+ @RenderSection("HeaderSection", false)
+</head>
+<body>  
+   @RenderBody()  
+</body>
+</html>

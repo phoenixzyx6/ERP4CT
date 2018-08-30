@@ -1,0 +1,59 @@
+﻿@model IList<ZLERP.Model.StuffIn>
+@{
+    ViewBag.Title = "材料入库统计";
+}
+@section Header{
+ <link href="@Url.Content("~/Content/mobile/css/calendar.css")" rel="stylesheet" type="text/css">  
+ <script language="javascript" type="text/javascript" src="@Url.Content("~/Scripts/calendar.js")" ></script>
+ }
+ 
+
+<div id="container">
+	     <div class="grupo box">
+  <h1>原料进货统计</h1>
+
+        <div>
+        @using (Html.BeginForm())
+        {
+            <p class="botonlink">
+          
+              <label for="text1">日期从: 
+              @Html.TextBox("StartDate", "", new { Class = "inputtxt", onclick = "showcalendar(event,this);" })@Html.ValidationMessage("StartDate")
+              </label>
+            
+            
+            <label for="text1">至:
+            @Html.TextBox("EndDate", "", new { Class = "inputtxt", onclick = "showcalendar(event,this);" })
+              @Html.ValidationMessage("EndDate")</label>
+             
+            <input type="submit" class="btn" value="查询" />
+            </p>
+        }
+        </div>
+
+    @if (Model != null)
+    {
+   <div class="pie_format">
+  	<div class="txt">总数：<span>@Model.Count</span> </div>
+  </div> 
+     foreach (var m in Model)
+     { 
+           
+      
+    <div class="terminales">
+      
+         
+        <h3>@m.StuffID </h3>
+        <p><span class="precio"><span class="desde">@m.Version 车</span>@Math.Round(m.InNum / 1000, 2)<span class="euro">吨</span></span></p>
+        <p><span class="caracteristica">供应商：@m.SupplyID  </span></p>
+        <p><span class="promocion">规格：@m.Spec </span></p>
+    
+    </div>
+     }
+
+    }
+  </div> 
+ 	
+</div>
+
+

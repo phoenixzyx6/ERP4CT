@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.PartReturn, ZLERP.Model" table="PartReturn" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="ReturnID">
+            <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="ReturnDate" column="ReturnDate" />
+		<property name="Recipientor" column="Recipientor" />
+		<property name="FactoryID" column="FactoryID" />
+		<property name="InvoiceNum" column="InvoiceNum" />
+		<property name="OperateStatus" column="OperateStatus" />
+		<property name="Purchaser" column="Purchaser" />
+		<property name="Sender" column="Sender" />
+		<property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<bag name="PartReturnDetails" lazy="true" batch-size="30" inverse="true" >
+			<key column="ReturnID"></key>
+			<one-to-many class="PartReturnDetail"></one-to-many>
+		</bag>
+	</class>
+</hibernate-mapping>

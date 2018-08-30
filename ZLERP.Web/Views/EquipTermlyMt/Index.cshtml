@@ -1,0 +1,96 @@
+﻿@model ZLERP.Model.ViewModels.EquipTermlyMtAndItem 
+@section HeaderSection{
+
+<script src="@Url.Content("~/Scripts/Views/EquipTermlyMt/EquipTermlyMt.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            equiptermlymtIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                itemstoreUrl: '@Url.Action("Find","EquipTermlyMtItem")',
+                itemAddUrl: '@Url.Action("Add","EquipTermlyMtItem")',
+                itemUpdateUrl: '@Url.Action("Update","EquipTermlyMtItem")',
+                itemDeleteUrl: '@Url.Action("Delete","EquipTermlyMtItem")',
+                listClassMUrl: '@Url.Action("ListData","ClassM")',
+                listClassSUrl: '@Url.Action("ListData","ClassS")',
+                listEquipUrl: '@Url.Action("ListData","Equipment")',
+                listPartInfoUrl: '@Url.Action("ListData","PartInfo")',
+                listMaintenanceUrl: '@Url.Action("ListData","Maintenance")',
+                classTypeID: '@Request.QueryString["p1"]'
+            });
+        });
+</script>
+}
+<div id="allbutton"></div>
+<div id="EquipTermlyMtGrid" style=" float:left; width:35%;"></div>
+<div id="EquipTermlyMtItemRight" style="float:right; width:64.5%;">
+    <div class="grid-toolbar ContractGrid-toolbar"></div>
+    <div id="EquipTermlyMtItemForm" class="mvcform paddingStyle" >
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+    @Html.TextBoxFor(m => m.EquipTermlyMtItem.ID, new { style = "display:none;" })
+    @Html.TextBoxFor(m => m.EquipTermlyMtItem.EquipTermlyMtID, new { style = "display:none;" })
+    <table class="mvcform"> 
+        <tr> 
+            <td>@Html.LabelFor(m => m.EquipTermlyMtItem.PartID)</td>
+            <td>@Html.LabelFor(m => m.EquipTermlyMtItem.UnitPrice)</td>
+            <td>@Html.LabelFor(m => m.EquipTermlyMtItem.Amount)</td>
+            <td>@Html.LabelFor(m => m.EquipTermlyMtItem.Sumx)</td>
+            <td>@Html.LabelFor(m => m.EquipTermlyMtItem.DepartmentID)</td>
+            <td>@Html.LabelFor(m => m.EquipTermlyMtItem.UserID)</td>
+            <td>@Html.LabelFor(m => m.EquipTermlyMtItem.Remark)</td>
+            @*<td rowspan="2" align="right"><button class="tbtn save" onclick="itemSave();return false;">保存</button></td>*@
+            <td rowspan="2" align="right"><div id="itemsbutton"></div></td>
+        </tr>
+        <tr>       
+            <td width="100">@Html.DropDownListFor(m => m.EquipTermlyMtItem.PartID, ViewBag.PartInfo as IEnumerable<SelectListItem>, new { style = "width:100px;" })</td>
+            <td>@Html.TextBoxFor(m => m.EquipTermlyMtItem.UnitPrice, new { style = "width:50px;", readOnly="true", Value=24.5 })</td>
+            <td>@Html.TextBoxFor(m => m.EquipTermlyMtItem.Amount, new { style = "width:50px;" })</td>
+            <td>@Html.TextBoxFor(m => m.EquipTermlyMtItem.Sumx, new { style = "width:50px;", readOnly="true" })</td>
+            <td>@Html.DropDownListFor(m => m.EquipTermlyMtItem.DepartmentID, ViewBag.Departments as IEnumerable<SelectListItem>, new { style = "width:100px;" })</td>
+            <td>@Html.DropDownListFor(m => m.EquipTermlyMtItem.UserID, ViewBag.Users as IEnumerable<SelectListItem>, new { style = "width:100px;" })</td>
+            <td>@Html.TextBoxFor(m => m.EquipTermlyMtItem.Remark, new { style = "width:120px;" })</td>
+        </tr>
+    </table>
+
+    }
+    </div>
+    <div id="EquipTermlyMtItemGrid"></div>
+</div>
+<div id="EquipTermlyMtForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+@Html.TextBoxFor(m => m.EquipTermlyMt.ID, new { style = "display:none;" })
+@Html.TextBoxFor(m => m.EquipTermlyMt.YM, new { Value = @DateTime.Now.ToString("yyyy-MM"), style = "display:none;" })
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipTermlyMt.ClassBID)@Html.DropDownListFor(m => m.EquipTermlyMt.ClassBID, ViewBag.ClassBEquip as IEnumerable<SelectListItem>)</td>
+        <td>@Html.LabelFor(m => m.EquipTermlyMt.MtDate)@Html.EditorFor(m => m.EquipTermlyMt.MtDate, "DateTime", new { DefaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })</td>
+
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipTermlyMt.ClassMID)@Html.DropDownListFor(m => m.EquipTermlyMt.ClassMID, Enumerable.Empty<SelectListItem>())</td>
+        <td>@Html.LabelFor(m => m.EquipTermlyMt.ClassSID)@Html.DropDownListFor(m => m.EquipTermlyMt.ClassSID, Enumerable.Empty<SelectListItem>())</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipTermlyMt.EquipmentID)@Html.DropDownListFor(m => m.EquipTermlyMt.EquipmentID, Enumerable.Empty<SelectListItem>())</td>
+        <td>@Html.LabelFor(m => m.EquipTermlyMt.MaintenanceID)@Html.DropDownListFor(m => m.EquipTermlyMt.MaintenanceID, Enumerable.Empty<SelectListItem>())</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipTermlyMt.BeMtDate)@Html.EditorFor(m => m.EquipTermlyMt.BeMtDate)</td>
+        <td>@Html.LabelFor(m => m.EquipTermlyMt.DelayReason)@Html.DicEditorFor(m => m.EquipTermlyMt.DelayReason, DicEnum.MtDelayReason)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipTermlyMt.PayableSum)@Html.EditorFor(m => m.EquipTermlyMt.PayableSum)</td>
+        <td>@Html.LabelFor(m => m.EquipTermlyMt.IsEntrust)@Html.CheckBoxFor(m => m.EquipTermlyMt.IsEntrust)</td>
+   
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.EquipTermlyMt.Remark)@Html.TextAreaFor(m => m.EquipTermlyMt.Remark, 3, 53, new { @class = "text" })</td>
+   
+    </tr>
+
+</table>
+
+}
+</div>

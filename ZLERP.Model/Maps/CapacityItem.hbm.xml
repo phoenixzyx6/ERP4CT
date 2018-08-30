@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.CapacityItem, ZLERP.Model" table="CapacityItems" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="CapacityItemsID">
+		 	<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="ProductRecID" column="ProductRecID" />
+		<property name="ProductLineID" column="ProductLineID" />
+		<property name="S1" column="S1" />
+		<property name="S2" column="S2" />
+		<property name="S3" column="S3" />
+		<property name="S4" column="S4" />
+		<property name="S5" column="S5" />
+		<property name="S6" column="S6" />
+		<property name="S7" column="S7" />
+		<property name="S8" column="S8" />
+		<property name="S9" column="S9" />
+		<property name="S10" column="S10" />
+		<property name="S11" column="S11" />
+		<property name="S12" column="S12" />
+		<property name="S13" column="S13" />
+		<property name="S14" column="S14" />
+		<property name="S15" column="S15" />
+		<property name="S16" column="S16" />
+		<property name="S17" column="S17" />
+		<property name="S18" column="S18" />
+		<property name="S19" column="S19" />
+		<property name="S20" column="S20" />
+		<property name="S21" column="S21" />
+		<property name="S22" column="S22" />
+		<property name="S23" column="S23" />
+		<property name="S24" column="S24" />
+		<property name="PCRate" column="PCRate" />
+		<property name="PotTimes" column="PotTimes" />
+		<property name="ElectValue" column="ElectValue" />
+		<property name="IsManual" column="IsManual" />
+		<property name="SynID" column="SynID" />
+		<property name="SynStatus" column="SynStatus" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<many-to-one name="Capacity" column="CapacityID" class="Capacity" />
+	</class>
+</hibernate-mapping>

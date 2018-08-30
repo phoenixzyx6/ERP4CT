@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.MsgUser, ZLERP.Model" table="MsgUser" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="MsgUserID">
+		 	<generator class="native" />
+		</id>
+		<property name="UserID" column="UserID" />
+		<property name="MsgID" column="MsgID" />
+    <many-to-one name="Msg" column="MsgID" class="Msg" update="false" insert="false" />
+    <many-to-one name="User" column="UserID" class="User" update="false" insert="false" />
+	</class>
+</hibernate-mapping>

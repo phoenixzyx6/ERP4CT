@@ -1,0 +1,123 @@
+﻿@model ZLERP.Model.ViewModels.EquipMtLyAndItem 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/EquipMtLy/EquipMtLy.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            equipmtlyIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                equipMtLyAddUrl: '@Url.Action("Add")',
+                equipMtLyUpdateUrl: '@Url.Action("Update")',
+                itemStoreUrl:'@Url.Action("Find","EquipMtLyItem")',
+                listClassMUrl: '@Url.Action("ListData","ClassM")',
+                listClassSUrl: '@Url.Action("ListData","ClassS")',
+                listEquipUrl: '@Url.Action("ListData","Equipment")',
+                listMaintenanceUrl: '@Url.Action("ListData","Maintenance")',
+                getMntZlByIdUrl: '@Url.Action("Get","MntZl")',
+                MntZlItemstoreUrl: '@Url.Action("Find","MntZlItem")',
+                classTypeID: '@Request.QueryString["p1"]'
+
+            });
+        });
+    </script>
+}
+<div id="EquipMtLyGrid" style=" float:left; width:40%"></div>
+<div id="EquipMtLyItemGrid" style=" float:right; width:59.8%"></div>
+<div id="EquipMtLyForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+@Html.TextBoxFor(m => m.EquipMtLy.ID, new { style = "display:none;" })
+@Html.TextBoxFor(m => m.EquipMtLy.YM, new { Value = @DateTime.Now.ToString("yyyy-MM"), style = "display:none;" })
+@Html.TextBox("actiontype", "add", new {style="display:none;" })
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipMtLy.MntZlID)@Html.DropDownListFor(m => m.EquipMtLy.MntZlID, ViewBag.MntZlID as IEnumerable<SelectListItem>, new { style="width:138px;"})</td>
+        <td>@Html.LabelFor(m => m.EquipMtLy.MtDate)@Html.EditorFor(m => m.EquipMtLy.MtDate, "DateTime", new { DefaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipMtLy.ClassBID)@Html.DropDownListFor(m => m.EquipMtLy.ClassBID, ViewBag.ClassBEquip as IEnumerable<SelectListItem>, new { style = "width:138px;" })</td>
+        <td>@Html.LabelFor(m => m.EquipMtLy.ClassMID)@Html.DropDownListFor(m => m.EquipMtLy.ClassMID, Enumerable.Empty<SelectListItem>(), new { style = "width:138px;" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipMtLy.ClassSID)@Html.DropDownListFor(m => m.EquipMtLy.ClassSID, Enumerable.Empty<SelectListItem>(), new { style = "width:138px;" })</td>
+        <td>@Html.LabelFor(m => m.EquipMtLy.EquipmentID)@Html.DropDownListFor(m => m.EquipMtLy.EquipmentID, Enumerable.Empty<SelectListItem>(), new { style = "width:138px;" })</td>
+    </tr>
+
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipMtLy.TyreID)@Html.EditorFor(m => m.EquipMtLy.TyreID)</td>
+        <td>@Html.LabelFor(m => m.EquipMtLy.IsEntrust)@Html.CheckBoxFor(m => m.EquipMtLy.IsEntrust)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipMtLy.ContractID)@Html.AutoComplete("EquipMtLy.ContractID", "EquipMtLy.ContractName", "Combo", "Contract", "ID", "ContractName")</td>
+        <td rowspan="2" style="padding-left:28px;"><button class="tbtn ui-icon-arrowreturnthick-1-e" onclick="importZlItems();return false;">导入支领明细</button></td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipMtLy.Remark)@Html.TextAreaFor(m => m.EquipMtLy.Remark, 3, 18, new { })</td>
+   
+    </tr>
+</table>
+
+}
+</div>
+
+<div id="EquipMtLyItemForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+@Html.Hidden("classbid","")
+@Html.TextBoxFor(m => m.EquipMtLyItem.ID, new { style = "display:none;" })
+<table class="mvcform"> 
+    <tr> 
+        <td style="color:Blue;">@Html.LabelFor(m => m.EquipMtLyItem.EquipMtLyID)@Html.EditorFor(m => m.EquipMtLyItem.EquipMtLyID)</td>
+        <td>@Html.LabelFor(m => m.EquipMtLyItem.Amount)@Html.EditorFor(m => m.EquipMtLyItem.Amount)@*@Html.LabelFor(m => m.EquipMtLyItem.MaintenanceID)@Html.DropDownListFor(m => m.EquipMtLyItem.MaintenanceID, Enumerable.Empty<SelectListItem>())*@</td>
+    </tr>
+    @*<tr> 
+        <td>@Html.LabelFor(m => m.EquipMtLyItem.PartID)@Html.DropDownListFor(m => m.EquipMtLyItem.PartID, ViewBag.PartInfo as IEnumerable<SelectListItem>)</td>
+        <td></td>
+    </tr>*@
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipMtLyItem.PurposeMill)@Html.DicEditorFor(m => m.EquipMtLyItem.PurposeMill, DicEnum.PartApplication)</td>
+        <td>@Html.LabelFor(m => m.EquipMtLyItem.IsAssess)@Html.CheckBoxFor(m => m.EquipMtLyItem.IsAssess)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipMtLyItem.DepartmentID)@Html.DropDownListFor(m => m.EquipMtLyItem.DepartmentID, ViewBag.Department as IEnumerable<SelectListItem>)</td>
+        <td>@Html.LabelFor(m => m.EquipMtLyItem.UserID)@Html.DropDownListFor(m => m.EquipMtLyItem.UserID, ViewBag.User as IEnumerable<SelectListItem>)</td>
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.EquipMtLyItem.Remark)@Html.TextAreaFor(m => m.EquipMtLyItem.Remark, 1, 50, new { })</td>
+    </tr>
+</table>
+
+}
+</div>
+
+<div id="AddEquipMtLyItemForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td style="color:Blue;">@Html.LabelFor(m => m.EquipMtLyItem.EquipMtLyID)@Html.EditorFor(m => m.EquipMtLyItem.EquipMtLyID)</td>
+        <td>@Html.LabelFor(m => m.EquipMtLyItem.Amount)@Html.EditorFor(m => m.EquipMtLyItem.Amount)@*@Html.LabelFor(m => m.EquipMtLyItem.MaintenanceID)@Html.DropDownListFor(m => m.EquipMtLyItem.MaintenanceID, Enumerable.Empty<SelectListItem>(), new { id = "Add_EquipMtLyItem_MaintenanceID" })*@</td>
+    </tr>
+    @*<tr> 
+        <td>@Html.LabelFor(m => m.EquipMtLyItem.PartID)@Html.DropDownListFor(m => m.EquipMtLyItem.PartID, ViewBag.PartInfo as IEnumerable<SelectListItem>)</td>
+        <td></td>
+    </tr>*@
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipMtLyItem.PurposeMill)@Html.DicEditorFor(m => m.EquipMtLyItem.PurposeMill, DicEnum.PartApplication)</td>
+        <td>@Html.LabelFor(m => m.EquipMtLyItem.IsAssess)@Html.CheckBoxFor(m => m.EquipMtLyItem.IsAssess)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipMtLyItem.DepartmentID)@Html.DropDownListFor(m => m.EquipMtLyItem.DepartmentID, ViewBag.Department as IEnumerable<SelectListItem>)</td>
+        <td>@Html.LabelFor(m => m.EquipMtLyItem.UserID)@Html.DropDownListFor(m => m.EquipMtLyItem.UserID, ViewBag.User as IEnumerable<SelectListItem>)</td>
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.EquipMtLyItem.Remark)@Html.TextAreaFor(m => m.EquipMtLyItem.Remark, 1, 50, new { })</td>
+    </tr>
+</table>
+
+}
+</div>
+
+@*导入支领明细弹出框*@
+<div id="ImportMntZlItemForm" style="display:none;">
+    <div id="MntZlItemGrid"></div>
+</div>

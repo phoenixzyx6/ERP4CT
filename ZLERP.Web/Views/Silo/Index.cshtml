@@ -1,0 +1,59 @@
+﻿@model ZLERP.Model.Silo
+@section HeaderSection{ 
+<script src="@Url.Content("~/Scripts/Views/Silo.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            siloIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                updateUrl: '@Url.Action("Update")'
+            });
+        });
+    </script>
+}
+<div id="My-FormDiv" style="display:none;">
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary() 
+<table class="mvcform">
+    <tr> 
+        
+        <td>@Html.LabelFor(m => m.SiloName)@Html.TextBoxFor(m => m.SiloName)</td>
+        <td>@Html.LabelFor(m => m.SiloShortName)@Html.TextBoxFor(m => m.SiloShortName)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.StuffName)@Html.DropDownListFor(m => m.StuffID, (SelectList)ViewBag.StuffInfoDics) </td>
+        <td style="display: none">@Html.LabelFor(m => m.Content)@Html.TextBoxFor(m => m.Content, new { Value = 0 })</td>
+        <td>@Html.Label("当前容量(T)")@Html.TextBox("Content_T", 0)</td>
+
+    </tr>
+    <tr> 
+        <td style="display: none">@Html.LabelFor(m => m.MinContent)@Html.TextBoxFor(m => m.MinContent, new { Value = 0 })</td>
+        <td style="display: none">@Html.LabelFor(m => m.MaxContent)@Html.TextBoxFor(m => m.MaxContent, new { Value = 0 })</td>
+        <td>@Html.Label("最小容量(T)")@Html.TextBox("MinContent_T", 0)</td>
+        <td>@Html.Label("最大容量(T)")@Html.TextBox("MaxContent_T", 0)</td>
+    </tr>
+    <tr> 
+        <td  style="display: none">@Html.LabelFor(m => m.MaxWarm)@Html.TextBoxFor(m => m.MaxWarm, new { Value = 0 })</td>
+        <td  style="display: none">@Html.LabelFor(m => m.MinWarm)@Html.TextBoxFor(m => m.MinWarm, new { Value = 0 })</td>
+        <td>@Html.Label("最大报警容量(T)")@Html.TextBox("MaxWarm_T", 0)</td>
+        <td>@Html.Label("最小报警容量(T)")@Html.TextBox("MinWarm_T", 0)</td>
+    </tr>
+    <tr> 
+        
+        <td>@Html.LabelFor(m => m.OrderNum)@Html.TextBoxFor(m => m.OrderNum, new { Value = 0 })</td>
+        <td  style="display: none">@Html.LabelFor(m => m.ID)@Html.TextBoxFor(m => m.ID)</td>
+
+    </tr>
+</table>
+
+}
+</div>
+<div id="SearchDiv" style="float: left; width: 11%">
+    @Html.LabelFor(m => m.ProductLineID)@Html.DropDownListFor(m => m.ProductLineID, (IEnumerable<SelectListItem>)ViewBag.ProductLineList)
+    @*@Html.LabelFor(m => m.ProductLineID)@Html.DropDownListFor(m => m.ProductLineID, (SelectList)ViewBag.ProductLineList)*@
+</div>
+<div id="rendertoButton" style="float: right; width: 89%">
+</div>
+<div style="clear: both;">
+</div>
+<div id="My-JqGrid"></div>

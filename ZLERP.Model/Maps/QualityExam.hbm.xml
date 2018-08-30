@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.QualityExam, ZLERP.Model" table="QualityExam" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="QualityExamID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="ExamDate" column="ExamDate" />
+    <property name="ConStrength" column="ConStrength" />
+    <property name="ConserveCondition" column="ConserveCondition" />
+    <property name="ExamNum" column="ExamNum" />
+    <property name="DoMan" column="DoMan" />
+    <property name="ExamMan" column="ExamMan" />
+    <property name="Remark" column="Remark" />
+    <property name="QualityType" column="QualityType" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="CommissionID" column="CommissionID" />
+    <many-to-one name="Commission" column="CommissionID" class="Commission" update="false" insert="false"/>
+    <property name="CustMixpropID" column="CustMixpropID" />
+    <many-to-one name="CustMixprop" column="CustMixpropID" class="CustMixprop" update="false" insert="false"/>
+    <property name="TaskID" column="TaskID" />
+    <many-to-one name="ProduceTask" column="TaskID" class="ProduceTask" update="false" insert="false"/>
+    <bag name="QualityExamItems" lazy="true" batch-size="30" inverse="true" >
+      <key column="QualityExamID"></key>
+      <one-to-many class="QualityExamItem"></one-to-many>
+    </bag>
+  </class>
+</hibernate-mapping>

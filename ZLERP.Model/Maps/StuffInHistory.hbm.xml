@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.StuffInHistory, ZLERP.Model" table="StuffInHistory" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="ID">
+      <generator class="native" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="StuffInID" column="StuffInID" />
+    <property name="StuffID" column="StuffID" />
+    <property name="SiloID" column="SiloID" />
+    <property name="StockPactID" column="StockPactID" />
+    <property name="SupplyID" column="SupplyID" />
+    <property name="TransportID" column="TransportID" />
+    <property name="CustName" column="CustName" />
+    <property name="GageUnit" column="GageUnit" />
+    <property name="TransportNum" column="TransportNum" />
+    <property name="SupplyNum" column="SupplyNum" />
+    <property name="TotalNum" column="TotalNum" />
+    <property name="CarWeight" column="CarWeight" />
+    <property name="StockNum" column="StockNum" />
+    <property name="WRate" column="WRate" />
+    <property name="InNum" column="InNum" />
+    <property name="Proportion" column="Proportion" />
+    <property name="FootNum" column="FootNum" />
+    <property name="Driver" column="Driver" />
+    <property name="SourceAddr" column="SourceAddr" />
+    <property name="InDate" column="InDate" />
+    <property name="OutDate" column="OutDate" />
+    <property name="AH" column="AH" />
+    <property name="IsBack" column="IsBack" />
+    <property name="Remark" column="Remark" />
+    <property name="CarNo" column="CarNo" />
+    <property name="Operator" column="Operator" />
+    <property name="FootStatus" column="FootStatus" />
+    <property name="UnitPrice" column="UnitPrice" />
+    <property name="TransUnitPrice" column="TransUnitPrice" />
+    <property name="TotalPrice" column="TotalPrice" />
+    <property name="TotalTransPrice" column="TotalTransPrice" />
+    <property name="ParentID" column="ParentID" />
+    <property name="OrderNum" column="OrderNum" />
+    <property name="pic1" column="pic1" />
+    <property name="pic2" column="pic2" />
+    <property name="pic3" column="pic3" />
+    <property name="pic4" column="pic4" />
+    <property name="DarkWeight" column="DarkWeight" />
+    <property name="Spec" column="Spec" />
+    <property name="FastMetage" column="FastMetage" />
+    <property name="ActionTime" column="ActionTime" />
+    <property name="Acter" column="Acter" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+  </class>
+</hibernate-mapping>

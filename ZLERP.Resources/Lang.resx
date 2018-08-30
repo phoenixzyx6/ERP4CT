@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Account_LogOn_Failed" xml:space="preserve">
+    <value>登录失败</value>
+  </data>
+  <data name="Account_LogOn_IPNotAllowed" xml:space="preserve">
+    <value>不允许在此IP地址登录</value>
+  </data>
+  <data name="Account_LogOn_Password" xml:space="preserve">
+    <value>密　码</value>
+  </data>
+  <data name="Account_LogOn_PasswordIncorrect" xml:space="preserve">
+    <value>登录密码错误</value>
+  </data>
+  <data name="Account_LogOn_RememberMe" xml:space="preserve">
+    <value>记住我</value>
+  </data>
+  <data name="Account_LogOn_UserIsLocked" xml:space="preserve">
+    <value>用户已被锁定</value>
+  </data>
+  <data name="Account_LogOn_UserName" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="Account_LogOn_UserNotFound" xml:space="preserve">
+    <value>没有该用户</value>
+  </data>
+  <data name="Entity_Dic" xml:space="preserve">
+    <value>字典</value>
+  </data>
+  <data name="Entity_SysConfig" xml:space="preserve">
+    <value>系统全局配置</value>
+  </data>
+  <data name="Error_FileTypeNotAllowed" xml:space="preserve">
+    <value>不允许上传的文件类型</value>
+  </data>
+  <data name="Error_NotAuthorized" xml:space="preserve">
+    <value>您没有权限使用该功能</value>
+  </data>
+  <data name="Error_OverRange" xml:space="preserve">
+    <value>修改数据大于限定区间</value>
+  </data>
+  <data name="Msg_hasAutoTz" xml:space="preserve">
+    <value>存在未处理的自动转退料记录</value>
+  </data>
+  <data name="Error_ParameterRequired" xml:space="preserve">
+    <value>未提供必要的参数</value>
+  </data>
+  <data name="Error_Validate_Failed" xml:space="preserve">
+    <value>验证失败</value>
+  </data>
+  <data name="Global_ProductName" xml:space="preserve">
+    <value>中联重科智慧商砼ERP</value>
+  </data>
+  <data name="Limit_ContractTime" xml:space="preserve">
+    <value>受合同起止时间限制</value>
+    <comment>如果该值在字典表中修改了，则此处需做相应的修改</comment>
+  </data>
+  <data name="Limit_MatCube" xml:space="preserve">
+    <value>受垫资方量限制</value>
+    <comment>如果该值在字典表中修改了，则此处需做相应的修改</comment>
+  </data>
+  <data name="Limit_None" xml:space="preserve">
+    <value>不受限制</value>
+    <comment>如果该值在字典表中修改了，则此处需做相应的修改</comment>
+  </data>
+  <data name="Limit_PrepayCube" xml:space="preserve">
+    <value>受预付方量限制</value>
+    <comment>如果该值在字典表中修改了，则此处需做相应的修改</comment>
+  </data>
+  <data name="Msg_Operate_Failed" xml:space="preserve">
+    <value>操作失败</value>
+  </data>
+  <data name="Msg_Operate_Success" xml:space="preserve">
+    <value>操作成功</value>
+  </data>
+  <data name="Operation_Add" xml:space="preserve">
+    <value>新增</value>
+  </data>
+  <data name="Operation_Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Operation_Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="TaskFormTitle" xml:space="preserve">
+    <value>生产任务单</value>
+  </data>
+  <data name="Title_BetonGrid" xml:space="preserve">
+    <value>混凝土配比信息列表</value>
+  </data>
+  <data name="Title_ConsGrid" xml:space="preserve">
+    <value>施工配比信息列表</value>
+  </data>
+  <data name="Title_ItemsGrid" xml:space="preserve">
+    <value>子表信息列表</value>
+  </data>
+  <data name="Title_SlurryGrid" xml:space="preserve">
+    <value>砂浆配比信息列表</value>
+  </data>
+  <data name="Title_TaskGrid" xml:space="preserve">
+    <value>生产任务信息列表</value>
+  </data>
+  <data name="TZRelation_Error_HasUnCompletedRecords" xml:space="preserve">
+    <value>该车有未完成的退转料合车记录，不能重复添加</value>
+  </data>
+  <data name="TZRelation_Error_HasUnCompletedRecords_NO" xml:space="preserve">
+    <value>该车有未完成的退转料记录，不能重复添加</value>
+  </data>
+  <data name="Validation_Required" xml:space="preserve">
+    <value>该字段不能为空</value>
+  </data>
+  <data name="Entity_Property_CastMode" xml:space="preserve">
+    <value>浇筑方式</value>
+  </data>
+  <data name="Entity_Property_ConsPos" xml:space="preserve">
+    <value>施工部位</value>
+  </data>
+  <data name="Entity_Property_ConStrength" xml:space="preserve">
+    <value>砼强度</value>
+  </data>
+  <data name="Entity_Property_CustName" xml:space="preserve">
+    <value>客户名称</value>
+  </data>
+  <data name="Car_SelectCar" xml:space="preserve">
+    <value>请选择车号</value>
+  </data>
+  <data name="Account_LogOn_CaptchaCode" xml:space="preserve">
+    <value>验证码</value>
+  </data>
+  <data name="Account_LogOn_CaptchaCodeIncorrect" xml:space="preserve">
+    <value>验证码不正确</value>
+  </data>
+  <data name="IsExistRecord" xml:space="preserve">
+    <value>记录已经存在，请不要重复添加</value>
+  </data>
+  <data name="Validation_Email" xml:space="preserve">
+    <value>请输入正确的Email格式\n示例：abc@123.com</value>
+  </data>
+  <data name="Entity_Property_ID" xml:space="preserve">
+    <value>流水号</value>
+  </data>
+  <data name="Entity_Property_StockPactName" xml:space="preserve">
+    <value>采购合同名称</value>
+  </data>
+  <data name="Entity_Property_StuffName" xml:space="preserve">
+    <value>原料名称</value>
+  </data>
+  <data name="Entity_Property_StockPactNo" xml:space="preserve">
+    <value>采购合同编号</value>
+  </data>
+  <data name="Cube_Unit" xml:space="preserve">
+    <value>方</value>
+  </data>
+  <data name="Error_TaskNotExist" xml:space="preserve">
+    <value>任务单不存在</value>
+  </data>
+  <data name="Msg_ContractStatus" xml:space="preserve">
+    <value>该任务单的合同为非进行中的合同，不允许供货！&lt;br&gt;合同编号为：</value>
+  </data>
+  <data name="Msg_LimitContractTime" xml:space="preserve">
+    <value>该任务单的合同已过期&lt;br&gt;合同编号为：</value>
+  </data>
+  <data name="Msg_LimitMatCube" xml:space="preserve">
+    <value>该任务单的合同受垫资方量限制，已经不能再供货了，已超出</value>
+  </data>
+  <data name="Msg_LimitPrepayCube" xml:space="preserve">
+    <value>该任务单的合同受预付方量限制，已经不能再供货了，已超出</value>
+  </data>
+  <data name="Msg_ExamGistForCE" xml:space="preserve">
+    <value>GB/T17671-1999 GB/T1346-2001</value>
+  </data>
+  <data name="Msg_ExamGistForFA" xml:space="preserve">
+    <value>JGJ52—2006</value>
+  </data>
+  <data name="Msg_ExamResultForCe" xml:space="preserve">
+    <value>样品经检测，所检各项性能指标都符合现行国家标准《通用硅酸盐水泥》GB175-2007规定的技术要求。</value>
+  </data>
+  <data name="Msg_ExamResultForFA" xml:space="preserve">
+    <value>该批砂子依据JGJ52—2006评定，所检项目合格</value>
+  </data>
+  <data name="Settlement_Error_DateRangeDuplicate" xml:space="preserve">
+    <value>指定的结算起止日期已存在结算单,结算日期范围不能交叉和重复!</value>
+  </data>
+  <data name="Msg_ExamGistForAIR1" xml:space="preserve">
+    <value>GB/T1596-2004</value>
+  </data>
+  <data name="Msg_ExamGistForAIR2" xml:space="preserve">
+    <value>GB/T18046-2008</value>
+  </data>
+  <data name="Msg_ExamGistForCA" xml:space="preserve">
+    <value>JGJ52-2006</value>
+  </data>
+  <data name="Msg_ExamResultForAIR1" xml:space="preserve">
+    <value>该批粉煤灰依据GB/T1596-2005标准，所检项目合格.</value>
+  </data>
+  <data name="Msg_ExamResultForAIR2" xml:space="preserve">
+    <value>该批粒化高炉矿渣粉依据GB/T18046-2008检验评定，所检项目合格</value>
+  </data>
+  <data name="Msg_ExamResultForCA" xml:space="preserve">
+    <value>该批石子依据JGJ52-2006标准，所检项目合格。</value>
+  </data>
+  <data name="SysLog_Error_WriteLogError" xml:space="preserve">
+    <value>记录系统日志出错</value>
+  </data>
+  <data name="Attachment_Error_DeleteFileFailed" xml:space="preserve">
+    <value>附件文件删除失败</value>
+  </data>
+  <data name="Format_DateTime_String" xml:space="preserve">
+    <value>yyyy年M月d日 H:mm:ss</value>
+    <comment>日期时间格式字符串</comment>
+  </data>
+  <data name="Format_Date_String" xml:space="preserve">
+    <value>yyyy年M月d日</value>
+    <comment>日期格式字符串</comment>
+  </data>
+  <data name="ColumnReference" xml:space="preserve">
+    <value>无法删除，请先删除对应的子表数据</value>
+  </data>
+  <data name="Msg_ContractNotAudit" xml:space="preserve">
+    <value>该合同未审核或审核未通过</value>
+  </data>
+  <data name="Msg_ContractIsLimited" xml:space="preserve">
+    <value>该任务单的合同已被锁定&lt;br&gt;合同编号为：</value>
+  </data>
+  <data name="Msg_Send_Fail" xml:space="preserve">
+    <value>信息发送失败</value>
+  </data>
+  <data name="Msg_Send_Success" xml:space="preserve">
+    <value>信息发送成功</value>
+  </data>
+  <data name="Validation_OriginPasswordError" xml:space="preserve">
+    <value>原始密码不正确</value>
+  </data>
+  <data name="Contract_ContractName_Exists" xml:space="preserve">
+    <value>已存在相同的合同名称，请在原有合同上增加合同明细</value>
+  </data>
+  <data name="Msg_ShippingDoc_NotExist" xml:space="preserve">
+    <value>该任务单还没有发货记录，不能直接打印票据</value>
+  </data>
+  <data name="Msg_Stuff_NoSame" xml:space="preserve">
+    <value>两个桶仓所装的原料不相同，不允许更换桶仓</value>
+  </data>
+  <data name="License_Expire_CountDown" xml:space="preserve">
+    <value>您的{0}许可将在&lt;b&gt;{1}&lt;/b&gt;天后过期，为了不影响您正常使用ERP系统，请尽快更新您的授权许可！如有疑问，请联系中联重科：0731-89751796</value>
+  </data>
+  <data name="Msg_OpenCheck_Failed" xml:space="preserve">
+    <value>开盘鉴定失败</value>
+  </data>
+  <data name="Msg_OpenCheck_Success" xml:space="preserve">
+    <value>开盘鉴定完成，请前往试验管理-&gt;开盘鉴定查看并打印技术资料</value>
+  </data>
+  <data name="TZRelation_Error_HasTZRelationRecords" xml:space="preserve">
+    <value>该车对应的源运输单已经存在退转料记录，不能重复添加</value>
+  </data>
+  <data name="Entity_Property_ContractName" xml:space="preserve">
+    <value>合同名称</value>
+  </data>
+  <data name="Tyre_Type" xml:space="preserve">
+    <value>轮胎类型</value>
+  </data>
+  <data name="Tyre_Model" xml:space="preserve">
+    <value>轮胎型号</value>
+  </data>
+  <data name="Tyre_Spec" xml:space="preserve">
+    <value>轮胎规格</value>
+  </data>
+  <data name="Tyre_InstallPlace" xml:space="preserve">
+    <value>轮胎位置</value>
+  </data>
+  <data name="Msg_ExamGistForADM" xml:space="preserve">
+    <value>试验按《普通混凝土外加剂均质性试验方法》GB/T8077-2000标准进行</value>
+  </data>
+  <data name="Msg_File_NotExist" xml:space="preserve">
+    <value>文件不存在</value>
+  </data>
+
+  <data name="TZRelation_Error_HasUnCompletedRecords1" xml:space="preserve">
+    <value>该车未找到退转料记录</value>
+  </data>
+</root>

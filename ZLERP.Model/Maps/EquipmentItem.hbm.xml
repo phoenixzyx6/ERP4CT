@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.EquipmentItem, ZLERP.Model" table="EquipmentItem" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="EquipmentItemID">
+		 	<generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="Days" column="Days" />
+		<property name="LatelyMaint" column="LatelyMaint" />
+		<property name="NextTimeMaint" column="NextTimeMaint" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="EquipmentID" column="EquipmentID" />
+    <property name="MaintenanceID" column="MaintenanceID" />
+		<many-to-one name="Equipment" column="EquipmentID" class="Equipment" update="false" insert="false"/>
+		<many-to-one name="Maintenance" column="MaintenanceID" class="Maintenance" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

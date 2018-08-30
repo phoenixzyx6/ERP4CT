@@ -1,0 +1,83 @@
+﻿@model ZLERP.Model.CarDriverPrice 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/CarDriverPrice/CarDriverPrice.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            cardriverpriceIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+
+<!-- 左边Grid -->
+<div id="MyJqGridMain" style="float: left; width: 35%">
+</div>
+
+<!-- 右边Grid -->
+<div id="MyJqGrid" style="float: right; width: 64%">
+</div>
+
+<div id="MyFormDivMain" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+    {@Html.ValidationSummary()
+    <table class="mvcform"> 
+        <tr> 
+            <td >@Html.Hidden("ID")
+           </td>
+        </tr>
+        <tr> 
+            <td>@Html.Label("开始日期")@Html.Editor("StartDate", "", new { @data_val_required = "开始日期 字段是必需的", data_val_datetime = "字段 开始日期 必须是一个日期", data_val = "true" })</td>
+        </tr>
+        <tr> 
+            <td>@Html.Label("结束日期")@Html.Editor("EndDate", "DateTime", new { @data_val_required = "结束日期 字段是必需的", data_val_datetime = "字段 结束日期 必须是一个日期", data_val = "true" })</td>
+   
+        </tr>
+        <tr> 
+            <td>@Html.Label("备  注")@Html.TextBox("Meno", "", new { })</td>
+        </tr>
+    </table>
+
+    }
+</div>
+
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+        <table class="mvcform"> 
+        <tr> 
+           <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+           </td>
+        </tr>
+
+        <tr> 
+            <td>@Html.LabelFor(m => m.TypeId)@Html.DicEditorFor(m => m.TypeId, DicEnum.KmPriceType, new { width = "157px;" })</td>
+   
+        </tr>
+      @*  <tr> 
+            <td>@Html.LabelFor(m => m.StartDate)@Html.EditorFor(m => m.StartDate)</td>
+   
+        </tr>
+        <tr> 
+            <td>@Html.LabelFor(m => m.EndDate)@Html.EditorFor(m => m.EndDate)</td>
+   
+        </tr>*@
+        <tr> 
+            <td>@Html.LabelFor(m => m.StartKm)@Html.EditorFor(m => m.StartKm)</td>
+   
+        </tr>
+        <tr> 
+            <td>@Html.LabelFor(m => m.EndKm)@Html.EditorFor(m => m.EndKm)</td>
+   
+        </tr>
+        <tr> 
+            <td>@Html.LabelFor(m => m.Price)@Html.EditorFor(m => m.Price)</td>
+        </tr>
+        <tr> 
+            <td style="display: none">@Html.LabelFor(m => m.CarDriverPriceMainId)@Html.EditorFor(m => m.CarDriverPriceMainId)</td>
+   
+        </tr>
+    </table>
+
+    }
+</div>

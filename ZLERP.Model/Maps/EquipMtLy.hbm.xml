@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.EquipMtLy, ZLERP.Model" table="EquipMtLy" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="EquipMtLyID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="MtDate" column="MtDate" />
+		<property name="TyreID" column="TyreID" />
+		<property name="IsEntrust" column="IsEntrust" />
+		<property name="Sumx" column="Sumx" />
+		<property name="Remark" column="Remark" />
+		<property name="YM" column="YM" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+
+<property name="Finder" column="Finder" />
+    <property name="FindTime" column="FindTime" />
+    <property name="ApplyMan" column="ApplyMan" />
+    <property name="ApplyTime" column="ApplyTime" />
+    <property name="TroubleDes" column="TroubleDes" />
+    <property name="RepairAdv" column="RepairAdv" />
+
+    <property name="ClassBID" column="ClassBID" />
+    <property name="ClassMID" column="ClassMID" />
+    <property name="ClassSID" column="ClassSID" />
+    <property name="EquipmentID" column="EquipmentID" />
+    <property name="ContractID" column="ContractID" />
+    <property name="MntZlID" column="MntZlID" />
+		<many-to-one name="ClassB" column="ClassBID" class="ClassB" update="false" insert="false"/>
+		<many-to-one name="ClassM" column="ClassMID" class="ClassM" update="false" insert="false"/>
+		<many-to-one name="Classs" column="ClassSID" class="Classs" update="false" insert="false"/>
+		<many-to-one name="Contract" column="ContractID" class="Contract" update="false" insert="false"/>
+		<many-to-one name="Equipment" column="EquipmentID" class="Equipment" update="false" insert="false"/>
+		<many-to-one name="MntZl" column="MntZlID" class="MntZl" update="false" insert="false"/>
+		<bag name="EquipMtLyItems" lazy="true" batch-size="30" inverse="true" >
+			<key column="EquipMtLyID"></key>
+			<one-to-many class="EquipMtLyItem"></one-to-many>
+		</bag>
+
+		<property name="mtlystate" column="mtlystate" />
+		<property name="summoney" column="summoney" />
+    <property name="GoodsOutID" column="GoodsOutID" />
+	</class>
+</hibernate-mapping>

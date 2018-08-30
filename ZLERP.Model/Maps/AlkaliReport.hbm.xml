@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.AlkaliReport, ZLERP.Model" table="AlkaliReport" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="AlkaliReportID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="ConStrength" column="ConStrength" />
+    <property name="CEStuffID" column="CEStuffID" />
+    <property name="CEExamID" column="CEExamID" />
+    <property name="CESupplyID" column="CESupplyID" />
+    <property name="CEAmount" column="CEAmount" />
+    <property name="CEAlkPer" column="CEAlkPer" />
+    <property name="ADM1StuffID" column="ADM1StuffID" />
+    <property name="ADM1ExamID" column="ADM1ExamID" />
+    <property name="ADM1SupplyID" column="ADM1SupplyID" />
+    <property name="ADM1Amount" column="ADM1Amount" />
+    <property name="ADM1AlkPer" column="ADM1AlkPer" />
+    <property name="AIR1StuffID" column="AIR1StuffID" />
+    <property name="AIR1ExamID" column="AIR1ExamID" />
+    <property name="AIR1SupplyID" column="AIR1SupplyID" />
+    <property name="AIR1Amount" column="AIR1Amount" />
+    <property name="AIR1AlkPer" column="AIR1AlkPer" />
+    <property name="AIR2StuffID" column="AIR2StuffID" />
+    <property name="AIR2ExamID" column="AIR2ExamID" />
+    <property name="AIR2SupplyID" column="AIR2SupplyID" />
+    <property name="AIR2Amount" column="AIR2Amount" />
+    <property name="AIR2AlkPer" column="AIR2AlkPer" />
+    <property name="ADM2StuffID" column="ADM2StuffID" />
+    <property name="ADM2ExamID" column="ADM2ExamID" />
+    <property name="ADM2SupplyID" column="ADM2SupplyID" />
+    <property name="ADM2Amount" column="ADM2Amount" />
+    <property name="ADM2AlkPer" column="ADM2AlkPer" />
+    <property name="ADM3StuffID" column="ADM3StuffID" />
+    <property name="ADM3ExamID" column="ADM3ExamID" />
+    <property name="ADM3SupplyID" column="ADM3SupplyID" />
+    <property name="ADM3Amount" column="ADM3Amount" />
+    <property name="ADM3AlkPer" column="ADM3AlkPer" />
+    <property name="AlkAmount" column="AlkAmount" />
+    <property name="ExamResult" column="ExamResult" />
+    <property name="Assessor" column="Assessor" />
+    <property name="Principal" column="Principal" />
+    <property name="Accountor" column="Accountor" />
+    <property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="CustMixpropID" column="CustMixpropID" />
+    <many-to-one name="CustMixprop" column="CustMixpropID" class="CustMixprop" update="false" insert="false"/>
+    <property name="TaskID" column="TaskID" />
+    <many-to-one name="ProduceTask" column="TaskID" class="ProduceTask" update="false" insert="false"/>
+  </class>
+</hibernate-mapping>

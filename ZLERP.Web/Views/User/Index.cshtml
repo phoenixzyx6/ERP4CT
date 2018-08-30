@@ -1,0 +1,173 @@
+﻿@*人员信息查看*@
+
+@model ZLERP.Model.User
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/User.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            userIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                getUserFuncsUrl: '@Url.Action("GetUserFuncs")',
+                sysFuncTreeUrl: '@Url.Action("FindTree", "SysFunc")',
+                copyPowerUrl: '@Url.Action("CopyPower")',
+                currentUser: '@User.UserID()',
+                getUserInfoUrl:'@Url.Action("Get")'
+            });
+        });
+    </script>
+}
+<div id="My-FormDiv" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform" style="width: 100%">
+            <tr>
+                <td>@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.DepartmentID)@Html.DropDownTreeFor(m => m.DepartmentID, "FindTree","Department")
+                </td>
+                <td>@Html.LabelFor(m => m.TrueName)@Html.EditorFor(m => m.TrueName)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.UserType)@Html.DicEditorFor(m => m.UserType, DicEnum.UserType, "")
+                </td>
+                <td>@Html.LabelFor(m => m.Team)@Html.DicEditorFor(m => m.Team, DicEnum.PlanClass, "")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CommAddr)@Html.EditorFor(m => m.CommAddr)
+                </td>
+                <td>@Html.LabelFor(m => m.NationAddr)@Html.EditorFor(m => m.NationAddr)
+                </td>
+                <td>@Html.LabelFor(m => m.IDCard)@Html.EditorFor(m => m.IDCard)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.PostCode)@Html.EditorFor(m => m.PostCode)
+                </td>
+                <td>@Html.LabelFor(m => m.BloodType)@Html.EditorFor(m => m.BloodType)
+                </td>
+                <td>@Html.LabelFor(m => m.Sex)@Html.DicEditorFor(m => m.Sex, DicEnum.Gender)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.IsMarried)@Html.CheckBoxFor(m => m.IsMarried)
+                </td>
+                <td>@Html.LabelFor(m => m.MaxEducate)@Html.EditorFor(m => m.MaxEducate)
+                </td>
+                <td>@Html.LabelFor(m => m.BankID)@Html.EditorFor(m => m.BankID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Nation)@Html.EditorFor(m => m.Nation)
+                </td>
+                <td>@Html.LabelFor(m => m.Birthday)@Html.EditorFor(m => m.Birthday)
+                </td>
+                <td>@Html.LabelFor(m => m.DigitSign)@Html.EditorFor(m => m.DigitSign)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.DriverIdentity)@Html.EditorFor(m => m.DriverIdentity)
+                </td>
+                <td>@Html.LabelFor(m => m.Email)@Html.EditorFor(m => m.Email)
+                </td>
+                <td>@Html.LabelFor(m => m.Tel)@Html.EditorFor(m => m.Tel)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Mobile)@Html.EditorFor(m => m.Mobile)
+                </td>
+                <td>@Html.LabelFor(m => m.ManagerID)@Html.AutoComplete("ManagerID", "ManageName", "Combo", "User", "ID", "TrueName")
+                </td>
+                <td>@Html.LabelFor(m => m.IsUsed)@Html.CheckBoxFor(m => m.IsUsed, new { Checked = true })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ValidFrom)@Html.EditorFor(m => m.ValidFrom)
+                </td>
+                <td>@Html.LabelFor(m => m.ValidTo)@Html.EditorFor(m => m.ValidTo)
+                </td>
+                <td>@Html.LabelFor(m => m.IsVisited)@Html.CheckBoxFor(m => m.IsVisited)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, new { style = "width:80%" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.Label("CopyPower", "复制权限")@Html.DropDownList("CopyPower", (SelectList)ViewBag.UserList, "请选择")
+                </td>
+                 <td>@Html.LabelFor(m => m.ClassType)@Html.DicEditorFor(m => m.ClassType, DicEnum.DriverClassType, "")
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+
+<table width="100%">
+    <tbody>
+        <tr>
+            <td width="200" valign="top">
+                <div id="sysFuncs" class="ztree" style="overflow: scroll;">
+                </div>
+            </td>
+            <td>
+                <div id="My-JqGrid" style="float: left; width: 100%; overflow: auto;">
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div id="Msg-Div" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform" style="width: 100%">
+            <tr>
+                <td>
+                    @Html.Label("手机号码：")@Html.TextBox("Mobile_Num")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("信息：")@Html.TextArea("Mobile_Msg")
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="Dimission-div" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform" style="width: 100%">
+            <tr>
+                <td style="display:none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.IsUsed)@Html.CheckBoxFor(m => m.IsUsed, new { Checked = false })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ValidTo)@Html.EditorFor(m => m.ValidTo, new { @id = "Dismission_ValidTo" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="Pwd-div" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform" style="width: 100%">
+            <tr>
+                <td style="display:none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.Password)@Html.PasswordFor(m => m.Password)
+                </td>
+            </tr> 
+        </table>
+    }
+</div>

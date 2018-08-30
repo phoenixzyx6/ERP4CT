@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.FAExam, ZLERP.Model" table="FAExam" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="FAExam">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="ExamTime" column="ExamTime" />
+    <property name="ReportTime" column="ReportTime" />
+    <property name="DeputyNum" column="DeputyNum" />
+    <property name="ClayRate" column="ClayRate" />
+    <property name="ClayMete" column="ClayMete" />
+    <property name="SurDensity" column="SurDensity" />
+    <property name="StackDensity" column="StackDensity" />
+    <property name="TightDensity" column="TightDensity" />
+    <property name="RadioExamID" column="RadioExamID" />
+    <property name="ReportID" column="ReportID" />
+    <property name="Mesh" column="Mesh" />
+    <property name="DrinkRate" column="DrinkRate" />
+    <property name="CarpGrade" column="CarpGrade" />
+    <property name="GrainNum100" column="GrainNum100" />
+    <property name="GrainNum50" column="GrainNum50" />
+    <property name="GrainNum25" column="GrainNum25" />
+    <property name="GrainNum125" column="GrainNum125" />
+    <property name="GrainNum063" column="GrainNum063" />
+    <property name="GrainNum315" column="GrainNum315" />
+    <property name="GrainNum160" column="GrainNum160" />
+    <property name="GrainNum080" column="GrainNum080" />
+    <property name="SiftBelow" column="SiftBelow" />
+
+    <property name="fjsy100_1" column="fjsy100_1" />
+    <property name="fjsy50_1" column="fjsy50_1" />
+    <property name="fjsy25_1" column="fjsy25_1" />
+    <property name="fjsy125_1" column="fjsy125_1" />
+    <property name="fjsy063_1" column="fjsy063_1" />
+    <property name="fjsy315_1" column="fjsy315_1" />
+    <property name="fjsy160_1" column="fjsy160_1" />
+    <property name="fjsy080_1" column="fjsy080_1" />
+    <property name="fjsy_1" column="fjsy_1" />
+
+    <property name="ljsy100_1" column="ljsy100_1" />
+    <property name="ljsy50_1" column="ljsy50_1" />
+    <property name="ljsy25_1" column="ljsy25_1" />
+    <property name="ljsy125_1" column="ljsy125_1" />
+    <property name="ljsy063_1" column="ljsy063_1" />
+    <property name="ljsy315_1" column="ljsy315_1" />
+    <property name="ljsy160_1" column="ljsy160_1" />
+    <property name="ljsy080_1" column="ljsy080_1" />
+    <property name="ljsy_1" column="ljsy_1" />
+
+    <property name="syl100_2" column="syl100_2" />
+    <property name="syl50_2" column="syl50_2" />
+    <property name="syl25_2" column="syl25_2" />
+    <property name="syl125_2" column="syl125_2" />
+    <property name="syl063_2" column="syl063_2" />
+    <property name="syl315_2" column="syl315_2" />
+    <property name="syl160_2" column="syl160_2" />
+    <property name="syl080_2" column="syl080_2" />
+    <property name="syl_2" column="syl_2" />
+
+    <property name="fjsy100_2" column="fjsy100_2" />
+    <property name="fjsy50_2" column="fjsy50_2" />
+    <property name="fjsy25_2" column="fjsy25_2" />
+    <property name="fjsy125_2" column="fjsy125_2" />
+    <property name="fjsy063_2" column="fjsy063_2" />
+    <property name="fjsy315_2" column="fjsy315_2" />
+    <property name="fjsy160_2" column="fjsy160_2" />
+    <property name="fjsy080_2" column="fjsy080_2" />
+    <property name="fjsy_2" column="fjsy_2" />
+
+    <property name="ljsy100_2" column="ljsy100_2" />
+    <property name="ljsy50_2" column="ljsy50_2" />
+    <property name="ljsy25_2" column="ljsy25_2" />
+    <property name="ljsy125_2" column="ljsy125_2" />
+    <property name="ljsy063_2" column="ljsy063_2" />
+    <property name="ljsy315_2" column="ljsy315_2" />
+    <property name="ljsy160_2" column="ljsy160_2" />
+    <property name="ljsy080_2" column="ljsy080_2" />
+    <property name="ljsy_2" column="ljsy_2" />
+    
+    <property name="WetSampWeight" column="WetSampWeight" />
+    <property name="DrySampWeight" column="DrySampWeight" />
+    <property name="WaRate" column="WaRate" />
+    <property name="AvaRate" column="AvaRate" />
+    <property name="AvaTime" column="AvaTime" />
+    <property name="StandJudge" column="StandJudge" />
+    <property name="ConcessionJudge" column="ConcessionJudge" />
+    <property name="Assessor" column="Assessor" />
+    <property name="Principal" column="Principal" />
+    <property name="IsUse" column="IsUse" />
+    <property name="ExamGist" column="ExamGist" />
+    <property name="ExamResult" column="ExamResult" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="CommissionID" column="CommissionID" />
+    <many-to-one name="Commission" column="CommissionID" class="Commission" update="false" insert="false"/>
+    <property name="StuffID" column="StuffID" />
+    <many-to-one name="StuffInfo" column="StuffID" class="StuffInfo" update="false" insert="false"/>
+  </class>
+</hibernate-mapping>

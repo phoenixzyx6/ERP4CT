@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Region, ZLERP.Model" table="Region" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="RegionID">
+		 	<generator class="assigned" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="RegionName" column="RegionName" />
+		<property name="Mileage" column="Mileage" />
+		<property name="UnitPrice" column="UnitPrice" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<bag name="ProduceTasks" lazy="true" batch-size="30" inverse="true" >
+			<key column="RegionID"></key>
+			<one-to-many class="ProduceTask"></one-to-many>
+		</bag>
+	</class>
+</hibernate-mapping>

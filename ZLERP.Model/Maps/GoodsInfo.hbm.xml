@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.GoodsInfo, ZLERP.Model" table="GoodsInfo" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="GoodsID">
+		 	<generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+
+    <property name="ClassBID" column="ClassBID" />
+    <property name="ClassMID" column="ClassMID" />
+    <property name="ClassSID" column="ClassSID" />
+    <many-to-one name="ClassB" column="ClassBID" class="ClassB" update="false" insert="false"/>
+    <many-to-one name="ClassM" column="ClassMID" class="ClassM" update="false" insert="false"/>
+    <many-to-one name="Classs" column="ClassSID" class="Classs" update="false" insert="false"/>
+    
+		<property name="GoodsName" column="GoodsName" />
+    <property name="GoodsTypeID" column="GoodsTypeID" />
+		<property name="TotalNum" column="TotalNum" />
+		<property name="ContentNum" column="ContentNum" />
+    <property name="uPrice" column="uPrice" />
+    <property name="unit" column="unit" />
+    <property name="tPrice" column="tPrice" />
+    <property name="InNum" column="InNum" />
+		<property name="OutNum" column="OutNum" />
+		<property name="BorrowNum" column="BorrowNum" />
+    <property name="RevertNum" column="RevertNum" />
+		<property name="InvalidateNum" column="InvalidateNum" />
+		<property name="MinWarmContent" column="MinWarmContent" />
+		<property name="MaxWarmContent" column="MaxWarmContent" />
+		<property name="Remark" column="Remark" />
+    <property name="GoodsModel" column="GoodsModel" />
+    <property name="IsUsed" column="IsUsed" />
+    
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<many-to-one name="GoodsType" column="GoodsTypeID" class="GoodsType" update="false" insert="false"/>
+		<bag name="GoodsBorrows" lazy="true" cascade="all-delete-orphan" inverse="true" >
+			<key column="GoodsID"></key>
+			<one-to-many class="GoodsBorrow"></one-to-many>
+		</bag>
+		<bag name="GoodsChecks" lazy="true" cascade="all-delete-orphan" inverse="true" >
+			<key column="GoodsID"></key>
+			<one-to-many class="GoodsCheck"></one-to-many>
+		</bag>
+		<bag name="GoodsIns" lazy="true" cascade="all-delete-orphan" inverse="true" >
+			<key column="GoodsID"></key>
+			<one-to-many class="GoodsIn"></one-to-many>
+		</bag>
+		<bag name="GoodsInvalidates" lazy="true" cascade="all-delete-orphan" inverse="true" >
+			<key column="GoodsID"></key>
+			<one-to-many class="GoodsInvalidate"></one-to-many>
+		</bag>
+		<bag name="GoodsOuts" lazy="true" cascade="all-delete-orphan" inverse="true" >
+			<key column="GoodsID"></key>
+			<one-to-many class="GoodsOut"></one-to-many>
+		</bag>
+		<bag name="GoodsReverts" lazy="true" cascade="all-delete-orphan" inverse="true" >
+			<key column="GoodsID"></key>
+			<one-to-many class="GoodsRevert"></one-to-many>
+		</bag>
+    
+    <bag name="GoodsAccounts"  lazy="true"   inverse="true" batch-size="30">
+      <key column="GoodsId" />
+      <one-to-many class="GoodsAccount" ></one-to-many>
+
+    </bag>
+    
+    <property name="IsM" column="IsM" />
+    
+	</class>
+</hibernate-mapping>

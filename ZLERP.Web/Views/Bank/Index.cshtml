@@ -1,0 +1,56 @@
+﻿@model ZLERP.Model.Bank 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/Bank/Bank.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            bankIndexInit({
+                BankStoreUrl: '@Url.Action("Find")',
+                CustomerStoreUrl: '@Url.Action("Find", "Customer")'
+            });
+        });
+    </script>
+}
+<div id="buttonToolbar">
+</div>
+<div id="grid">
+    <div id="CustomerGrid" style="float: left; width: 30%;">
+    </div>
+    <div id="BankGrid" style="float: right; width: 69.8%">
+    </div>
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="height:3px;">@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CustName)@Html.TextBoxFor(m => m.CustName, new { @style = "width:200px;", @readonly=true })@Html.TextBoxFor(m => m.CustomerID, new { @style = "display:none;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.BankName)@Html.TextBoxFor(m => m.BankName, new { @style = "width:200px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AccountName)@Html.TextBoxFor(m => m.AccountName, new { @style = "width:200px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Account)@Html.TextBoxFor(m => m.Account, new { @style = "width:200px;" })
+                </td>
+            </tr>
+            
+            <tr>
+                <td>@Html.LabelFor(m => m.IsGuarantee)@Html.CheckBoxFor(m => m.IsGuarantee)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.IsUsed)@Html.CheckBoxFor(m => m.IsUsed)
+                </td>
+            </tr>
+        </table>
+    }
+</div>

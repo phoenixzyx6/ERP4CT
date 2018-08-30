@@ -1,0 +1,41 @@
+﻿@model ZLERP.Model.ARBill 
+@section HeaderSection{ 
+<script src="@Url.Content("~/Scripts/Views/ARBill.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            arbillIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td>@Html.LabelFor(m => m.ContractID)@Html.AutoCompleteFor(m => m.ContractID, m=>m.ContractName, "Combo","Contract", "ID","ContractName", null) @Html.HiddenFor(m => m.ID)</td> 
+        <td>@Html.LabelFor(m => m.Sales)@Html.DropDownListFor(m => m.Sales, (IEnumerable<SelectListItem>)ViewBag.Sales)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Amount)@Html.EditorFor(m => m.Amount)</td> 
+        <td>@Html.LabelFor(m => m.ARDate)@Html.EditorFor(m => m.ARDate, new { defaultValue = DateTime.Today.ToString("yyyy-MM-dd") })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.UnitPrice)@Html.EditorFor(m => m.UnitPrice)</td> 
+        <td>@Html.LabelFor(m => m.Total)@Html.TextBoxFor(m => m.Total, new { readOnly = true })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.InTotal)@Html.TextBoxFor(m => m.InTotal, new { Value = 0 })</td> 
+        <td>@Html.LabelFor(m => m.UnTotal)@Html.TextBoxFor(m => m.UnTotal, new { readOnly = true })</td>
+   
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.Memo)@Html.TextAreaFor(m => m.Memo, 3, 50,null )</td> 
+         
+    </tr>
+</table>
+}
+</div>

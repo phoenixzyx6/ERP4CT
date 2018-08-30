@@ -1,0 +1,86 @@
+﻿@model ZLERP.Model.EquipMtLyReturn 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/EquipMtLyReturn/EquipMtLyReturn.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            equipmtlyreturnIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                itemstoreUrl: '@Url.Action("Find", "EquipMtLyReturnItem")',
+                equipMtLyReturnAddUrl: '@Url.Action("Add")',
+                equipMtLyReturnUpdateUrl: '@Url.Action("Update")',
+                listClassMUrl: '@Url.Action("ListData", "ClassM")',
+                listClassSUrl: '@Url.Action("ListData", "ClassS")',
+                listEquipUrl: '@Url.Action("ListData", "Equipment")',
+                getMntZlByIdUrl: '@Url.Action("Get", "MntZl")',
+                classTypeID: '@Request.QueryString["p1"]'
+            });
+        });
+    </script>
+}
+<div id="EquipMtLyReturnGrid" style="float: left; width: 40%">
+</div>
+<div id="EquipMtLyReturnItemGrid" style="float: right; width: 59.8%">
+</div>
+<div id="EquipMtLyReturnForm" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        @Html.TextBoxFor(m => m.ID, new { style = "display:none;" })
+        @Html.TextBoxFor(m => m.YM, new { Value = @DateTime.Now.ToString("yyyy-MM"), style = "display:none;" })
+        @Html.TextBox("actiontype", "add", new { style = "display:none;" })
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.ReturnDate)@Html.EditorFor(m => m.ReturnDate)
+                </td>
+                <td>@Html.LabelFor(m => m.MntZlID)@Html.DropDownListFor(m => m.MntZlID, ViewBag.MntZlID as IEnumerable<SelectListItem>, new { style = "width:138px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ClassBID)@Html.DropDownListFor(m => m.ClassBID, ViewBag.ClassBEquip as IEnumerable<SelectListItem>, new { style = "width:138px;" })
+                </td>
+                <td>@Html.LabelFor(m => m.ClassMID)@Html.DropDownListFor(m => m.ClassMID, Enumerable.Empty<SelectListItem>(), new { style = "width:138px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ClassSID)@Html.DropDownListFor(m => m.ClassSID, Enumerable.Empty<SelectListItem>(), new { style = "width:138px;" })
+                </td>
+                <td>@Html.LabelFor(m => m.EquipmentID)@Html.DropDownListFor(m => m.EquipmentID, Enumerable.Empty<SelectListItem>(), new { style = "width:138px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Sumx)@Html.EditorFor(m => m.Sumx)
+                </td>
+                <td>@Html.LabelFor(m => m.BeSumx)@Html.EditorFor(m => m.BeSumx)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.MApprove)@Html.EditorFor(m => m.MApprove)
+                </td>
+                <td>@Html.LabelFor(m => m.DApprove)@Html.EditorFor(m => m.DApprove)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.DrawMan)@Html.EditorFor(m => m.DrawMan)
+                </td>
+                <td>@Html.LabelFor(m => m.SendMan)@Html.DropDownListFor(m => m.SendMan, ViewBag.User as IEnumerable<SelectListItem>)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ApplyDate)@Html.EditorFor(m => m.ApplyDate)
+                </td>
+                <td>@Html.LabelFor(m => m.IsEntrust)@Html.CheckBoxFor(m => m.IsEntrust)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 3, 18, new { })
+                </td>
+                
+            </tr>
+            <tr>
+                <td colspan="2" style="padding-top:15px; vertical-align:bottom; padding-bottom:10px; border-top:1px solid #ccc;">
+                <button class="tbtn ui-icon-arrowreturnthick-1-e" onclick="importZlItems();return false;">导入退回明细</button>
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

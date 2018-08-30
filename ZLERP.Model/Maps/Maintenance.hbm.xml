@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.Maintenance, ZLERP.Model" table="Maintenance" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="MaintenanceID">
+      <generator class="assigned" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="ItemName" column="ItemName" />
+    <property name="DrawType" column="DrawType" />
+    <property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="ClassBID" column="ClassBID" />
+    <many-to-one name="ClassB" column="ClassBID" class="ClassB" update="false" insert="false"/>
+    <bag name="EquipMtLyItems" lazy="true" batch-size="30" inverse="true" >
+      <key column="MaintenanceID"></key>
+      <one-to-many class="EquipMtLyItem"></one-to-many>
+    </bag>
+    <bag name="EquipTermlyMts" lazy="true" batch-size="30" inverse="true" >
+      <key column="MaintenanceID"></key>
+      <one-to-many class="EquipTermlyMt"></one-to-many>
+    </bag>
+    <bag name="EquipmentItems" lazy="true" batch-size="30" inverse="true" >
+      <key column="MaintenanceID"></key>
+      <one-to-many class="EquipmentItem"></one-to-many>
+    </bag>
+    <bag name="MntZlItems" lazy="true" batch-size="30" inverse="true" >
+      <key column="MaintenanceID"></key>
+      <one-to-many class="MntZlItem"></one-to-many>
+    </bag>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,82 @@
+﻿@model ZLERP.Model.DutyPlan 
+@{
+    var dispatchers = HelperExtensions.SelectListData<ZLERP.Model.User>("TrueName", "ID", " UserType = '02' AND IsUsed=1 ", "ID", true, "");
+    var dispatcherArray = dispatchers.Select(p => string.Format("'{0}':'{1}'", p.Value, p.Text)).ToArray();
+    string dispatcherInlineSelect = "{'':''," + string.Join(",", dispatcherArray) + "}";
+
+    var changeDay = ViewBag.ChangeDay;
+    string currentCondition, nextCondition;
+    DateTime dt = DateTime.Parse(DateTime.Today.ToString("yyyy-MM") + "-" + changeDay + " 00:00:00").AddDays(1);
+    if (DateTime.Today >= dt)
+    {
+        currentCondition = " DutyDate >= '" + dt.ToString("yyyy-MM-dd HH:mm:ss") + "' and DutyDate < '" + dt.AddMonths(1).ToString("yyyy-MM-dd HH:mm:ss") + "' ";
+        nextCondition = " DutyDate >= '" + dt.AddMonths(1).ToString("yyyy-MM-dd HH:mm:ss") + "' and DutyDate < '" + dt.AddMonths(2).ToString("yyyy-MM-dd HH:mm:ss") + "' ";
+    }
+    else
+    {
+        currentCondition = " DutyDate >= '" + dt.AddMonths(-1).ToString("yyyy-MM-dd HH:mm:ss") + "' and DutyDate < '" + dt.ToString("yyyy-MM-dd HH:mm:ss") + "' ";
+        nextCondition = " DutyDate >= '" + dt.ToString("yyyy-MM-dd HH:mm:ss") + "' and DutyDate < '" + dt.AddMonths(1).ToString("yyyy-MM-dd HH:mm:ss") + "' ";
+    }
+}
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/DutyPlan/DutyPlan.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        var dispatcherInlineStr = "@Html.Raw(dispatcherInlineSelect)";
+        $(function () {
+            dutyPlanIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                updateUrl: '@Url.Action("Update")',
+                currentCondition: "@Html.Raw(currentCondition)",
+                nextCondition: "@Html.Raw(nextCondition)"
+            });
+        });
+        
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+    @using (Html.BeginForm())
+    {   
+        @Html.ValidationSummary()
+        @Html.TextBoxFor(m => m.ID, new { style = "display:none;" })
+         <table class="mvcform">
+
+            <tr>
+                <td>@Html.LabelFor(m => m.DutyDate)@Html.EditorFor(m => m.DutyDate, "datetime")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.MainDispatcher)@Html.DropDownListFor(m => m.MainDispatcher, (IEnumerable<SelectListItem>)ViewBag.dispatchers, new { style = "width:138px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.SecondDispatcher)@Html.DropDownListFor(m => m.SecondDispatcher, (IEnumerable<SelectListItem>)ViewBag.dispatchers, new { style = "width:138px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 5)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+<div id="MultAddForm" class="mvcform" style="display:none;">
+    @using (Html.BeginForm())
+    {   
+        @Html.ValidationSummary()
+        <table class="mvcform"> 
+            <tr> 
+                <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })</td>
+   
+            </tr>
+            请输入值班计划日期范围，计划日期不包括截止日期。
+            <tr>
+                <td>@Html.Label("起始日期")@Html.Editor("BeginDate", "datetime", new { })</td>
+            </tr>
+            <tr>
+                <td>@Html.Label("截止日期")@Html.Editor("EndDate", "datetime", new { })</td>
+            </tr>
+        </table>
+    }
+</div>

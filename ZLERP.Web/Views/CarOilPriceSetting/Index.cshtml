@@ -1,0 +1,41 @@
+﻿@model ZLERP.Model.CarOilPriceSetting
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/CarOilPriceSetting.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            customerIndexInit({
+                storeUrl: '@Url.Action("Find")'
+            });
+        });
+    </script>
+}
+<div id="custForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+             <tr>               
+                <td>
+                   @Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })
+                   @Html.LabelFor(m => m.StartDate)
+                   @Html.EditorFor(m => m.StartDate, "DateTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })
+                </td>
+            </tr>
+            <tr>
+                 <td>
+                   @Html.LabelFor(m => m.EndDate)
+                   @Html.EditorFor(m => m.EndDate, "DateTime", new { defaultValue = @DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd") })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   @Html.LabelFor(m => m.OilPrice)
+                   @Html.TextBoxFor(m => m.OilPrice)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="custid">
+</div>
+

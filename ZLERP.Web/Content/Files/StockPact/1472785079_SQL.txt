@@ -1,0 +1,113 @@
+USE [ERP4]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_rpt_SaleDeductPer]    Script Date: 08/19/2016 08:05:58 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/****** Object:  Stored Procedure dbo.sp_rpt_CarReport    Script Date: 2012-6-5 9:12:05 ******/
+-- =============================================
+-- Author:		lzl
+-- Create date: 2016/8/18
+-- Description:	商砼销售提成考核明细表
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_rpt_SaleDeductPer]
+( 
+	@Month NVARCHAR(30)
+)
+AS
+BEGIN	 
+
+--DECLARE @Month NVARCHAR(30)
+--SET @Month='201608'
+DECLARE @StartDateTime VARCHAR(30) ,
+        @EndDateTime VARCHAR(30) ,
+        @ChangeTime VARCHAR(20),
+        @ChangeDay VARCHAR(10),
+        @StartDateYear VARCHAR(30)
+    SELECT  @ChangeTime = ConfigValue
+    FROM    dbo.SysConfig
+    WHERE   ConfigName = 'ChangeTime'
+    SELECT  @ChangeDay = ConfigValue
+    FROM    dbo.SysConfig
+    WHERE   ConfigName = 'ChangeDay'
+    IF @ChangeTime IS NULL 
+        SET @ChangeTime = '00:00'
+    IF @ChangeDay IS NULL
+        SET @ChangeDay='01'
+    SET @EndDateTime =  substring(@Month,0,5)+'-'+substring(@Month,5,2)+'-'+ @ChangeDay + ' ' + @ChangeTime 
+    SET @StartDateTime =convert(varchar(30),DATEADD(m, -1,convert(datetime,@EndDateTime)),23)+' '+@ChangeTime
+    SET @StartDateYear =convert(varchar(30),convert(datetime,convert(varchar(4),convert(int,substring(@Month,0,5))-1)+'-12-'+ @ChangeDay)+1,23)+' '+@ChangeTime
+
+
+select Salesman,[contract].ContractID,[contract].ContractName,Contract.BusinessType,SUM(contract.SignTotalCube) QyCube,JsCoefficient,SUM(ShippingDocument.SignInCube) JsCube,QyCoefficient,HkCoefficient
+,DeductPerPrice
+INTO #temp0
+from project 
+join producetasks on producetasks.projectid=project.projectid 
+join shippingdocument on shippingdocument.taskid=producetasks.taskid 
+join [contract] on [contract].contractid=project.contractid
+where shippingdocument.IsEffective=1 
+group by [contract].contractname,contract.BusinessType,[contract].ContractID,JsCoefficient,QyCoefficient,HkCoefficient,Salesman,DeductPerPrice
+ORDER BY Contract.ContractID
+
+--总欠款
+SELECT ContractID,SUM(PayMoney) PayMoney INTO #temp00
+FROM ContractPay 
+WHERE PayDate<@StartDateTime
+GROUP BY ContractID
+---
+SELECT c.*
+,dbo.getDayu0(isnull(dbo.GetContractMoneyMove(contract.ContractID,dateadd(month,-1,@StartDateTime)),0),
+dbo.GetStuffQianPrice(isnull(dbo.GetContractMoneyMove(Contract.ContractID,dateadd(month,-1-isnull(Contract.Dianzi4,0),@StartDateTime)),0)
+,isnull(Contract.Dianzi1,0),isnull(Contract.Dianzi2,0),isnull(Contract.Dianzi3,100)) - dbo.GetHuanDianZi(isnull(dbo.GetContractMoneyMove(Contract.ContractID,dateadd(month,-1-isnull(Contract.Dianzi7,0)-isnull(Contract.Dianzi4,0),@StartDateTime)),0),isnull(Contract.Dianzi1,0),isnull(Contract.Dianzi2,0),isnull(Contract.Dianzi3,100),isnull(Contract.Dianzi6,0))+isnull(dbo.GetContractMoneyMove(Contract.ContractID,dateadd(month,-1,@StartDateTime)),0)-isnull(dbo.GetContractMoneyMove(Contract.ContractID,dateadd(month,-1-isnull(Contract.Dianzi4,0),@StartDateTime)),0)+isnull(PayMoney,0)) as dz
+INTO #temp1 
+FROM(
+select [contract].ContractID
+,SUM(shippingdocument.signincube*(dbo.getConAddPrice(producetasks.ContractID,producetasks.constrength,shippingdocument.producedate)
++dbo.GetConPrice(producetasks.ContractID,producetasks.constrength,shippingdocument.producedate)))-isnull(#temp00.PayMoney,0) zqk
+
+from project 
+join producetasks on producetasks.projectid=project.projectid 
+join shippingdocument on shippingdocument.taskid=producetasks.taskid 
+join [contract] on [contract].contractid=project.contractid
+LEFT JOIN #temp00 ON #temp00.ContractID=Project.ContractID
+where shippingdocument.IsEffective=1 AND ShippingDocument.produceDate<=@StartDateTime
+group by [contract].ContractID,#temp00.PayMoney
+) c LEFT JOIN Contract ON c.ContractID=contract.ContractID
+
+--回款金额
+SELECT ContractID,SUM(PayMoney) PayMoney INTO #temp3
+FROM ContractPay 
+WHERE PayDate>=@StartDateTime AND PayDate<=@EndDateTime
+GROUP BY ContractID
+
+SELECT *,ISNULL(Jtgz-Kjgz,0) AS Hjgz FROM(
+SELECT DISTINCT #temp0.*,#temp1.dz,ISNULL(#temp1.zqk,0) ZQK
+,ISNULL(#temp3.PayMoney,0) PayMoney,ISNULL(#temp1.zqk,0)-ISNULL(#temp3.PayMoney,0) AS Wsqk
+,ISNULL(QyCoefficient*QyCube+JsCube*JsCoefficient+(PayMoney/DeductPerPrice)*HkCoefficient,0) AS Jtgz
+,((ISNULL(#temp1.zqk,0)-ISNULL(#temp3.PayMoney,0))/DeductPerPrice)*HkCoefficient/3 AS Kjgz
+FROM #temp0 
+LEFT JOIN #temp1 ON #temp0.ContractID=#temp1.ContractID 
+--LEFT JOIN #temp2 ON #temp0.ContractID=#temp2.ContractID
+LEFT JOIN #temp3 ON #temp0.ContractID=#temp3.ContractID
+) b
+
+DROP TABLE #temp00
+DROP TABLE #temp0
+DROP TABLE #temp1
+--DROP TABLE #temp2
+DROP TABLE #temp3
+
+SET NOCOUNT OFF;
+END
+
+
+-- exec [sp_rpt_SaleDeductPer] '201608'
+
+--UPDATE Contract SET JsCoefficient=0.1,QyCoefficient=0.2,HkCoefficient=0.6,DeductPerPrice=290
+
+--select ContractID,Sum(PayMoney) as yifu 
+--	into #T7 
+--	from ContractPay 
+--	where PayDate<@BeginDate  group by ContractID 

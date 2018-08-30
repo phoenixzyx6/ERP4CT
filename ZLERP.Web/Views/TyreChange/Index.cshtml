@@ -1,0 +1,60 @@
+﻿@model ZLERP.Model.TyreChange 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/TyreChange/TyreChange.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            var options = {
+                storeUrl: '@Url.Action("Find")'
+                , getChangeUrl: '@Url.Action("GetCarLastChange", "TyreChange")'
+                , carTyreInstallPlaceUrl: '@Url.Action("TyreInfoCombo", "TyreInfo")'
+                , changeTyreUrl: '@Url.Action("AddTyreChange")'
+            };
+            tyrechangeIndexInit(options);
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td colspan ="2">@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarDics, new { @class = "text", style = "width:140px;", id = "change-carid" })
+                </td>
+                  
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.OldTyreID)@Html.AutoComplete("OldTyreID", "Old", "CarTyreCombo", "TyreInfo", "ID", "", "", "F_InstallPlace")
+                </td>
+                <td>  @Html.LabelFor(m => m.NewTyreID)@Html.AutoComplete("NewTyreID", "New", "TyreInfoCombo", "TyreInfo", "ID", "", "CurrentStatus = 'TyreStatus1' ")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ChangeReason)@Html.DicComboBoxFor(m => m.ChangeReason, DicEnum.TyreChangeReason)
+                </td>
+                <td>@Html.Label("原胎处理")@Html.RadioButton("OldTyreAction", "TyreStatus1", true, new { id = "TyreChange_TyreStatus1" })
+                     <label for = "TyreChange_TyreStatus1" style="width:30px;text-align:left">待用</label>
+                    @Html.RadioButton("OldTyreAction", "TyreStatus3", new { id = "TyreChange_TyreStatus3" })
+                     <label for = "TyreChange_TyreStatus3" style="width:30px;text-align:left">维修</label>
+                    @Html.RadioButton("OldTyreAction", "TyreStatus4", new { id = "TyreChange_TyreStatus4" })
+                     <label for = "TyreChange_TyreStatus4" style="width:30px;text-align:left">报废</label>
+                </td>
+            </tr>
+            <tr>
+              
+                <td>@Html.LabelFor(m => m.Mileage)@Html.EditorFor(m => m.Mileage)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ChangeDate)@Html.EditorFor(m => m.ChangeDate, "DateTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })
+                    @Html.HiddenFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.ChangeMan)@Html.DropDownListFor(m => m.ChangeMan, (SelectList)ViewBag.UserInfoDics, new { stype = "width:130px;" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+ 

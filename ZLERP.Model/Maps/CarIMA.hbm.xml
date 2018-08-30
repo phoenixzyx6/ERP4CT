@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.CarIMA, ZLERP.Model" table="CarIMA" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="CarIMAID">
+      <generator class="native" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="CarID" column="CarID" />
+    <property name="CarNo" column="CarNo"/>
+    <property name="InsuranceDate" column="InsuranceDate" />
+    <property name="InsuranceIsHandle" column="InsuranceIsHandle" />
+	  <property name="BusInsuranceDate" column="BusInsuranceDate" />
+    <property name="CarAnnualVerDate" column="CarAnnualVerDate" />
+    <property name="CarAnnualVerIsHandle" column="CarAnnualVerIsHandle" />
+    <property name="CerAnnualVerDate" column="CerAnnualVerDate" />
+    <property name="CerAnnualVerIsHandle" column="CerAnnualVerIsHandle"/>
+    <property name="FMaintainIsHandle" column="FMaintainIsHandle" />
+    <property name="FMaintainNextTime" column="FMaintainNextTime"   />
+    <property name="SMaintainIsHandle" column="SMaintainIsHandle"  />
+    <property name="SMaintainNextTime" column="SMaintainNextTime"  />
+    <property name="RoadBridge" column="RoadBridge" type="string"  />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    
+  </class>
+</hibernate-mapping>

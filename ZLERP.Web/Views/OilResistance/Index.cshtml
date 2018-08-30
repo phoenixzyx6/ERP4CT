@@ -1,0 +1,32 @@
+﻿@model ZLERP.Model.OilResistance 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/OilResistance/OilResistance.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            oilresistanceIndexInit({storeUrl:'@Url.Action("Find")'});
+        });
+</script>
+}
+<div id="oilresistanceGrid"></div>
+<div id="oilresistanceFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.HiddenFor(m => m.ID)</td>  
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.MfrType)@Html.EditorFor(m=>m.MfrType)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Oil)@Html.EditorFor(m=>m.Oil)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Resistance)@Html.EditorFor(m=>m.Resistance)</td>
+    </tr>
+</table>
+
+}
+</div>

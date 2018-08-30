@@ -1,0 +1,156 @@
+﻿@model ZLERP.Model.ViewModels.ConsMixAndItems
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/ConsMixprop.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+
+            consMixpropIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                itemStoreUrl: '@Url.Action("Find", "ConsMixpropItem")',
+                updateItemUrl: '@Url.Action("Update", "ConsMixpropItem")',
+                historyUrl: '@Url.Action("Find", "ConsMixpropItemsHistory")',
+                deleteUrl: '@Url.Action("Delete")',
+                conStrengthSelectUrl: '@Html.Raw(Url.Action("SearchSelect", "ConStrength", new { textField = "ConStrengthCode", valueField = "ConStrengthCode", orderby = "ConStrengthCode" }))',
+                ChangeSiloUrl: '@Url.Action("ChangeSilo", "ConsMixpropItem")',
+                listSiloUrl: '@Url.Action("ListData", "SiloProductLine")'
+            });
+        });
+    </script>
+}
+@*配比审核*@
+<div id="PBAuditForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("编号")@Html.TextBoxFor(m => m.ConsMixprop.ID, new { @class = "text", readOnly = true })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ConsMixprop.FormulaName)@Html.TextBoxFor(m => m.ConsMixprop.FormulaName, new { @class = "text", disabled = true })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ConsMixprop.MixingTime)@Html.TextBoxFor(m => m.ConsMixprop.MixingTime, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ConsMixprop.AuditStatus)@Html.DicEditorFor(m => m.ConsMixprop.AuditStatus, DicEnum.AuditStatus)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ConsMixprop.AuditInfo)@Html.TextAreaFor(m => m.ConsMixprop.AuditInfo)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="SearchDiv" style="float: left; width: 11%">
+    @Html.LabelFor(m => m.ConsMixprop.ProductLineID)@Html.DropDownListFor(m => m.ConsMixprop.ProductLineID, (IEnumerable<SelectListItem>)ViewBag.ProductLineList)
+</div>
+<div id="rendertoButton" style="float: right; width: 89%; padding-bottom: 2px;">
+</div>
+<div style="clear: both;">
+</div>
+<table id="ConsGridDiv">
+</table>
+<div id="ConsGridDivPager">
+</div>
+@*施工配比子表历史记录弹出框*@
+<div id="itemHisWindow" style="display: none;">
+    <div id="itemHisGrid">
+    </div>
+</div>
+@*更换桶仓弹出框*@
+<div id="ChangeSiloDiv" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        <table class="mvcform">
+            <tr>
+                <td>
+                    <span style=" padding-left:10px;">生产线：</span>@Html.DropDownList("ProductLineID2", (IEnumerable<SelectListItem>)ViewBag.ProductLineList)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style=" padding-left:10px; vertical-align:middle; height:18px; line-height:24px;">时间段：</span>@Html.RadioButton("SelectDuringDate", 0, true, new {@id="SelectDuringDate0", style = " vertical-align:text-bottom;" })<span style = " vertical-align:middle;">当天交班时间</span>&nbsp;&nbsp;@Html.RadioButton("SelectDuringDate", 1, false, new { @id = "SelectDuringDate1", style = " vertical-align:text-bottom;" })<span style = " vertical-align:middle;">自定义时间</span><span id="fromto" style=" display:none; float:right;">@Html.Editor("From") - @Html.Editor("To")</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style=" padding-left:10px;">储料仓：</span>@Html.DropDownList("S_SiloID", Enumerable.Empty<SelectListItem>())&nbsp;<-->&nbsp;@Html.DropDownList("D_SiloID", Enumerable.Empty<SelectListItem>())
+                </td>
+            </tr>
+        </table>
+    }
+    <div id="emsg" style=" display:none; vertical-align:middle; padding-top:15px;"></div>
+</div>
+<div id="QuickModifyRZForm" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        <fieldset  id="Beton" style = " padding-left:10px; border:1px dashed #A6C9E2" >
+        <legend id="border-title"><b>混凝土</b></legend>
+        <table class="mvcform">
+            <tr>
+                <td style="text-align:right;width:120px;">
+                    混凝土容重最小值：
+                </td>
+                <td align="center" id="CurrentFormulaRZMin">
+                </td>
+                <td>
+                   &nbsp;→&nbsp;
+                </td>
+                <td valign="middle">
+                    @Html.TextBox("FormulaRZMin", null, new { @class = "text", style = " width:50px; background-color:#CCC", @readOnly = true })<span class="ui-icon ui-icon-locked" title="解锁" style=" float:right; margin-top:3px; cursor:pointer;"></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:right;">
+                    混凝土容重最大值：
+                </td>
+                <td align="center" id="CurrentFormulaRZMax">
+                </td>
+                <td>
+                   &nbsp;→&nbsp;
+                </td>
+                <td>
+                    @Html.TextBox("FormulaRZMax", null, new { @class = "text", style = " width:50px;background-color:#CCC", @readOnly = true })<span class="ui-icon ui-icon-locked" title="解锁" style=" float:right; margin-top:3px; cursor:pointer;"></span>
+                </td>
+            </tr>
+        </table>
+        </fieldset>
+        <fieldset id="Slurry" style = " padding-left:10px; border:1px dashed #A6C9E2" >
+        <legend id="border2-title"><b>砂浆</b></legend>
+        <table class="mvcform">
+            <tr>
+                <td style="text-align:right;width:120px;">
+                    砂浆容重最小值：
+                </td>
+                <td align="center" id="CurrentSlurryRZMin">
+                </td>
+                <td>
+                   &nbsp;→&nbsp;
+                </td>
+                <td>
+                    @Html.TextBox("SlurryRZMin", null, new { @class = "text", style = " width:50px;background-color:#CCC", @readOnly = true })<span class="ui-icon ui-icon-locked" title="解锁" style=" float:right; margin-top:3px; cursor:pointer;"></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:right;">
+                    砂浆容重最大值：
+                </td>
+                <td align="center" id="CurrentSlurryRZMax">
+                </td>
+                <td>
+                   &nbsp;→&nbsp;
+                </td>
+                <td>
+                    @Html.TextBox("SlurryRZMax", null, new { @class = "text", style = " width:50px;background-color:#CCC", @readOnly = true })<span class="ui-icon ui-icon-locked" title="解锁" style=" float:right; margin-top:3px; cursor:pointer;"></span>
+                </td>
+            </tr>
+        </table>
+        </fieldset>
+        <div style="padding:5px;">注意：值为0或不填均视为未修改</div>
+    }
+</div>

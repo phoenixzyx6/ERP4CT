@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.CustomerPlan, ZLERP.Model" table="CustomerPlan" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="CustomerPlanID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+    <property name="ConstructUnit" column="ConstructUnit" />
+		<property name="ProjectName" column="ProjectName" />
+		<property name="ProjectAddr" column="ProjectAddr" />
+		<property name="ConsPos" column="ConsPos" />
+		<property name="ConStrength" column="ConStrength" />
+		<property name="Slump" column="Slump" />
+		<property name="CastMode" column="CastMode" />
+    <property name="PumpName" column="PumpName" />
+    <property name="PiepLen" column="PiepLen" />
+    <property name="PumpMan" column="PumpMan" />
+		<property name="PlanCube" column="PlanCube" />
+		<property name="NeedDate" column="NeedDate" />
+    <property name="PlanDate" column="PlanDate" />
+		<property name="Tel" column="Tel" />
+		<property name="LinkMan" column="LinkMan" />
+		<property name="Remark" column="Remark" />
+		<property name="AuditStatus" column="AuditStatus" />
+		<property name="AuditTime" column="AuditTime" />
+		<property name="AuditInfo" column="AuditInfo" />
+		<property name="Auditor" column="Auditor" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="ContractID" column="ContractID"/>
+    <property name="TaskID" column="TaskID"/>
+    <property name="RegionID" column="RegionID"/>
+    <property name="SupplyUnit" column="SupplyUnit"/>
+    <many-to-one name="Contract" column="ContractID" class="Contract" update="false" insert="false"/>
+		<many-to-one name="ProduceTask" column="TaskID" class="ProduceTask" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,73 @@
+﻿ @model ZLERP.Model.SystemMsg 
+@section HeaderSection{
+    
+}
+@*签写消息*@
+<div id="WriteMsg" class="mvcform">
+    @using (Html.BeginForm("Upload", "Attachment", FormMethod.Post, new { id = "WriteMsgForm", encrypt = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary()
+        <div style="float: left;">
+            <table class="mvcform">
+                <tr>
+                    <td colspan="2" style="height: 1px; line-height: 1px;">
+                        @Html.TextBoxFor(m => m.ID, new { @class = "text", style = "display:none; height:1px;" })
+                        @Html.TextBoxFor(m => m.MsgType, new { @class = "text", style = "display:none; height:1px;" ,Value="用户消息"})
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="height: 25px; line-height: 25px;">
+                        @Html.Label("Sender", "发信人：")<span id="sender">@User.UserName()</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="height: 25px; line-height: 25px;">
+                        <div style="float: left;">@Html.Label("UserList", "收信人：")<div id="repUserID" class="ui-jqgrid ui-widget ui-corner-all mvcform text"
+                            style="width: 400px; height: 14px; line-height: 14px; float: right; overflow: auto;">
+                            &nbsp;</div><textarea id="UserID" style="width:380px;display:none;" rows="1" name="UserID" cols="40" data-val-required="The 收信人 field is required.", data-val-length-max="512", data-val-length="The field 收信人 must be a string with a maximum length of 512.", data-val="true", class="requiredval"></textarea></div>
+                        <div style="float: left; vertical-align: middle;">
+                            <span class="ui-button-icon-primary ui-icon ui-icon-person" style="float: left; margin-top: 3px;">
+                            </span><span style="float: right;">
+                                <input type="button" id="choseUserBtn" class="definBtnWithUnderline" style="border: none;"
+                                    value="选择联系人" /></span><span style="">
+                                <input type="button" id="clearUserBtn" class="definBtnWithUnderline" style="border: none;"
+                                    value="清空" onclick="cleanLinkMan();" /></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="height: 25px; line-height: 25px;">
+                        @Html.Label("MsgTitle", "主题：")@Html.TextBoxFor(m => m.MsgTitle, new { style = "width:400px;" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="height: 25px; line-height: 25px;">
+                        @Html.Label("Files", "     ")<a href="javascript:void(0)" id="addfile" title="添加附件" onclick="addFileType();">添加附件</a>&nbsp;(提示：附件总大小不能超过20M，单个附件不能超过10M)<div id="filecontrl" style="display: none;"><input
+                            id="file1" name="file1" onchange="File.add(this)" type="file" style="display: none;" current="true" /></div>@*<a id="switchEidtMode"
+                                href="javascript:void(0);" title="切换编辑模式" style="float: right; padding-right: 25px;">+切换至纯文本模式+</a>*@
+                    </td>
+                </tr>
+                <tr id="filelisttr" style=" display:none;">
+                    <td>&nbsp;
+                    </td><td ><div id="filelist" style=" width:450px; display:block;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        @Html.Label("OperateObj", "内容：")
+                    </td>
+                    <td>@Html.TextAreaFor(m => m.OperateObj, new { @zlerp = "xheditor", style = "width:500px; height:250px;border-radius: 0px; padding:0px; border:1px solid #C5C5C5;resize:none;" })</td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        @Html.Label("IsSendToTel", "发送至手机：")
+                    </td>
+                    <td style=" color:Red;">@Html.CheckBox("IsSendToTel", true) <span>此项只有联系人开通了手机短信平台接收功能才有效</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+    }
+</div>
+
+

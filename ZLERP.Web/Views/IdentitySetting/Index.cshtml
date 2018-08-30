@@ -1,0 +1,110 @@
+﻿@model ZLERP.Model.IdentitySetting
+<div id="IdentitySetForm" style=" display:none;">
+
+@using (Html.BeginForm())
+{
+@Html.ValidationSummary()
+<table class="mvcform paddingStyle">
+    <tr> 
+        <td colspan="4">@Html.TextBoxFor(m => m.ID, new { @class = "text", style = " display:none;" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.ContractItem.ID)</td>
+        <td>@Html.LabelFor(m => m.IdentityType)</td>
+        <td>@Html.LabelFor(m => m.IdentityName)</td>
+        <td>@Html.LabelFor(m => m.IdentityPrice)</td>
+    </tr>
+    <tr> 
+        <td>@Html.TextBoxFor(m => m.ContractItem.ID, new { @class = "text" })</td>
+        <td>@Html.TextBoxFor(m => m.IdentityType, new { @class = "text" })</td>
+        <td>@Html.TextBoxFor(m => m.IdentityName, new { @class = "text" })</td>
+        <td>@Html.TextBoxFor(m => m.IdentityPrice, new { @class = "text" })</td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <div id="My-JqGrid"></div>
+            <script type="text/javascript">
+                $(function () {
+                    var myJqGrid = new MyGrid({
+                        renderTo: 'My-JqGrid'
+		                , title: '管理列表'
+                        //, width: '100%'
+                        , autoWidth: true
+                        , buttons: @ViewBag.Buttons0
+                        , height: 300
+		                , storeURL: '@Url.Action("Find")'
+		                , sortByField: 'ID'
+		                , primaryKey: 'ID'
+                        , dialogWidth:500
+                        , dialogHeight:300
+		                //, groupField: 'UserType'
+		                , setGridPageSize: 30
+		                , showPageBar: true
+                        //, singleSelect: true
+                        //, editSaveUrl: '@Url.Action("Update")'
+		                , initArray: [
+                            {label:' 特性设定编号', name: 'IdentitySettingID', index:'IdentitySettingID', editable:true ,editrules: {required: true}}   	 
+                            ,{label:' 合同明细编号', name: 'ContractItemsID', index:'ContractItemsID', editable:true }   	 
+                            ,{label:'如抗渗、抗折 特性类型', name: 'IdentityType', index:'IdentityType', editable:true }   	 
+                            ,{label:'如P8 详细特性', name: 'IdentityName', index:'IdentityName', editable:true }   	 
+                            ,{label:' 特性价格', name: 'IdentityPrice', index:'IdentityPrice', editable:true }   	 
+                            ,{label:' 创建人', name: 'Builder', index:'Builder', editable:true }   	 
+                            ,{label:' 创建时间', name: 'BuildTime', index:'BuildTime', editable:true }   	 
+                            ,{label:' 修改人', name: 'Modifier', index:'Modifier', editable:true }   	 
+                            ,{label:' 修改时间', name: 'ModifyTime', index:'ModifyTime', editable:true }   	 
+                            ,{label:' 版本', name: 'Version', index:'Version', editable:true }   	 
+                            ,{label:' 状态', name: 'Lifecycle', index:'Lifecycle', editable:true }   	 
+		                ]
+                        , functions: {
+                            handleReload: function (btn) {
+                                myJqGrid.reloadGrid();
+                            },
+                            handleRefresh: function (btn) {
+                                myJqGrid.refreshGrid();
+                            },
+                            handleAdd: function (btn) {
+                                myJqGrid.handleAdd({
+                                    title: btn.data.FuncDesc
+                                    ,loadFrom: 'My-FormDiv'
+                                    ,postUrl: btn.data.Url
+                                    ,afterFormLoaded:function(){
+                                        //新增时允许填写
+                                        myJqGrid.setFormFieldReadOnly('ID',false);                                   
+                                    }
+                                    /*,width: 600
+                                    ,height: 400
+                                    ,formId: 'myform'
+                                    ,postCallBack: function (response) { }*/
+                                });
+                            },
+                            handleEdit: function (btn) {
+                                myJqGrid.handleEdit({
+                                    title: btn.data.FuncDesc
+                                    ,loadFrom: 'My-FormDiv'
+                                    ,postUrl: btn.data.Url
+                                    ,afterFormLoaded:function(){
+                                        //主键readOnly属性置为true，可以显示，但不允许修改
+                                        //Edit By XJM   
+                                        myJqGrid.setFormFieldReadOnly('ID',true);                                   
+                                    }
+                                });
+                            }
+                            , handleDelete: function (btn) {
+                                myJqGrid.deleteRecord({
+                                    deleteUrl: btn.data.Url
+                                    /*,singleDelete:false
+                                    , reloadGrid: true
+                                    , postCallBack: function (response) { alert('delete callback ' + response.Message); }*/
+                                });
+                            }
+                        }
+                    });
+ 
+                });
+            </script>
+        </td>
+    </tr>
+</table>
+}
+</div>
+

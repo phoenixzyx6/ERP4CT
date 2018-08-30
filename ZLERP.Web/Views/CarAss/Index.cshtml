@@ -1,0 +1,50 @@
+﻿@model ZLERP.Model.CarAss 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/CarAss/CarAss.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            carassIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display:none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.TaskID)@Html.AutoComplete("TaskID", "ProjectName", "Combo", "ProduceTask", "ID", "ProjectName")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarID)@Html.AutoComplete("CarID", "CarNo", "Combo", "Car", "ID", "CarNo")
+                </td>
+                <td>@Html.LabelFor(m => m.UserID)@Html.AutoComplete("UserID", "TrueName", "Combo", "User", "ID", "TrueName")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AssDate)@Html.EditorFor(m => m.AssDate)
+                </td>
+                <td>@Html.LabelFor(m => m.AssType)@Html.DicEditorFor(m => m.AssType,DicEnum.AssType)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AssTimes)@Html.EditorFor(m => m.AssTimes)
+                </td>
+               
+
+                 <td>@Html.LabelFor(m => m.IsChangeCar)@Html.CheckBoxFor(m => m.IsChangeCar, new { Checked = true })
+                </td>
+                
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 3, 50, new { })
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

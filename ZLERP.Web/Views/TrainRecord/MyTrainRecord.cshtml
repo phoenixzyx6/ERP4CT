@@ -1,0 +1,27 @@
+﻿@model ZLERP.Model.TrainRecord 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/TrainRecord/TrainRecord.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            trainrecordIndexInit({ storeUrl: '@Url.Action("GetMyTrainRecord")' });
+        });
+</script>
+}
+<div id="TrainRecordGrid"></div>
+<div id="TrainResultForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td colspan="2" style=" color:Red;">@Html.TextBoxFor(m => m.ID, new {@class = "text", style="display:none;"})</td>
+   
+    </tr>
+    <tr>
+        <td colspan="2">@Html.Label("TrainName","培训项目名称")@Html.TextBox("TrainName", "", new { style="color:Red;border:none;", @ReadOnly=true})</td>
+    </tr>
+    <tr> 
+        <td colspan="2" ><span style="vertical-align:top; text-align:right; margin-right:5px; display:inline-block; width:6em;">签写培训心得</span>@Html.TextAreaFor(m => m.TrainResult, 7, 50, new { @class = "text" })</td>
+    </tr>
+</table>
+}
+</div>

@@ -1,0 +1,229 @@
+﻿@model ZLERP.Model.ViewModels.SchedulerViewModel
+@section HeaderSection{ 
+<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/Views/DispatchList/DispatchList2.js")"> </script>
+<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.dragsort-0.5.1.js")"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#tabs").tabs();
+        var options = {
+            getRangeTimeTaskUrl: '@Url.Action("GetRangeTimeTasks", "ProduceTask")'
+            , getNotRangeTimeTaskUrl: '@Url.Action("GetNotRangeTimeTasks", "ProduceTask")'            
+            , saveDispatchUrl: '@Url.Action("Save", "DispatchList")'
+            , findDispatchUrl: '@Url.Action("Find", "DispatchList")'
+            , getCarInfoUrl: '@Url.Action("GetInfo", "Car")'
+            , changeProductLineUrl: '@Url.Action("ChangeProductLine", "DispatchList")'
+            , changeCubeUrl: '@Url.Action("ChangeCube", "DispatchList")'
+            , changeCarUrl: '@Url.Action("ChangeCar", "DispatchList")'
+            , changeProvidedUrl: '@Url.Action("UpdateProvided")'
+            , getDispatchUrl: '@Url.Action("GetInfoByDJH", "DispatchList")'
+            , getLatestDocs: '@Url.Action("Find", "ShippingDocument")'
+            , getLastDocUrl: '@Url.Action("GetLastDocByTaskId", "ShippingDocument")'
+            , newDocUrl: '@Url.Action("NewShipDoc", "ShippingDocument")'
+            , getCarStatusUrl: '@Url.Action("GetMixerCarStatus", "Car")'
+            , shiftCarStatusUrl: '@Url.Action("ShiftMixerCarStatus", "Car")'
+            , setCompleteUrl: '@Url.Action("SetComplete", "ProduceTask")'
+            , getLastDocByCarUrl: '@Url.Action("GetLastDocByCarId", "TZRalation")'
+            , completedUrl: '@Url.Action("SetCompleted", "DispatchList")'
+            , moveUpUrl: '@Url.Action("MoveUp", "DispatchList")'
+            , createDocUrl: '@Url.Action("CreateDoc", "ShippingDocument")'
+            , carReturnUrl: '@Url.Action("CarReturn", "ShippingDocument")'
+            , dragCarUrl: '@Url.Action("DragMixerCar", "Car")'
+            , getRemaincubeUrl: '@Url.Action("GetRemaincubeByCarId", "TZRalation")'
+            , getTzMarkActionUrl: '@Url.Action("MarkAction", "TZRalation")'
+            , getLastDocAutoByCarId: '@Url.Action("GetLastDocAutoByCarId", "TZRalation")'
+            , currentUser: '@User.UserName()'
+            , HandleTodayPlanUrl: '@Url.Action("UpdateTodayPlan","ProduceTask")'
+        };
+
+        dispatchListIndexInit(options);
+        
+    });
+
+ </script>
+
+ <script id="tmplShipDoc" type="text/x-jquery-tmpl">
+<table class="info">
+<tr><td colspan="4"><strong>上车发货信息 [${TaskID}]</strong></td></tr>
+    <tr>
+    <td>客户名称：</td><td>${CustName}</td><td>工程名称：</td><td>${ProjectName}</td>
+    </tr>
+    <tr>
+    <td> 砼强度：</td><td>${ConStrength}</td><td>浇筑方式：</td><td> ${CastMode}</td>
+    </tr>
+    <tr>
+    <td>施工部位：</td><td> ${ConsPos}</td><td>运输方量：</td><td><span id='spSendCube'>${ShippingCube}</span></td>
+    </tr>
+</table> 
+</script>
+
+
+ <style>
+	#tabs { height: 267px; } 
+	.tabs-bottom { position: relative; } 
+	.tabs-bottom .ui-tabs-panel { height: 240px; overflow: auto; } 
+	.tabs-bottom .ui-tabs-nav { position: absolute !important; left: 0; bottom: 0; right:0; padding: 0 0.2em 0.2em 0; } 
+	.tabs-bottom .ui-tabs-nav li { margin-top: 0px !important; margin-bottom: 0px !important; border-top: none; border-bottom-width: 1px; }
+	.ui-tabs-selected { margin-top: 0px !important; }
+	</style>
+
+} 
+<div id="top-layout" style="float:left;width:100%;">
+<div id="tabs" class="tabs-bottom"  style="width:70.5%;float:left;">
+	<ul>
+		<li><a href="#task-grid" style="display:none;">今日</a></li>
+		<li><a href="#task-grid1" style="display:none;">其他</a></li>
+	</ul>
+	<div id="task-grid" style=" height:90%"></div>
+	<div id="task-grid1" style=" height:90%"></div>
+</div>
+<div id="latestShip" style="width:29%;float:right;"></div>
+</div>
+
+
+
+
+<div id="exception-dialog" style="display:none;">
+    <input type="hidden" name="exDJH" id="exception-djh" />
+    <div id="exception-tabs" class="mvcform">
+	    <ul>
+		    @* <li><a href="#tabs-1">换线生产</a></li>
+		   <li><a href="#tabs-2"> 扣 补 方 </a></li>*@
+		    <li><a href="#tabs-3"> 换 车 </a></li>
+            <li><a href="#tabs-4">修改累计</a></li>
+	    </ul>
+	    @* <div id="tabs-1">
+            当前生产线:<span id="exception-curproductline"></span>
+		    可转生产线:<select name="exProductLine" id="exception-productline"></select>
+            <input type="button" id="exception-cpbtn" value="保存" />     
+	    </div>
+	   <div id="tabs-2">
+            <input type="radio" name="exRepare" id="exception-fill" value="1" checked="checked" />补方
+            <input type="radio" name="exRepare" id="exception-subtract" value="0" />扣方
+            请输入方量:<input name="exCube" id="exception-cube" />
+            <input type="button" id="exception-cubebtn" value="保存" />     
+
+	    </div>*@
+	    <div id="tabs-3">
+            当前车号：<span id="exception-curcarid"></span>
+            可选车号:@Html.DropDownListFor(m => m.ShippingDocument.CarID, (SelectList)ViewBag.CarDics, new { @class = "text", style = "width:110px;", id = "exception-carid" }) 
+            司机姓名:<select name="exDriver" id="exception-driver"></select> 
+            <input type="button" id="exception-carbtn" value="保存" />     
+	    </div>
+        <div id = "tabs-4">
+             已供车数：@Html.TextBoxFor(m => m.ShippingDocument.ProvidedTimes, new { style = "width:60px", id = "exception-ProvidedTimes" }) 
+             已供方量：@Html.TextBoxFor(m => m.ShippingDocument.ProvidedCube, new { style = "width:60px", id = "exception-ProvidedCube" }) 
+             <input type="button" id="exception-providedbtn" value="保存" />
+        </div>
+    </div>
+</div>
+
+
+<div id="MyFormDiv_dispatch" class="mvcform" style="display:none;">
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "dispatch-tz-form" }))
+{@Html.ValidationSummary()
+<table class="mvcform">
+  
+    <tr> 
+        <td>@Html.LabelFor(m => m.TZRalation.CarID)@Html.TextBoxFor(m => m.TZRalation.CarID, new { ReadOnly = true })
+         @Html.HiddenFor(m => m.TZRalation.ID) @Html.HiddenFor(m => m.TZRalation.ID)
+        </td>
+ 
+        <td>@Html.LabelFor(m => m.TZRalation.Cube)@Html.TextBoxFor(m => m.TZRalation.Cube, new { @class = "noime stext" })</td>
+ 
+        <td>@Html.LabelFor(m => m.TZRalation.Driver)@Html.TextBoxFor(m => m.TZRalation.Driver, new { ReadOnly = true })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.TZRalation.ReturnType)@Html.DicEditorFor(m => m.TZRalation.ReturnType, DicEnum.ReturnType, "")</td>
+ 
+        <td>@Html.LabelFor(m => m.TZRalation.ActionType)@Html.DicEditorFor(m => m.TZRalation.ActionType, DicEnum.ActionType, "")</td>
+ 
+        <td>
+        @Html.HiddenFor(m => m.TZRalation.IsCompleted, new { Value = false })
+        </td>
+   
+    </tr>
+     <tr>
+     <td colspan="3" valign="top">@Html.LabelFor(m => m.TZRalation.ReturnReason) 
+        
+        @Html.TextAreaFor(m => m.TZRalation.ReturnReason, new { style = "width:70%" })
+        </td>
+     </tr>
+
+</table>
+}
+</div>
+
+<div id="bottom-layout" style="float:left;width:100%;">
+    <div style="width:50%;float:left;"   id="left-panel">
+        <div id="operate-buttons" style="padding-top:5px;"></div>
+        <div id="scdjFormDiv" style="display:none;" >
+            @using (Html.BeginForm("", "", FormMethod.Post, new { id = "scdj-form" }))
+            {
+                @Html.ValidationSummary();
+                <fieldset style="border:solid 1px; border-color:#aaa;">
+                    <legend id="border-title"><b>生产调度</b></legend>
+                    @Html.HiddenFor(m => m.ShippingDocument.ID)
+                    @Html.HiddenFor(m => m.DispatchList.ID)
+                    @Html.HiddenFor(m => m.ShippingDocument.TaskID)
+                    @Html.Hidden("IsLubricatingSlurry")
+                    <table class="mvcform short" >
+                        <tr>
+                            <td>@Html.LabelFor(m => m.ShippingDocument.ProjectName)@Html.TextBoxFor(m => m.ShippingDocument.ProjectName, new { @class = "text", readOnly = true })
+                            </td>
+                            <td>@Html.LabelFor(m => m.ShippingDocument.CarID)@Html.DropDownListFor(m => m.ShippingDocument.CarID, (SelectList)ViewBag.CarDics,"", new {style = "width:110px;" })
+                            </td>  
+                            <td>@Html.LabelFor(m => m.ShippingDocument.PumpName)@Html.DropDownListFor(m => m.ShippingDocument.PumpName, (SelectList)ViewBag.PumpList,"", new { style = "width:110px;" })
+                            </td>     
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(m => m.DispatchList.ProductLineID)@Html.DropDownListFor(m => m.DispatchList.ProductLineID, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:110px;" })
+                            </td>
+                            <td>@Html.LabelFor(m => m.ShippingDocument.Driver)@Html.DropDownListFor(m => m.ShippingDocument.Driver, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:110px;" }) 
+                            </td>
+                            <td>@Html.LabelFor(m => m.ShippingDocument.PlanCube)@Html.TextBoxFor(m => m.ShippingDocument.PlanCube, new { @class = "text", readOnly = true })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(m => m.DispatchList.PCRate)@Html.DropDownListFor(m => m.DispatchList.PCRate, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:110px;" }) 
+                            </td>
+                            <td><center> 本车容量 <input type="text" name="MaxCube" value = "0" readonly="readonly" style="width:80px;" /></center>
+                            </td>
+                            <td>@Html.LabelFor(m => m.ShippingDocument.ProvidedCube)@Html.TextBoxFor(m => m.ShippingDocument.ProvidedCube, new { @class = "text" })
+                            </td>    
+                        </tr>
+                       <tr>
+                            <td>@Html.LabelFor(m => m.DispatchList.BetonCount)@Html.TextBoxFor(m => m.DispatchList.BetonCount, new { @class = "text" })
+                            </td>
+                            <td style="display:none">@Html.LabelFor(m => m.DispatchList.IsAverage)@Html.CheckBoxFor(m => m.DispatchList.IsAverage, new { @class = "text", style = "width:auto; display:block;", @checked = true })
+                            </td>
+                            
+                            <td>@Html.LabelFor(m => m.DispatchList.SlurryCount)@Html.TextBoxFor(m => m.DispatchList.SlurryCount, new { @class = "text"})
+                            </td>
+                            <td>@Html.LabelFor(m => m.ShippingDocument.ProvidedTimes)@Html.TextBoxFor(m => m.ShippingDocument.ProvidedTimes, new { @class = "text" }) 
+                            </td>
+                        </tr>
+                        <tr>
+                        <td>@Html.Label("RemainCube","上车余料")@Html.TextBoxFor(m => m.ShippingDocument.RemainCube, new { @class = "text" }) 
+                            </td>                            
+                            <td>@Html.LabelFor(m => m.ShippingDocument.OtherCube)@Html.TextBoxFor(m => m.ShippingDocument.OtherCube, new { @class = "text" }) 
+                            </td>
+                            <td>@Html.LabelFor(m => m.ShippingDocument.DeliveryTime)@Html.TextBoxFor(m => m.ShippingDocument.DeliveryTime, new { @class = "text" })
+                            </td>
+                        </tr>
+                        <tr>
+                        <td colspan="2">@Html.Label("Remark", "备注")@Html.TextBoxFor(m => m.ShippingDocument.Remark, new { @class = "text", style = "width:285px;" })</td>
+                        <td>
+                        <label id="parcube_red" style=" color:Red; font-size:32pt; font-weight:bolder">0</label>方
+                        </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            }
+
+        </div>
+       
+    </div>
+    <div style="width:50%;float:right;padding-top:5px;" id="scdj-grid"></div>
+</div>
+ 

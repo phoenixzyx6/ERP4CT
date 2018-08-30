@@ -1,0 +1,50 @@
+﻿@model ZLERP.Model.EquipMtLy
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/EquipMtLy/ApplyEquipMtLy.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            equipmtlyIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                listClassMUrl: '@Url.Action("ListData","ClassM")',
+                listClassSUrl: '@Url.Action("ListData","ClassS")',
+                listEquipUrl: '@Url.Action("ListData","Equipment")'
+            });
+        });
+    </script>
+}
+<div id="EquipMtLyGrid"></div>
+<div id="EquipMtLyForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+@Html.TextBoxFor(m => m.ID, new { style = "display:none;" })
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.ClassBID)@Html.DropDownListFor(m => m.ClassBID, ViewBag.ClassBEquip as IEnumerable<SelectListItem>, new { style = "width:138px;" })</td>
+        <td>@Html.LabelFor(m => m.ClassMID)@Html.DropDownListFor(m => m.ClassMID, Enumerable.Empty<SelectListItem>(), new { style = "width:138px;" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.ClassSID)@Html.DropDownListFor(m => m.ClassSID, Enumerable.Empty<SelectListItem>(), new { style = "width:138px;" })</td>
+        <td>@Html.LabelFor(m => m.EquipmentID)@Html.DropDownListFor(m => m.EquipmentID, Enumerable.Empty<SelectListItem>(), new { style = "width:138px;" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Finder)@Html.EditorFor(m => m.Finder)</td>
+        <td>@Html.LabelFor(m => m.FindTime)@Html.EditorFor(m => m.FindTime, "DateTime", new { DefaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.ApplyMan)@Html.EditorFor(m => m.ApplyMan)</td>
+        <td>@Html.LabelFor(m => m.ApplyTime)@Html.EditorFor(m => m.ApplyTime, "DateTime", new { DefaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })</td>
+    </tr>
+    <tr>
+    <td>@Html.LabelFor(m => m.MtDate)@Html.EditorFor(m => m.MtDate, "DateTime", new { DefaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })</td>
+    <td>@Html.LabelFor(m=>m.summoney)@Html.TextBoxFor(m=>m.summoney)</td>
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.TroubleDes)@Html.TextAreaFor(m => m.TroubleDes, 3, 50, new { })</td>   
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.RepairAdv)@Html.TextAreaFor(m => m.RepairAdv, 3, 50, new { })</td>   
+    </tr>
+</table>
+
+}
+</div>

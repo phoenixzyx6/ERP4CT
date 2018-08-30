@@ -1,0 +1,35 @@
+﻿@model ZLERP.Model.CarTrafficPoliceFine 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/CarTrafficPoliceFine/CarTrafficPoliceFine.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            IndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr>
+        <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })</td>   
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarList, new { style = "width:140px;" })</td> 
+        <td>@Html.LabelFor(m => m.UserID)@Html.AutoComplete("UserID", "TrueName", "Combo", "Users", "ID", "TrueName", "", new { style = "width:97px" })</td>    
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.OccurrenceTime)@Html.EditorFor(m => m.OccurrenceTime, "DateTimeWithTime")</td>
+        <td>@Html.LabelFor(m => m.FineAmount)@Html.EditorFor(m => m.FineAmount)</td>
+    </tr>
+    <tr>
+        <td colspan="2">@Html.LabelFor(m => m.Describe)@Html.TextAreaFor(m => m.Describe, 3, 53, new { })</td>   
+    </tr>
+    <tr>
+        <td colspan="2">@Html.LabelFor(m => m.Meno)@Html.TextAreaFor(m => m.Meno, 2, 53, new { })</td>   
+    </tr>
+
+</table>
+}
+</div>

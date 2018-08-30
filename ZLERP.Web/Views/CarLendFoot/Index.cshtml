@@ -1,0 +1,74 @@
+﻿@model ZLERP.Model.ViewModels.CarLendFootAndItems 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/CarLendFoot/CarLendFoot.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            carlendfootIndexInit('@Url.Action("Find", "CarLendFoot")', '@Url.Action("Find", "CarLendItem")');
+        });
+</script>
+}
+<div id="MyJqGrid" style="float: left; width: 45%">
+</div>
+<div id="RightDiv"  style="float: right; width: 54%">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td  style="display: none;">@Html.LabelFor(m => m.CarLendFoot.ID)@Html.EditorFor(m => m.CarLendFoot.ID)</td>
+ 
+        <td style="display: none;">@Html.LabelFor(m => m.CarLendFoot.CarLendItemID)@Html.EditorFor(m => m.CarLendFoot.CarLendItemID)</td>
+   
+    </tr>
+    <tr> 
+		<td>@Html.LabelFor(m=>m.CarLendFoot.UserID)@Html.AutoComplete("CarLendFoot.UserID", "TrueName", "Combo", "User", "ID", "TrueName", string.Format("UserType='{0}' or UserType='{1}'", UserType.Driver, UserType.MixerDriver))</td>
+        <td>@Html.LabelFor(m => m.CarLendFoot.TranTimes)@Html.EditorFor(m => m.CarLendFoot.TranTimes)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.CarLendFoot.TranCube)@Html.EditorFor(m => m.CarLendFoot.TranCube)</td>
+         <td  style="display: none;">@Html.TextBox("CarLendFoot.LendPrice")</td>
+ 
+        <td>@Html.LabelFor(m => m.CarLendFoot.TotalPrice)@Html.EditorFor(m => m.CarLendFoot.TotalPrice)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.CarLendFoot.TranPlace)@Html.EditorFor(m => m.CarLendFoot.TranPlace)</td>
+ 
+        <td>@Html.LabelFor(m => m.CarLendFoot.OilNum)@Html.EditorFor(m => m.CarLendFoot.OilNum)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.CarLendFoot.OilPrice)@Html.EditorFor(m => m.CarLendFoot.OilPrice)</td>
+ 
+        <td>@Html.LabelFor(m => m.CarLendFoot.OilTotalPrice)@Html.EditorFor(m => m.CarLendFoot.OilTotalPrice)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.CarLendFoot.FootTime)@Html.EditorFor(m => m.CarLendFoot.FootTime,"DateTimeWithTime", new{defaultValue=DateTime.Now.ToString("yyyy-MM-dd H:mm:ss")}) </td>
+        <td></td>
+    </tr>
+</table>
+
+}
+</div>
+
+<div id="MyItemFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td  style="display: none;">@Html.LabelFor(m => m.CarLendItem.ID)@Html.EditorFor(m => m.CarLendItem.ID)
+                </td>
+                <td  style="display: none;">@Html.LabelFor(m => m.CarLendItem.CarLendID)@Html.EditorFor(m => m.CarLendItem.CarLendID)
+                </td>
+                <td>@Html.LabelFor(m => m.CarLendItem.CarID)@Html.TextBoxFor(m => m.CarLendItem.CarID ,new {ReadOnly = true})
+                </td>
+                <td>@Html.LabelFor(m => m.CarLendItem.BackTime)@Html.EditorFor(m => m.CarLendItem.BackTime,"DateTimeWithTime", new{defaultValue=DateTime.Now.ToString("yyyy-MM-dd H:mm:ss")})
+                </td>
+            </tr>
+        </table>
+    }
+    <div id="SubDiv"></div>
+</div>

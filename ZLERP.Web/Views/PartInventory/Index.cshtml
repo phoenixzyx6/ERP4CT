@@ -1,0 +1,56 @@
+﻿@model ZLERP.Model.ViewModels.PartInventoryAndDetail
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/PartInventory/PartInventory.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        var options = { storeUrl: '@Url.Action("Find")' ,
+						PartInventoryDetailUrl: '@Url.Action("Find","PartInventoryDetail")'
+		};
+        $(function () {
+            partinventoryIndexInit(options);
+        });
+</script>
+}
+<div id="MyJqGrid"style="float: left; width: 42%"></div>
+<div id="itemGrid" style="float: right; width: 56%"></div>
+
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    @Html.HiddenFor(m => m.PartInventory.ID)
+<table class="mvcform"> 
+    <tr> 
+        
+        <td>@Html.LabelFor(m => m.PartInventory.InventoryMan)@Html.TextBoxFor(m => m.PartInventory.InventoryMan, new { Value = @User.UserName() })</td>
+		<td>@Html.LabelFor(m => m.PartInventory.InventoryDate)@Html.EditorFor(m => m.PartInventory.InventoryDate, new { defaultValue = DateTime.Now.ToString("yyyy-MM-dd") })</td>
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.PartInventory.Remark)@Html.TextAreaFor(m => m.PartInventory.Remark, 1, 50, new { @class = "text" })</td>
+        <td></td>
+    </tr>
+</table>
+}
+</div>
+
+
+<div id="MyDetailFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    @Html.HiddenFor(m => m.PartInventoryDetail.InventoryID)
+    
+<table class="mvcform"> 
+       <tr>
+                <td>
+                    @Html.HiddenFor(m => m.PartInventoryDetail.ID, new { @class = "text" })
+                </td>
+            </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartInventoryDetail.PartID)@Html.DropDownListFor(m => m.PartInventoryDetail.PartID, (IEnumerable<SelectListItem>)ViewBag.PartInfoList, new { style = "width:130px;" })</td>
+        <td>@Html.LabelFor(m => m.PartInventoryDetail.FaceValue)@Html.EditorFor(m => m.PartInventoryDetail.FaceValue)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartInventoryDetail.ActualValue)@Html.EditorFor(m => m.PartInventoryDetail.ActualValue)</td>
+        <td>@Html.LabelFor(m => m.PartInventoryDetail.DiffenceAmount)@Html.EditorFor(m => m.PartInventoryDetail.DiffenceAmount)</td>
+    </tr>
+</table>
+}
+</div>

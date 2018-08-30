@@ -1,0 +1,98 @@
+﻿@model ZLERP.Model.ManualProduce 
+@section HeaderSection{ 
+<script src="@Url.Content("~/Scripts/Views/ManualProduce/ManualProduce.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            manualProduceIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                getDispatchInfoByIDUrl: '@Url.Action("GetDispatchInfoByID")',
+                findSiloUrl: '@Html.Raw(Url.Action("ListData", "Silo", new {textField="SiloName", valueField="ID"}))'
+            });
+        });
+    </script>
+}
+
+<!-- 左边Grid -->
+<div id="MyJqGrid" style="float: left; width: 64%">
+</div>
+
+<!-- 右边Grid -->
+<div id="MyJqGridItems" style="float: right; width: 35%">
+</div>
+
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <table class="mvcform"> 
+    <tr>
+        <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })</td>
+    </tr>
+    <tr>        
+        <td>@Html.LabelFor(m => m.DispatchID)@Html.TextBoxFor(m => m.DispatchID)</td>
+        <td>@Html.LabelFor(m => m.ProductLineID)@Html.DropDownListFor(m => m.ProductLineID, (SelectList)ViewBag.ProductLineList, "", new { @class = "text", style = "width:137px;" })
+            @Html.HiddenFor(m => m.ProductLineName)
+        </td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.TaskID)@Html.TextBoxFor(m => m.TaskID)</td>
+        <td>@Html.LabelFor(m => m.ShipDocID)@Html.TextBoxFor(m => m.ShipDocID)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.ProjectName)@Html.TextBoxFor(m => m.ProjectName)</td>
+        <td>@Html.LabelFor(m => m.ConStrength)@Html.TextBoxFor(m => m.ConStrength)</td>
+    </tr>
+    <tr>        
+        <td>@Html.LabelFor(m => m.CarID)@Html.TextBoxFor(m => m.CarID)</td>
+        <td>@Html.LabelFor(m => m.SendPot)@Html.TextBoxFor(m => m.SendPot)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.SendCube)@Html.TextBoxFor(m => m.SendCube)</td>
+        <td>@Html.LabelFor(m => m.BeginPot)@Html.TextBoxFor(m => m.BeginPot)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.ManualCube)@Html.TextBoxFor(m => m.ManualCube)</td>
+        <td>@Html.LabelFor(m => m.ManualPot)@Html.TextBoxFor(m => m.ManualPot)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.Operator)@Html.TextBoxFor(m => m.Operator)</td>
+        <td>@Html.LabelFor(m => m.ProduceTime)@Html.EditorFor(m => m.ProduceTime, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+    </tr>
+    <tr>
+        <td colspan="2">@Html.LabelFor(m => m.ManualReason)@Html.TextAreaFor(m => m.ManualReason, new { style = "width:342px;" })</td>
+    </tr>
+    <tr>
+        <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, new { style = "width:342px;" })</td>
+    </tr>
+
+    </table> 
+}
+</div>
+
+<div id="MyFormDivItems" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <table class="mvcform"> 
+    <tr>
+        <td>@Html.Hidden("ID")</td>
+    </tr>
+    <tr>        
+        <td>@Html.Label("材料")@Html.DropDownList("StuffID", (IEnumerable<SelectListItem>)ViewBag.StuffList, "", null)</td>
+       
+        <td style="display: none">@Html.Hidden("ManualProductID")</td>
+    </tr>
+    <tr>
+        <td>@Html.Label("筒仓")@Html.DropDownList("SiloID", Enumerable.Empty<SelectListItem>())
+        </td> 
+    </tr>
+    <tr>
+        <td>@Html.Label("数量")@Html.TextBox("ActualAmount","0")<span>(千克)</span>
+        </td>
+
+    </tr>
+     
+
+    </table> 
+}
+</div>

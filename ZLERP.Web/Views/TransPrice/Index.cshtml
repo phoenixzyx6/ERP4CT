@@ -1,0 +1,44 @@
+﻿@model ZLERP.Model.TransPrice 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/TransPrice/TransPrice.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            transpriceIndexInit({transportStoreUrl:'@Url.Action("Find","SupplyInfo")', transPriceStoreUrl: '@Url.Action("Find")' });
+        });
+</script>
+}
+<div id="TransportGrid" style="float:left; width:40%"></div>
+<div id="TransPriceGrid" style="float:right; width:58%">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+       　
+        <td>@*@Html.LabelFor(m => m.SupplyID)@Html.DropDownListFor(m => m.SupplyID, (IEnumerable<SelectListItem>)ViewBag.Supplies, new { Style="width:137px;"})*@
+        @Html.LabelFor(m => m.SupplyID)@Html.AutoComplete("SupplyID", "SupplyName", "ComboByKey", "SupplyInfo", "ID","ShortName", "SupplyName","supplykind in ('Su1','Su5') and IsUsed =1 ",null)
+        @Html.TextBoxFor(m => m.ID, new { style = "display:none" })
+        @Html.TextBoxFor(m => m.TransportID, new { style = "display:none" })
+
+        </td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PriceDate)@Html.EditorFor(m => m.PriceDate, "DateTime", new { defaultValue = DateTime.Today.ToString("yyyy-MM-dd") })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.UnitPrice)@Html.EditorFor(m => m.UnitPrice)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.CalcType)@Html.DicEditorFor(m => m.CalcType, DicEnum.TransPriceMethod)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Remark)@Html.EditorFor(m => m.Remark)</td>
+    </tr>
+</table>
+
+}
+</div>

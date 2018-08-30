@@ -1,0 +1,62 @@
+﻿@model ZLERP.Model.Training 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/xheditor-1.1.13-zh-cn.min.js")" type="text/javascript" language="javascript"></script>
+<script src="@Url.Content("~/Scripts/Views/Training/Training.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            trainingIndexInit({storeUrl:'@Url.Action("Find")'});
+        });
+</script>
+<script id="tmplDetail" type="text/x-jquery-tmpl">
+<h2 style="text-align:center; padding:.5em 0"> ${TrainName}</h2>
+   <div style="line-height:1.7em">
+           <div><span style="color:red;">培训日期：</span><span>{{html TrainDate}}</span></div>
+           <div><span style="color:red;">培训内容：</span><div style="height:170px;overflow:auto;padding-left:25px;border:1px dashed black">{{html TrainContent}}</div></div>
+           <div><div style="color:red;padding-top:3px;float:left;">授课讲师：</div><div style="text-align:right;text-align:left;padding-top:3px;">{{html TrainTeacher}}</div></div>
+   </div>
+        <div style="text-align:right;">
+            <div style="float:left"></div>
+            <div style="float:right">
+            <div style="color:black;text-align:left;">发布人：${Builder}</div>
+            <div style="color:black;text-align:left;">发布时间：${BuildTime}</div>
+            </div>
+        </div>
+</script>
+}
+<div id="TrainingGrid"></div>
+<div id="TrainingForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm("", "", FormMethod.Post, new { encrypt = "multipart/form-data" }))
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td colspan="2">@Html.TextBoxFor(m => m.ID, new { @class = "text", style = "display:none;" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.TrainName)@Html.EditorFor(m => m.TrainName)</td>
+ 
+        <td>@Html.LabelFor(m => m.TrainDate)@Html.EditorFor(m => m.TrainDate)</td>
+   
+    </tr>
+    <tr> 
+        <td valign="top" colspan="2">@Html.LabelFor(m => m.TrainContent)@Html.TextAreaFor(m => m.TrainContent, new { @zlerp = "xheditor", style = "width:352px;; height:200px;" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.TrainCost)@Html.EditorFor(m => m.TrainCost)</td>
+ 
+        <td>@Html.LabelFor(m => m.TrainTeacher)@Html.EditorFor(m => m.TrainTeacher)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Plans)@Html.EditorFor(m => m.Plans)</td>
+ 
+        <td>@Html.LabelFor(m => m.Infact)@Html.EditorFor(m => m.Infact)</td>
+   
+    </tr>
+    <tr> 
+        <td valign="top" colspan="2"><span style="vertical-align:top; text-align:right; margin-right:5px; display:inline-block; width:6em;">备注</span>@Html.TextAreaFor(m => m.Remark, 3, 53, new { @class = "text" })</td>
+    </tr>
+</table>
+}
+</div>
+<div id="dialogDetail"></div>

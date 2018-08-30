@@ -1,0 +1,147 @@
+﻿@model ZLERP.Model.ViewModels.CheckAndItems
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/CheckInfo.js")" type="text/javascript" language="javascript"> </script>
+<script type="text/javascript">
+    $(function () {
+        var checkItemUrl = '@Url.Action("Find", "CheckItem")';
+        var getSiloUrl = '@Url.Action("Get","Silo")';
+        var FindSiloUrl = '@Url.Action("ListData","Silo")';
+        var limitTimeUrl = '@Url.Action("ReadTimeLimit","CheckInfo")';
+        var FindSiloUrl2 = '@Url.Action("Find","Silo")';
+        checkInfoIndexInit('@Url.Action("Find", "CheckInfo")', checkItemUrl, checkItemUrl, getSiloUrl, FindSiloUrl, limitTimeUrl, FindSiloUrl2);
+    });
+</script>
+<style type="text/css">
+        fieldset
+        {
+            padding: 1px;
+            margin: 1px;
+            width: 100%;
+            color: #333;
+            border: #06c dashed 1px;
+        }
+        legend
+        {
+            color: #1D5987;
+            
+            font-weight: bold;
+            background: #fff;
+            border: #b6b6b6 solid 1px;
+            padding: 3px 6px;
+        }
+    </style>
+}
+
+@*增加-盘点*@
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.check.ID)@Html.EditorFor(m => m.check.ID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.HiddenFor(m => m.check.Checker)
+                </td>
+                <td>@Html.LabelFor(m => m.check.CheckTime)@Html.EditorFor(m => m.check.CheckTime, new { defaultValue=DateTime.Now.ToString("yyyy-MM-dd")})
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.check.Remark)@Html.TextAreaFor(m => m.check.Remark,new { id = "edit_Remark"})
+                </td>
+            </tr>
+        </table>
+        <table class="subgridform">
+            <tr>
+                <td>
+                    <div id="SubGridDiv">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*单个筒仓盘点界面*@
+<div id="MyItemFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.checkitem.ID)@Html.EditorFor(m => m.checkitem.ID)
+                </td>
+            </tr>
+            <tr>
+                <td colspan = "2">@Html.LabelFor(m => m.checkitem.CheckID)@Html.EditorFor(m => m.checkitem.CheckID)</td>
+            </tr>
+             <tr>
+                <td>@Html.Label("生产线")@Html.DropDownList("ProductLine", (IEnumerable<SelectListItem>)ViewBag.ProductLineInfo)
+                </td>
+                <td>@Html.Label("筒仓名称")@Html.fixedDropDownListFor(m => m.checkitem.SiloID, Enumerable.Empty<SelectListItem>())
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("账面值(T)")@Html.TextBox("SystemValue_T",0)
+                </td>
+                <td>@Html.Label("盘点值(T)")@Html.TextBox("FactValue_T", 0)
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.checkitem.SystemValue)@Html.TextBoxFor(m => m.checkitem.SystemValue, new { Value = 0 })
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.checkitem.FactValue)@Html.TextBoxFor(m => m.checkitem.FactValue, new { Value = 0 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("盘盈(损)值(T)")@Html.TextBox("ProfitAndLoss_T",0)
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.checkitem.ProfitAndLoss)@Html.TextBoxFor(m => m.checkitem.ProfitAndLoss, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.checkitem.Reason)@Html.EditorFor(m => m.checkitem.Reason)
+                </td>
+            </tr>
+            
+            <tr> 
+                <td  style="display: none">
+                @Html.LabelFor(m => m.checkitem.IsAuditor)@Html.EditorFor(m => m.checkitem.IsAuditor)
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+<div id="AuditingFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td  style="display: none">@Html.LabelFor(m => m.checkitem.ID)@Html.TextBoxFor(m => m.checkitem.ID, new { readOnly = true })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.checkitem.SiloName)@Html.TextBoxFor(m => m.checkitem.SiloName, new { readOnly = true })
+                </td>
+            </tr>
+            <tr>
+                <td  style="display: none">@Html.LabelFor(m => m.checkitem.FactValue)@Html.TextBoxFor(m => m.checkitem.FactValue)
+                </td>
+                <td>@Html.Label("盘点值")@Html.TextBox("checkitem_FactValue_T", "", new { readOnly = true })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.checkitem.AuditStatus)@Html.DicEditorFor(m => m.checkitem.AuditStatus, DicEnum.AuditStatus)
+                </td>
+            </tr>
+
+        </table>
+    }
+</div>
+
+
+<div id="CheckGriddiv" style="float: left; width: 42%">
+</div>
+
+<!-- 右边Grid -->
+<div id="ItemsGridDiv" style="float: right; width: 56%">
+</div>
+ 
+

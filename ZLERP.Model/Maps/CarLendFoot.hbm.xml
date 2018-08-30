@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.CarLendFoot, ZLERP.Model" table="CarLendFoot" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="CarLendFoot">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+    <many-to-one name="Driver" column="Driver" class="User" update="false" insert="false"/>
+    <property name="UserID" column="Driver" />
+		<property name="TranTimes" column="TranTimes" />
+		<property name="TranCube" column="TranCube" />
+		<property name="TotalPrice" column="TotalPrice" />
+		<property name="TranPlace" column="TranPlace" />
+		<property name="OilNum" column="OilNum" />
+		<property name="OilPrice" column="OilPrice" />
+		<property name="OilTotalPrice" column="OilTotalPrice" />
+		<property name="FootTime" column="FootTime" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="CarLendItemID" column="CarLendItemID" />
+    <many-to-one name="CarLendItem" column="CarLendItemID" class="CarLendItem" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,17 @@
+﻿@model ZLERP.Model.CarLendItem
+@section HeaderSection{
+<script type="text/javascript">
+    function carlenditemsIndexInit(storeUrl) {
+        
+
+    }
+</script>
+<script src="@Url.Content("~/Scripts/Views/CarLendItems/CarLendItems.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            carlenditemsIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+

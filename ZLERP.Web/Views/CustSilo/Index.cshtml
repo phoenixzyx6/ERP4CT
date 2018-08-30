@@ -1,0 +1,61 @@
+﻿@model ZLERP.Model.CustSilo 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/CustSilo/CustSilo.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            custsiloIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                findSiloUrl: '@Html.Raw(Url.Action("ListData", "Silo", new {textField="SiloName", valueField="ID"}))'
+            });
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>客户库存编号 @Html.EditorFor(m => m.ID)
+                </td>            
+
+                 <td>@Html.LabelFor(m => m.StuffID)@Html.DropDownListFor(m=>m.StuffID, (IEnumerable<SelectListItem>)ViewBag.StuffList,"",null)
+                </td>
+            </tr>
+            <tr>
+                
+                   <td>@Html.LabelFor(m => m.SiloID)@Html.DropDownListFor(m => m.SiloID, Enumerable.Empty<SelectListItem>())
+                </td>
+
+                <td>@Html.LabelFor(m => m.CustomerID)@Html.AutoComplete("CustomerID", "CustName", "Combo", "Customer", "ID", "CustName")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.YearMonth)@Html.EditorFor(m => m.YearMonth, "DateTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM") })
+                </td>
+                <td>@Html.LabelFor(m => m.Inival)@Html.EditorFor(m => m.Inival)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Imval)@Html.EditorFor(m => m.Imval)
+                </td>
+                <td>@Html.LabelFor(m => m.Useval)@Html.EditorFor(m => m.Useval)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Resetval)@Html.EditorFor(m => m.Resetval)
+                </td>
+                <td>@Html.LabelFor(m => m.Val)@Html.EditorFor(m => m.Val)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.UniPrice)@Html.EditorFor(m => m.UniPrice)
+                </td>
+                <td>@Html.LabelFor(m => m.TotalPrice)@Html.EditorFor(m => m.TotalPrice)
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

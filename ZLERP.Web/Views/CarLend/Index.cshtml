@@ -1,0 +1,92 @@
+﻿@model ZLERP.Model.ViewModels.CarLendAndItems 
+@section HeaderSection{
+    <script type="text/javascript">
+    
+    </script>
+    <script src="@Url.Content("~/Scripts/Views/CarLend/CarLend.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            carlendIndexInit('@Url.Action("Find", "CarLend")', '@Url.Action("Find", "CarLendItem")','@Url.Action("AddAllCars", "CarLendItem")');
+			
+        });
+    </script>
+}
+<div id="MyJqGrid" style="float: left; width: 65%">
+</div>
+<div id="MyItemGrid" style="float: right; width: 33%">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>车辆出租编号 @Html.EditorFor(m => m.CarLend.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.CarLend.CustomerID)@Html.AutoComplete("CarLend.CustomerID", "CarLend.CustName", "Combo", "Customer", "ID", "CustName")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarLend.LendTime)@Html.EditorFor(m => m.CarLend.LendTime,"DateTimeWithTime", new{defaultValue=DateTime.Now.ToString("yyyy-MM-dd H:mm:ss")})
+                </td>
+                <td>@Html.LabelFor(m => m.CarLend.LendIner)@Html.EditorFor(m => m.CarLend.LendIner)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarLend.LendOuter)@Html.EditorFor(m => m.CarLend.LendOuter)
+                </td>
+                <td>@Html.LabelFor(m => m.CarLend.ProductDate)@Html.EditorFor(m => m.CarLend.ProductDate)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarLend.ProjectAddr)@Html.EditorFor(m => m.CarLend.ProjectAddr)
+                </td>
+                <td>@Html.LabelFor(m => m.CarLend.ProjectName)@Html.EditorFor(m => m.CarLend.ProjectName)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarLend.ConsPos)@Html.EditorFor(m => m.CarLend.ConsPos)
+                </td>
+                <td>@Html.LabelFor(m => m.CarLend.CurSign)@Html.EditorFor(m => m.CarLend.CurSign)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarLend.LendPrice)@Html.EditorFor(m => m.CarLend.LendPrice)
+                </td>
+                <td>@Html.LabelFor(m => m.CarLend.PriceType)@Html.DicEditorFor(m => m.CarLend.PriceType, DicEnum.Ptype)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarLend.MotorSign)@Html.EditorFor(m => m.CarLend.MotorSign)
+                </td>
+                <td>@Html.LabelFor(m => m.CarLend.MangSign)@Html.EditorFor(m => m.CarLend.MangSign)
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+<div id="MyItemFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display: none;">@Html.LabelFor(m => m.CarLendItem.ID)@Html.EditorFor(m => m.CarLendItem.ID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarLendItem.CarLendID)@Html.EditorFor(m => m.CarLendItem.CarLendID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarLendItem.CarID)@Html.DropDownListFor(m => m.CarLendItem.CarID, (SelectList)ViewBag.CarInfoDics, new { style = "width:140px;" })
+                </td>
+            </tr>
+			
+            <tr>
+                <td style="display: none;">@Html.LabelFor(m => m.CarLendItem.BackTime)@Html.EditorFor(m => m.CarLendItem.BackTime)
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

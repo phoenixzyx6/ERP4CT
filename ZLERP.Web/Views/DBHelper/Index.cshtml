@@ -1,0 +1,41 @@
+﻿@model System.Data.DataTable
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/DBHelper/DBHelper.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            dbHelperInit({
+                tablesInfoUrl: '@Url.Action("GetTablesInfo")',
+                dbfileInfoUrl: '@Url.Action("GetDBFileInfo")',
+                backupDBUrl: '@Url.Action("BackupDB")',
+                listfileUrl: '@Url.Action("ListBackupFiles")'
+            });
+        });
+
+</script>
+<style type="text/css">
+ol li{ list-style-type: decimal; margin-left:10px; line-height:1.8em;}
+</style>
+}
+    <div class="dbhelper">
+    <button type="button" id="btnTablesInfo" class="tbtn ui-icon-calculator" >数据表空间占用</button>
+
+    <button type="button" id="btnBackupDB" class="tbtn ui-icon-suitcase" >备份数据库</button>
+
+    <button type="button" id="btnDownload" class="tbtn ui-icon-circle-arrow-s" >下载备份</button>
+    <div id="dlgTablesInfo" style="display:none;" title="数据表空间占用">
+        <div id="innerTablesInfo" style="width:500px"></div>
+        <h3>数据文件</h3>
+        <div id="innerDBInfo" style="width:500px"></div>
+    </div>
+
+    <div id="dlgBackupFiles" style="display:none;" title="下载备份文件">
+        
+    </div>
+    <div id="dlgBackupOptions" style="display:none;" title="备份选项">
+    <form class="mvcform">
+    <span style="color:Red;">备份名请不要加入日期时间等，系统会自动附加日期时间。</span>
+        <p style="padding:5px;">备份名：<input type="text" name="fileName" /></p>
+        <p style="padding:5px;"><label style="width:auto">压缩备份文件<input type="checkbox" value="true" name="compress" /></label></p>
+    </form>
+    </div>
+    </div>

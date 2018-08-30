@@ -1,0 +1,14 @@
+﻿@model ZLERP.Model.FinalStuffType
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/FinalStuffType/FinalStuffType.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            finalStuffTypeInit({
+                storeUrl: '@Url.Action("Find")',
+                updateUrl: '@Url.Action("Update")'
+            });
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>

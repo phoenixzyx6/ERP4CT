@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.RouteDetail, ZLERP.Model" table="RouteDetail" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="Id">
+		 	<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+    <property name="RouteId" column="RouteId" />
+    <property name="ProjectID" column="ProjectID" />
+		<property name="ShipDocID" column="ShipDocID" />
+		<property name="CarID" column="CarID" />
+		<property name="GPSStatus" column="GPSStatus" />
+		<property name="Latitude" column="Latitude" />
+		<property name="Longtidue" column="Longtidue" />
+		<property name="OriginLatitude" column="OriginLatitude"/>
+		<property name="OriginLongtidue" column="OriginLongtidue" />
+    <property name="LonLatStr" column="LonLatStr" type ="StringClob"/>
+    <property name="Distance" column="Distance">
+      <column name="Distance" sql-type="float"/>
+    </property>
+		<property name="SendTime" column="SendTime" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<many-to-one name="ProjectRoute" column="RouteId" class="ProjectRoute" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,75 @@
+﻿@model ZLERP.Model.CarTimesReward 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/CarTimesReward/CarTimesReward.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            cartimesrewardIndexInit('@Url.Action("Find")');
+        });
+        function setWxz() {
+            $("#EndTimes").val('1000000000');
+        }
+</script>
+}
+
+<!-- 左边Grid -->
+<div id="MyJqGridMain" style="float: left; width: 35%">
+</div>
+
+<!-- 右边Grid -->
+<div id="MyJqGrid" style="float: right; width: 64%">
+</div>
+
+<div id="MyFormDivMain" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+    {@Html.ValidationSummary()
+    <table class="mvcform"> 
+        <tr> 
+            <td >@Html.Hidden("ID")
+           </td>
+        </tr>
+        <tr> 
+            <td>@Html.Label("方案名称")@Html.Editor("Name", "", new { @data_val_required = "方案名称 字段是必需的", data_val = "true" })</td>
+        </tr>
+        @*<tr> 
+            <td>@Html.Label("班次类型")@Html.DicEidtor("DriverClassType", "DriverClassType", DicEnum.DriverClassType)</td>
+        </tr>*@
+        <tr> 
+            <td>@Html.Label("备  注")@Html.TextBox("Meno", "", new { })</td>
+        </tr>
+    </table>
+
+    }
+</div>
+
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+        <table class="mvcform"> 
+        <tr> 
+           <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+           </td>
+        </tr>
+        <tr> 
+            <td>@Html.Label("班次类型")@Html.DicEidtor("DriverClassType", "DriverClassType", DicEnum.DriverClassType)</td>
+        </tr>
+        <tr> 
+            <td>@Html.LabelFor(m => m.StartTimes)@Html.EditorFor(m => m.StartTimes)</td>
+   
+        </tr>
+        <tr> 
+            <td>@Html.LabelFor(m => m.EndTimes)@Html.EditorFor(m => m.EndTimes)</td>
+            <td><a style="color:Red" onclick="setWxz();">无限制</a></td>
+        </tr>
+        <tr> 
+            <td>@Html.LabelFor(m => m.Price)@Html.EditorFor(m => m.Price)</td>
+        </tr>
+        <tr> 
+            <td style="display: none">@Html.LabelFor(m => m.CarTimesRewardMainId)@Html.EditorFor(m => m.CarTimesRewardMainId)</td>
+   
+        </tr>
+    </table>
+
+    }
+</div>

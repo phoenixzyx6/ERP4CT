@@ -1,0 +1,268 @@
+﻿@model ZLERP.Model.SystemMsg 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/jquery.form.js")" type="text/javascript" language="javascript"></script>
+    <script src="@Url.Content("~/Scripts/xheditor-1.1.13-zh-cn.min.js")" type="text/javascript" language="javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-smartMenu-min.js")" type="text/javascript" language="javascript"></script>
+    <script src="@Url.Content("~/Scripts/Views/SystemMsg/SystemMsg.js")" type="text/javascript" language="javascript"> </script>
+    <link href="@Url.Content("~/Content/smartMenu.css")" rel="stylesheet" type="text/css" />
+    <script id="tmplSystemMsg" type="text/x-jquery-tmpl">
+    <div style="text-align:left; float:left;padding:5px 20px 5px 10px ;font-size:18px;font-weight:bold"> ${MsgTitle}</div>
+    <div id="jjxx" style="float:left;text-align:left;padding:5px 0 ;cursor:pointer;color:#449ADC;">精简信息</div>
+    <span class="ui-icon ui-icon-arrowthickstop-1-n" style="display:inline-block; margin-top:6px;">&nbsp;</span>
+    <div id="mailinfo" style="line-height:1.7em; padding-left:15px; clear:both;">
+        <div><span>发件人：</span><span style="color:green;">{{= Sender}}</span></div>
+        <div><span>时&nbsp;&nbsp;&nbsp;&nbsp;间：</span><span attrsendtime>{{= SendTime}}</span></div>
+        <div><span>收件人：</span><span>{{= UserID}}</span></div>
+        {{if HasAttachments == "true"}}<div style="display:-moz-box;height:auto;"><div style="float:left;width:5%">附&nbsp;&nbsp;&nbsp;&nbsp;件：</div><div id="attchdiv" style="float:right; text-align:left;width:95%;line-height:1.7em;">{{html Attachments}}</div></div>{{else}}{{/if}}
+    </div>
+    <hr style="color:#EEF3F9; margin-top:4px;margin-bottom:3px;clear:both;">
+    <div style="text-align:left;padding-left:15px;">
+        <div><span>{{html OperateObj}}</span></div>
+    </div>
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            systemmsgIndexInit({
+                storeUrl: '@Url.Action("GetMyMsg")',
+                cleartrashUrl: '@Url.Action("Cleartrash", "MyMsg")',
+                toreadedUrl: '@Url.Action("toReaded", "MyMsg")',
+                forwardUrl: '@Url.Action("Forward")',
+                linkManUrl: '@Url.Action("Find", "User")',
+                suitcaseUrl: '@Url.Action("GetMySuitCaseMsg")',
+                sendsuitcaseUrl: '@Url.Action("SendSuitCaseMsg")', 
+                currentUserID: '@User.UserID()'
+            });
+            $("#Menu").height($("#MySystemMsgGrid").getTotalHeight() - 7).show();
+            $("#allc").height($("#MySystemMsgGrid").getTotalHeight() + 5);
+            var mark_items = $("div#Menu div").filter(function (index) {
+                return $(this).attr("mark_item");
+            });
+            mark_items.addClass("ui-corner-all ui-helper-clearfix");
+            mark_items.addClass("mark_item");
+            //mark_items.first().addClass("ui-widget-header").attr("current",true);
+
+            $("#otherFolder").toggle(
+                function () {
+                    $("#otherFolderItems").show();
+                    $(this).children().first().toggleClass('ui-icon-triangle-1-s');
+                },
+                function () {
+                    $("#otherFolderItems").hide();
+                    $(this).children().first().toggleClass('ui-icon-triangle-1-s');
+                }
+            );
+
+            //清空已删除按钮绑定事件
+            $("#cleartrash").bind({
+                mouseover: function (e) {
+                    $(this).children().first().toggleClass('ui-icon');
+                }, mouseout: function (e) {
+                    $(this).children().first().toggleClass('ui-icon');
+                }, click: function (e) {
+                    handleCleartrash(); //清除已删除的数据
+                    return false; //取消默认的行为并阻止事件起泡
+                }
+            })
+            //选项绑定事件
+            $.each(mark_items, function (i, n) {
+                //$(n).unbind("mouseover");
+                $(n).bind({
+                    mouseover: function () {
+                        if ($(this).attr("current")) { return; }
+                        $(this).toggleClass('ui-widget-header');
+                    }
+                    , mouseout: function () {
+                        if ($(this).attr("current")) { return; }
+                        $(this).toggleClass('ui-widget-header');
+                    }
+                    , click: function (event) {
+                        //1、先改变样式
+                        if ($(this).attr("current")) {
+                            event.preventDefault();
+                        } else {
+                            mark_items.removeAttr("current").removeClass("ui-widget-header");
+                            $(this).attr("current", true).addClass("ui-widget-header");
+                        }
+                        //2、执行对应的功能函数
+                        extraCallback($(this).attr("callback"));
+                    }
+                });
+            });
+            $("#xloading").dialog({
+                title: '上传附件',
+                autoOpen: false,
+                minHeight: 30,
+                height: 'auto',
+                width: 'auto',
+                resizable: false, //不允许改变窗口大小
+                //draggable: false, //不允许移动
+                modal: true, //模态化窗口
+
+                open: function () {
+                    //$(this)[0].previousElementSibling.remove();//去掉标题
+                }
+            });
+        });
+    </script>
+    <script language="javascript" type="text/javascript">
+        var File = {
+            num: 1, count: 0, name: 'file', status: 'filelist', form: 'WriteMsgForm', urls: {}
+            , add: function (file) {
+                //判断附件是否为可传类型
+                var allowExt = gSysConfig.UploadFileTypes; //系统中设置的可传文件类型
+                var fileExt = /\.[^\.]+$/.exec(file.value);
+                if ($.inArray(fileExt.toString(), allowExt.split(",")) == -1) {
+                    $("#xloading").text("文件类型错误，可允许上传的文件类型为:" + allowExt);
+                    $("#xloading").dialog("open");
+                    return false;
+                }
+                //添加附件
+                if (this.urls[file.value]) {
+                    $("#xloading").html("文件【" + file.value + "】已存在，请重新选择");
+                    $("#xloading").dialog("open");
+                    return false;
+                }
+                var a = file.parentNode;
+                var status = $("#" + this.status);
+                this.urls[file.value] = 1;
+                $(file).appendTo("#" + this.form).end();
+
+                if (/Firefox/.test(window.navigator.userAgent)) {
+                    //这里一定要加，否则在FF中会出错
+                    var b = a, a = a.cloneNode(true);
+                    b.parentNode.replaceChild(a, b);
+                    b = null;
+                }
+                file.style.display = 'none';
+                $(file).removeAttr("current");
+                $("#filecontrl").html('<input id="' + this.name + (this.num + 1) + '" name="' + this.name + (this.num + 1) + '" onchange="File.add(this)" type="file"  current="true"\/>')
+                $("#filelisttr").fadeIn("fast");
+                status.append(' <span style="display: block; height: 16px; padding-left:17px; background: url(/Content/themes/default/images/fj.gif) repeat-y scroll 0px 1px transparent; "><span>' + (/[^\\]+$/.exec(file.value) || '') + '</span><span  style="color:red;cursor:pointer;" title="删除此附件" onclick="File.del(this, ' + this.num + ')"> ✘<\/span>&nbsp;<\/span>');
+                this.count++, this.num++, a = file = null;
+                if (this.count > 0) {
+                    $("a#addfile").text("继续添加");
+                }
+            }
+
+            , del: function (span, num) {
+                //删除附件
+                var file = document.getElementById(this.name + num);
+                delete this.urls[file.value];
+
+                document.getElementById(this.form).removeChild(file);
+                span.parentNode.parentNode.removeChild(span.parentNode);
+                this.count--, span = num = null;
+                if (this.count == 0) {
+                    this.urls = {};
+                    $("#filelisttr").hide();
+                    $("a#addfile").text("添加附件");
+                }
+            }
+
+        };
+    </script>
+}
+<div id="buttonToolbar">
+</div>
+<div id="allc" class="ui-jqgrid ui-widget  ui-corner-all" style="background-color: #A6C9E2;
+    background-attachment: fixed; background-image: url('/Content/erpimage/BG.png');
+    background-position: center center; background-repeat: no-repeat; padding: 0 3px 0 3px;
+    width: 100%; margin-top: 1px;">
+    <div style="float: left; width: 11.92%;">
+        <div class="grid-toolbar MySystemMsgGrid-toolbar">
+        </div>
+        <div id="Menu" class="ui-jqgrid ui-widget ui-widget-content ui-corner-all" style="display: none;">
+            <div id="SubMenu" style="display: block;">
+                <div id="MenuHead" class="ui-jqgrid-titlebar ui-corner-top ui-helper-clearfix " style="margin: 3px 5px 1px 5px;
+                    height: 25px; line-height: 25px; background-color: #D0E5F5">
+                    <span style="float: left;"></span><span class="ui-button-text" style="font-weight: normal;">
+                        消息系统V3.2.3正式版</span></div>
+                <div mark_item="1" callback="UnReadMsg">
+                    <span class='ui-button-icon-primary ui-icon-red ui-icon-mail-closed' style="float: left;
+                        margin-top: 4px;"></span><span class="ui-button-text">未读消息<span id="unreadcount">（<font
+                            color="red">@ViewBag.TotalMsg.Count</font>）</span></span></div>
+                <div mark_item="1" callback="ReadedMsg">
+                    <span class='ui-button-icon-primary ui-icon ui-icon-mail-open' style="float: left;
+                        margin-top: 5px;"></span><span class="ui-button-text">已读消息</span></div>
+                <div mark_item="1" callback="SendedMsg">
+                    <span class='ui-button-icon-primary ui-icon ui-icon-bookmark' style="float: left;
+                        margin-top: 5px;"></span><span class="ui-button-text">已发送</span></div>
+                <div mark_item="1" callback="suitcaseMsg">
+                    <span class='ui-button-icon-primary ui-icon ui-icon-suitcase' style="float: left;
+                        margin-top: 4px;"></span><span class="ui-button-text">草稿箱</span></div>
+                <div mark_item="1" id="trash" callback="trashMsg">
+                    <span class='ui-button-icon-primary ui-icon ui-icon-arrowreturnthick-1-s' style="float: left;
+                        margin-top: 5px;"></span><span class="ui-button-text">已删除</span><span style="float: right;"
+                            id="cleartrash"><span class="ui-icon-gray ui-icon-trash" style="float: left; margin-top: 4px;"></span></span></div>
+            </div>
+            <div id="otherMenu1">
+                <div id="otherFolder" class="ui-jqgrid-titlebar ui-corner-all ui-helper-clearfix "
+                    style="margin: 3px 5px 1px 5px; cursor: pointer; height: 20px; line-height: 20px;
+                    background-color: #D0E5F5">
+                    <span class="ui-icon ui-icon-triangle-1-e" style="float: left; margin-top: 1px;">
+                    </span>其他文件夹
+                </div>
+                <div id="otherFolderItems" style="display: none;">
+                    <div mark_item="1" id="myfiles" callback="myFiles">
+                        <span class='ui-icon-document ui-icon ' style="float: left; margin-top: 4px; width: 16px;
+                            height: 16px;"></span><span class="ui-button-text">我的附件夹</span></div>
+                    @*<div mark_item="1">
+                        Folder2</div>
+                    <div mark_item="1">
+                        Folder3</div>
+                    <div mark_item="1">
+                        Folder4</div>*@
+                </div>
+            </div>
+            @*<div id="otherMenu2">
+                <div id="otherFolder2" class="ui-jqgrid-titlebar ui-corner-all ui-helper-clearfix "
+                    style="margin: 3px 5px 1px 5px; cursor: pointer; height: 20px; line-height: 20px;
+                    background-color: #D0E5F5">
+                    <span class="ui-icon ui-icon-triangle-1-s" style="float: left; margin-top: 2px;">
+                    </span>其他文件夹2
+                </div>
+                <div id="otherFolderItems2">
+                    <div mark_item="1">
+                        Folder5</div>
+                    <div mark_item="1">
+                        Folder6</div>
+                    <div mark_item="1">
+                        Folder7</div>
+                    <div mark_item="1">
+                        Folder8</div>
+                </div>
+            </div>*@
+        </div>
+    </div>
+    <div id="MySystemMsgGrid" style="float: right; z-index: 100; width: 88%;">
+        <div id="suitcaseGrid" style="float: right; z-index: 1000; position: absolute; display: none;
+            width: 88%;">
+        </div>
+    </div>
+    <div id="myfilesFolderParent" style="display: none; float: right; width: 88%; height: auto;">
+        <div id="myfilesFolder-toolbar" class="grid-toolbar">
+        </div>
+        <div id="myfilesFolder" class="ui-jqgrid ui-widget ui-widget-content ui-corner-all"
+            style="width: 99.8%;">
+            <div id="myfilesFolderC" class="ui-jqgrid-view" style="width: 100%;">
+                <div class="ui-jqgrid-titlebar ui-widget-header ui-corner-top ui-helper-clearfix">
+                    <span class="ui-jqgrid-title">我的附件夹－(默认为收件箱中的附件)</span></div>
+                <div id="searchbox" style=" height:30px; line-height:30px; padding-left:15px;"><input name="keywords" id="keywords" style=" width:150px; border:1px solid #CCC; height:20px; line-height:20px; vertical-align:middle" />&nbsp;&nbsp;@Html.DropDownList("searchrange", new List<SelectListItem> { new SelectListItem { Text = "=请选择=", Value = "-9", Selected = true }, new SelectListItem { Text = "=收件箱=", Value = "0" }, new SelectListItem { Text = "=发件箱=", Value = "1" } }, new { style = "width:83px;height:22px;line-height:22px;vertical-align:middle;font-size:14px;border:1px solid #CCC;" }) <input type="submit" style="vertical-align:middle; text-align:center; width:40px; height:22px; line-height:22px; border:1px solid #CCC;" value="搜索" /><i style=" vertical-align:middle; display:inline-block; height:100%; width:0; overflow:hidden;" ></i></div>
+                <div id="myfilescontent" style=" overflow-x:hidden; overflow-y:auto;">
+                    <div id="load_myfilescontent-datagrid" class="loading ui-state-default ui-state-active" style="display: none;">读取中...</div>
+                </div>
+                <div id="bottomtoolbar" class="ui-corner-bottom" style=" background-color:#DDECF7; bottom:0; width:100%; height:26px; position:absolute;"><button id="batchDownload" style="margin-left:10px;">批量下载</button><span id="filesinfo" style=" display:none;">你选择了 <span id="filecounts">6</span> 个附件，共 <span id="allfilesize"></span></span></span></span></div>
+            </div>
+        </div>
+    </div>
+    <div id="userlistgrid" style="float: right; width: 132px; display: none;">
+        <div style="background: #D4E7F5; width: 130px; height: 22px; line-height: 22px; border: 1px solid #A6C9E2;
+            border-bottom: none">
+            联系人列表｜<a href="javascript:selectAll()" style="text-decoration: none; color: Green;">全选/反选</a></div>
+    </div>
+</div>
+<div id="xloading" style="display: none;">
+</div>
+<div id="msgDataCache"></div>
+<div id="msgDialogDetail">
+</div>

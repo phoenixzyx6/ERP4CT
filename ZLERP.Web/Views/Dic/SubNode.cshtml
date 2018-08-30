@@ -1,0 +1,34 @@
+﻿@model ZLERP.Model.Dic 
+@section HeaderSection{
+
+<script src="@Url.Content("~/Scripts/Views/Dic/SubNode.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        var options = {
+            storeUrl: '@Url.Action("Find")'
+            , ParentID: '@ViewBag.ParentID'
+        };
+        $(function () {
+            dicIndexInit(options);
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    @Html.HiddenFor(m => m.ParentID)
+    @Html.HiddenFor(m => m.ID)
+    @Html.HiddenFor(m => m.IsLeaf, new { value=true})
+<table class="mvcform"> 
+    <tr> 
+       <td>@Html.Label("名称")</td> <td>@Html.EditorFor(m => m.DicName)</td>
+    </tr>
+    <tr> 
+        <td>@Html.Label("编号")</td> <td> @Html.TextBoxFor(m => m.TreeCode, new { @data_val_required = "编号 字段是必需的" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.Label("描述")</td> <td> @Html.EditorFor(m => m.Des)</td>
+    </tr>
+</table>
+}
+</div>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Purchase, ZLERP.Model" table="Purchase" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" >
+		<id name="ID" column="Purchase_ID">
+		 	<generator class="native" />
+		</id>
+    <many-to-one name="PurchaseMain" column="Main_ID" class="PurchaseMain" insert="false" update="false" />
+    <bag name="PurchaseContracts" lazy="true" batch-size="30" inverse="true" >
+      <key column="Purchase_ID"></key>
+      <one-to-many class="PurchaseContract"></one-to-many>
+    </bag>
+    <property name="Purchase_Num" column="Purchase_Num" />
+    <property name="Purchase_Num1" column="Purchase_Num1" />
+		<property name="GoodsID" column="GoodsID" />
+		<property name="GoodsName" column="GoodsName" />
+		<property name="Purchase_Price" column="Purchase_Price" />
+		<property name="Purchase_Money" column="Purchase_Money" />
+		<property name="Purchase_ManTel" column="Purchase_ManTel" />
+		<property name="Purchase_Man" column="Purchase_Man" />
+		<property name="Purchase_Date" column="Purchase_Date" />
+		<property name="Purchase_StickMoney" column="Purchase_StickMoney" />
+		<property name="Purchase_NoMoney" column="Purchase_NoMoney" />
+		<property name="Purchase_StickNo" column="Purchase_StickNo" />
+    <property name="Purchase_State" column="Purchase_State" />
+		<property name="Remark" column="Remark" />
+    <property name="Main_ID" column="Main_ID"/>
+    
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    
+	</class>
+</hibernate-mapping>

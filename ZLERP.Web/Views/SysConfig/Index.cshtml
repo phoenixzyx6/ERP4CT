@@ -1,0 +1,285 @@
+﻿@model ZLERP.Model.SysConfig　
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/SysConfig.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            sysConfigInit({
+                storeUrl: '@Url.Action("Find")',
+                updateUrl: '@Url.Action("Update")'
+            });
+            var $tabs = $("#tabs").show().tabs();
+            $("#bb").show();
+            $("#tabs input").bind("change", function () {
+                var name = this.name;
+                var val = this.type == "checkbox" ? this.checked : this.value;
+                if (val.toString().length == 0) { showError("内容不能为空，请重新输入"); return; }
+                ajaxRequest('@Url.Action("UpdateByName")', { configName: name, value: val }, true, function () {
+                });
+            });
+        });
+    </script>
+}
+@*<div id="grid" style="display: none;">
+</div>*@
+<div id="tabs" style="display:none;">
+    <ul>
+        <li><a href="#tabs-setsys">系统配置</a></li>
+        <li><a href="#tabs-setuser">业务配置</a></li>
+       @if (ViewBag.GpsFuncEnabled)
+       {
+        <li><a href="#tabs-setGPS">GPS配置</a></li>
+       }
+        <li><a href="#tabs-other">其他</a></li>
+    </ul>
+    <div id="tabs-setsys">
+        <table class="mvcform paddingStyle" style="margin: 3px; width: auto">
+            <tr>
+                <th style="width: 50px">
+                    序号
+                </th>
+                <th style="width: 200">
+                    名称
+                </th>
+                <th style="width: 200px">
+                    当前值
+                </th>
+                <th style="width: 400px">
+                    备注
+                </th>
+                <th style="width: 50px">
+                    类型
+                </th>
+            </tr>
+            @foreach (ZLERP.Model.SysConfig s in ViewBag.SysConfigs)
+            {
+                if (s.ConfigType == "setSys")
+                {
+                <tr>
+                    <td>
+                        @s.ID
+                    </td>
+                    <td>
+                        @s.ConfigInfo
+                    </td>
+                    <td>
+                        @if (@s.DateType == "bool")
+                        {
+                            @Html.CheckBox(@s.ConfigName, @s.ConfigValue == "true" ? true : false, null)     
+                        }
+                        else
+                        {
+                            @Html.TextBox(@s.ConfigName, @s.ConfigValue, new { style = "width:180px" })
+                        }
+                    </td>
+                    <td>
+                        @s.Remark
+                    </td>
+                    <td>
+                        @s.DateType
+                    </td>
+                </tr>
+                }
+            }
+        </table>
+    </div>
+    <div id="tabs-setuser">
+        <table class="mvcform paddingStyle" style="margin: 3px; width: auto">
+            <tr>
+                <th style="width: 50px">
+                    序号
+                </th>
+                <th style="width: 200">
+                    名称
+                </th>
+                <th style="width: 200px">
+                    当前值
+                </th>
+                <th style="width: 400px">
+                    备注
+                </th>
+                <th style="width: 50px">
+                    类型
+                </th>
+                <th style="width: 50px">
+                    类别
+                </th>
+            </tr>
+            @foreach (ZLERP.Model.SysConfig s in ViewBag.SysConfigs)
+            {
+                if (s.ConfigType == "setUser")
+                {
+                <tr>
+                    <td>
+                        @s.ID
+                    </td>
+                    <td>
+                        @s.ConfigInfo
+                    </td>
+                    <td>
+                        @if (@s.DateType == "bool")
+                        {
+                            @Html.CheckBox(@s.ConfigName, @s.ConfigValue == "true" ? true : false, null)     
+                        }
+                        else
+                        {
+                            @Html.TextBox(@s.ConfigName, @s.ConfigValue, new { style = "width:180px" })
+                        }
+                    </td>
+                    <td>
+                        @s.Remark @*@Html.TextBox(@s.Remark, @s.Remark ==null ? "" : @s.Remark, new { style = "width:180px" })*@
+                    </td>
+                    <td>
+                        @s.DateType
+                    </td>
+                    
+                </tr>
+                }
+            }
+        </table>
+    </div>
+     @if (ViewBag.GpsFuncEnabled)
+     {
+    <div id="tabs-setGPS">
+        <table class="mvcform paddingStyle" style="margin: 3px; width: auto">
+            <tr>
+                <th style="width: 50px">
+                    序号
+                </th>
+                <th style="width: 200">
+                    名称
+                </th>
+                <th style="width: 200px">
+                    当前值
+                </th>
+                <th style="width: 400px">
+                    备注
+                </th>
+                <th style="width: 50px">
+                    类型
+                </th>
+            </tr>
+            @foreach (ZLERP.Model.SysConfig s in ViewBag.SysConfigs)
+            {
+                if (s.ConfigType == "setGPS")
+                {
+                <tr>
+                    <td>
+                        @s.ID
+                    </td>
+                    <td>
+                        @s.ConfigInfo
+                    </td>
+                    <td>
+                        @if (@s.DateType == "bool")
+                        {
+                            @Html.CheckBox(@s.ConfigName, @s.ConfigValue == "true" ? true : false, null)     
+                        }
+                        else
+                        {
+                            @Html.TextBox(@s.ConfigName, @s.ConfigValue, new { style = "width:180px" })
+                        }
+                    </td>
+                    <td>
+                        @s.Remark
+                    </td>
+                    <td>
+                        @s.DateType
+                    </td>
+                </tr>
+                }
+            }
+        </table>
+    </div>
+     }
+    <div id="tabs-other">
+        <table class="mvcform paddingStyle" style="margin: 3px; width: auto">
+            <tr>
+                <th style="width: 50px">
+                    序号
+                </th>
+                <th style="width: 200">
+                    名称
+                </th>
+                <th style="width: 200px">
+                    当前值
+                </th>
+                <th style="width: 400px">
+                    备注
+                </th>
+                <th style="width: 50px">
+                    类型
+                </th>
+                <th style="width: 50px">
+                    类别
+                </th>
+            </tr>
+            @foreach (ZLERP.Model.SysConfig s in ViewBag.SysConfigs)
+            {
+                if (s.ConfigType != "setUser" && s.ConfigType != "setSys" && s.ConfigType != "setGPS")
+                {
+                <tr>
+                    <td>
+                        @s.ID
+                    </td>
+                    <td>
+                        @s.ConfigInfo
+                    </td>
+                    <td>
+                        @if (@s.DateType == "bool")
+                        {
+                            @Html.CheckBox(@s.ConfigName, @s.ConfigValue == "true" ? true : false, null)     
+                        }
+                        else
+                        {
+                            @Html.TextBox(@s.ConfigName, @s.ConfigValue, new { style = "width:180px" })
+                        }
+                    </td>
+                    <td>
+                        @s.Remark
+                    </td>
+                    <td>
+                        @s.DateType
+                    </td>
+                    <td>
+                        @s.ConfigType
+                    </td>
+                </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+<button id="bb" class="tbtn save" title="新增" role="button" aria-disabled="false"
+    type="button" onclick="handleAddSys();return false;" style="display:none;">
+    新增</button>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {
+     
+        <table class="mvcform">
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => m.ID)
+                    @Html.LabelFor(m => m.ConfigName)@Html.TextBoxFor(m => m.ConfigName, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.ConfigInfo)@Html.TextBoxFor(m => m.ConfigInfo, new { @class = "text" })
+                </td>                
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ConfigValue)@Html.TextBoxFor(m => m.ConfigValue, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.ConfigType)@Html.DicEditorFor(m => m.ConfigType, DicEnum.SetClass,"","")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.DateType)@Html.DicEditorFor(m => m.DateType, DicEnum.DataType)
+                </td>
+                
+            </tr>
+            <tr>
+            <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, new { @class = "text" })
+                </td>
+            </tr>
+        </table> 
+    }
+</div>

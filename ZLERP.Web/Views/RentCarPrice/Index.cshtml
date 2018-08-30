@@ -1,0 +1,39 @@
+﻿@model ZLERP.Model.RentCarPrice 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/RentCarPrice/RentCarPrice.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            rentcarpriceIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+	<tr> 
+        
+ 
+        <td><nobr> 单价设定编号  @Html.EditorFor(m=>m.ID)</nobr></td>
+   
+   
+        
+ 
+        <td><nobr> @Html.LabelFor(m=>m.PriceSetTime)@Html.EditorFor(m=>m.PriceSetTime)</nobr></td>
+   
+    </tr>
+    <tr> 
+        <td><nobr>@Html.LabelFor(m=>m.Price1)@Html.EditorFor(m=>m.Price1)</nobr></td>
+ 
+        <td><nobr>@Html.LabelFor(m=>m.Price2)@Html.EditorFor(m=>m.Price2)</nobr></td>
+   </tr>
+    <tr> 
+        <td><nobr>@Html.LabelFor(m=>m.Price3)@Html.EditorFor(m=>m.Price3)</nobr></td>
+  
+        <td><nobr>@Html.LabelFor(m=>m.Price4)@Html.EditorFor(m=>m.Price4)</nobr></td>
+    </tr>
+</table>
+
+}
+</div>

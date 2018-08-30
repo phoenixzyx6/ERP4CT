@@ -1,0 +1,55 @@
+﻿@model ZLERP.Model.Project
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/Project.js")" type="text/javascript" language="javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        projectIndexInit({
+            storeUrl: '@Url.Action("Find")',
+            projectUpdateUrl: '@Url.Action("Update")'
+        });
+    });
+</script>
+}
+<div id="projectForm" style="display:none;">
+@using (Html.BeginForm())
+{
+@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td colspan="2">@Html.TextBoxFor(m => m.ID, new { @class = "text", style = "display:none" })
+        @Html.LabelFor(m => m.Contract.ContractName)@Html.HiddenFor(m => m.ContractID, new { @class = "text" })<span id="ContractName_project" style=" color:Red;"></span></td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.ProjectName)@Html.TextBoxFor(m => m.ProjectName, new { @class = "text" })</td>
+        <td>@Html.LabelFor(m => m.ProjectAddr)@Html.TextBoxFor(m => m.ProjectAddr, new { @class = "text" })</td>
+   
+    </tr>
+    
+    <tr> 
+        <td>@Html.LabelFor(m => m.BuildUnit)@Html.TextBoxFor(m => m.BuildUnit, new { @class = "text" })</td>
+        <td>@Html.LabelFor(m => m.ConstructUnit)@Html.TextBoxFor(m => m.ConstructUnit, new { @class = "text" })</td>
+   
+    </tr>
+    
+    <tr> 
+        <td>@Html.LabelFor(m => m.LinkMan)@Html.TextBoxFor(m => m.LinkMan, new { @class = "text" })</td>
+        <td>@Html.LabelFor(m => m.CPOrder)@Html.TextBoxFor(m => m.CPOrder, new { @class = "text" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Tel)@Html.TextBoxFor(m => m.Tel, new { @class = "text" })</td>
+        <td>@Html.LabelFor(m => m.IsShow)@Html.CheckBoxFor(m => m.IsShow, new { @class = "text" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Distance)@Html.TextBoxFor(m => m.Distance, new { @class = "text" })</td>
+        
+        <td>@Html.LabelFor(m => m.PayType)@Html.DicEditorFor(m => m.PayType, DicEnum.ProjectPay, "", "", new { style = "width:137px;" })</td>
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 3, 54, new { @class = "text" })</td>
+    </tr>
+</table>
+}
+</div>
+<div id="ProjectGrid"></div>
+

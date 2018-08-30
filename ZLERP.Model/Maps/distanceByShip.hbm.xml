@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.distanceByShip, ZLERP.Model" table="distanceByShip" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" >
+		<id name="ID" column="routeid">
+      <generator class="native" />
+		</id>
+    <property name="outfactory" column="outfactory" />
+		<property name="inbuilding" column="inbuilding" />
+		<property name="outbuilding" column="outbuilding" />
+    <property name="infactory" column="infactory" />
+    <property name="shipdocid" column="shipdocid" />
+
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    
+		<many-to-one name="ShipDoc" column="shipdocid" class="ShippingDocument" update="false" insert="false"/>
+    
+	</class>
+</hibernate-mapping>

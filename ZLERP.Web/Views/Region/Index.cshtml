@@ -1,0 +1,36 @@
+﻿@model ZLERP.Model.Region
+@section HeaderSection{ 
+  <script src="@Url.Content("~/Scripts/Views/Region.js")" type="text/javascript" language="javascript"></script>
+    <script type="text/javascript">
+    $(function () {
+        regionIndexInit({
+            storeUrl: '@Url.Action("Find")'
+        });
+    });
+    </script>
+}
+<div id="MyJqGrid"></div>  
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ID)@Html.EditorFor(m=>m.ID)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.RegionName)@Html.EditorFor(m=>m.RegionName)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Mileage)@Html.TextBoxFor(m => m.Mileage, new { Value = 0, Class = "stext" }) KM</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.UnitPrice)@Html.TextBoxFor(m => m.UnitPrice, new { Value = 0,Class="stext" }) 元</td>
+    </tr>
+</table>
+
+}
+</div>
+ 

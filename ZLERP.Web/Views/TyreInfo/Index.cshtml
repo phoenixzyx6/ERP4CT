@@ -1,0 +1,72 @@
+﻿@model ZLERP.Model.TyreInfo 
+@section HeaderSection{
+
+<script src="@Url.Content("~/Scripts/Views/TyreInfo/TyreInfo.js")" type="text/javascript" language="javascript"> </script>
+<script type="text/javascript">
+    $(function () {
+   
+    var options = {
+                       storeUrl:'@Url.Action("Find")'
+                      , CarClassUrl: '@Url.Action("TyrePlaceListData","CarClassItem")'
+                      , InstallTyreUrl: '@Url.Action("InstallTyre")'
+                    };
+            tyreinfoIndexInit(options);
+     });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ID)@Html.EditorFor(m=>m.ID)</td>
+ 
+        <td>@Html.LabelFor(m=>m.StockDate)@Html.EditorFor(m => m.StockDate, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.TyreType)@Html.DicComboBoxFor(m=>m.TyreType,DicEnum.TyreType)</td>
+ 
+        <td>@Html.LabelFor(m=>m.TyreModel)@Html.DicComboBoxFor(m => m.TyreModel, DicEnum.TyreModel)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.TyreSpec)@Html.EditorFor(m=>m.TyreSpec)</td>
+ 
+        <td>@Html.LabelFor(m=>m.CurrentStatus)@Html.DropDownListFor(m => m.CurrentStatus, (IEnumerable<SelectListItem>)ViewBag.StatusList)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.MileageAble)@Html.EditorFor(m=>m.MileageAble)</td>
+        <td>@Html.LabelFor(m => m.BreedCode)@Html.DicComboBoxFor(m => m.BreedCode, DicEnum.TyreBreed)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.MileageUsed)@Html.EditorFor(m => m.MileageUsed)</td>
+ 
+        <td>@Html.LabelFor(m => m.Manufacture)@Html.AutoComplete("SupplyID", "Manufacture", "Combo", "SupplyInfo", "SupplyName", "SupplyName", " IsUsed =1 ")</td>
+      
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.InstallPlace)@Html.EditorFor(m => m.InstallPlace)</td>
+ 
+        <td>@Html.LabelFor(m => m.CarID)@Html.EditorFor(m => m.CarID)</td>
+   
+    </tr>
+    
+</table>
+}
+</div>
+
+
+<div id="NewTyreFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td>@Html.HiddenFor(m=>m.ID) @Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (IEnumerable<SelectListItem>)ViewBag.CarList, new { style = "width:140px;", @data_val_required = "车辆 字段是必需的" })</td>
+        <td>@Html.Label("安装位置")@Html.DropDownListFor(m => m.InstallPlace, Enumerable.Empty<SelectListItem>(), new { style = "width:140px;", @data_val_required = "安装位置 字段是必需的" })</td>
+    </tr>
+</table>
+}
+</div>

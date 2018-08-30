@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.CarProjectPrice, ZLERP.Model" table="CarProjectPrice" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="CarProjectPriceId">
+      <generator class="native" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="StartTimes" column="StartTimes" />
+    <property name="EndTimes" column="EndTimes" />
+    <property name="Meno" column="Meno" />
+    <property name="Price" column="Price" />
+    <property name="CarProjectPriceMainId" column="CarProjectPriceMainId" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <many-to-one name="CarProjectPriceMain" column="CarProjectPriceMainId" class="CarProjectPriceMain" update="false" insert="false"/>
+  </class>
+</hibernate-mapping>

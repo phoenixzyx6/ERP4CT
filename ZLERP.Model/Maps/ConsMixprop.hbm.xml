@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.ConsMixprop, ZLERP.Model" table="ConsMixprop" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="ConsMixpropID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="ConStrength" column="ConStrength" />
+    <property name="ImpGrade" column="ImpGrade" />
+    <property name="FlexStrength" column="FlexStrength" />
+    <property name="SCRate" column="SCRate" />
+    <property name="WCRate" column="WCRate" />
+    <property name="Weight" column="Weight" />
+    <property name="SeasonType" column="SeasonType" />
+    <property name="Auditor" column="Auditor" />
+    <property name="AuditTime" column="AuditTime" />
+    <property name="AuditStatus" column="AuditStatus" />
+    <property name="AuditInfo" column="AuditInfo" />
+    <property name="IsSlurry" column="IsSlurry" />
+    <property name="MixingTime" column="MixingTime" />
+    <property name="SynStatus" column="SynStatus" />
+    <property name="ProductLineID" column="ProductLineID" />
+    <property name="Remark" column="Remark" />
+    <property name="S1_wet" column="S1_wet" />
+    <property name="S2_wet" column="S2_wet" />
+    <property name="S3_wet" column="S3_wet" />
+    <property name="S4_wet" column="S4_wet" />
+    <property name="S5_wet" column="S5_wet" />
+    <property name="S6_wet" column="S6_wet" />
+    <property name="S7_wet" column="S7_wet" />
+    <property name="S8_wet" column="S8_wet" />
+    <property name="S9_wet" column="S9_wet" />
+    <property name="S10_wet" column="S10_wet" />
+    <property name="S11_wet" column="S11_wet" />
+    <property name="S12_wet" column="S12_wet" />
+    <property name="S13_wet" column="S13_wet" />
+    <property name="S14_wet" column="S14_wet" />
+    <property name="S15_wet" column="S15_wet" />
+    <property name="S16_wet" column="S16_wet" />
+    <property name="S17_wet" column="S17_wet" />
+    <property name="S18_wet" column="S18_wet" />
+    <property name="S19_wet" column="S19_wet" />
+    <property name="S20_wet" column="S20_wet" />
+    <property name="S21_wet" column="S21_wet" />
+    <property name="S22_wet" column="S22_wet" />
+    <property name="S23_wet" column="S23_wet" />
+    <property name="S24_wet" column="S24_wet" />
+    <property name="LastWeight" column="LastWeight" />
+    <property name="IsCompleted" column="IsCompleted" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="TaskID" column="TaskID" />
+    <many-to-one name="ProduceTask" column="TaskID" class="ProduceTask" update="false" insert="false" />
+    <property name="FormulaID" column="FormulaID" />
+    <many-to-one name="Formula" column="FormulaID" class="Formula" update="false" insert="false" />
+    <property name="CustMixpropID" column="CustMixpropID" />
+    <many-to-one name="CustMixprop" column="CustMixpropID" class="CustMixprop" update="false" insert="false" />
+    <bag name="ConsMixpropItems" lazy="true" batch-size="30" inverse="true" >
+      <key column="ConsMixpropID"></key>
+      <one-to-many class="ConsMixpropItem"></one-to-many>
+    </bag>
+    <many-to-one name="ProductLine" column="ProductLineID" class="ProductLine" update="false" insert="false"/>
+  </class>
+</hibernate-mapping>

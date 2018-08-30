@@ -1,0 +1,32 @@
+﻿@model ZLERP.Model.AlarmLog 
+@using ZLERP.Model
+@{
+    Company companyInfo = (Company)ViewBag.CompanyInfo;   
+ }
+@section HeaderSection{
+<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/commonmap.js")"></script>
+<script type="text/javascript" language="javascript" src="@Url.Content("~/scripts/abc/mapabc.custom.v1.1.js")"></script>
+    <script src="@Url.Content("~/Scripts/Views/UnloadRecord.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            unloadRecordIndexInit({ storeUrl: '@Url.Action("Find")' });
+        });
+    </script>
+}
+<script>
+      var companyinfo = { name:"@companyInfo.CompName",lon:@companyInfo.Longtide ,lat: @companyInfo.Latitude,range:@companyInfo.Range };
+</script>
+<div id="searchbar" class="mvcform">
+    @using (Html.BeginForm())
+    {
+        <text><span style ="margin-left:20px"> 车辆：@Html.DropDownList("CarID", (SelectList)ViewBag.CarList, "请选择车辆")</span> 
+        
+        <span style = "margin-left:30px"></span>卸料时间：@Html.Editor("startTime", "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd 00:00:00") }) --
+        @Html.Editor("endTime", "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd 23:59:59") })
+        <input  class="ui-button ui-widget ui-state-default ui-corner-all" id="UnloadSearchButton" type="button" value="查询"  role="button" aria-disabled="false">
+        </text>
+    }
+</div>
+<div id="MyJqGrid">
+</div>
+

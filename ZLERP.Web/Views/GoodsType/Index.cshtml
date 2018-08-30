@@ -1,0 +1,28 @@
+﻿@model ZLERP.Model.GoodsType 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/GoodsType/GoodsType.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            goodstypeIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.GoodsTypeName)@Html.EditorFor(m=>m.GoodsTypeName)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Remark)@Html.EditorFor(m=>m.Remark)</td>
+    </tr>
+</table>
+}
+</div>

@@ -1,0 +1,47 @@
+﻿@model ZLERP.Model.PurchasePlanByEquip 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/PurchasePlanByEquip/PurchasePlanByEquip.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            var options = {
+                storeUrl: '@Url.Action("Find")'
+            };
+            PurchasePlanByEquipIndexInit(options);
+        });
+</script>
+}
+
+<div id="MyJqGrid"></div>
+
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    @Html.HiddenFor(m => m.ID)
+<table class="mvcform"> 
+
+<tr>
+    <td>@Html.LabelFor(m => m.PurchasePlan_NeedDate)@Html.TextBoxFor(m => m.PurchasePlan_NeedDate)</td>
+    <td>@Html.Label("维修类型")@Html.TextBox("__type")</td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.GoodsID)@Html.TextBoxFor(m => m.GoodsID)</td>
+    <td>@Html.LabelFor(m => m.planmoney)@Html.TextBoxFor(m => m.planmoney)</td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.PurchasePlan_claimer)@Html.TextBoxFor(m => m.PurchasePlan_claimer)</td>
+    <td>@Html.Label("申请时间")@Html.TextBoxFor(m => m.BuildTime)</td>
+</tr>
+<tr>
+    <td colspan="2">@Html.LabelFor(m => m.PurchasePlan_reason)@Html.TextAreaFor(m => m.PurchasePlan_reason, new { style = "width:345px;" })</td>
+</tr>
+
+<tr>
+    <td colspan="2">@Html.LabelFor(m => m.PurchasePlan_audit_opinion)@Html.TextAreaFor(m => m.PurchasePlan_audit_opinion, new { style = "width:345px;" })</td>
+</tr>
+
+<tr><td>@Html.LabelFor(m => m.PurchasePlan_state)@Html.DicEditorFor(m => m.PurchasePlan_state, DicEnum.PurchasePlanByEquip_state)</td>
+    <td></td></tr>
+
+</table>
+}
+</div>

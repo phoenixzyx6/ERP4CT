@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.SettlementBill, ZLERP.Model" table="SettlementBill" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="SettleBillId">
+		 	<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="BillMonth" column="BillMonth" />
+		<property name="Amount" column="Amount" />
+		<property name="Total" column="Total" />
+		<property name="ContractID" column="ContractID" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<many-to-one name="Settlement" column="SettlementId" class="Settlement" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

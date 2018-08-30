@@ -1,0 +1,64 @@
+﻿<div id="draggable" class="ui-widget-content">
+   <br />
+	<p align="center" style="color:Red; font-size:xx-large">通知</p>
+    <p>ERP3.0将于2012年3月15号正式发布M2版本，请大家及时关注！</p>
+    <p>谢谢！</p>
+    <p>ERP3.0开发小组</p>
+    <p>2012年3月13日 </p>
+</div>
+<div id="task-grid" style="width:100%">
+</div>
+
+
+
+<div id="accordion">
+	<h3><a href="#">中联重科搅拌站砼价格波动表</a></h3>
+	<div>
+		<p>
+		C30 300
+		</p>
+        <p>
+		C35 345
+		</p>
+	</div>
+	<h3><a href="#">原材料价格波动表</a></h3>
+	<div>
+		<p>
+		水泥：360元/吨
+		</p>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+       // $("#draggable").draggable();
+        $("#accordion").accordion();
+        var scrwGrid = new MyGrid({
+            renderTo: 'task-grid'
+		    , title: '今日生产计划'
+            , height: 200
+            , autoWidth: true
+		    , storeURL: '@Url.Action("GetRangeTimeTasks", "ProduceTask")'
+		    , sortByField: 'ID'
+		    , primaryKey: 'ID'
+		   // , groupField: 'TaskType'
+            , buttonRenderTo:'operate-buttons'
+		    , setGridPageSize: 8
+		    , showPageBar: true
+            , singleSelect: true
+		    , initArray: [
+   		{ label: ' 任务单号', name: 'ID', index: 'ID', editable: true, editrules: { required: true},hidden:true }
+   		, { label: ' 工程名称', name: 'ProjectName', index: 'ProjectName', editable: true, editrules: { required: true} }
+   		, { label: ' 项目地址', name: 'ProjectAddr', index: 'ProjectAddr', editable: true }
+   		, { label: ' 客户编码', name: 'CustID', index: 'CustID', editable: true }
+   		, { label: ' 施工单位', name: 'ConstructUnit', index: 'ConstructUnit', editable: true }
+   		, { label: '施工部位类型', name: 'ConsPosType', index: 'ConsPosType', editable: true }
+   		, { label: '施工部位', name: 'ConsPos', index: 'ConsPos', editable: true }
+   		, { label: ' 计划方量', name: 'PlanCube', index: 'PlanCube', editable: true }
+   		, { label: ' 用砼日期', name: 'NeedDate', index: 'NeedDate', editable: true, formatter: 'date',formatoptions:{srcformat:'m-d-Y',newformat:'Y-m-d'} }
+   	        ]
+		    , autoLoad: true
+        });
+    });
+</script>

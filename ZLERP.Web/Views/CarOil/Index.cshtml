@@ -1,0 +1,113 @@
+﻿@model ZLERP.Model.CarOil
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/CarOil/CarOil.js")" type="text/javascript" language="javascript"></script>
+    <script type="text/javascript" src="../../Scripts/moment.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            caroilIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                getSiloUrl: '@Url.Action("Get", "Silo")',
+                getKiloMeter: '@Url.Action("GetKiloMeter")'
+            });
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarList, new { style = "width:140px;" })
+                </td>
+                <td>
+                    @Html.LabelFor(m => m.AddDate)
+                    @Html.EditorFor(m => m.AddDate, "DateTimeWithTime", new { defaultValue = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })
+                    @Html.TextBoxFor(m => m.ID, new { Style = "display:none;" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Driver)@Html.AutoComplete("Driver", "TrueName", "Combo", "User", "ID", "TrueName", string.Format("UserType='{0}' or UserType='{1}'", UserType.Driver, UserType.MixerDriver))
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.SiloID)@Html.DropDownListFor(m => m.SiloID, (SelectList)ViewBag.Silos, "")
+                </td>
+                <td>
+                    @Html.LabelFor(m => m.StuffID)@Html.DropDownListFor(m => m.StuffID, Enumerable.Empty<SelectListItem>())
+                </td>
+            </tr>
+            <tr>
+                <td style="display: none">
+                </td>
+                <td>@Html.LabelFor(m => m.Amount)@Html.TextBoxFor(m => m.Amount)
+                </td>
+                <td>@Html.LabelFor(m => m.UnitPrice)
+                    @Html.TextBoxFor(m => m.UnitPrice, new { Value = ViewBag.OilPrice })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.TotalPrice)@Html.TextBoxFor(m => m.TotalPrice, new { Value = 0, ReadOnly = true })
+                </td>
+                <td>@Html.LabelFor(m => m.LastKM)@Html.TextBoxFor(m => m.LastKM, new { Value = 0 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ThisKM)@Html.TextBoxFor(m => m.ThisKM, new { Value = 0 })
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.KiloMeter)@Html.TextBoxFor(m => m.KiloMeter, new { Value = 0, ReadOnly = true })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.Memo)@Html.TextAreaFor(m => m.Memo, new { style = "width:80%" })
+                </td>
+            </tr>
+        </table> 
+    }
+</div>
+
+<div id="SetPriceDiv" class="mvcform" style="display: none;">
+    
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m=>m.CarOilPrice.BeginTime) @Html.EditorFor(m => m.CarOilPrice.BeginTime, "DateTime", new { })
+                </td>
+                <td>@Html.LabelFor(m=>m.CarOilPrice.EndTime) @Html.EditorFor(m => m.CarOilPrice.EndTime, "DateTime", new { })
+                </td>
+                <td>@Html.LabelFor(m=>m.CarOilPrice.Price) @Html.EditorFor(m => m.CarOilPrice.Price, new {Value=1 })
+                </td>
+            </tr>
+        </table> 
+    }
+
+    <div id="showProgress" style="display:none;text-align:center;color:#f90;font-weight:bold;position:absolute;top:50%; z-index:10;">
+    <img src="@Url.Content("~/Content/themes/default/images/ajax-loader.gif")" border="0" alt="请稍等,价格正在修改中，请勿关闭程序..."/>
+    <br/>请稍等,价格正在修改中，请勿关闭程序...
+    </div>
+</div>
+
+<div id="ConfirmDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr style="display:none">
+                <td >油料换算率 <input id="rate" class="text-box single-line requiredval" type="text" value=@ViewBag.Rate name="rate" data-val-required="换算率字段是必需的。" data-val-number="字段 Price 必须是一个数字。"  data-val="true"></input> （千克/升）
+                </td>
+            </tr>
+        </table> 
+    }
+    <div id="showProgress2" style="display:none;text-align:center;color:#f90;font-weight:bold;position:absolute;top:50%; z-index:10;">
+    <img src="@Url.Content("~/Content/themes/default/images/ajax-loader.gif")" border="0" alt="请稍等,确认加油记录中，请勿关闭程序..."/>
+    <br/>请稍等,确认加油记录中，请勿关闭程序...
+    </div>
+</div>

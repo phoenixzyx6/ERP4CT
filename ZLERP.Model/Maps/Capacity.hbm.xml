@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Capacity, ZLERP.Model" table="Capacity" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="CapacityID">
+		 	<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="ProductRecID" column="ProductRecID" />
+		<property name="ProduceDate" column="ProduceDate" />
+		<property name="ProjectName" column="ProjectName" />
+		<property name="CustName" column="CustName" />
+		<property name="TaskID" column="TaskID" />
+		<property name="ConsMixpropID" column="ConsMixpropID" />
+		<property name="ProvidedCube" column="ProvidedCube" />
+		<property name="ProvidedTimes" column="ProvidedTimes" />
+		<property name="ProduceCube" column="ProduceCube" />
+		<property name="ConStrength" column="ConStrength" />
+		<property name="RealSlump" column="RealSlump" />
+		<property name="ConsPos" column="ConsPos" />
+		<property name="CastMode" column="CastMode" />
+		<property name="ProductLineName" column="ProductLineName" />
+		<property name="TechId" column="TechId" />
+		<property name="CarID" column="CarID" />
+		<property name="PotCount" column="PotCount" />
+		<property name="DispatchID" column="DispatchID" />
+		<property name="SWRate" column="SWRate" />
+		<property name="RWRate" column="RWRate" />
+		<property name="ProductLineID" column="ProductLineID" />
+		<property name="SynStatus" column="SynStatus" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<bag name="CapacityItems" lazy="true" batch-size="30" inverse="true" >
+			<key column="CapacityID"></key>
+			<one-to-many class="CapacityItem"></one-to-many>
+		</bag>
+	</class>
+</hibernate-mapping>

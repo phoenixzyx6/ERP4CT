@@ -1,0 +1,50 @@
+﻿@model ZLERP.Model.Maintenance 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/Maintenance/Maintenance.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            maintenanceIndexInit({
+                bstoreUrl: '@Url.Action("Find", "ClassB")',
+                storeUrl: '@Url.Action("Find")',
+                maintenanceAddUrl: '@Url.Action("Add")',
+                maintenanceUpdateUrl: '@Url.Action("Update")',
+                classTypeID: '@Request.RequestContext.RouteData.Values["id"]'
+            });
+        });
+    </script>
+}
+<div id="BGrid" style="float: left; width: 30%;height:100%;">
+</div>
+<div id="Maintenance" style="float: right; width: 69.8%;height:100%;">
+    <div class="grid-toolbar ContractGrid-toolbar"></div>
+    <div id="MaintenanceDiv" class="mvcform">
+        @using (Html.BeginForm("", "", FormMethod.Post, new { id = "MaintenanceForms" }))
+        {@Html.ValidationSummary()
+            @Html.TextBoxFor(m => m.ClassBID, new { style="display:none;"})
+            <table class="mvcform paddingStyle" style="width:100%;">
+                <tr>
+                    <td>@Html.Label("大类编号")@Html.TextBox("bigclassid", "", new { disabled = "true", style="width:80px;" })
+                    </td>
+                    <td colspan="3">
+                    @Html.Label("大类名称")@Html.TextBox("bigclassname", "", new { disabled = "true" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ItemName)@Html.EditorFor(m => m.ItemName)
+                    </td>
+                    <td>@Html.LabelFor(m => m.DrawType)@Html.DicEditorFor(m => m.DrawType,DicEnum.DrawType,"")
+                    </td>
+                    <td>@Html.LabelFor(m => m.Remark)@Html.EditorFor(m => m.Remark)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">@*<button class="tbtn save" onclick="maintenanceSave();return false;">保存</button>*@<div id="maintenanceButton"></div></td>
+                </tr>
+            </table>
+        }
+    </div>
+    <div id="MaintenanceGrid">
+    </div>
+</div>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.ConPrice, ZLERP.Model" table="ConPrice" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="ConPriceID">
+		 	<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="ConStrengthCode" column="ConStrengthCode" />
+		<property name="SettingDate" column="SettingDate" />
+		<property name="InfoPrice" column="InfoPrice" />
+		<property name="PumpPrice" column="PumpPrice" />
+		<property name="SlurryPrice" column="SlurryPrice" />
+    <property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+	</class>
+</hibernate-mapping>

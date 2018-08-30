@@ -1,0 +1,412 @@
+﻿@model ZLERP.Model.ShippingDocument
+@{
+    //运输单模板列表，默认选择值为"ShippingDocument.xml"的项
+    var ShipTempList = new SelectList(ViewBag.ShipTempItems, "TreeCode", "DicName", "ShippingDocument.xml");   
+}
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/ShippingDocument.js")" type="text/javascript" language="javascript"> </script>
+
+    <script type="text/javascript">
+        $(function () {
+            shippingDocInit({
+                storeUrl: '@Url.Action("Find")',
+                garbageUrl: '@Url.Action("Garbage")',
+                getUrl: '@Url.Action("Get")',
+                AuditUrl: '@Url.Action("Audit")',
+                MultiAuditUrl: '@Url.Action("MultiAudit")',
+                GetTemplateInfoUrl: '@Url.Action("Get", "Dic")',
+                dispatchHisStoreUrl: '@Url.Action("Find", "DispatchListHistory")',
+                ShipHisStoreUrl: '@Url.Action("Find", "ShippingDocumentHistory")',
+                findShipDocHisUrl: '@Url.Action("Find", "ShippingDocumentHistory")',
+                handleBatchAuditUrl: '@Url.Action("BatchAudit")',
+                getCarInfoUrl: '@Url.Action("GetInfo", "Car")',
+                MetageUpdateUrl: '@Url.Action("MetageUpdate")'
+            });
+        });
+    </script>
+}
+<div id="shippDocGrid">
+</div>
+
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.TaskID)@Html.AutoComplete("TaskID", "ProjectName", "Combo", "ProduceTask", "ID", "ProjectName")
+                </td>
+                <td>@Html.LabelFor(m => m.ShipDocType)@Html.EditorFor(m => m.ShipDocType)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.PumpName)@Html.DropDownListFor(m => m.PumpName, (SelectList)ViewBag.PumpList, "", new { style = "width:110px;" })
+                </td>
+                <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarDics, "", new { style = "width:110px;" })
+                </td>
+                <td>@Html.LabelFor(m => m.Driver)@Html.EditorFor(m => m.Driver)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.BetonCount)@Html.EditorFor(m => m.BetonCount)
+                </td>
+                <td>@Html.LabelFor(m => m.SlurryCount)@Html.TextBoxFor(m => m.SlurryCount, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.SendCube)@Html.EditorFor(m => m.SendCube)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ParCube)@Html.EditorFor(m => m.ParCube)
+                </td>
+                <td>@Html.LabelFor(m => m.RemainCube)@Html.TextBoxFor(m => m.RemainCube, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.SignInCube)@Html.EditorFor(m => m.SignInCube)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.OtherCube)@Html.TextBoxFor(m => m.OtherCube, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.SumPrice)@Html.EditorFor(m => m.SumPrice)
+                </td>
+                <td>@Html.LabelFor(m => m.DeliveryTime)@Html.EditorFor(m => m.DeliveryTime)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ArriveTime)@Html.EditorFor(m => m.ArriveTime)
+                </td>
+                <td>@Html.LabelFor(m => m.Surveyor)@Html.EditorFor(m => m.Surveyor)
+                </td>
+                <td>@Html.LabelFor(m => m.Accepter)@Html.EditorFor(m => m.Accepter)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Signer)@Html.EditorFor(m => m.Signer)
+                </td>
+                <td>@Html.LabelFor(m => m.ForkLift)@Html.EditorFor(m => m.ForkLift)
+                </td>
+                <td>@Html.LabelFor(m => m.Operator)@Html.EditorFor(m => m.Operator)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.PlanClass)@Html.EditorFor(m => m.PlanClass)
+                </td>
+                <td>@Html.LabelFor(m => m.ProduceDate)@Html.EditorFor(m => m.ProduceDate, new { id = "add_ProduceDate" })
+                </td>
+                <td>@Html.LabelFor(m => m.ProductLineID)@Html.EditorFor(m => m.ProductLineID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.IsEffective)@Html.CheckBoxFor(m => m.IsEffective)
+                </td>
+                <td>@Html.LabelFor(m => m.IsBack)@Html.CheckBoxFor(m => m.IsBack)
+                </td>
+                <td>@Html.LabelFor(m => m.IsAudit)@Html.CheckBoxFor(m => m.IsAudit)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Remark)@Html.EditorFor(m => m.Remark)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*回单处理表单*@
+<div id="TakeBack" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            @*            <tr>
+                <td>@Html.Label("运输单号")@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.DeliveryTime)@Html.TextBoxFor(m => m.DeliveryTime,  new {Disabled=true, @id = "editDeliverTime" })
+                </td>
+                <td>@Html.LabelFor(m => m.CastMode)@Html.DicComboBoxFor(m => m.CastMode, DicEnum.CastMode)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ProduceDate)@Html.TextBoxFor(m => m.ProduceDate, new { Disabled = true })
+                </td>
+                <td>@Html.LabelFor(m => m.ArriveTime)@Html.EditorFor(m => m.ArriveTime, "DateTimeWithTime", new {  @id = "editArriveTime"})
+                </td>
+                <td>@Html.LabelFor(m => m.PumpName)@Html.DropDownListFor(m => m.PumpName, (SelectList)ViewBag.PumpList, "", new { style = "width:135px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ConstructUnit)@Html.TextBoxFor(m => m.ConstructUnit, new { Disabled = true })
+                </td>
+                <td>@Html.LabelFor(m => m.Accepter)@Html.EditorFor(m => m.Accepter)
+                </td>
+                <td>@Html.LabelFor(m => m.TicketNO)@Html.EditorFor(m => m.TicketNO)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ProjectName)@Html.TextBoxFor(m => m.ProjectName, new { Disabled = true })
+                </td>
+                <td>@Html.LabelFor(m => m.ShippingCube)@Html.TextBoxFor(m => m.ShippingCube, new { Disabled = true })
+                </td>
+                <td>@Html.LabelFor(m => m.ExceptionInfo)@Html.TextBoxFor(m => m.ExceptionInfo )
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CustName)@Html.TextBoxFor(m => m.CustName, new { Disabled = true })
+                </td>
+                <td>@Html.LabelFor(m => m.SignInCube)@Html.EditorFor(m => m.SignInCube)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractName)@Html.TextBoxFor(m => m.ContractName, new { Disabled = true })
+                </td>
+                <td>@Html.LabelFor(m => m.ScrapCube)@Html.EditorFor(m => m.ScrapCube)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Driver)@Html.EditorFor(m => m.Driver)
+                </td>
+                <td>@Html.LabelFor(m => m.TransferCube)@Html.EditorFor(m => m.TransferCube)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.EntrustUnit)@Html.TextBoxFor(m => m.EntrustUnit, new { Disabled = true })
+                </td>
+                <td>@Html.LabelFor(m => m.PlanClass)@Html.EditorFor(m => m.PlanClass)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.LinkMan)@Html.EditorFor(m => m.LinkMan)
+                </td>
+                <td>@Html.LabelFor(m => m.ForkLift)@Html.EditorFor(m => m.ForkLift)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Tel)@Html.EditorFor(m => m.Tel)
+                </td>
+                <td>@Html.LabelFor(m => m.IsBack)@Html.CheckBoxFor(m => m.IsBack)
+                </td>
+            </tr>*@
+            <tr>
+                <td>@Html.Label("运输单号")@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.ProduceDate)@Html.TextBoxFor(m => m.ProduceDate, new { Disabled = true })
+                </td>
+                <td>@Html.LabelFor(m => m.ShippingCube)@Html.TextBoxFor(m => m.ShippingCube, new { Disabled = true })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ConstructUnit)@Html.TextBoxFor(m => m.ConstructUnit, new { Disabled = true })
+                </td>
+                <td>@Html.LabelFor(m => m.DeliveryTime)@Html.TextBoxFor(m => m.DeliveryTime, new { Disabled = true, @id = "editDeliverTime" })
+                </td>
+                <td>@Html.LabelFor(m => m.SignInCube)@Html.EditorFor(m => m.SignInCube)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ProjectName)@Html.TextBoxFor(m => m.ProjectName, new { Disabled = true })
+                </td>
+                <td>@Html.LabelFor(m => m.ArriveTime)@Html.EditorFor(m => m.ArriveTime, "DateTimeWithTime", new { @id = "editArriveTime" })
+                </td>
+                <td>@Html.LabelFor(m => m.ScrapCube)@Html.EditorFor(m => m.ScrapCube)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CastMode)@Html.DicComboBoxFor(m => m.CastMode, DicEnum.CastMode)
+                </td>
+                <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarDics, "", new { style = "width:135px;" })
+                </td>
+                <td>@Html.LabelFor(m => m.TransferCube)@Html.EditorFor(m => m.TransferCube)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.PumpName)@Html.DropDownListFor(m => m.PumpName, (SelectList)ViewBag.PumpList, "", new { style = "width:135px;" })
+                </td>
+                <td>@Html.LabelFor(m => m.Driver)@Html.fixedDropDownListFor(m => m.Driver, Enumerable.Empty<SelectListItem>())
+                </td>
+                <td>@Html.LabelFor(m => m.Accepter)@Html.EditorFor(m => m.Accepter)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.BetonCount)@Html.EditorFor(m => m.BetonCount)
+                </td>
+                <td>@Html.LabelFor(m => m.SlurryCount)@Html.EditorFor(m => m.SlurryCount)
+                </td>
+                <td>@Html.LabelFor(m => m.SendCube)@Html.EditorFor(m => m.SendCube)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ProvidedTimes)@Html.EditorFor(m => m.ProvidedTimes)
+                </td>
+                <td>@Html.LabelFor(m => m.ProvidedCube)@Html.EditorFor(m => m.ProvidedCube)
+                </td>
+                <td>@Html.LabelFor(m => m.ParCube)@Html.EditorFor(m => m.ParCube)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.OtherCube)@Html.EditorFor(m => m.OtherCube)
+                </td>
+                <td>@Html.LabelFor(m => m.XuCube)@Html.EditorFor(m => m.XuCube)
+                </td>
+                <td>@Html.LabelFor(m => m.CarKm)@Html.TextBoxFor(m => m.CarKm, new { @Value="0"})
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.TicketNO)@if (ViewBag.TicketNoConfig == null || ViewBag.TicketNoConfig.ConfigValue == "true")
+                                                   { @Html.TextBoxFor(m => m.TicketNO) }
+                                                   else
+                                                   { @Html.TextBoxFor(m => m.TicketNO, new { @data_val_required = "小票票号 字段是必需的", data_val = "true" }) }
+                </td>
+                <td>@Html.LabelFor(m => m.LinkMan)@Html.DropDownListFor(m => m.LinkMan, (IEnumerable<SelectListItem>)ViewBag.LinkManList, new { zlerp = "combobox" })
+                    @*@Html.EditorFor(m => m.LinkMan)*@
+                </td>
+                <td>@Html.LabelFor(m => m.IsBack)@Html.CheckBoxFor(m => m.IsBack)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">@Html.LabelFor(m => m.ExceptionInfo)@Html.TextAreaFor(m => m.ExceptionInfo, new { style = "width:345px;" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*打印模板选择*@
+<div id="TemplateForm" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+            </tr>
+            <tr>
+                <td>@Html.Label("打印模板:")@Html.DropDownList("TemplateID", ShipTempList)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*作废原因*@
+<div id="GarbageForm" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.TextAreaFor(m => m.Remark, 3, 48, new { @class = "text", id = "remark", @data_val_required = "原因 字段是必需的", data_val = "true" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*生产登记历史记录弹出框*@
+<div id="dispatchHisWindow" style="display: none;">
+    <div id="dispatchHisGrid">
+    </div>
+</div>
+
+@*运输单历史记录弹出框*@
+<div id="shipDocHisWindow" style="display: none;">
+    <div id="shipDocHisGrid">
+    </div>
+</div>
+
+@*出厂检测*@
+<div id="OutCheckForm" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.HiddenFor(m => m.ID)@Html.LabelFor(m => m.RealSlump)@Html.TextBoxFor(m => m.RealSlump)
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*过磅校正*@
+<div id="MetageUpdate" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.HiddenFor(m => m.ID)@Html.LabelFor(m => m.TotalWeight)@Html.TextBoxFor(m => m.TotalWeight)
+                    kg
+                </td>
+                <td>@Html.LabelFor(m => m.CarWeight)@Html.TextBoxFor(m => m.CarWeight) kg
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Weight)@Html.TextBoxFor(m => m.Weight, new { Disabled = true })
+                    kg
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Exchange)@Html.TextBoxFor(m => m.Exchange) kg/m³
+                </td>
+                <td>@Html.LabelFor(m => m.Cube)@Html.TextBoxFor(m => m.Cube, new { Disabled = true })
+                    m³
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*自定义时间*@
+<div id="SelectTimeForm" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("起始时间")@Html.Editor("sBeginTime", "DateTimeWithTime")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("终止时间")@Html.Editor("sEndTime", "DateTimeWithTime")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("自动关闭")@Html.CheckBox("sIsAutoClose")
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+@*超时原因设置*@
+<div id="OverTimeReasonForm" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        @Html.ValidationSummary()
+        <table class="mvcform">
+             <tr>
+                <td>@Html.HiddenFor(m => m.ID)
+                </td>
+             </tr>
+             <tr>
+@*                <td>
+                  <label for="IsOverTime">超时状态</label>
+                  <select name="IsOverTime" id="IsOverTime">
+                     <option value='0'>未超时</option>
+                     <option value='1'>超时</option>
+                  </select>
+                </td>*@
+                <td>@Html.LabelFor(m => m.IsOverTime)@Html.CheckBoxFor(m => m.IsOverTime)
+                </td>
+            </tr>
+            <tr>
+                
+                
+                <td>@Html.LabelFor(m=>m.OverTimeReason)@Html.TextAreaFor(m=>m.OverTimeReason,5,30,null);
+                </td>
+            </tr>
+           
+        </table>
+    }
+</div>

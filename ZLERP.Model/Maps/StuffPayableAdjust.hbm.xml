@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.StuffPayableAdjust, ZLERP.Model" table="StuffPayableAdjust" lazy="true"
+	  dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="StuffPayableAdjustId">
+			<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="PayBalance" column="PayBalance" />
+		<property name="DzMoney" column="DzMoney" />
+		<property name="QianFaPiao" column="QianFaPiao" />
+		<property name="NoPay1" column="NoPay1" />
+		<property name="NoPay2" column="NoPay2" />
+		<property name="NoPay3" column="NoPay3" />
+		<property name="NoPay4" column="NoPay4" />
+		<property name="SupplyID" column="SupplyID" />
+		<property name="StockPactID" column="StockPactID" />
+		<property name="AdjustDate" column="AdjustDate" />
+
+		<property name="BuildTime" column="BuildTime" update="false"/>
+		<property name="Builder" column="Builder" update="false"/>
+		<property name="ModifyTime" column="ModifyTime" insert="false"/>
+		<property name="Modifier" column="Modifier" insert="false"/>
+		<property name="Lifecycle" column="Lifecycle" />
+		<many-to-one name="SupplyInfo" column="SupplyID" class="SupplyInfo" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

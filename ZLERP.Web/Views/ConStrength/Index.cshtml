@@ -1,0 +1,41 @@
+﻿@model ZLERP.Model.ConStrength
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/ConStrength.js")" type="text/javascript" language="javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+        conStrengthIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="ConStrengthForm" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td>@Html.HiddenFor(m=>m.ID, new { @class = "text" })</td>  
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ConStrengthCode)@Html.TextBoxFor(m=>m.ConStrengthCode, new { @class = "text" })</td>   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Level)@Html.TextBoxFor(m=>m.Level, new { @class = "text" })</td>   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.BrandPrice)@Html.TextBoxFor(m=>m.BrandPrice, new { @class = "text" })</td>   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.AdvisePrice)@Html.TextBoxFor(m=>m.AdvisePrice, new { @class = "text" })</td>   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.BumpAddPrice)@Html.TextBoxFor(m=>m.BumpAddPrice, new { @class = "text" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Exchange)@Html.TextBoxFor(m=>m.Exchange, new { @class = "text" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.OrderNum)@Html.TextBoxFor(m => m.OrderNum, new { @class = "text" })</td>
+    </tr>
+</table>
+}
+</div>
+<div id="ConStrengthid"></div> 

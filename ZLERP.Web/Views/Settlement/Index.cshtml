@@ -1,0 +1,87 @@
+﻿@model ZLERP.Model.Settlement 
+@section HeaderSection{ 
+<script src="@Url.Content("~/Scripts/Views/Settlement/Settlement.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            settlementIndexInit({storeUrl:'@Url.Action("Find")',
+            findValueItemsUrl:'@Url.Action("FindValueItems")',
+            findSettlementItemsUrl:'@Url.Action("FindSettlementItems")',
+            executeUrl: '@Url.Action("Execute")'});
+        });
+</script>
+<style type="text/css">
+.mvcform {width:100%;}
+.mvcform fieldset{float:left; margin-right:.5em;}
+fieldset table{width:100%; border-color: #A6C9E2;}
+.mvcform fieldset input{width:40px; text-align:right}
+fieldset th{ border-color: #A6C9E2; color:#fff; background-color:#2E6E9E;}
+fieldset td{text-align:right; border-color: #A6C9E2;}
+</style>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td>@Html.LabelFor(m => m.ContractID)@Html.AutoCompleteFor(m => m.ContractID, m => m.ContractName, "Combo", "Contract", "ID", "ContractName", null)@Html.HiddenFor(m => m.ID)</td>
+    <td>@Html.LabelFor(m => m.CreateDate)@Html.EditorFor(m => m.CreateDate, "DateTime", new { defaultValue = DateTime.Today.ToString("yyyy-MM-dd") })</td>
+    <td>@Html.LabelFor(m => m.Rate)@Html.TextBoxFor(m => m.Rate, new { @class = "stext", Value=0 })</td> <td></td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.BeginDate)@Html.EditorFor(m => m.BeginDate, "DateTime")</td>
+        <td>@Html.LabelFor(m => m.EndDate)@Html.EditorFor(m => m.EndDate, "DateTime")</td>
+        <td>@Html.LabelFor(m => m.PriceType)@Html.DicEditorFor(m => m.PriceType, DicEnum.ValuationType)</td>
+        <td>
+        <button class="tbtn search" id="btnQuery" type="button">查询</button>
+        </td>
+    </tr>
+    <tr>
+    <td colspan="4">
+    <fieldset id="fsOtherPrice" style="width:25%">
+    <legend>其他加价</legend>
+    </fieldset>
+    <fieldset  id="fsItemPrice" style="width:45%">
+    <legend>合同明细</legend>
+    </fieldset>
+    <fieldset id="fsPumpPrice" style="width:26%">
+    <legend>泵车价格</legend>
+    </fieldset>
+    </td>
+    </tr> 
+</table>
+
+    <table style="width:100%">
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    
+    </table>
+}
+</div>
+ 
+<div id="AuditForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    
+    <tr> 
+        <td>@Html.Label("ID","结算单号")@Html.TextBoxFor(m => m.ID, new { readOnly = true })
+        </td> 
+      
+    </tr> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.AuditStatus)@Html.DicEditorFor(m => m.AuditStatus, DicEnum.AuditStatus)</td> 
+       
+   
+    </tr>
+    <tr> 
+        <td >@Html.LabelFor(m => m.AuditInfo)@Html.TextAreaFor(m => m.AuditInfo, new { style = "width:240px;" })
+        @Html.HiddenFor(m=>m.Auditor) @Html.HiddenFor(m=>m.AuditTime)
+        </td> 
+    </tr>
+</table> 
+}
+</div> 

@@ -1,0 +1,217 @@
+﻿
+@{
+   // List<ZLERP.Model.Project> Projects = ViewBag.Projects;
+    List<ZLERP.Model.ProduceTask> Tasks = ViewBag.Tasks;
+    //List<ZLERP.Model.distance> Tasks = ViewBag.Tasks;
+    List<ZLERP.Model.ShippingDocument> CarTasks = ViewBag.CarTasks;
+  
+}@section HeaderSection{ 
+
+<script src="../../Scripts/Views/schedule/schedule_center.js" type="text/javascript"></script>
+<script type="text/javascript">
+    initCenterPagejs();
+    var isShowGprs = (gSysConfig.Gps == "true"); var isShowGps = (gSysConfig.Gprs == "true");
+    var isBeaterStatus = (gSysConfig.AddBeaterStatusFn == "true");
+    $("#layout_radio").buttonset();
+    $("#layout_radio>label").width(50);
+</script>
+
+
+}
+
+<div class="container-fluid">
+     <div id="layout_radio" style="display:inline-block;">
+		    <input type="radio" id="radio1" name="radio" onclick="changeLayout(1)" /><label for="radio1">单列</label>
+		    <input type="radio" id="radio2" name="radio" onclick="changeLayout(2)" /><label for="radio2">双列</label>
+		    <input type="radio" id="radio3" name="radio" onclick="changeLayout(3)" /><label for="radio3">三列</label>
+	 </div>
+
+    <div class="pj_st sd_help">
+        图标说明：
+        <div class="inlineBlock16 c_run">
+        </div>
+        正常;&nbsp;
+       <div class="inlineBlock16 carStop">
+        </div>
+        熄火;&nbsp;
+        <div class="inlineBlock16 unload">
+        </div>
+        卸料;&nbsp;
+        <div class="inlineBlock16 gpsInvalid">
+        </div>
+        定位无效;&nbsp;
+        <div class="inlineBlock16 gprsInvalid">
+        </div>
+        数据异常;&nbsp;
+    
+    </div>
+   
+    <div class="pj">
+                @*@foreach (ZLERP.Model.distance task in Tasks)
+                {
+               
+                    var curCartasks = CarTasks.Where(s => s.ProjectID == task.projectid && s.CastMode==task.CastModeName);
+                    <div class="mediumListIconTextItem task" tkid="@task.Builder" style="float:left;width:46%;padding:5px">
+                    <div class="taskDes">@task.ID -- @task.ProjectName -- @task.CastModeName -- @task.distance.ToString("#0.0#") km</div>
+
+                    <span  style="display:none"><text>距离:<span class="pj_distance">@task.distance.ToString("#0.0#")</span>km</text></span>
+
+                        <div class="produceLine" title = "生产线装料">
+                        </div>
+                        <div class="factoryIcon" title = "搅拌站">
+                        </div>
+                        <div class ="CubeInfo" title = "方量累计">
+                            <span class="tk_PlanCube" title="计划方量"></span>方
+                            <br/>
+                            <span class="tk_ProvidedCube" title="已完成方量"></span>方
+                            <br/>
+                            <span class="tk_Times" title="已完成车次"></span>次 
+                        </div>
+                        <div class="atBuilding" title = "工地卸料">
+                        </div>
+                        <div class="buildingIcon" title = "工地">
+                        </div>
+                        <div class="path">
+                            <div class="go" title = "路上">
+                            </div>
+                            <div class="info">
+                            </div>
+                            <div class="back" title = "返回中">
+                            </div>
+                        </div>
+                    </div>
+                }*@
+                @foreach (ZLERP.Model.ProduceTask task in Tasks)
+                {
+               
+                    var curCartasks = CarTasks.Where(s => s.TaskID == task.ID);
+                    <div class="mediumListIconTextItem task" tkid="@task.ID" style="float:left;width:46%;padding:5px">
+                    <div class="taskDes">@task.ID -- @task.ProjectName -- @task.ConsPos --  [@task.ConStrength]-- @task.CastMode -- @task.Distance.Value.ToString("#0.0#") km</div>
+                    @if (task.Distance.HasValue)
+                    {
+                        <span  style="display:none"><text>距离:<span class="pj_distance">@task.Distance.Value.ToString("#0.0#")</span>km</text></span>
+                    }
+                    else
+                    {
+                        <span  style="display:none"><text>距离:未知</text></span>
+                    }
+                        <div class="produceLine" title = "生产线装料">
+                        </div>
+                        <div class="factoryIcon" title = "搅拌站">
+                        </div>
+                        <div class ="CubeInfo" title = "方量累计">
+                            <span class="tk_PlanCube" title="计划方量"></span>方
+                            <br/>
+                            <span class="tk_ProvidedCube" title="已完成方量"></span>方
+                            <br/>
+                            <span class="tk_Times" title="已完成车次"></span>次 
+                        </div>
+                        <div class="atBuilding" title = "工地卸料">
+                        </div>
+                        <div class="buildingIcon" title = "工地">
+                        </div>
+                        <div class="path">
+                            <div class="go" title = "路上">
+                            </div>
+                            <div class="info">
+                            </div>
+                            <div class="back" title = "返回中">
+                            </div>
+                        </div>
+                    </div>
+                }
+       
+    </div>
+</div>
+<script type="text/x-jquery-tmpl" id="tooltipTmp">
+<table cellpadding="0" width="100%" cellspacing="0" border="0">
+    <tr>
+        <td>
+            车辆编号：
+        </td>
+        <td>
+            ${CustomNo}
+        </td>
+        <td>
+            车牌号：
+        </td>
+        <td>
+            ${CarNum}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            司机：
+        </td>
+        <td>
+            ${DriverName}
+        </td>
+        <td>
+            SIM卡号：
+        </td>
+        <td>
+             ${SIM}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            车辆类型：
+        </td>
+        <td>
+            ${CarTypeName}&nbsp;
+        </td>
+        <td>
+            
+        </td>
+        <td>
+             
+        </td>
+    </tr>
+    <tr>
+         <td>
+            车载(方)：
+        </td>
+        <td>
+             ${CarCapacity}
+        </td>
+        <td>
+            车次：
+        </td>
+        <td>
+             ${ProvidedTimes}
+        </td>
+
+    </tr>
+    {{if StatusCode == "005008"}}
+    <tr>
+        <td align="center" colspan="4"> </td>
+    <tr>
+    {{else}}
+    <tr>
+        <td>
+            距离搅拌站：
+        </td>
+        <td>
+            ${FactoryDistance}km
+        </td>
+        <td>
+            距离工地：
+        </td>
+        <td>
+            ${ProjectDistance}km
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" align="center">
+            @Html.Button("回厂", "class='icon reload' onclick=\"changeCarState('/ShippingDocument.mvc/CarReturn',{carId:'${Id}'} ,'${Id}');tooltip.pnotify_remove();\"")
+            @*--同步 关闭--
+           @if(!isSoftSyn){
+                @Html.Button("转发", "class='icon undo' onclick=\"showPage('" + Url.Action("ChangeTask", "Car") + "/${Id}','转发','500','600');tooltip.pnotify_remove();\"")
+            }*@
+      </td>
+    </tr>
+    {{/if}}
+</table>
+</script>
+
+

@@ -1,0 +1,89 @@
+﻿@model ZLERP.Model.AIR2Exam 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/AIR2Exam/AIR2Exam.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            air2examIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("试验编号")@Html.EditorFor(m => m.ID)
+                </td>               
+                <td>@Html.LabelFor(m => m.ExamTime)@Html.EditorFor(m => m.ExamTime)
+                </td>
+                <td>@Html.LabelFor(m => m.ReportTime)@Html.EditorFor(m => m.ReportTime)
+                </td>
+            </tr>
+            <tr>
+            <td>@Html.LabelFor(m => m.CommissionID)@Html.fixedDropDownListFor(m => m.CommissionID, (IEnumerable<SelectListItem>)ViewBag.Commission)
+                </td>
+                <td>@Html.LabelFor(m => m.StuffID)@Html.fixedDropDownListFor(m => m.StuffID, (IEnumerable<SelectListItem>)ViewBag.AIRStuff)
+                </td>
+                <td>@Html.LabelFor(m => m.DeputyNum)@Html.EditorFor(m => m.DeputyNum)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.OutID)@Html.EditorFor(m => m.OutID)
+                </td>
+                <td>@Html.LabelFor(m => m.RadioExamID)@Html.EditorFor(m => m.RadioExamID)
+                </td>
+                <td>@Html.LabelFor(m => m.Grade)@Html.EditorFor(m => m.Grade)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ActIndex7)@Html.EditorFor(m => m.ActIndex7)
+                </td>
+                <td>@Html.LabelFor(m => m.ActIndex28)@Html.EditorFor(m => m.ActIndex28)
+                </td>
+                <td>@Html.LabelFor(m => m.WaContent)@Html.EditorFor(m => m.WaContent)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.BurnLossNum)@Html.EditorFor(m => m.BurnLossNum)
+                </td>
+                <td>@Html.LabelFor(m => m.Density)@Html.EditorFor(m => m.Density)
+                </td>
+                <td>@Html.LabelFor(m => m.GlaContent)@Html.EditorFor(m => m.GlaContent)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Area)@Html.EditorFor(m => m.Area)
+                </td>
+                <td>@Html.LabelFor(m => m.SO3)@Html.EditorFor(m => m.SO3)
+                </td>
+                <td>@Html.LabelFor(m => m.Clion)@Html.EditorFor(m => m.Clion)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AvaTime)@Html.EditorFor(m => m.AvaTime)
+                </td>
+                <td>@Html.LabelFor(m => m.StandJudge)@Html.EditorFor(m => m.StandJudge)
+                </td>
+                <td>@Html.LabelFor(m => m.Assessor)@Html.EditorFor(m => m.Assessor)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Principal)@Html.EditorFor(m => m.Principal)
+                </td>
+                <td>@Html.LabelFor(m => m.IsUse)@Html.CheckBoxFor(m => m.IsUse)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">@Html.LabelFor(m => m.ExamGist)@Html.TextArea("ExamGist",Lang.Msg_ExamGistForAIR2,1,90,new {})
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">@Html.LabelFor(m => m.ExamResult)@Html.TextArea("ExamResult", Lang.Msg_ExamResultForAIR2, 1, 90, new { })
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

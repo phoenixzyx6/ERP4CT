@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.PurchasePlanByEquip, ZLERP.Model" table="PurchasePlanByEquip" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" >
+		<id name="ID" column="PurchasePlan_ID">
+		 	<generator class="native" />
+		</id>
+    <property name="PurchasePlan_NeedDate" column="PurchasePlan_NeedDate" />
+		<property name="GoodsID" column="GoodsID" />
+		<!--<property name="BID" column="BID" />
+		<property name="MID" column="MID" />
+		<property name="SID" column="SID" />
+		<many-to-one name="ClassB" column="BID" class="ClassB" update="false" insert="false"/>
+		<many-to-one name="ClassM" column="MID" class="ClassM" update="false" insert="false"/>
+		<many-to-one name="Classs" column="SID" class="Classs" update="false" insert="false"/>
+		<many-to-one name="Equipment" column="GoodsID" class="Equipment" update="false" insert="false"/>-->
+		
+		<property name="PurchasePlan_reason" column="PurchasePlan_reason" />
+		<property name="PurchasePlan_planstate" column="PurchasePlan_planstate" />
+		<property name="PurchasePlan_state" column="PurchasePlan_state" />
+		<property name="PurchasePlan_claimer" column="PurchasePlan_claimer" />
+		<property name="PurchasePlan_auditor" column="PurchasePlan_auditor" />
+		<property name="PurchasePlan_audit_date" column="PurchasePlan_audit_date" />
+		<property name="PurchasePlan_audit_opinion" column="PurchasePlan_audit_opinion" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Remark" column="Remark" />
+
+		<property name="planmoney" column="planmoney" />
+		<property name="_type" column="_type" />
+		<property name="EquipMtLyID" column="EquipMtLyID" />
+	</class>
+</hibernate-mapping>

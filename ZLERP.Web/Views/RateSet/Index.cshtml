@@ -1,0 +1,38 @@
+﻿@model ZLERP.Model.RateSet 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/RateSet/RateSet.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            ratesetIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.RIWRate)@Html.TextBoxFor(m => m.RIWRate, new { @Value="0"})
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.RIWRate1)@Html.TextBoxFor(m => m.RIWRate1, new { @Value = "0" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.SIRRate)@Html.TextBoxFor(m => m.SIRRate, new { @Value = "0" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.SIWRate)@Html.TextBoxFor(m => m.SIWRate, new { @Value = "0" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>

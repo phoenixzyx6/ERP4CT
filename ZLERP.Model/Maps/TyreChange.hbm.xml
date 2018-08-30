@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.TyreChange, ZLERP.Model" table="TyreChange" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="ChangeID">
+            <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="ChangeDate" column="ChangeDate" />
+		<property name="TyreType" column="TyreType" />
+		<property name="NewTyreID" column="NewTyreID" />
+		<property name="OldTyreID" column="OldTyreID" />
+		<property name="ChangeReason" column="ChangeReason" />
+		<property name="InstallPlace" column="InstallPlace" />
+		<property name="Mileage" column="Mileage" />
+		<property name="ChangeMan" column="ChangeMan" />
+        <many-to-one name="ChangeManUser" column="ChangeMan" class="User" />
+		<property name="CarID" column="CarID" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+	</class>
+</hibernate-mapping>

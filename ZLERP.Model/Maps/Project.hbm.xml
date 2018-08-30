@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Project, ZLERP.Model" table="Project" lazy="true"
+    dynamic-insert="true" dynamic-update="true"  optimistic-lock="version">
+		<id name="ID" column="ProjectID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="ProjectAddr" column="ProjectAddr" />
+		<property name="ProjectName" column="ProjectName" />
+		<property name="Distance" column="Distance" />
+		<property name="BuildUnit" column="BuildUnit" />
+		<property name="ConstructUnit" column="ConstructUnit" />
+		<property name="LinkMan" column="LinkMan" />
+		<property name="Tel" column="Tel" />
+		<property name="Remark" column="Remark" />
+		<property name="Longitude" column="Longitude" />
+    <property name="Latitude" column="Latitude" />
+    <property name="PayType" column="PayType" />
+		<property name="PlaceRange" column="PlaceRange" />
+		<property name="ErrorValue" column="ErrorValue" />
+		<property name="CPOrder" column="CPOrder" />
+		<property name="IsShow" column="IsShow" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="ContractID" column="ContractID" />
+    <many-to-one name="Contract" column="ContractID" class="Contract" insert="false" update="false" />
+	</class>
+</hibernate-mapping>

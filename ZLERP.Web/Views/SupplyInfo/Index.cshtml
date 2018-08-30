@@ -1,0 +1,93 @@
+﻿
+@model ZLERP.Model.SupplyInfo 
+@section HeaderSection{ 
+     <script src="@Url.Content("~/Scripts/Views/SupplyInfo.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            supplyInfoInit({
+                storeUrl: '@Url.Action("Find")',
+                updateUsedStatusUrl: '@Url.Action("UpdateUsedStatus")',
+                getPinYin: '@Url.Action("GetFirstPinYin")',
+                updateStroeUrl: '@Url.Action("UpdateSupplyInfo")'
+            });
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+   
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.ShortName)@Html.EditorFor(m => m.ShortName)
+                </td>
+            </tr>
+                @Html.HiddenFor(m => m.ID)
+            <tr>
+                <td>@Html.LabelFor(m => m.SupplyKind)@Html.DicEditorFor(m => m.SupplyKind, DicEnum.SuType, "", "" )
+                </td>
+                <td>@Html.LabelFor(m => m.SupplyName)@Html.EditorFor(m => m.SupplyName)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Principal)@Html.EditorFor(m => m.Principal)
+                </td>
+                <td>@Html.LabelFor(m => m.SupplyAddr)@Html.EditorFor(m => m.SupplyAddr)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.InvoiceAddr)@Html.EditorFor(m => m.InvoiceAddr)
+                </td>
+                <td>@Html.LabelFor(m => m.BankName)@Html.EditorFor(m => m.BankName)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.BankAccount)@Html.EditorFor(m => m.BankAccount)
+                </td>
+                <td>@Html.LabelFor(m => m.BusinessTel)@Html.EditorFor(m => m.BusinessTel)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.BusinessFax)@Html.EditorFor(m => m.BusinessFax)
+                </td>
+                <td>@Html.LabelFor(m => m.PostCode)@Html.EditorFor(m => m.PostCode)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.PrincipalTel)@Html.EditorFor(m => m.PrincipalTel)
+                </td>
+                <td>@Html.LabelFor(m => m.LinkMan)@Html.EditorFor(m => m.LinkMan)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.LinkTel)@Html.EditorFor(m => m.LinkTel)
+                </td>
+                <td>@Html.LabelFor(m => m.SupplyType)@Html.EditorFor(m => m.SupplyType)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CreditWorthiness)@Html.EditorFor(m => m.CreditWorthiness)
+                </td>
+                <td>@Html.LabelFor(m => m.Email)@Html.EditorFor(m => m.Email)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.IsUsed)@Html.CheckBoxFor(m => m.IsUsed, new { Checked = true})
+                </td>
+                <td>@Html.LabelFor(m => m.IsTax)@Html.CheckBoxFor(m => m.IsTax)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Remark)@Html.EditorFor(m => m.Remark)
+                </td>
+                <td>@Html.LabelFor(m => m.IsNz)@Html.CheckBoxFor(m => m.IsNz)
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

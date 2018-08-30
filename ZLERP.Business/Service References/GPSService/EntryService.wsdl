@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EntryService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://10.71.11.62:8002/EntryService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://10.71.11.62:8002/EntryService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IEntryService_ProjectAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProjectAdd" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_ProjectAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProjectAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_ProjectEdit_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProjectEdit" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_ProjectEdit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProjectEditResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_TaskTryGetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:TaskTryGetInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_TaskTryGetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TaskTryGetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_TaskList_InputMessage">
+    <wsdl:part name="parameters" element="tns:TaskList" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_TaskList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TaskListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_TaskAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:TaskAdd" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_TaskAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TaskAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_TaskEdit_InputMessage">
+    <wsdl:part name="parameters" element="tns:TaskEdit" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_TaskEdit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TaskEditResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_TaskComplete_InputMessage">
+    <wsdl:part name="parameters" element="tns:TaskComplete" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_TaskComplete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TaskCompleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_TaskGetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:TaskGetInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_TaskGetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TaskGetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarTaskTryGetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarTaskTryGetInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarTaskTryGetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarTaskTryGetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarTaskList_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarTaskList" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarTaskList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarTaskListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarTaskAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarTaskAdd" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarTaskAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarTaskAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarTaskGetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarTaskGetInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarTaskGetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarTaskGetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_LoginWithKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginWithKey" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_LoginWithKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginWithKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_Logout_InputMessage">
+    <wsdl:part name="parameters" element="tns:Logout" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_Logout_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarAdd" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarEdit_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarEdit" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarEdit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarEditResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarGetDrivers_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarGetDrivers" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarGetDrivers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarGetDriversResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarAddDriver_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarAddDriver" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarAddDriver_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarAddDriverResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarDeleteDriver_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarDeleteDriver" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarDeleteDriver_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarDeleteDriverResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarGetLastestGpsInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarGetLastestGpsInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarGetLastestGpsInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarGetLastestGpsInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarGetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarGetInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarGetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarGetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarSearchGpsInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarSearchGpsInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarSearchGpsInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarSearchGpsInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarListLastestGpsInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarListLastestGpsInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarListLastestGpsInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarListLastestGpsInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarList_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarList" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarTryGetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarTryGetInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarTryGetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarTryGetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarRun_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarRun" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarRun_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarRunResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarRepeal_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarRepeal" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarRepeal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarRepealResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarTaskComplete_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarTaskComplete" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarTaskComplete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarTaskCompleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarRest_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarRest" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarRest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarRestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarWaiting_InputMessage">
+    <wsdl:part name="parameters" element="tns:CarWaiting" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_CarWaiting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CarWaitingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_DriverTryGetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:DriverTryGetInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_DriverTryGetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DriverTryGetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_DriverAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:DriverAdd" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_DriverAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DriverAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_DriverEdit_InputMessage">
+    <wsdl:part name="parameters" element="tns:DriverEdit" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_DriverEdit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DriverEditResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_DriverGetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:DriverGetInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_DriverGetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DriverGetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_DriverGetCars_InputMessage">
+    <wsdl:part name="parameters" element="tns:DriverGetCars" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_DriverGetCars_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DriverGetCarsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_DriverList_InputMessage">
+    <wsdl:part name="parameters" element="tns:DriverList" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_DriverList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DriverListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_ProjectTryGetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProjectTryGetInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_ProjectTryGetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProjectTryGetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_ProjectList_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProjectList" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_ProjectList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProjectListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_ProjectGetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProjectGetInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEntryService_ProjectGetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProjectGetInfoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IEntryService">
+    <wsdl:operation name="ProjectAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/ProjectAdd" message="tns:IEntryService_ProjectAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/ProjectAddResponse" message="tns:IEntryService_ProjectAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProjectEdit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/ProjectEdit" message="tns:IEntryService_ProjectEdit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/ProjectEditResponse" message="tns:IEntryService_ProjectEdit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TaskTryGetInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/TaskTryGetInfo" message="tns:IEntryService_TaskTryGetInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/TaskTryGetInfoResponse" message="tns:IEntryService_TaskTryGetInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TaskList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/TaskList" message="tns:IEntryService_TaskList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/TaskListResponse" message="tns:IEntryService_TaskList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TaskAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/TaskAdd" message="tns:IEntryService_TaskAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/TaskAddResponse" message="tns:IEntryService_TaskAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TaskEdit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/TaskEdit" message="tns:IEntryService_TaskEdit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/TaskEditResponse" message="tns:IEntryService_TaskEdit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TaskComplete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/TaskComplete" message="tns:IEntryService_TaskComplete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/TaskCompleteResponse" message="tns:IEntryService_TaskComplete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TaskGetInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/TaskGetInfo" message="tns:IEntryService_TaskGetInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/TaskGetInfoResponse" message="tns:IEntryService_TaskGetInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarTaskTryGetInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarTaskTryGetInfo" message="tns:IEntryService_CarTaskTryGetInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarTaskTryGetInfoResponse" message="tns:IEntryService_CarTaskTryGetInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarTaskList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarTaskList" message="tns:IEntryService_CarTaskList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarTaskListResponse" message="tns:IEntryService_CarTaskList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarTaskAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarTaskAdd" message="tns:IEntryService_CarTaskAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarTaskAddResponse" message="tns:IEntryService_CarTaskAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarTaskGetInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarTaskGetInfo" message="tns:IEntryService_CarTaskGetInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarTaskGetInfoResponse" message="tns:IEntryService_CarTaskGetInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/Login" message="tns:IEntryService_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/LoginResponse" message="tns:IEntryService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginWithKey">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/LoginWithKey" message="tns:IEntryService_LoginWithKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/LoginWithKeyResponse" message="tns:IEntryService_LoginWithKey_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/Logout" message="tns:IEntryService_Logout_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/LogoutResponse" message="tns:IEntryService_Logout_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarAdd" message="tns:IEntryService_CarAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarAddResponse" message="tns:IEntryService_CarAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarEdit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarEdit" message="tns:IEntryService_CarEdit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarEditResponse" message="tns:IEntryService_CarEdit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarGetDrivers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarGetDrivers" message="tns:IEntryService_CarGetDrivers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarGetDriversResponse" message="tns:IEntryService_CarGetDrivers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarAddDriver">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarAddDriver" message="tns:IEntryService_CarAddDriver_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarAddDriverResponse" message="tns:IEntryService_CarAddDriver_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarDeleteDriver">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarDeleteDriver" message="tns:IEntryService_CarDeleteDriver_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarDeleteDriverResponse" message="tns:IEntryService_CarDeleteDriver_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarGetLastestGpsInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarGetLastestGpsInfo" message="tns:IEntryService_CarGetLastestGpsInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarGetLastestGpsInfoResponse" message="tns:IEntryService_CarGetLastestGpsInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarGetInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarGetInfo" message="tns:IEntryService_CarGetInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarGetInfoResponse" message="tns:IEntryService_CarGetInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarSearchGpsInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarSearchGpsInfo" message="tns:IEntryService_CarSearchGpsInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarSearchGpsInfoResponse" message="tns:IEntryService_CarSearchGpsInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarListLastestGpsInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarListLastestGpsInfo" message="tns:IEntryService_CarListLastestGpsInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarListLastestGpsInfoResponse" message="tns:IEntryService_CarListLastestGpsInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarList" message="tns:IEntryService_CarList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarListResponse" message="tns:IEntryService_CarList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarTryGetInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarTryGetInfo" message="tns:IEntryService_CarTryGetInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarTryGetInfoResponse" message="tns:IEntryService_CarTryGetInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarRun">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarRun" message="tns:IEntryService_CarRun_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarRunResponse" message="tns:IEntryService_CarRun_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarRepeal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarRepeal" message="tns:IEntryService_CarRepeal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarRepealResponse" message="tns:IEntryService_CarRepeal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarTaskComplete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarTaskComplete" message="tns:IEntryService_CarTaskComplete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarTaskCompleteResponse" message="tns:IEntryService_CarTaskComplete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarRest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarRest" message="tns:IEntryService_CarRest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarRestResponse" message="tns:IEntryService_CarRest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarWaiting">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/CarWaiting" message="tns:IEntryService_CarWaiting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/CarWaitingResponse" message="tns:IEntryService_CarWaiting_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DriverTryGetInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/DriverTryGetInfo" message="tns:IEntryService_DriverTryGetInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/DriverTryGetInfoResponse" message="tns:IEntryService_DriverTryGetInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DriverAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/DriverAdd" message="tns:IEntryService_DriverAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/DriverAddResponse" message="tns:IEntryService_DriverAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DriverEdit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/DriverEdit" message="tns:IEntryService_DriverEdit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/DriverEditResponse" message="tns:IEntryService_DriverEdit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DriverGetInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/DriverGetInfo" message="tns:IEntryService_DriverGetInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/DriverGetInfoResponse" message="tns:IEntryService_DriverGetInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DriverGetCars">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/DriverGetCars" message="tns:IEntryService_DriverGetCars_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/DriverGetCarsResponse" message="tns:IEntryService_DriverGetCars_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DriverList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/DriverList" message="tns:IEntryService_DriverList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/DriverListResponse" message="tns:IEntryService_DriverList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProjectTryGetInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/ProjectTryGetInfo" message="tns:IEntryService_ProjectTryGetInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/ProjectTryGetInfoResponse" message="tns:IEntryService_ProjectTryGetInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProjectList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/ProjectList" message="tns:IEntryService_ProjectList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/ProjectListResponse" message="tns:IEntryService_ProjectList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProjectGetInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEntryService/ProjectGetInfo" message="tns:IEntryService_ProjectGetInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEntryService/ProjectGetInfoResponse" message="tns:IEntryService_ProjectGetInfo_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IEntryService" type="tns:IEntryService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ProjectAdd">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/ProjectAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProjectEdit">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/ProjectEdit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TaskTryGetInfo">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/TaskTryGetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TaskList">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/TaskList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TaskAdd">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/TaskAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TaskEdit">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/TaskEdit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TaskComplete">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/TaskComplete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TaskGetInfo">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/TaskGetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarTaskTryGetInfo">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarTaskTryGetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarTaskList">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarTaskList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarTaskAdd">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarTaskAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarTaskGetInfo">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarTaskGetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginWithKey">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/LoginWithKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/Logout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarAdd">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarEdit">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarEdit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarGetDrivers">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarGetDrivers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarAddDriver">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarAddDriver" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarDeleteDriver">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarDeleteDriver" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarGetLastestGpsInfo">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarGetLastestGpsInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarGetInfo">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarGetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarSearchGpsInfo">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarSearchGpsInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarListLastestGpsInfo">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarListLastestGpsInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarList">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarTryGetInfo">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarTryGetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarRun">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarRun" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarRepeal">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarRepeal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarTaskComplete">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarTaskComplete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarRest">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarRest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarWaiting">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/CarWaiting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DriverTryGetInfo">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/DriverTryGetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DriverAdd">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/DriverAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DriverEdit">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/DriverEdit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DriverGetInfo">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/DriverGetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DriverGetCars">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/DriverGetCars" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DriverList">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/DriverList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProjectTryGetInfo">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/ProjectTryGetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProjectList">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/ProjectList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProjectGetInfo">
+      <soap:operation soapAction="http://tempuri.org/IEntryService/ProjectGetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EntryService">
+    <wsdl:port name="BasicHttpBinding_IEntryService" binding="tns:BasicHttpBinding_IEntryService">
+      <soap:address location="http://10.71.11.62:8002/EntryService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

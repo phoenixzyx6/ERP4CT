@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.Lab_Air2Density, ZLERP.Model" table="Lab_Air2Density" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="Lab_Air2DensityId">
+      <generator class="native" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="Lab_Air2OriginId" column="Lab_Air2OriginId" />
+    <property name="Sort" column="Sort" />
+    <property name="OreQuality" column="OreQuality" />
+    <property name="InitialVolume" column="InitialVolume" />
+    <property name="ASlagVolume" column="ASlagVolume" />
+    <property name="BKeroseneVolume" column="BKeroseneVolume" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <many-to-one name="Lab_Air2Origin" column="Lab_Air2OriginId" class="Lab_Air2Origin" update="false" insert="false"/>
+  </class>
+</hibernate-mapping>

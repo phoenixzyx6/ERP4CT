@@ -1,0 +1,2102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E7BA785B-6E84-4F9D-9E08-A54108359E32}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZLERP.Web</RootNamespace>
+    <AssemblyName>ZLERP.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <TargetFrameworkProfile />
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DeployIisAppPath>
+    </DeployIisAppPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PackageAsSingleFile>false</PackageAsSingleFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>../ZOOMLION.ERP3.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ChnCharInfo">
+      <HintPath>..\Library\ChnCharInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\Library\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib.Web.Mvc, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\Lib.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\Library\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common.resources, Version=8.0.0.0, Culture=zh-CHS, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\Microsoft.ReportViewer.Common.resources.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization.resources, Version=10.0.0.0, Culture=zh-Hans, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\Microsoft.ReportViewer.DataVisualization.resources.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms.resources, Version=8.0.0.0, Culture=zh-CHS, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\Microsoft.ReportViewer.WebForms.resources.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MvcContrib.IncludeHandling">
+      <HintPath>..\Library\MvcContrib.IncludeHandling.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Library\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Caches.SysCache">
+      <HintPath>..\Library\NHibernate.Caches.SysCache.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\Library\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Yahoo.Yui.Compressor, Version=1.4.0.0, Culture=neutral, PublicKeyToken=f8b4b81ec75097e2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Yahoo.Yui.Compressor.dll</HintPath>
+    </Reference>
+    <Reference Include="ZLERP.Id">
+      <HintPath>..\Library\ZLERP.Id.dll</HintPath>
+    </Reference>
+    <Reference Include="ZLERP.License.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0e6da7acd3da75ec, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ZLERP.Business\bin\Debug\ZLERP.License.Client.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\AssemblyVersion.cs">
+      <Link>Properties\AssemblyVersion.cs</Link>
+    </Compile>
+    <Compile Include="Controllers\AdvanceMoneyController.cs" />
+    <Compile Include="Controllers\BankController.cs" />
+    <Compile Include="Areas\Mobile\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Mobile\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Mobile\Controllers\ProduceController.cs" />
+    <Compile Include="Areas\Mobile\MobileAreaRegistration.cs" />
+    <Compile Include="Controllers\Attributes\MobileAuthorizeAttribute.cs" />
+    <Compile Include="Controllers\CarAssController.cs" />
+    <Compile Include="Controllers\CarDriverPriceController.cs" />
+    <Compile Include="Controllers\CarDriverPriceMainController.cs" />
+    <Compile Include="Controllers\CarIMAController.cs" />
+    <Compile Include="Controllers\CarLeaseCostSetController.cs" />
+    <Compile Include="Controllers\CarOilPriceSettingController.cs" />
+    <Compile Include="Controllers\CarProjectCubeCarController.cs" />
+    <Compile Include="Controllers\CarProjectCubeController.cs" />
+    <Compile Include="Controllers\CarProjectCubeMainController.cs" />
+    <Compile Include="Controllers\CarProjectPriceController.cs" />
+    <Compile Include="Controllers\CarProjectPriceMainController.cs" />
+    <Compile Include="Controllers\CarRepairController.cs" />
+    <Compile Include="Controllers\CarTimesRewardController.cs" />
+    <Compile Include="Controllers\CarTimesRewardMainController.cs" />
+    <Compile Include="Controllers\CarTrafficPoliceFineController.cs" />
+    <Compile Include="Controllers\ContractDZController.cs" />
+    <Compile Include="Controllers\ContractJSController.cs" />
+    <Compile Include="Controllers\ContractProductController.cs" />
+    <Compile Include="Controllers\CustomerPlanController.cs" />
+    <Compile Include="Controllers\DispatchListHistoryController.cs" />
+    <Compile Include="Controllers\distanceController.cs" />
+    <Compile Include="Controllers\DutyPlanController.cs" />
+    <Compile Include="Controllers\ExtraPumpController.cs" />
+    <Compile Include="Controllers\FinalStuffTypeController.cs" />
+    <Compile Include="Controllers\GoodsAccountController.cs" />
+    <Compile Include="Controllers\GoodsAccountMainController.cs" />
+    <Compile Include="Controllers\GoodsBorrowController.cs" />
+    <Compile Include="Controllers\GoodsCheckController.cs" />
+    <Compile Include="Controllers\GoodsInController.cs" />
+    <Compile Include="Controllers\GoodsInfoController.cs" />
+    <Compile Include="Controllers\GoodsInHistoryController.cs" />
+    <Compile Include="Controllers\GoodsInvalidateController.cs" />
+    <Compile Include="Controllers\GoodsInvoiceController.cs" />
+    <Compile Include="Controllers\GoodsOutController.cs" />
+    <Compile Include="Controllers\GoodsPayController.cs" />
+    <Compile Include="Controllers\GoodsRevertController.cs" />
+    <Compile Include="Controllers\GoodsTypeController.cs" />
+    <Compile Include="Controllers\GPS_HotMarkController.cs" />
+    <Compile Include="Controllers\GPS_IconLayerController.cs" />
+    <Compile Include="Controllers\HandleRecordController.cs" />
+    <Compile Include="Controllers\Lab_ActiveInfoController.cs" />
+    <Compile Include="Controllers\Lab_ADM_ItemsController.cs" />
+    <Compile Include="Controllers\Lab_Air2ActiveInfoController.cs" />
+    <Compile Include="Controllers\Lab_Air2DensityController.cs" />
+    <Compile Include="Controllers\Lab_Air2OriginController.cs" />
+    <Compile Include="Controllers\Lab_Air2ReportController.cs" />
+    <Compile Include="Controllers\Lab_AirOriginController.cs" />
+    <Compile Include="Controllers\Lab_AirReportController.cs" />
+    <Compile Include="Controllers\Lab_BurntInfoController.cs" />
+    <Compile Include="Controllers\Lab_CAController.cs" />
+    <Compile Include="Controllers\Lab_CA_ItemsController.cs" />
+    <Compile Include="Controllers\Lab_FAController.cs" />
+    <Compile Include="Controllers\Lab_FA_ItemsController.cs" />
+    <Compile Include="Controllers\Lab_RecordController.cs" />
+    <Compile Include="Controllers\LinkManRecordController.cs" />
+    <Compile Include="Controllers\ManualProduceController.cs" />
+    <Compile Include="Controllers\ManualProductItemsController.cs" />
+    <Compile Include="Controllers\MonthAccountController.cs" />
+    <Compile Include="Controllers\MsgController.cs" />
+    <Compile Include="Controllers\MsgUserController.cs" />
+    <Compile Include="Controllers\MyMsgController.cs" />
+    <Compile Include="Controllers\OilResistanceController.cs" />
+    <Compile Include="Controllers\ProduceTaskOtherPriceController.cs" />
+    <Compile Include="Controllers\ProjectRouteController.cs" />
+    <Compile Include="Controllers\PurchaseContractController.cs" />
+    <Compile Include="Controllers\PurchaseController.cs" />
+    <Compile Include="Controllers\PurchasePlanByEquipController.cs" />
+    <Compile Include="Controllers\PurchasePlanController.cs" />
+    <Compile Include="Controllers\RegController.cs" />
+    <Compile Include="Controllers\RemindinfoController.cs" />
+    <Compile Include="Controllers\ReportDatumController.cs" />
+    <Compile Include="Controllers\RewardController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\RouteDetailController.cs" />
+    <Compile Include="Controllers\StockPactPriceSetController.cs" />
+    <Compile Include="Controllers\StuffAccountController.cs" />
+    <Compile Include="Controllers\StuffAccountMainController.cs" />
+    <Compile Include="Controllers\StuffInfoPriceController.cs" />
+    <Compile Include="Controllers\StuffInHistoryController.cs" />
+    <Compile Include="Controllers\StuffInPriceAdjustController.cs" />
+    <Compile Include="Controllers\StuffPayableAdjustController.cs" />
+    <Compile Include="Controllers\SystemMsgController.cs" />
+    <Compile Include="Controllers\TaskAssController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ADM2ExamController.cs" />
+    <Compile Include="Controllers\ADMExamController.cs" />
+    <Compile Include="Controllers\AIR1ExamController.cs" />
+    <Compile Include="Controllers\AIR2ExamController.cs" />
+    <Compile Include="Controllers\AlkaliReportController.cs" />
+    <Compile Include="Controllers\APBillController.cs" />
+    <Compile Include="Controllers\ARBillController.cs" />
+    <Compile Include="Controllers\AttachmentController.cs" />
+    <Compile Include="Controllers\Attributes\HandleAjaxErrorAttribute.cs" />
+    <Compile Include="Controllers\Attributes\UrlAuthorizeAttribute.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CAExamController.cs" />
+    <Compile Include="Controllers\CaptchaController.cs" />
+    <Compile Include="Controllers\CarCardController.cs" />
+    <Compile Include="Controllers\CarClassController.cs" />
+    <Compile Include="Controllers\CarClassItemController.cs" />
+    <Compile Include="Controllers\CarController.cs" />
+    <Compile Include="Controllers\CarLendController.cs" />
+    <Compile Include="Controllers\CarLendFootController.cs" />
+    <Compile Include="Controllers\CarLendItemController.cs" />
+    <Compile Include="Controllers\CarOilController.cs" />
+    <Compile Include="Controllers\CEExamController.cs" />
+    <Compile Include="Controllers\CheckInfoController.cs" />
+    <Compile Include="Controllers\CheckItemController.cs" />
+    <Compile Include="Controllers\ClassBController.cs" />
+    <Compile Include="Controllers\ClassMController.cs" />
+    <Compile Include="Controllers\ClasssController.cs" />
+    <Compile Include="Controllers\COMConfigController.cs" />
+    <Compile Include="Controllers\CommissionController.cs" />
+    <Compile Include="Controllers\CommissionItemController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\ConPriceController.cs" />
+    <Compile Include="Controllers\ConsMixpropController.cs" />
+    <Compile Include="Controllers\ConsMixpropItemsHistoryController.cs" />
+    <Compile Include="Controllers\ConStrAssessController.cs" />
+    <Compile Include="Controllers\ConStrAssessItemController.cs" />
+    <Compile Include="Controllers\ConStrengthController.cs" />
+    <Compile Include="Controllers\ConsMixpropItemController.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
+    <Compile Include="Controllers\ContractItemController.cs" />
+    <Compile Include="Controllers\ContractOtherPriceController.cs" />
+    <Compile Include="Controllers\ContractPumpController.cs" />
+    <Compile Include="Controllers\CustMixpropController.cs" />
+    <Compile Include="Controllers\CustMixpropItemController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\CustSiloController.cs" />
+    <Compile Include="Controllers\DBHelperController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\DicController.cs" />
+    <Compile Include="Controllers\DriverForCarController.cs" />
+    <Compile Include="Controllers\EquipmentController.cs" />
+    <Compile Include="Controllers\EquipmentItemController.cs" />
+    <Compile Include="Controllers\EquipMtLyController.cs" />
+    <Compile Include="Controllers\EquipMtLyItemController.cs" />
+    <Compile Include="Controllers\EquipMtLyReturnController.cs" />
+    <Compile Include="Controllers\EquipMtLyReturnItemController.cs" />
+    <Compile Include="Controllers\EquipTermlyMtController.cs" />
+    <Compile Include="Controllers\EquipTermlyMtItemController.cs" />
+    <Compile Include="Controllers\FAExamController.cs" />
+    <Compile Include="Controllers\FinanceController.cs" />
+    <Compile Include="Controllers\FormulaController.cs" />
+    <Compile Include="Controllers\FormulaItemController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IdentityController.cs" />
+    <Compile Include="Controllers\IdentitySettingController.cs" />
+    <Compile Include="Controllers\LogViewerController.cs" />
+    <Compile Include="Controllers\M1AssessItemController.cs" />
+    <Compile Include="Controllers\MaintenanceController.cs" />
+    <Compile Include="Controllers\MntZlController.cs" />
+    <Compile Include="Controllers\MntZlItemController.cs" />
+    <Compile Include="Controllers\OilMechController.cs" />
+    <Compile Include="Controllers\OpenCheckController.cs" />
+    <Compile Include="Controllers\PartBorrowController.cs" />
+    <Compile Include="Controllers\PartBorrowItemController.cs" />
+    <Compile Include="Controllers\PartBorrowReturnController.cs" />
+    <Compile Include="Controllers\PartInController.cs" />
+    <Compile Include="Controllers\PartInfoController.cs" />
+    <Compile Include="Controllers\PartInItemController.cs" />
+    <Compile Include="Controllers\PartInventoryController.cs" />
+    <Compile Include="Controllers\PartInventoryDetailController.cs" />
+    <Compile Include="Controllers\PartPlanController.cs" />
+    <Compile Include="Controllers\PartReturnController.cs" />
+    <Compile Include="Controllers\PartReturnDetailController.cs" />
+    <Compile Include="Controllers\PartStockContractController.cs" />
+    <Compile Include="Controllers\PartStockContractItemController.cs" />
+    <Compile Include="Controllers\PartStockController.cs" />
+    <Compile Include="Controllers\PartStockPlanController.cs" />
+    <Compile Include="Controllers\PartStockPlanDetailController.cs" />
+    <Compile Include="Controllers\ProducePlanController.cs" />
+    <Compile Include="Controllers\ProduceTaskController.cs" />
+    <Compile Include="Controllers\ProduceTasksHistoryController.cs" />
+    <Compile Include="Controllers\ProductRecordController.cs" />
+    <Compile Include="Controllers\ProductRecordItemController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\PumpWorkController.cs" />
+    <Compile Include="Controllers\QualityExamController.cs" />
+    <Compile Include="Controllers\QualityExamItemController.cs" />
+    <Compile Include="Controllers\ReceiveBillController.cs" />
+    <Compile Include="Controllers\RegionController.cs" />
+    <Compile Include="Controllers\RentCarPriceController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\ServiceBasedController.cs" />
+    <Compile Include="Controllers\SettlementController.cs" />
+    <Compile Include="Controllers\SiloController.cs" />
+    <Compile Include="Controllers\SiloProductLineController.cs" />
+    <Compile Include="Controllers\StockPactController.cs" />
+    <Compile Include="Controllers\StockPlanController.cs" />
+    <Compile Include="Controllers\StuffInController.cs" />
+    <Compile Include="Controllers\StuffInfoController.cs" />
+    <Compile Include="Controllers\StuffPriceController.cs" />
+    <Compile Include="Controllers\StuffSellController.cs" />
+    <Compile Include="Controllers\StuffTypeController.cs" />
+    <Compile Include="Controllers\SupplyInfoController.cs" />
+    <Compile Include="Controllers\SysConfigController.cs" />
+    <Compile Include="Controllers\SysFuncController.cs" />
+    <Compile Include="Controllers\SysLogController.cs" />
+    <Compile Include="Controllers\testController.cs" />
+    <Compile Include="Controllers\TplManageController.cs" />
+    <Compile Include="Controllers\TrainingController.cs" />
+    <Compile Include="Controllers\TrainRecordController.cs" />
+    <Compile Include="Controllers\TransPriceController.cs" />
+    <Compile Include="Controllers\TyreChangeController.cs" />
+    <Compile Include="Controllers\TyreInfoController.cs" />
+    <Compile Include="Controllers\TyreRepairController.cs" />
+    <Compile Include="Controllers\TZRalationController.cs" />
+    <Compile Include="Controllers\TZRalationHistoryController.cs" />
+    <Compile Include="Controllers\UnloadRecordController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\DispatchListController.cs" />
+    <Compile Include="Controllers\ProductLineController.cs" />
+    <Compile Include="Controllers\ShippingDocumentController.cs" />
+    <Compile Include="Controllers\NoticeController.cs" />
+    <Compile Include="Controllers\PayBillController.cs" />
+    <Compile Include="Controllers\MeasureInfoController.cs" />
+    <Compile Include="Controllers\StuffExamController.cs" />
+    <Compile Include="Controllers\TranAccController.cs" />
+    <Compile Include="Controllers\RateSetController.cs" />
+    <Compile Include="Controllers\ShippingDocumentHistoryController.cs" />
+    <Compile Include="Controllers\AlarmLogController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
+    <Compile Include="Controllers\GPSSysConfigController.cs" />
+    <Compile Include="Controllers\UserRoleController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\YearAccountController.cs" />
+    <Compile Include="Controllers\ABCController.cs" />
+    <Compile Include="Controllers\PurchaseMainController.cs" />
+    <Compile Include="Controllers\StockPactChildController.cs" />
+    <Compile Include="Controllers\StockPactChildChildController.cs" />
+    <Compile Include="Controllers\ProjectItemController.cs" />
+    <Compile Include="Controllers\PriceSettingController.cs" />
+    <Compile Include="Controllers\InsteadProductController.cs" />
+    <Compile Include="Controllers\ContractJSTZController.cs" />
+    <Compile Include="Controllers\ContractPayController.cs" />
+    <Compile Include="Controllers\Lab_ADMController.cs" />
+    <Compile Include="DataSet1.cs">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\LimitRegionController.cs" />
+    <Compile Include="Helpers\AutoCompleteExtensions.cs" />
+    <Compile Include="Helpers\CaptchaHelper.cs" />
+    <Compile Include="Helpers\DouglasPeuckerUtil.cs" />
+    <Compile Include="Helpers\DropDownTreeExtensions.cs" />
+    <Compile Include="Reports\EMFDeviceInfo.cs" />
+    <Compile Include="Reports\EMFStreamPrintDocument.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Helpers\ExcelExportHelper.cs" />
+    <Compile Include="Helpers\FileSizeHelper.cs" />
+    <Compile Include="Helpers\HelperExtensions.cs" />
+    <Compile Include="Helpers\LatLonUtils.cs" />
+    <Compile Include="Reports\Printer.cs" />
+    <Compile Include="Reports\PrintHelp.cs" />
+    <Compile Include="Helpers\SqlServerHelper.cs" />
+    <Compile Include="Helpers\ZipHelper.cs" />
+    <Compile Include="help\help.aspx.cs">
+      <DependentUpon>help.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="help\help.aspx.designer.cs">
+      <DependentUpon>help.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="help\helpinfo.aspx.cs">
+      <DependentUpon>helpinfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="help\helpinfo.aspx.designer.cs">
+      <DependentUpon>helpinfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Produce\ddKanban.aspx.cs">
+      <DependentUpon>ddKanban.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Produce\ddKanban.aspx.designer.cs">
+      <DependentUpon>ddKanban.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\QCCReportsBase.Master.cs">
+      <DependentUpon>QCCReportsBase.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\QCCReportsBase.Master.designer.cs">
+      <DependentUpon>QCCReportsBase.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebService\MetagePic.asmx.cs">
+      <DependentUpon>MetagePic.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Produce\Kanban.aspx.cs">
+      <DependentUpon>Kanban.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Produce\Kanban.aspx.designer.cs">
+      <DependentUpon>Kanban.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Produce\LinkManRecord.aspx.cs">
+      <DependentUpon>LinkManRecord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Produce\LinkManRecord.aspx.designer.cs">
+      <DependentUpon>LinkManRecord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportsBase.Master.cs">
+      <DependentUpon>ReportsBase.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportsBase.Master.designer.cs">
+      <DependentUpon>ReportsBase.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebService\CustomSoapHeader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Account\img\lanrenzhijia.png" />
+    <Content Include="Content\Account\login.css" />
+    <Content Include="Content\bootstrap\bootstrap.js" />
+    <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\duanxin.mp3" />
+    <Content Include="Content\erpimage\BG.png" />
+    <Content Include="Content\erpimage\erp.gif" />
+    <Content Include="Content\erpimage\erp3.gif" />
+    <Content Include="Content\erpimage\logo.gif" />
+    <Content Include="Content\erpimage\mapimage\button\button.png" />
+    <Content Include="Content\erpimage\mapimage\button\center.gif" />
+    <Content Include="Content\erpimage\mapimage\button\centerHover.gif" />
+    <Content Include="Content\erpimage\mapimage\button\dots_40x100.png" />
+    <Content Include="Content\erpimage\mapimage\button\left.gif" />
+    <Content Include="Content\erpimage\mapimage\button\leftHover.gif" />
+    <Content Include="Content\erpimage\mapimage\button\right.gif" />
+    <Content Include="Content\erpimage\mapimage\button\rightHover.gif" />
+    <Content Include="Content\erpimage\mapimage\icon\accept.png" />
+    <Content Include="Content\erpimage\mapimage\icon\add.png" />
+    <Content Include="Content\erpimage\mapimage\icon\adminAdd.png" />
+    <Content Include="Content\erpimage\mapimage\icon\bg.png" />
+    <Content Include="Content\erpimage\mapimage\icon\building.png" />
+    <Content Include="Content\erpimage\mapimage\icon\calendar.gif" />
+    <Content Include="Content\erpimage\mapimage\icon\cancel.png" />
+    <Content Include="Content\erpimage\mapimage\icon\car16.png" />
+    <Content Include="Content\erpimage\mapimage\icon\collapse.png" />
+    <Content Include="Content\erpimage\mapimage\icon\control_pause_blue.png" />
+    <Content Include="Content\erpimage\mapimage\icon\control_play_blue.png" />
+    <Content Include="Content\erpimage\mapimage\icon\control_stop_blue.png" />
+    <Content Include="Content\erpimage\mapimage\icon\cut.png" />
+    <Content Include="Content\erpimage\mapimage\icon\delete.png" />
+    <Content Include="Content\erpimage\mapimage\icon\down.png" />
+    <Content Include="Content\erpimage\mapimage\icon\edit.png" />
+    <Content Include="Content\erpimage\mapimage\icon\expand.png" />
+    <Content Include="Content\erpimage\mapimage\icon\factory.png" />
+    <Content Include="Content\erpimage\mapimage\icon\home.png" />
+    <Content Include="Content\erpimage\mapimage\icon\iconAll.png" />
+    <Content Include="Content\erpimage\mapimage\icon\icons.png" />
+    <Content Include="Content\erpimage\mapimage\icon\info.png" />
+    <Content Include="Content\erpimage\mapimage\icon\page_add.png" />
+    <Content Include="Content\erpimage\mapimage\icon\plugin_add.png" />
+    <Content Include="Content\erpimage\mapimage\icon\redo.png" />
+    <Content Include="Content\erpimage\mapimage\icon\refresh.png" />
+    <Content Include="Content\erpimage\mapimage\icon\reload.png" />
+    <Content Include="Content\erpimage\mapimage\icon\resetPWD.png" />
+    <Content Include="Content\erpimage\mapimage\icon\save.png" />
+    <Content Include="Content\erpimage\mapimage\icon\search.png" />
+    <Content Include="Content\erpimage\mapimage\icon\tip.png" />
+    <Content Include="Content\erpimage\mapimage\icon\undo.png" />
+    <Content Include="Content\erpimage\mapimage\icon\up.png" />
+    <Content Include="Content\erpimage\mapimage\icon\_upcross.png" />
+    <Content Include="Content\erpimage\mapimage\icon\_upcross1.png" />
+    <Content Include="Content\erpimage\mapimage\map\alarm1.png" />
+    <Content Include="Content\erpimage\mapimage\map\b-1.gif" />
+    <Content Include="Content\erpimage\mapimage\map\b-2.gif" />
+    <Content Include="Content\erpimage\mapimage\map\background.png" />
+    <Content Include="Content\erpimage\mapimage\map\backgroundLR.png" />
+    <Content Include="Content\erpimage\mapimage\map\bank.png" />
+    <Content Include="Content\erpimage\mapimage\map\bigcar.png" />
+    <Content Include="Content\erpimage\mapimage\map\book.png" />
+    <Content Include="Content\erpimage\mapimage\map\car.png" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\green\0.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\green\120.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\green\150.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\green\180.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\green\210.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\green\240.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\green\270.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\green\30.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\green\300.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\green\330.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\green\60.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\green\90.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\green\stop.png" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\red\0.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\red\120.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\red\150.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\red\180.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\red\210.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\red\240.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\red\270.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\red\30.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\red\300.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\red\330.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\red\60.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\red\90.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\red\stop.png" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\roll.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\roll1.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\1\Stop.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\green\0.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\green\120.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\green\150.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\green\180.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\green\210.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\green\240.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\green\270.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\green\30.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\green\300.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\green\330.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\green\60.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\green\90.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\red\0.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\red\120.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\red\150.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\red\180.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\red\210.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\red\240.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\red\270.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\red\30.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\red\300.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\red\330.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\red\60.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\red\90.gif" />
+    <Content Include="Content\erpimage\mapimage\map\Car\2\yellow.gif" />
+    <Content Include="Content\erpimage\mapimage\map\circle.png" />
+    <Content Include="Content\erpimage\mapimage\map\city.png" />
+    <Content Include="Content\erpimage\mapimage\map\FARM1-32.gif" />
+    <Content Include="Content\erpimage\mapimage\map\food.png" />
+    <Content Include="Content\erpimage\mapimage\map\gasStation.png" />
+    <Content Include="Content\erpimage\mapimage\map\GOLF1-32.gif" />
+    <Content Include="Content\erpimage\mapimage\map\hospital.png" />
+    <Content Include="Content\erpimage\mapimage\map\hotel.png" />
+    <Content Include="Content\erpimage\mapimage\map\mapbar31.2.1.png" />
+    <Content Include="Content\erpimage\mapimage\map\maptool.gif" />
+    <Content Include="Content\erpimage\mapimage\map\map_mark.gif" />
+    <Content Include="Content\erpimage\mapimage\map\markerE.png" />
+    <Content Include="Content\erpimage\mapimage\map\markerS.png" />
+    <Content Include="Content\erpimage\mapimage\map\movie.png" />
+    <Content Include="Content\erpimage\mapimage\map\pointer.png" />
+    <Content Include="Content\erpimage\mapimage\map\redbigcar.png" />
+    <Content Include="Content\erpimage\mapimage\map\redcar.png" />
+    <Content Include="Content\erpimage\mapimage\map\shop.png" />
+    <Content Include="Content\erpimage\mapimage\map\station.png" />
+    <Content Include="Content\erpimage\mapimage\map\tb1.gif" />
+    <Content Include="Content\erpimage\mapimage\map\trackdot.png" />
+    <Content Include="Content\erpimage\mapimage\map\trav.png" />
+    <Content Include="Content\Files\Report\GoodsBorrow.xml" />
+    <Content Include="Content\Files\Report\GoodsIn.xml" />
+    <Content Include="Content\Files\Report\GoodsOut.xml" />
+    <Content Include="Content\Files\Report\ShippingDocument.xml" />
+    <Content Include="Content\Files\Report\ShippingDocument01.xml" />
+    <Content Include="Content\Files\Report\ShippingDocument02.xml" />
+    <Content Include="Content\Files\Report\ShippingDocument03.xml" />
+    <Content Include="Content\Files\Report\StuffIn.xml" />
+    <Content Include="Content\icons.htm" />
+    <Content Include="Content\jq.ui.datetimepicker.css" />
+    <Content Include="Content\jquery.pnotify.default.css" />
+    <Content Include="Content\master.css" />
+    <Content Include="Content\public.css" />
+    <Content Include="Content\mobile\css\calendar.css" />
+    <Content Include="Content\mobile\css\comunesOPT.css" />
+    <Content Include="Content\mobile\css\homeOPT.css" />
+    <Content Include="Content\mobile\imgs\arrowf%402x.png" />
+    <Content Include="Content\mobile\imgs\arrowf.png" />
+    <Content Include="Content\mobile\imgs\headerayuda%402x.png" />
+    <Content Include="Content\mobile\imgs\headerayuda.png" />
+    <Content Include="Content\mobile\imgs\headerclientes%402x.png" />
+    <Content Include="Content\mobile\imgs\headerclientes.png" />
+    <Content Include="Content\mobile\imgs\headermedia%402x.png" />
+    <Content Include="Content\mobile\imgs\headermedia.png" />
+    <Content Include="Content\mobile\imgs\headermenu%402x.png" />
+    <Content Include="Content\mobile\imgs\headermenu.png" />
+    <Content Include="Content\mobile\imgs\headertienda%402x.png" />
+    <Content Include="Content\mobile\imgs\headertienda.png" />
+    <Content Include="Content\mobile\imgs\orangelohoN%402x.png" />
+    <Content Include="Content\mobile\imgs\orangelohoN.png" />
+    <Content Include="Content\mobile\style.css" />
+    <Content Include="Content\smartMenu.css" />
+    <Content Include="Content\themes\default\images\add01close.png" />
+    <Content Include="Content\themes\default\images\add02.png" />
+    <Content Include="Content\themes\default\images\add04.png" />
+    <Content Include="Content\themes\default\images\addbtn0204.gif" />
+    <Content Include="Content\themes\default\images\addbtn0506.gif" />
+    <Content Include="Content\themes\default\images\ajax-loader.gif" />
+    <Content Include="Content\themes\default\images\arrowleftbig.png" />
+    <Content Include="Content\themes\default\images\arrowrightbig.png" />
+    <Content Include="Content\themes\default\images\billprocedure.gif" />
+    <Content Include="Content\themes\default\images\billprocedurecurrent.gif" />
+    <Content Include="Content\themes\default\images\carinforbg.png" />
+    <Content Include="Content\themes\default\images\carnumber.jpg" />
+    <Content Include="Content\themes\default\images\close2.png" />
+    <Content Include="Content\themes\default\images\commonbbtn.gif" />
+    <Content Include="Content\themes\default\images\dlatool.gif" />
+    <Content Include="Content\themes\default\images\dot.gif" />
+    <Content Include="Content\themes\default\images\end.gif" />
+    <Content Include="Content\themes\default\images\excel.gif" />
+    <Content Include="Content\themes\default\images\excelprinthelpbtn.gif" />
+    <Content Include="Content\themes\default\images\fj.gif" />
+    <Content Include="Content\themes\default\images\fj2.gif" />
+    <Content Include="Content\themes\default\images\footer_bg.png" />
+    <Content Include="Content\themes\default\images\GPSText.GIF" />
+    <Content Include="Content\themes\default\images\halfway.gif" />
+    <Content Include="Content\themes\default\images\headtitle_bg.gif" />
+    <Content Include="Content\themes\default\images\linewidth.gif" />
+    <Content Include="Content\themes\default\images\login_bg.gif" />
+    <Content Include="Content\themes\default\images\login_btn.gif" />
+    <Content Include="Content\themes\default\images\login_l.png" />
+    <Content Include="Content\themes\default\images\login_m.png" />
+    <Content Include="Content\themes\default\images\login_r.png" />
+    <Content Include="Content\themes\default\images\magnifier.gif" />
+    <Content Include="Content\themes\default\images\menu2_a_hover_left.gif" />
+    <Content Include="Content\themes\default\images\menu2_a_hover_right.gif" />
+    <Content Include="Content\themes\default\images\menu2_a_select_left.gif" />
+    <Content Include="Content\themes\default\images\menu2_a_select_right.gif" />
+    <Content Include="Content\themes\default\images\menu_left_gps_btn.png" />
+    <Content Include="Content\themes\default\images\messagetitlebg.gif" />
+    <Content Include="Content\themes\default\images\modifyoksearchbtn.gif" />
+    <Content Include="Content\themes\default\images\nav_bg.png" />
+    <Content Include="Content\themes\default\images\nav_bt_4.png" />
+    <Content Include="Content\themes\default\images\nav_bt_6.png" />
+    <Content Include="Content\themes\default\images\overbg.gif" />
+    <Content Include="Content\themes\default\images\pannel_tit01.gif" />
+    <Content Include="Content\themes\default\images\pannel_tit02.png" />
+    <Content Include="Content\themes\default\images\peopledynamic001.gif" />
+    <Content Include="Content\themes\default\images\playstopbtn.gif" />
+    <Content Include="Content\themes\default\images\projectpathbg.png" />
+    <Content Include="Content\themes\default\images\refreshbtn.gif" />
+    <Content Include="Content\themes\default\images\savereturncancelbtn.gif" />
+    <Content Include="Content\themes\default\images\savesendhelp.gif" />
+    <Content Include="Content\themes\default\images\searchshowhidebtn.gif" />
+    <Content Include="Content\themes\default\images\splitline.gif" />
+    <Content Include="Content\themes\default\images\startpoint.gif" />
+    <Content Include="Content\themes\default\images\submenubg.gif" />
+    <Content Include="Content\themes\default\images\toolbg01.png" />
+    <Content Include="Content\themes\default\images\toolbg02.png" />
+    <Content Include="Content\themes\default\images\ui-anim_basic_16x16.gif" />
+    <Content Include="Content\themes\default\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\default\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\themes\default\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\themes\default\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\themes\default\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\default\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\themes\default\images\ui-bg_highlight-soft_100_e7f0f9_1x100.png" />
+    <Content Include="Content\themes\default\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\themes\default\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\themes\default\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\themes\default\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\default\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\themes\default\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\themes\default\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\default\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\themes\default\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\themes\default\images\viewcarnumberbg.gif" />
+    <Content Include="Content\themes\default\images\windowbtn.gif" />
+    <Content Include="Content\themes\default\images\zoomlion_s.png" />
+    <Content Include="Content\themes\default\jquery-ui-1.8.2.custom.css" />
+    <Content Include="Content\xheditor_skin\nostyle\iframe.css" />
+    <Content Include="Content\xheditor_skin\nostyle\img\anchor.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\close.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\flash.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\icons.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\loading.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\progress.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\progressbg.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\tag-address.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\tag-div.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\tag-h1.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\tag-h2.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\tag-h3.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\tag-h4.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\tag-h5.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\tag-h6.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\tag-p.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\tag-pre.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\waiting.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\img\wmp.gif" />
+    <Content Include="Content\xheditor_skin\nostyle\ui.css" />
+    <Content Include="excel.aspx" />
+    <Content Include="favicon.ico" />
+    <Content Include="help\help.aspx" />
+    <Content Include="help\helpinfo.aspx" />
+    <Content Include="Reports\Bale\R220804.aspx" />
+    <Content Include="Reports\Bale\R220820.aspx" />
+    <Content Include="Reports\Bale\R220821.aspx" />
+    <Content Include="Reports\Bale\R220822.aspx" />
+    <Content Include="Reports\Bale\R220823.aspx" />
+    <Content Include="Reports\Bale\R2208230.aspx" />
+    <Content Include="Reports\Car\R610212.aspx" />
+    <Content Include="Reports\Car\R610213.aspx" />
+    <Content Include="Reports\Car\R610214.aspx" />
+    <Content Include="Reports\Car\R610215.aspx" />
+    <Content Include="Reports\Car\R610216.aspx" />
+    <Content Include="Reports\Car\R610217.aspx" />
+    <Content Include="Reports\Car\R610218.aspx" />
+    <Content Include="Reports\Car\R610219.aspx" />
+    <Content Include="Reports\Car\R610220.aspx" />
+    <Content Include="Reports\ContractData\Contract.aspx" />
+    <Content Include="Reports\Goods\R230902.aspx" />
+    <Content Include="Reports\Goods\R230903.aspx" />
+    <Content Include="Reports\Goods\R230904.aspx" />
+    <Content Include="Reports\Goods\R230905.aspx" />
+    <Content Include="Reports\Goods\R230906.aspx" />
+    <Content Include="Reports\Goods\R230907.aspx" />
+    <Content Include="Reports\GPS\R420702.aspx" />
+    <Content Include="Reports\GPS\R420704.aspx" />
+    <Content Include="Reports\GPS\R420705.aspx" />
+    <Content Include="Reports\GPS\R420706.aspx" />
+    <Content Include="Reports\GPS\R420707.aspx" />
+    <Content Include="Reports\LabData\PHBDesignReport.aspx" />
+    <Content Include="Reports\LabData\PHBDesignReport_Preview.aspx" />
+    <Content Include="Reports\Lab\R720099.aspx" />
+    <Content Include="Reports\Lab\R720101.aspx" />
+    <Content Include="Reports\Lab\R720102.aspx" />
+    <Content Include="Reports\Lab\R720201.aspx" />
+    <Content Include="Reports\Lab\R720202.aspx" />
+    <Content Include="Reports\Lab\R720401.aspx" />
+    <Content Include="Reports\Lab\R720402.aspx" />
+    <Content Include="Reports\Lab\R720601.aspx" />
+    <Content Include="Reports\Lab\R720602.aspx" />
+    <Content Include="Reports\Lab\R720603.aspx" />
+    <Content Include="Reports\Lab\R720604.aspx" />
+    <Content Include="Reports\Lab\R720605.aspx" />
+    <Content Include="Reports\Produce\ddKanban.aspx" />
+    <Content Include="Reports\Produce\R410706.aspx" />
+    <Content Include="Reports\Produce\R410728.aspx" />
+    <Content Include="Reports\Produce\R410729.aspx" />
+    <Content Include="Reports\Produce\R410740.aspx" />
+    <Content Include="Reports\Produce\R410741.aspx" />
+    <Content Include="Reports\Produce\R410742.aspx" />
+    <Content Include="Reports\Produce\R410743.aspx" />
+    <Content Include="Reports\Produce\R410790.aspx" />
+    <Content Include="Reports\Produce\R410803.aspx" />
+    <Content Include="Reports\Produce\R410804.aspx" />
+    <Content Include="Reports\Produce\R410805.aspx" />
+    <Content Include="Reports\Produce\R4108050.aspx" />
+    <Content Include="Reports\Produce\R410794.aspx" />
+    <Content Include="Reports\Produce\R410806.aspx" />
+    <Content Include="Reports\Produce\R410807.aspx" />
+    <Content Include="Reports\Produce\R410808.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Produce\R410809.aspx" />
+    <Content Include="Reports\Produce\R410810.aspx" />
+    <Content Include="Reports\Produce\R410811.aspx" />
+    <Content Include="Reports\Produce\R410808.aspx" />
+    <Content Include="Reports\Produce\R4107051.aspx" />
+    <Content Include="Reports\Produce\R410831.aspx" />
+    <Content Include="Reports\QCC\R710618.aspx" />
+    <Content Include="Reports\QCC\R710810.aspx" />
+    <Content Include="Reports\QCC\R710802.aspx" />
+    <Content Include="Reports\Sales\R310404.aspx" />
+    <Content Include="Reports\Sales\R310411.aspx" />
+    <Content Include="Reports\Sales\R3104111.aspx" />
+    <Content Include="Reports\Sales\R310420.aspx" />
+    <Content Include="Reports\Sales\R310413.aspx" />
+    <Content Include="Reports\Sales\R310415.aspx" />
+    <Content Include="Reports\Sales\R310416.aspx" />
+    <Content Include="Reports\Sales\R310417.aspx" />
+    <Content Include="Reports\Sales\R310418.aspx" />
+    <Content Include="Reports\Sales\R310419.aspx" />
+    <Content Include="Reports\Sales\R310421.aspx" />
+    <Content Include="Scripts\jquery.jqGrid.groupHeader-0.2.1.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\plugins\iCheck\all.css" />
+    <Content Include="Scripts\plugins\iCheck\flat\aero%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\aero.css" />
+    <Content Include="Scripts\plugins\iCheck\flat\aero.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\blue%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\blue.css" />
+    <Content Include="Scripts\plugins\iCheck\flat\blue.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\flat%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\flat.css" />
+    <Content Include="Scripts\plugins\iCheck\flat\flat.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\green%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\green.css" />
+    <Content Include="Scripts\plugins\iCheck\flat\green.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\grey%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\grey.css" />
+    <Content Include="Scripts\plugins\iCheck\flat\grey.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\orange%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\orange.css" />
+    <Content Include="Scripts\plugins\iCheck\flat\orange.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\pink%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\pink.css" />
+    <Content Include="Scripts\plugins\iCheck\flat\pink.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\purple%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\purple.css" />
+    <Content Include="Scripts\plugins\iCheck\flat\purple.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\red%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\red.css" />
+    <Content Include="Scripts\plugins\iCheck\flat\red.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\yellow%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\yellow.css" />
+    <Content Include="Scripts\plugins\iCheck\flat\yellow.png" />
+    <Content Include="Scripts\plugins\iCheck\flat\_all.css" />
+    <Content Include="Scripts\plugins\iCheck\futurico\futurico%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\futurico\futurico.css" />
+    <Content Include="Scripts\plugins\iCheck\futurico\futurico.png" />
+    <Content Include="Scripts\plugins\iCheck\icheck.js" />
+    <Content Include="Scripts\plugins\iCheck\icheck.min.js" />
+    <Content Include="Scripts\plugins\iCheck\line\aero.css" />
+    <Content Include="Scripts\plugins\iCheck\line\blue.css" />
+    <Content Include="Scripts\plugins\iCheck\line\green.css" />
+    <Content Include="Scripts\plugins\iCheck\line\grey.css" />
+    <Content Include="Scripts\plugins\iCheck\line\line%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\line\line.css" />
+    <Content Include="Scripts\plugins\iCheck\line\line.png" />
+    <Content Include="Scripts\plugins\iCheck\line\orange.css" />
+    <Content Include="Scripts\plugins\iCheck\line\pink.css" />
+    <Content Include="Scripts\plugins\iCheck\line\purple.css" />
+    <Content Include="Scripts\plugins\iCheck\line\red.css" />
+    <Content Include="Scripts\plugins\iCheck\line\yellow.css" />
+    <Content Include="Scripts\plugins\iCheck\line\_all.css" />
+    <Content Include="Scripts\plugins\iCheck\minimal\aero%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\aero.css" />
+    <Content Include="Scripts\plugins\iCheck\minimal\aero.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\blue%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\blue.css" />
+    <Content Include="Scripts\plugins\iCheck\minimal\blue.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\green%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\green.css" />
+    <Content Include="Scripts\plugins\iCheck\minimal\green.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\grey%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\grey.css" />
+    <Content Include="Scripts\plugins\iCheck\minimal\grey.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\minimal%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\minimal.css" />
+    <Content Include="Scripts\plugins\iCheck\minimal\minimal.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\orange%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\orange.css" />
+    <Content Include="Scripts\plugins\iCheck\minimal\orange.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\pink%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\pink.css" />
+    <Content Include="Scripts\plugins\iCheck\minimal\pink.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\purple%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\purple.css" />
+    <Content Include="Scripts\plugins\iCheck\minimal\purple.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\red%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\red.css" />
+    <Content Include="Scripts\plugins\iCheck\minimal\red.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\yellow%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\yellow.css" />
+    <Content Include="Scripts\plugins\iCheck\minimal\yellow.png" />
+    <Content Include="Scripts\plugins\iCheck\minimal\_all.css" />
+    <Content Include="Scripts\plugins\iCheck\polaris\polaris%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\polaris\polaris.css" />
+    <Content Include="Scripts\plugins\iCheck\polaris\polaris.png" />
+    <Content Include="Scripts\plugins\iCheck\square\aero%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\square\aero.css" />
+    <Content Include="Scripts\plugins\iCheck\square\aero.png" />
+    <Content Include="Scripts\plugins\iCheck\square\blue%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\square\blue.css" />
+    <Content Include="Scripts\plugins\iCheck\square\blue.png" />
+    <Content Include="Scripts\plugins\iCheck\square\green%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\square\green.css" />
+    <Content Include="Scripts\plugins\iCheck\square\green.png" />
+    <Content Include="Scripts\plugins\iCheck\square\grey%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\square\grey.css" />
+    <Content Include="Scripts\plugins\iCheck\square\grey.png" />
+    <Content Include="Scripts\plugins\iCheck\square\orange%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\square\orange.css" />
+    <Content Include="Scripts\plugins\iCheck\square\orange.png" />
+    <Content Include="Scripts\plugins\iCheck\square\pink%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\square\pink.css" />
+    <Content Include="Scripts\plugins\iCheck\square\pink.png" />
+    <Content Include="Scripts\plugins\iCheck\square\purple%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\square\purple.css" />
+    <Content Include="Scripts\plugins\iCheck\square\purple.png" />
+    <Content Include="Scripts\plugins\iCheck\square\red%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\square\red.css" />
+    <Content Include="Scripts\plugins\iCheck\square\red.png" />
+    <Content Include="Scripts\plugins\iCheck\square\square%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\square\square.css" />
+    <Content Include="Scripts\plugins\iCheck\square\square.png" />
+    <Content Include="Scripts\plugins\iCheck\square\yellow%402x.png" />
+    <Content Include="Scripts\plugins\iCheck\square\yellow.css" />
+    <Content Include="Scripts\plugins\iCheck\square\yellow.png" />
+    <Content Include="Scripts\plugins\iCheck\square\_all.css" />
+    <Content Include="Scripts\plugins\jqprint\jquery.jqprint-0.3.js" />
+    <Content Include="Scripts\plugins\jqprint\jquery.jqprint.css" />
+    <Content Include="Scripts\Views\CarDriverPrice\CarDriverPrice.js" />
+    <Content Include="Scripts\Views\CarIMA\CarIMA.js" />
+    <Content Include="Scripts\Views\CarLeaseCostSet\CarLeaseCostSet.js" />
+    <Content Include="Scripts\Views\CarOilPriceSetting.js" />
+    <Content Include="Scripts\Views\CarProjectCube\CarProjectCube.js" />
+    <Content Include="Scripts\Views\CarProjectPrice\CarProjectPrice.js" />
+    <Content Include="Scripts\Views\CarTimesReward\CarTimesReward.js" />
+    <Content Include="Scripts\Views\CarTrafficPoliceFine\CarTrafficPoliceFine.js" />
+    <Content Include="Scripts\Views\distance.js" />
+    <Content Include="Scripts\Views\GoodsAccount\GoodsAccount.js" />
+    <Content Include="Scripts\Views\GoodsPay\GoodsPay.js" />
+    <Content Include="Scripts\Views\Lab_Record\Lab_AIR2.js" />
+    <Content Include="Scripts\Views\Lab_Record\Lab_AIR.js" />
+    <Content Include="Scripts\Views\Lab_Record\Lab_ADM.js" />
+    <Content Include="Scripts\Views\Lab_Record\Lab_FA.js" />
+    <Content Include="Scripts\Views\MonthAccount\MonthAccount.js" />
+    <Content Include="Scripts\Views\Role\Role.js" />
+    <Content Include="Scripts\Views\StuffAccount\StuffAccount.js" />
+    <Content Include="Scripts\Views\StuffPayableAdjust\StuffPayableAdjust.js" />
+    <Content Include="Scripts\Views\Users\Users.js" />
+    <None Include="help\doc\ERP3.5用户手册\厂商信息管理.pdf" />
+    <None Include="help\doc\ERP3.5用户手册\材料消耗估算.pdf" />
+    <None Include="Reports\Goods\R230903.rdlc 的副本%282%29" />
+    <None Include="Scripts\abc\key.txt" />
+    <Content Include="Reports\Sales\R311401.aspx" />
+    <Content Include="Reports\Sales\R310501.aspx" />
+    <Content Include="Reports\Sales\R310412.aspx" />
+    <Content Include="Scripts\abc\mapabc.custom.v1.1.js" />
+    <Content Include="Scripts\calendar.js" />
+    <Content Include="Scripts\commonmap.js" />
+    <Content Include="Scripts\jquery-smartMenu-min.js" />
+    <Content Include="Scripts\jquery.layout.js" />
+    <Content Include="Scripts\jquery.ztree.core-3.2.min.js" />
+    <Content Include="Scripts\jquery.ztree.excheck-3.2.min.js" />
+    <Content Include="Scripts\Views\AlarmLog.js" />
+    <Content Include="Scripts\Views\Contract\PayIndex.js" />
+    <Content Include="Scripts\Views\Dic\TyreBrand.js" />
+    <Content Include="Scripts\Views\DutyPlan\DutyPlan.js" />
+    <Content Include="Scripts\Views\IconLayerAndHotMark\IconLayerAndHotMark.js" />
+    <Content Include="Scripts\Views\Bank\Bank.js" />
+    <Content Include="Scripts\Views\ManualProduce\ManualProduce.js" />
+    <Content Include="Scripts\Views\Map\abc_index.js" />
+    <Content Include="Scripts\Views\Map\abc_track.js" />
+    <Content Include="Scripts\Views\Map\abc_ztree.js" />
+    <Content Include="Scripts\Views\Map\alarm_part.js" />
+    <Content Include="Scripts\Views\DispatchList\DispatchList.js" />
+    <Content Include="Scripts\Views\DispatchList\DispatchList2.js" />
+    <Content Include="Scripts\Views\OilResistance\OilResistance.js" />
+    <Content Include="Scripts\Views\ProduceTask\test.js" />
+    <Content Include="Scripts\Views\ProjectRoute\ProjectRoute.js" />
+    <Content Include="Scripts\Views\PurchaseMain\PurchaseMain.js" />
+    <Content Include="Scripts\Views\PurchasePlanByEquip\PurchasePlanByEquip.js" />
+    <Content Include="Scripts\Views\schedule\schedule_center.js" />
+    <Content Include="Scripts\Views\schedule\schedule_index.js" />
+    <Content Include="Scripts\Views\schedule\schedule_left.js" />
+    <Content Include="Scripts\Views\ShippingDocument\AuditReport.js" />
+    <Content Include="Scripts\Views\TplManage\TplManage.js" />
+    <Content Include="Scripts\Views\UnloadRecord.js" />
+    <Content Include="Scripts\Views\YearAccount\YearAccount.js" />
+    <Content Include="Scripts\Views\TZRalationHistory.js" />
+    <Content Include="Scripts\Views\PurchasePlan\PurchasePlan.js" />
+    <Content Include="Scripts\Views\StuffInfoPrice\StuffInfoPrice.js" />
+    <Content Include="Views\AlarmLog\Index.cshtml" />
+    <Content Include="Areas\Mobile\Views\Produce\Tasks.cshtml" />
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <Content Include="Views\Bank\Index.cshtml" />
+    <Content Include="Scripts\Views\GPSSysConfig.js" />
+    <Content Include="Scripts\Views\LimitRegion\LimitRegion.js" />
+    <Content Include="WebService\MetagePic.asmx" />
+    <Content Include="Reports\Bale\R220801.aspx" />
+    <Content Include="Reports\Bale\R220803.aspx" />
+    <Content Include="Reports\Bale\R220802.aspx" />
+    <Content Include="Reports\Bale\R220805.aspx" />
+    <Content Include="Reports\Bale\R220807.aspx" />
+    <Content Include="Reports\Bale\R220809.aspx" />
+    <Content Include="Reports\Bale\R220810.aspx" />
+    <Content Include="Reports\Bale\R2231.aspx" />
+    <Content Include="Reports\Bale\R220806.aspx" />
+    <Content Include="Reports\Bale\R220808.aspx" />
+    <Content Include="Reports\Car\R610206.aspx" />
+    <Content Include="Reports\Car\R610208.aspx" />
+    <Content Include="Reports\Car\R610209.aspx" />
+    <Content Include="Reports\Car\R610210.aspx" />
+    <Content Include="Reports\Car\R610211.aspx" />
+    <Content Include="Reports\Finance\R020206.aspx" />
+    <Content Include="Reports\Car\R610205.aspx" />
+    <Content Include="Reports\Car\R610202.aspx" />
+    <Content Include="Reports\Car\R610203.aspx" />
+    <Content Include="Reports\Car\R610204.aspx" />
+    <Content Include="Reports\FusionCharts\FCF_Area2D.swf" />
+    <Content Include="Reports\FusionCharts\FCF_Bar2D.swf" />
+    <Content Include="Reports\FusionCharts\FCF_Candlestick.swf" />
+    <Content Include="Reports\FusionCharts\FCF_Column2D.swf" />
+    <Content Include="Reports\FusionCharts\FCF_Column3D.swf" />
+    <Content Include="Reports\FusionCharts\FCF_Doughnut2D.swf" />
+    <Content Include="Reports\FusionCharts\FCF_Funnel.swf" />
+    <Content Include="Reports\FusionCharts\FCF_Gantt.swf" />
+    <Content Include="Reports\FusionCharts\FCF_Line.swf" />
+    <Content Include="Reports\FusionCharts\FCF_MSArea2D.swf" />
+    <Content Include="Reports\FusionCharts\FCF_MSBar2D.swf" />
+    <Content Include="Reports\FusionCharts\FCF_MSColumn2D.swf" />
+    <Content Include="Reports\FusionCharts\FCF_MSColumn2DLineDY.swf" />
+    <Content Include="Reports\FusionCharts\FCF_MSColumn3D.swf" />
+    <Content Include="Reports\FusionCharts\FCF_MSColumn3DLineDY.swf" />
+    <Content Include="Reports\FusionCharts\FCF_MSLine.swf" />
+    <Content Include="Reports\FusionCharts\FCF_Pie2D.swf" />
+    <Content Include="Reports\FusionCharts\FCF_Pie3D.swf" />
+    <Content Include="Reports\FusionCharts\FCF_StackedArea2D.swf" />
+    <Content Include="Reports\FusionCharts\FCF_StackedBar2D.swf" />
+    <Content Include="Reports\FusionCharts\FCF_StackedColumn2D.swf" />
+    <Content Include="Reports\FusionCharts\FCF_StackedColumn3D.swf" />
+    <Content Include="Reports\FusionCharts\FusionCharts.js" />
+    <Content Include="Reports\Bale\R2211.aspx" />
+    <Content Include="Reports\Car\R610201.aspx" />
+    <Content Include="Reports\Finance\R020205.aspx" />
+    <Content Include="Reports\Finance\R020303.aspx" />
+    <Content Include="Reports\Goods\R230901.aspx" />
+    <Content Include="Reports\Part\R9104.aspx" />
+    <Content Include="Reports\Part\R911301.aspx" />
+    <Content Include="Reports\Produce\LinkManRecord.aspx" />
+    <Content Include="Reports\Produce\R310604.aspx" />
+    <Content Include="Reports\Produce\R410705.aspx" />
+    <Content Include="Reports\Produce\R410701.aspx" />
+    <Content Include="Reports\Produce\R410702.aspx" />
+    <Content Include="Reports\Produce\R410703.aspx" />
+    <Content Include="Reports\Finance\R020101.aspx" />
+    <Content Include="Reports\Produce\R410704.aspx" />
+    <Content Include="Reports\Produce\R410707.aspx" />
+    <Content Include="Reports\Produce\R410709.aspx" />
+    <Content Include="Reports\Produce\R410710.aspx" />
+    <Content Include="Reports\Produce\R410721.aspx" />
+    <Content Include="Reports\Produce\R410726.aspx" />
+    <Content Include="Reports\Produce\R410727.aspx" />
+    <Content Include="Reports\Produce\R410730.aspx" />
+    <Content Include="Reports\Produce\R410731.aspx" />
+    <Content Include="Reports\Produce\R410732.aspx" />
+    <Content Include="Reports\Produce\R410733.aspx" />
+    <Content Include="Reports\Produce\R410734.aspx" />
+    <Content Include="Reports\Produce\R410735.aspx" />
+    <Content Include="Reports\Produce\R410791.aspx" />
+    <Content Include="Reports\Produce\Kanban.aspx" />
+    <Content Include="Reports\Produce\R410708.aspx" />
+    <Content Include="Reports\Produce\R410711.aspx" />
+    <Content Include="Reports\Produce\R410720.aspx" />
+    <Content Include="Reports\Produce\R410722.aspx" />
+    <Content Include="Reports\Produce\R410723.aspx" />
+    <Content Include="Reports\Produce\R410724.aspx" />
+    <Content Include="Reports\Produce\R410725.aspx" />
+    <Content Include="Reports\Produce\R410801.aspx" />
+    <Content Include="Reports\Produce\R410736.aspx" />
+    <Content Include="Reports\Produce\R410802.aspx" />
+    <Content Include="Reports\Pump\R940301.aspx" />
+    <Content Include="Reports\Pump\R940303.aspx" />
+    <Content Include="Reports\Pump\R940302.aspx" />
+    <Content Include="Reports\QCC\R710611.aspx" />
+    <Content Include="Reports\QCC\R510701.aspx" />
+    <Content Include="Reports\QCC\R710801.aspx" />
+    <Content Include="Reports\QCC\R710803.aspx" />
+    <Content Include="Reports\QCC\R710804.aspx" />
+    <Content Include="Reports\QCC\R710805.aspx" />
+    <Content Include="Reports\QCC\R710806.aspx" />
+    <Content Include="Reports\QCC\R710807.aspx" />
+    <Content Include="Reports\QCC\R710808.aspx" />
+    <Content Include="Reports\QCC\R710809.aspx" />
+    <Content Include="Reports\QCC\R710612.aspx" />
+    <Content Include="Reports\QCC\R710822.aspx" />
+    <Content Include="Reports\QCC\R710823.aspx" />
+    <Content Include="Reports\QCC\R710824.aspx" />
+    <Content Include="Reports\QCC\R710825.aspx" />
+    <Content Include="Reports\QCC\R710832.aspx" />
+    <Content Include="Reports\QCC\R710833.aspx" />
+    <Content Include="Reports\QCC\R710842.aspx" />
+    <Content Include="Reports\QCC\R710843.aspx" />
+    <Content Include="Reports\QCC\R710844.aspx" />
+    <Content Include="Reports\QCC\R710845.aspx" />
+    <Content Include="Reports\Sales\R310401.aspx" />
+    <Content Include="Reports\Sales\R310402.aspx" />
+    <Content Include="Reports\Sales\R310403.aspx" />
+    <Content Include="Reports\Tyre\R810401.aspx" />
+    <Content Include="Reports\Tyre\R810402.aspx" />
+    <Content Include="Reports\Tyre\R810403.aspx" />
+    <Content Include="Reports\Tyre\R810404.aspx" />
+    <Content Include="Reports\User\R120201.aspx" />
+    <Content Include="Scripts\ActReport.js" />
+    <Content Include="Scripts\ajaxfileupload.js" />
+    <Content Include="Scripts\date.js" />
+    <Content Include="Scripts\daterangepicker.jQuery.js" />
+    <Content Include="Content\themes\default\Site.css" />
+    <Content Include="Content\ui.jqgrid.css" />
+    <Content Include="Content\zTreeStyle\img\diy\1_close.png" />
+    <Content Include="Content\zTreeStyle\img\diy\1_open.png" />
+    <Content Include="Content\zTreeStyle\img\diy\2.png" />
+    <Content Include="Content\zTreeStyle\img\diy\3.png" />
+    <Content Include="Content\zTreeStyle\img\diy\4.png" />
+    <Content Include="Content\zTreeStyle\img\diy\5.png" />
+    <Content Include="Content\zTreeStyle\img\diy\6.png" />
+    <Content Include="Content\zTreeStyle\img\diy\7.png" />
+    <Content Include="Content\zTreeStyle\img\diy\8.png" />
+    <Content Include="Content\zTreeStyle\img\diy\9.png" />
+    <Content Include="Content\zTreeStyle\img\line_conn.gif" />
+    <Content Include="Content\zTreeStyle\img\loading.gif" />
+    <Content Include="Content\zTreeStyle\img\zTreeStandard.gif" />
+    <Content Include="Content\zTreeStyle\img\zTreeStandard.png" />
+    <Content Include="Content\zTreeStyle\zTreeStyle.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Default.aspx" />
+    <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\fg.menu.js" />
+    <Content Include="Scripts\i18n\grid.locale-cn.js" />
+    <Content Include="Scripts\i18n\jquery.ui.locale.zh-CN.js" />
+    <Content Include="Scripts\Jplayer.swf" />
+    <Content Include="Scripts\jquery-ui-timepicker-addon.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.dragsort-0.5.1.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.form.min.js" />
+    <Content Include="Scripts\jquery.jplayer.min.js" />
+    <Content Include="Scripts\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\jquery.loadmask.js" />
+    <Content Include="Scripts\jquery.messager.js" />
+    <Content Include="Scripts\jquery.pnotify.min.js" />
+    <Content Include="Scripts\jquery.tmpl.min.js" />
+    <Content Include="Scripts\jquery.zlerp.js" />
+    <Content Include="Scripts\json2.js" />
+    <Content Include="Scripts\MyGrid.js" />
+    <Content Include="Scripts\ReportViewer.js" />
+    <Content Include="Scripts\Views\APBill\APBill.js" />
+    <Content Include="Scripts\Views\ARBill.js" />
+    <Content Include="Scripts\Views\Car.js" />
+    <Content Include="Scripts\Views\CarOil\CarOil.js" />
+    <Content Include="Scripts\Views\CarRepair\CarRepair.js" />
+    <Content Include="Scripts\Views\CheckInfo.js" />
+    <Content Include="Scripts\Views\ClassType\ClassType.js" />
+    <Content Include="Scripts\Views\Commission\Commission.js" />
+    <Content Include="Scripts\Views\ConPrice.js" />
+    <Content Include="Scripts\Views\Contract\Contract.js" />
+    <Content Include="Scripts\Views\ContractOtherPrice.js" />
+    <Content Include="Scripts\Views\ContractPump.js" />
+    <Content Include="Scripts\Views\Contract\ControlIndex.js" />
+    <Content Include="Scripts\Views\Customer.js" />
+    <Content Include="Scripts\Views\CustomerPlan\CustomerPlan.js" />
+    <Content Include="Scripts\Views\CustomerPlan\ManageIndex.js" />
+    <Content Include="Scripts\Views\DBHelper\DBHelper.js" />
+    <Content Include="Scripts\Views\Dic.js" />
+    <Content Include="Scripts\Views\Company.js" />
+    <Content Include="Scripts\Views\ConsMixprop.js" />
+    <Content Include="Scripts\Views\ConStrength.js" />
+    <Content Include="Scripts\Views\CustMixprop.js" />
+    <Content Include="Scripts\Views\Department.js" />
+    <Content Include="Scripts\Views\Dic\SubNode.js" />
+    <Content Include="Scripts\Views\Dic\SubTree.js" />
+    <Content Include="Scripts\Views\Equipment\Equipment.js" />
+    <Content Include="Scripts\Views\EquipMtLyReturn\EquipMtLyReturn.js" />
+    <Content Include="Scripts\Views\EquipMtLy\EquipMtLy.js" />
+    <Content Include="Scripts\Views\EquipMtLy\ApplyEquipMtLy.js" />
+    <Content Include="Scripts\Views\EquipTermlyMt\EquipTermlyMt.js" />
+    <Content Include="Scripts\Views\FinalStuffType\FinalStuffType.js" />
+    <Content Include="Scripts\Views\Formula.js" />
+    <Content Include="Scripts\Views\FormulaCopy.js" />
+    <Content Include="Scripts\Views\GoodsBorrow\GoodsBorrow.js" />
+    <Content Include="Scripts\Views\GoodsCheck\GoodsCheck.js" />
+    <Content Include="Scripts\Views\GoodsInfo\GoodsInfo.js" />
+    <Content Include="Scripts\Views\GoodsInvalidate\GoodsInvalidate.js" />
+    <Content Include="Scripts\Views\GoodsIn\GoodsIn.js" />
+    <Content Include="Scripts\Views\GoodsOut\GoodsOut.js" />
+    <Content Include="Scripts\Views\GoodsRevert\GoodsRevert.js" />
+    <Content Include="Scripts\Views\GoodsType\GoodsType.js" />
+    <Content Include="Scripts\Views\Identity.js" />
+    <Content Include="Scripts\Views\LinkManRecord\LinkManRecord.js" />
+    <Content Include="Scripts\Views\LogViewer\LogViewer.js" />
+    <Content Include="Scripts\Views\Maintenance\Maintenance.js" />
+    <Content Include="Scripts\Views\MeasureInfo\MeasureInfo.js" />
+    <Content Include="Scripts\Views\MntZl\MntZl.js" />
+    <Content Include="Scripts\Views\Msg\Msg.js" />
+    <Content Include="Scripts\Views\OpenCheck\OpenCheck.js" />
+    <Content Include="Scripts\Views\Notice.js" />
+    <Content Include="Scripts\Views\PartBorrowReturn\PartBorrowReturn.js" />
+    <Content Include="Scripts\Views\PartBorrow\PartBorrow.js" />
+    <Content Include="Scripts\Views\PartInventory\PartInventory.js" />
+    <Content Include="Scripts\Views\PartIn\PartIn.js" />
+    <Content Include="Scripts\Views\PartPlan\PartPlan.js" />
+    <Content Include="Scripts\Views\PartReturn\PartReturn.js" />
+    <Content Include="Scripts\Views\PartStockContract\PartStockContract.js" />
+    <Content Include="Scripts\Views\PartStockPlan\PartStockPlan.js" />
+    <Content Include="Scripts\Views\PayBill\PayBill.js" />
+    <Content Include="Scripts\Views\ProducePlan.js" />
+    <Content Include="Scripts\Views\ProduceTask\ProduceTask.js" />
+    <Content Include="Scripts\Views\ProduceTask\OpenCheck.js" />
+    <Content Include="Scripts\Views\ProductRecord.js" />
+    <Content Include="Scripts\Views\Project.js" />
+    <Content Include="Scripts\Views\PumpWork.js" />
+    <Content Include="Scripts\Views\ReceiveBill\ReceiveBill.js" />
+    <Content Include="Scripts\Views\Region.js" />
+    <Content Include="Scripts\Views\Rewards\Rewards.js" />
+    <Content Include="Scripts\Views\Settlement\Settlement.js" />
+    <Content Include="Scripts\Views\ShippingDocument.js" />
+    <Content Include="Scripts\Views\Silo.js" />
+    <Content Include="Scripts\Views\StockPact.js" />
+    <Content Include="Scripts\Views\StockPlan.js" />
+    <Content Include="Scripts\Views\StuffIn.js" />
+    <Content Include="Scripts\Views\StuffInfo.js" />
+    <Content Include="Scripts\Views\StuffIn\PriceConfirm.js" />
+    <Content Include="Scripts\Views\StuffPrice\StuffPrice.js" />
+    <Content Include="Scripts\Views\StuffType.js" />
+    <Content Include="Scripts\Views\SupplyInfo.js" />
+    <Content Include="Scripts\Views\SysConfig.js" />
+    <Content Include="Scripts\Views\SysFunc.js" />
+    <Content Include="Scripts\Views\ProduceTask\TaskAndFormula.js" />
+    <Content Include="Scripts\Views\ProductLine.js" />
+    <Content Include="Scripts\Views\SystemMsg\SystemMsg.js" />
+    <Content Include="Scripts\Views\Training\Training.js" />
+    <Content Include="Scripts\Views\TrainRecord\TrainRecord.js" />
+    <Content Include="Scripts\Views\TranAcc\TranAcc.js" />
+    <Content Include="Scripts\Views\TransPrice\TransPrice.js" />
+    <Content Include="Scripts\Views\TyreChange\TyreChange.js" />
+    <Content Include="Scripts\Views\TyreInfo\TyreInfo.js" />
+    <Content Include="Scripts\Views\TyreRepair\TyreRepair.js" />
+    <Content Include="Scripts\Views\TZRelation.js" />
+    <Content Include="Scripts\Views\User.js" />
+    <Content Include="Scripts\Views\NewShipDoc.js" />
+    <Content Include="Scripts\Views\SysLog.js" />
+    <Content Include="Scripts\Views\QualityExam\QualityExam.js" />
+    <Content Include="Scripts\Views\CEExam\CEExam.js" />
+    <Content Include="Scripts\Views\FAExam\FAExam.js" />
+    <Content Include="Scripts\Views\CAExam\CAExam.js" />
+    <Content Include="Scripts\Views\AIR2Exam\AIR2Exam.js" />
+    <Content Include="Scripts\Views\AIR1Exam\AIR1Exam.js" />
+    <Content Include="Scripts\Views\ADMExam\ADMExam.js" />
+    <Content Include="Scripts\Views\ADM2Exam\ADM2Exam.js" />
+    <Content Include="Scripts\Views\AlkaliReport\AlkaliReport.js" />
+    <Content Include="Scripts\Views\PartInfo\PartInfo.js" />
+    <Content Include="Scripts\Views\ConStrAssess\ConStrAssess.js" />
+    <Content Include="Scripts\Views\StuffSell\StuffSell.js" />
+    <Content Include="Scripts\Views\CarLend\CarLend.js" />
+    <Content Include="Scripts\Views\CarLendFoot\CarLendFoot.js" />
+    <Content Include="Scripts\Views\OilMech\OilMech.js" />
+    <Content Include="Scripts\Views\CarCard\CarCard.js" />
+    <Content Include="Scripts\Views\COMConfig\COMConfig.js" />
+    <Content Include="Scripts\Views\RentCarPrice\RentCarPrice.js" />
+    <Content Include="Scripts\Views\CarClass\CarClass.js" />
+    <Content Include="Scripts\Views\CustSilo\CustSilo.js" />
+    <Content Include="Scripts\Views\TaskAss\TaskAss.js" />
+    <Content Include="Scripts\Views\CarAss\CarAss.js" />
+    <Content Include="Scripts\Views\HandleRecord\HandleRecord.js" />
+    <Content Include="Scripts\Views\StuffExam\StuffExam.js" />
+    <Content Include="Scripts\Views\RateSet\RateSet.js" />
+    <Content Include="Scripts\Views\ReportNav.js" />
+    <Content Include="Scripts\xheditor-1.1.13-zh-cn.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery-1.4.4.js" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LogOnPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\OilResistance\Index.cshtml" />
+    <Content Include="Views\ShippingDocument\AuditReport.cshtml" />
+    <Content Include="Views\ProjectRoute\Index.cshtml" />
+    <Content Include="Views\YearAccount\Index.cshtml" />
+    <Content Include="Views\ABC\Index.cshtml" />
+    <Content Include="Views\UnloadRecord\Index.cshtml" />
+    <Content Include="Views\Dic\TyreBrand.cshtml" />
+    <Content Include="Views\test\Index.cshtml" />
+    <Content Include="Views\test\TaskAndFormula.cshtml" />
+    <Content Include="Views\DutyPlan\Index.cshtml" />
+    <Content Include="Views\ShippingDocument\NewQitaShipDoc.cshtml" />
+    <Content Include="Views\ManualProduce\Index.cshtml" />
+    <Content Include="Views\TZRalationHistory\Index.cshtml" />
+    <Content Include="Views\PurchasePlan\Index.cshtml" />
+    <Content Include="Views\PurchaseMain\Index.cshtml" />
+    <Content Include="Views\StuffInfoPrice\Index.cshtml" />
+    <Content Include="Views\PurchasePlanByEquip\Index.cshtml" />
+    <Content Include="Views\Contract\PayIndex.cshtml" />
+    <Content Include="Views\CarOilPriceSetting\Index.cshtml" />
+    <Content Include="Views\MonthAccount\Index.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <None Include="Scripts\plugins\iCheck\flat\Thumbs.db" />
+    <Content Include="XmlConfig\system.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="XmlConfig\database.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="XmlConfig\hibernate-configuration.config" />
+    <Content Include="XmlConfig\log4net.config" />
+    <Content Include="XmlConfig\prefixGenerator.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\StockPact\PriceSet.cshtml" />
+    <Content Include="Views\CarIMA\Index.cshtml" />
+    <Content Include="Views\GoodsPay\Index.cshtml" />
+    <Content Include="Views\distance\Index.cshtml" />
+    <Content Include="Views\CarDriverPrice\Index.cshtml" />
+    <Content Include="Views\CarTimesReward\Index.cshtml" />
+    <Content Include="Views\CarProjectPrice\Index.cshtml" />
+    <Content Include="Views\CarLeaseCostSet\Index.cshtml" />
+    <Content Include="Views\CarProjectCube\Index.cshtml" />
+    <Content Include="Views\CarTrafficPoliceFine\Index.cshtml" />
+    <Content Include="Views\StuffAccount\Index.cshtml" />
+    <Content Include="Views\StuffPayableAdjust\Index.cshtml" />
+    <Content Include="Views\GoodsAccount\Index.cshtml" />
+    <Content Include="Views\Lab_Record\ADMIndex.cshtml" />
+    <Content Include="Views\Lab_Record\AirIndex.cshtml" />
+    <Content Include="Views\Lab_Record\FAIndex.cshtml" />
+    <Content Include="Views\Lab_Record\Air2Index.cshtml" />
+    <Content Include="Views\Lab_Record\CAIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\LogOn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZLERP.Business\ZLERP.Business.csproj">
+      <Project>{9FA3CDC9-2189-4381-9599-6567F0BFEB92}</Project>
+      <Name>ZLERP.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLERP.IRespository\ZLERP.IRepository.csproj">
+      <Project>{82C73E05-9622-4BDD-8FD8-7182EEF5F2BC}</Project>
+      <Name>ZLERP.IRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLERP.JBZKZ12\ZLERP.JBZKZ12.csproj">
+      <Project>{26C932A5-E5A4-41FE-9DD5-7CC89CE32F7B}</Project>
+      <Name>ZLERP.JBZKZ12</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLERP.Model\ZLERP.Model.csproj">
+      <Project>{772D60F4-C404-41B5-BDF3-000A8BA87F52}</Project>
+      <Name>ZLERP.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLERP.NHibernateRepository\ZLERP.NHibernateRepository.csproj">
+      <Project>{33462E2E-4F42-4BA1-BFF0-3422FFA30A4B}</Project>
+      <Name>ZLERP.NHibernateRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLERP.Resources\ZLERP.Resources.csproj">
+      <Project>{2DA438E1-73E3-4C05-9742-380BA99A2D81}</Project>
+      <Name>ZLERP.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\StuffInfo\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dic\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Company\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ProducePlan\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ProduceTask\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Customer\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Contract\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SysConfig\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SysFunc\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ProduceTask\TaskAndFormula.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DispatchList\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Formula\DesignFormula.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\SiteMaps.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Department\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Silo\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ProductLine\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ConsMixprop\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Formula\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\CustMixprop\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ConStrength\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SiloProductLine\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\StuffType\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Identity\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\DateTimeWithTime.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\IdentitySetting\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Car\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Project\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\StuffInfo\Report.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Region\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TZRalation\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SupplyInfo\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\StockPact\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\StockPlan\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Bale\R2211.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Car\R610201.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Produce\R410701.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Produce\R410702.rdlc" />
+    <Content Include="Reports\Produce\R410703.rdlc" />
+    <Content Include="Reports\Finance\R020101.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\DicDropDown.cshtml" />
+    <Content Include="Views\StuffIn\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DicComboBox.cshtml" />
+    <Content Include="Views\Finance\Report.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\StuffInfo\Search.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ShippingDocument\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\CheckInfo\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\QCC\R710822.rdlc" />
+    <Content Include="Reports\QCC\R710823.rdlc" />
+    <Content Include="Reports\Car\R610206.rdlc" />
+    <Content Include="Reports\Produce\R410708.rdlc" />
+    <Content Include="Reports\Pump\R940301.rdlc" />
+    <Content Include="Reports\Pump\R940303.rdlc" />
+    <Content Include="Reports\Pump\R940302.rdlc" />
+    <Content Include="Reports\QCC\R710824.rdlc" />
+    <Content Include="Reports\QCC\R710825.rdlc" />
+    <Content Include="Reports\QCC\R710832.rdlc" />
+    <Content Include="Reports\QCC\R710833.rdlc" />
+    <Content Include="Reports\QCC\R710801.rdlc" />
+    <Content Include="Reports\QCC\R710842.rdlc" />
+    <Content Include="Reports\ReportsBase.Master" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Formula\CopyInfo.cshtml" />
+    <Content Include="Views\ProductRecord\Index.cshtml" />
+    <Content Include="Views\Home\Desktop.cshtml" />
+    <Content Include="Views\ConPrice\Index.cshtml" />
+    <Content Include="Views\ContractPump\Index.cshtml" />
+    <Content Include="Views\ShippingDocument\NewShipDoc.cshtml" />
+    <Content Include="Views\OpenCheck\Index.cshtml" />
+    <Content Include="Views\Notice\Index.cshtml" />
+    <Content Include="Views\SysLog\Index.cshtml" />
+    <Content Include="Views\Commission\Index.cshtml" />
+    <Content Include="Views\ARBill\Index.cshtml" />
+    <Content Include="Views\QualityExam\Index.cshtml" />
+    <Content Include="Views\QualityExamItem\Index.cshtml" />
+    <Content Include="Views\CEExam\Index.cshtml" />
+    <Content Include="Views\FAExam\Index.cshtml" />
+    <Content Include="Views\CAExam\Index.cshtml" />
+    <Content Include="Views\Settlement\Index.cshtml" />
+    <Content Include="Views\AIR2Exam\Index.cshtml" />
+    <Content Include="Views\ContractOtherPrice\Index.cshtml" />
+    <Content Include="Views\AIR1Exam\Index.cshtml" />
+    <Content Include="Views\ReceiveBill\Index.cshtml" />
+    <Content Include="Views\ADMExam\Index.cshtml" />
+    <Content Include="Views\TyreChange\Index.cshtml" />
+    <Content Include="Views\TyreInfo\Index.cshtml" />
+    <Content Include="Views\ADM2Exam\Index.cshtml" />
+    <Content Include="Views\TyreRepair\Index.cshtml" />
+    <Content Include="Views\APBill\Index.cshtml" />
+    <Content Include="Views\PayBill\Index.cshtml" />
+    <Content Include="Views\AlkaliReport\Index.cshtml" />
+    <Content Include="Views\ProduceTask\OpenCheck.cshtml" />
+    <Content Include="Views\PumpWork\Index.cshtml" />
+    <Content Include="Views\LogViewer\Index.cshtml" />
+    <Content Include="Views\PartInfo\Index.cshtml" />
+    <Content Include="Views\PartPlan\Index.cshtml" />
+    <Content Include="Views\PartStockPlan\Index.cshtml" />
+    <Content Include="Views\PartStockContract\Index.cshtml" />
+    <Content Include="Views\PartIn\Index.cshtml" />
+    <Content Include="Views\PartReturn\Index.cshtml" />
+    <Content Include="Views\PartInventory\Index.cshtml" />
+    <Content Include="Views\PartBorrow\Index.cshtml" />
+    <Content Include="Views\PartBorrowReturn\Index.cshtml" />
+    <Content Include="Views\ConStrAssess\Index.cshtml" />
+    <Content Include="Views\Dic\SubNode.cshtml" />
+    <Content Include="Views\Dic\SubTree.cshtml" />
+    <Content Include="Views\Shared\select.cshtml" />
+    <Content Include="Views\CarOil\Index.cshtml" />
+    <Content Include="Views\StuffPrice\Index.cshtml" />
+    <Content Include="Views\TransPrice\Index.cshtml" />
+    <Content Include="Views\StuffIn\PriceConfirm.cshtml" />
+    <Content Include="Views\Maintenance\Index.cshtml" />
+    <Content Include="Views\ClassB\ClassType.cshtml" />
+    <Content Include="Views\Equipment\Index.cshtml" />
+    <Content Include="Views\DBHelper\Index.cshtml" />
+    <Content Include="Views\StuffSell\Index.cshtml" />
+    <Content Include="Views\MntZl\Index.cshtml" />
+    <Content Include="Views\CarLend\Index.cshtml" />
+    <Content Include="Views\CarLendItem\Index.cshtml" />
+    <Content Include="Views\CarLendFoot\Index.cshtml" />
+    <Content Include="Views\CarCard\Index.cshtml" />
+    <Content Include="Views\OilMech\Index.cshtml" />
+    <Content Include="Views\COMConfig\Index.cshtml" />
+    <Content Include="Views\RentCarPrice\Index.cshtml" />
+    <Content Include="Views\CarClass\Index.cshtml" />
+    <Content Include="Views\EquipTermlyMt\Index.cshtml" />
+    <Content Include="Views\Shared\SelectForString.cshtml" />
+    <Content Include="Views\EquipMtLy\Index.cshtml" />
+    <Content Include="Views\StuffInfo\StuffPlan.cshtml" />
+    <Content Include="Views\CustSilo\Index.cshtml" />
+    <Content Include="Views\TaskAss\Index.cshtml" />
+    <Content Include="Views\CarAss\Index.cshtml" />
+    <Content Include="Views\MeasureInfo\Index.cshtml" />
+    <Content Include="Views\Silo\SiloStatus.cshtml" />
+    <Content Include="Views\CustomerPlan\Index.cshtml" />
+    <Content Include="Views\CustomerPlan\ManageIndex.cshtml" />
+    <Content Include="Views\EquipMtLyReturn\Index.cshtml" />
+    <Content Include="Views\DispatchList\AddDispatch.cshtml" />
+    <Content Include="Views\EquipMtLy\Apply.cshtml" />
+    <Content Include="Views\HandleRecord\Index.cshtml" />
+    <Content Include="Views\Reg\Index.cshtml" />
+    <Content Include="Reports\QCC\R710613.aspx" />
+    <Content Include="Reports\QCC\R710614.aspx" />
+    <Content Include="Reports\QCC\R710615.aspx" />
+    <Content Include="Reports\QCC\R710616.aspx" />
+    <Content Include="Reports\QCC\R710617.aspx" />
+    <Content Include="Reports\Car\R610205.rdlc" />
+    <Content Include="Reports\Produce\R410707.rdlc" />
+    <Content Include="Reports\Finance\R020206.rdlc" />
+    <Content Include="Reports\QCC\R71064.rdlc" />
+    <Content Include="Reports\QCC\R710614.rdlc" />
+    <Content Include="Reports\QCC\R710615.rdlc" />
+    <Content Include="Reports\QCC\R710616.rdlc" />
+    <Content Include="Reports\QCC\R710617.rdlc" />
+    <Content Include="Views\StuffExam\Index.cshtml" />
+    <Content Include="Views\TranAcc\Index.cshtml" />
+    <Content Include="Views\CarRepair\Index.cshtml" />
+    <Content Include="Views\GoodsBorrow\Index.cshtml" />
+    <Content Include="Views\GoodsType\Index.cshtml" />
+    <Content Include="Views\GoodsInfo\Index.cshtml" />
+    <Content Include="Views\GoodsIn\Index.cshtml" />
+    <Content Include="Views\GoodsOut\Index.cshtml" />
+    <Content Include="Views\GoodsRevert\Index.cshtml" />
+    <Content Include="Views\GoodsInvalidate\Index.cshtml" />
+    <Content Include="Views\GoodsCheck\Index.cshtml" />
+    <Content Include="Views\RateSet\Index.cshtml" />
+    <Content Include="Views\FinalStuffType\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Finance\R020205.rdlc" />
+    <Content Include="Reports\Finance\R020303.rdlc" />
+    <Content Include="Reports\Bale\R220801.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Finance\TaskSettlement.rdlc" />
+    <Content Include="Reports\Part\R9104.rdlc" />
+    <Content Include="Reports\Produce\R410704.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Tyre\R810401.rdlc" />
+    <Content Include="Reports\QCC\R710803.rdlc" />
+    <Content Include="Reports\QCC\R710804.rdlc" />
+    <Content Include="Reports\QCC\R710805.rdlc" />
+    <Content Include="Reports\QCC\R710806.rdlc" />
+    <Content Include="Reports\QCC\R710807.rdlc" />
+    <Content Include="Reports\Tyre\R810402.rdlc" />
+    <Content Include="Reports\Tyre\R810403.rdlc" />
+    <Content Include="Reports\Tyre\R810404.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\DBBak\" />
+    <Folder Include="日志\张宇欣\" />
+    <Folder Include="日志\李周良\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Finance\APDetails.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Sales\R310401.rdlc" />
+    <Content Include="Reports\Sales\R310402.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Produce\R410705.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Bale\R220802.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Car\R610202.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Bale\R2231.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\User\R120201.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Sales\R310403.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\QCC\R510701.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Bale\R220803.rdlc" />
+    <Content Include="Reports\Car\R610203.rdlc" />
+    <Content Include="Reports\Car\R610204.rdlc" />
+    <Content Include="Reports\Part\R911301.rdlc" />
+    <Content Include="Reports\Produce\R410791.rdlc" />
+    <Content Include="Reports\QCC\R710808.rdlc" />
+    <Content Include="Reports\QCC\R710809.rdlc" />
+    <Content Include="Reports\QCC\R710612.rdlc" />
+    <Content Include="Reports\QCC\R710613.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Bale\R2208021.rdlc" />
+    <Content Include="Reports\Car\R610208.rdlc" />
+    <Content Include="Reports\Bale\R220805.rdlc" />
+    <Content Include="Reports\Bale\R220806.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Car\R610209.rdlc" />
+    <Content Include="Reports\Car\R610210.rdlc" />
+    <Content Include="Reports\Finance\DocDetail.rdlc" />
+    <Content Include="Reports\Goods\R230901.rdlc" />
+    <Content Include="Reports\Produce\DocDetail.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Produce\R410711.rdlc" />
+    <Content Include="Reports\Produce\R410709.rdlc" />
+    <Content Include="Reports\Produce\R410720.rdlc" />
+    <Content Include="Reports\Produce\R410722.rdlc" />
+    <Content Include="Reports\Produce\R410723.rdlc" />
+    <Content Include="Reports\Produce\R410724.rdlc" />
+    <Content Include="Reports\Produce\R410725.rdlc" />
+    <Content Include="Reports\Produce\R410721.rdlc" />
+    <Content Include="Reports\Produce\R410730.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Produce\R310604.rdlc" />
+    <Content Include="Reports\Bale\R220808.rdlc" />
+    <Content Include="Reports\Car\R610211.rdlc" />
+    <Content Include="Reports\Produce\R410726.rdlc" />
+    <Content Include="Reports\Produce\R410731.rdlc" />
+    <Content Include="Reports\QCC\R710843.rdlc" />
+    <Content Include="Reports\QCC\R710844.rdlc" />
+    <Content Include="Reports\QCC\R710845.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\erpimage\mapimage\icon\iconAll.psd" />
+    <None Include="Content\erpimage\mapimage\icon\icons.psd" />
+    <Content Include="Areas\Mobile\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Mobile\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Mobile\Views\Web.config" />
+    <Content Include="Areas\Mobile\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Mobile\Views\Produce\Index.cshtml" />
+    <Content Include="Areas\Mobile\Views\Produce\ProduceStats.cshtml" />
+    <Content Include="Areas\Mobile\Views\Account\LogOn.cshtml" />
+    <Content Include="Areas\Mobile\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\Mobile\Views\Produce\StuffInStats.cshtml" />
+    <Content Include="Views\LinkManRecord\Index.cshtml" />
+    <Content Include="Views\Contract\ControlIndex.cshtml" />
+    <Content Include="Views\Reward\Index.cshtml" />
+    <Content Include="Views\Training\Index.cshtml" />
+    <Content Include="Views\TrainRecord\Index.cshtml" />
+    <Content Include="Views\TrainRecord\MyTrainRecord.cshtml" />
+    <Content Include="Views\Msg\Index.cshtml" />
+    <Content Include="Views\SystemMsg\MyMsg.cshtml" />
+    <Content Include="Views\Report\Report.cshtml" />
+    <Content Include="Views\SystemMsg\WriteMsg.cshtml" />
+    <Content Include="Reports\QCCReportsBase.Master" />
+    <Content Include="Views\TplManage\Index.cshtml" />
+    <Content Include="Views\DispatchList\Index2.cshtml" />
+    <Content Include="Views\Schedule\Center.cshtml" />
+    <Content Include="Views\Schedule\Index.cshtml" />
+    <Content Include="Views\Schedule\Left.cshtml" />
+    <Content Include="Views\GPSSysConfig\Index.cshtml" />
+    <Content Include="Views\GPS_HotMark\Index.cshtml" />
+    <Content Include="Views\LimitRegion\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Produce\R410732.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Bale\R220807.rdlc" />
+    <Content Include="Reports\Bale\R220809.rdlc" />
+    <Content Include="Reports\Bale\R220810.rdlc" />
+    <Content Include="Reports\Produce\R410733.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Produce\R410734.rdlc" />
+    <Content Include="Reports\Produce\R410735.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Produce\R410801.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Produce\R410710.rdlc" />
+    <Content Include="Reports\Produce\R410727.rdlc" />
+    <Content Include="Reports\Produce\R410736.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Produce\R410802.rdlc" />
+    <Content Include="Reports\QCC\R710611.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\GPS\R420705.rdlc" />
+    <Content Include="Reports\GPS\R420702.rdlc" />
+    <Content Include="Reports\GPS\R420704.rdlc" />
+    <Content Include="Reports\QCC\R710810.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\QCC\R710618.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Sales\R310404.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\GPS\R420706.rdlc" />
+    <Content Include="Reports\GPS\R420707.rdlc" />
+    <Content Include="Reports\QCC\R710802.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Goods\R230902.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Sales\DocDetail.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Bale\R2208011.rdlc" />
+    <Content Include="Reports\Bale\R220804.rdlc" />
+    <Content Include="Reports\Bale\R220820.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Bale\R220821.rdlc" />
+    <Content Include="Reports\Bale\R220822.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Bale\R220823.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Bale\R2208230.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Car\R610212.rdlc" />
+    <Content Include="Reports\Goods\R230903.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Goods\R230904.rdlc" />
+    <Content Include="Reports\Goods\R230905.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Goods\R230904old.rdlc" />
+    <Content Include="Reports\Goods\R230906.rdlc" />
+    <Content Include="Reports\Goods\副本 R230903.rdlc" />
+    <Content Include="Reports\Produce\R410706.rdlc" />
+    <Content Include="Reports\Produce\R410728.rdlc" />
+    <Content Include="Reports\Produce\R410729.rdlc" />
+    <Content Include="Reports\Produce\R410740.rdlc" />
+    <Content Include="Reports\Produce\R410741.rdlc" />
+    <Content Include="Reports\Produce\R410742.rdlc" />
+    <Content Include="Reports\Produce\R410743.rdlc" />
+    <Content Include="Reports\Produce\R410790.rdlc" />
+    <Content Include="Reports\Produce\R410803.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Produce\R410804.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Produce\R4108050.rdlc" />
+    <Content Include="Reports\Produce\R410794.rdlc" />
+    <Content Include="Reports\Produce\R410807.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Produce\R410809.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Produce\R410810.rdlc" />
+    <Content Include="Reports\Produce\R410811.rdlc" />
+    <Content Include="Reports\Produce\R410806.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Sales\R311401.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Produce\R4107051.rdlc" />
+    <Content Include="Reports\Sales\R310501.rdlc" />
+    <Content Include="Reports\Sales\R310412.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Sales\R310411.rdlc" />
+    <Content Include="Reports\Sales\R310413.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Sales\R310415.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Sales\R310416.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Sales\R310417.rdlc" />
+    <Content Include="Reports\Sales\R310418.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Sales\R310419.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Produce\R410805.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Produce\R410809Detail.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Sales\R310420.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Sales\R310421.rdlc" />
+    <Content Include="Reports\Sales\R311401T.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Car\R610213.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Car\R610214.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Car\R610215.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Car\R610216.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Car\R610217.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Car\R610218.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Car\R610219.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Goods\R230907.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Car\R610220.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Lab\R720099.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <EmbeddedResource Include="Reports\Lab\R720101.rdlc" />
+    <EmbeddedResource Include="Reports\Lab\R720102.rdlc" />
+    <EmbeddedResource Include="Reports\Lab\R720201.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Lab\R720202TT.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Lab\R720202Sub.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Lab\R720202Sub2.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Lab\R720202.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Lab\R720401.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Lab\R720402.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Lab\R720402Sub.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Lab\R720402Sub2.rdlc" />
+    <EmbeddedResource Include="Reports\Lab\R720601.rdlc" />
+    <EmbeddedResource Include="Reports\Lab\R720602.rdlc" />
+    <EmbeddedResource Include="Reports\Lab\R720603.rdlc" />
+    <EmbeddedResource Include="Reports\Lab\R720604.rdlc" />
+    <EmbeddedResource Include="Reports\Lab\R720605.rdlc" />
+    <EmbeddedResource Include="Reports\Produce\R410831.rdlc" />
+    <EmbeddedResource Include="Reports\Sales\R3104111.rdlc" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>17202</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1055</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+  </PropertyGroup>
+</Project>

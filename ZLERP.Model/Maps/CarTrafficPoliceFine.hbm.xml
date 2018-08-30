@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.CarTrafficPoliceFine, ZLERP.Model" table="CarTrafficPoliceFine" lazy="true"
+	  dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="CarTrafficPoliceFineId">
+			<generator class="native" />
+		</id>
+		<property name="CarID" column="CarID" />
+		<property name="UserID" column="UserID" />
+		<property name="Address" column="Address" />
+		<property name="OccurrenceTime" column="OccurrenceTime" />
+		<property name="FineAmount" column="FineAmount" />
+		<property name="Describe" column="Describe" />
+		<property name="Meno" column="Meno" />
+		<property name="BuildTime" column="BuildTime" update="false"/>
+		<property name="Builder" column="Builder" update="false"/>
+		<property name="ModifyTime" column="ModifyTime" insert="false"/>
+		<property name="Modifier" column="Modifier" insert="false"/>
+		<property name="Lifecycle" column="Lifecycle" />
+		<!--<bag name="CarDriverPrices" lazy="true" cascade="all" inverse="true" >
+			<key column="CarDriverPriceMainId"></key>
+			<one-to-many class="CarDriverPrice"></one-to-many>
+		</bag>-->
+	</class>
+</hibernate-mapping>

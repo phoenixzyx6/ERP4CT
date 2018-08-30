@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.Remindinfo, ZLERP.Model" table="Remindinfo" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="REID">
+      <generator class="native" />
+    </id>
+    <!--<version name="Version" column="Version" />-->
+    <property name="DispatchID" column="DispatchID" />
+    <property name="ShipDocID" column="ShipDocID" />
+    <property name="StuffID" column="StuffID" />
+    <property name="StuffName" column="StuffName" />
+    <property name="ProjectID" column="ProjectID" />
+    <property name="ProjectName" column="ProjectName"/>
+    <property name="Status" column="Status" />
+    <property name="ErrorValue" column="ErrorValue" />
+    <property name="TaskID" column="TaskID" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="PotTimes" column="PotTimes" />
+  </class>
+</hibernate-mapping>

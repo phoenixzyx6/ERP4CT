@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Attachment, ZLERP.Model" table="Attachments" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="AttachemntId">
+		 	<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="Title" column="Title" />
+		<property name="FileType" column="FileType" />
+		<property name="FileUrl" column="FileUrl" />
+		<property name="FileSize" column="FileSize" />
+		<property name="ObjectType" column="ObjectType" />
+		<property name="ObjectId" column="ObjectId" not-null="true" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+	</class>
+</hibernate-mapping>

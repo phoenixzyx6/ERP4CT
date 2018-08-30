@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.TranAcc, ZLERP.Model" table="TranAcc" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="AccID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+    <version name="Version" column="Version" />
+    
+		<property name="AccTime" column="AccTime" />
+		<property name="AccAddr" column="AccAddr" />
+    <property name="AccClass" column="AccClass" />
+    <property name="AccReason" column="AccReason" />
+    <property name="AccDes" column="AccDes" />
+    <property name="AccMan" column="AccMan" />
+    <property name="InsureCorp" column="InsureCorp" />
+    <property name="InsureNo" column="InsureNo" />
+    <property name="AccCarID" column="AccCarID" />
+    <property name="LossPart" column="LossPart" />   
+    <property name="LossAmount" column="LossAmount" />   
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+	</class>
+</hibernate-mapping>

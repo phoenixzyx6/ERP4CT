@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Customer, ZLERP.Model" table="Customer" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30"  optimistic-lock="version">
+		<id name="ID" column="CustomerID">
+		 	<generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="CustName" column="CustName" />
+		<property name="ShortName" column="ShortName" />
+		<property name="CustType" column="CustType" />
+		<property name="RegFund" column="RegFund" />
+		<property name="CachetPath" column="CachetPath" />
+		<property name="BusinessAddr" column="BusinessAddr" />
+		<property name="InvoiceAddr" column="InvoiceAddr" />
+		<property name="BusinessTel" column="BusinessTel" />
+		<property name="BusinessFax" column="BusinessFax" />
+		<property name="Email" column="Email" />
+		<property name="PostCode" column="PostCode" />
+		<property name="PrincipalSex" column="PrincipalSex" />
+		<property name="Principal" column="Principal" />
+		<property name="PrincipalTel" column="PrincipalTel" />
+		<property name="LinkMan" column="LinkMan" />
+		<property name="LinkTel" column="LinkTel" />
+		<property name="Buyer" column="Buyer" />
+		<property name="AddrCode" column="AddrCode" />
+		<property name="CreditQuota" column="CreditQuota" />
+		<property name="IsAudit" column="IsAudit" />
+    <property name="IsUse" column="IsUse" />
+		<property name="TaxCode" column="TaxCode" />
+		<property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<bag name="Banks" lazy="true" inverse="true" >
+			<key column="CustomerID"></key>
+			<one-to-many class="Bank"></one-to-many>
+		</bag>
+		<bag name="Contracts" lazy="true" inverse="true" >
+			<key column="CustomerID"></key>
+			<one-to-many class="Contract"></one-to-many>
+		</bag>
+		<bag name="PumpWorks" lazy="true" inverse="true" >
+			<key column="CustomerID"></key>
+			<one-to-many class="PumpWork"></one-to-many>
+		</bag>
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,59 @@
+﻿@model ZLERP.Model.GoodsInfo 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/GoodsInfo/GoodsInfo.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+        
+            goodsinfoIndexInit({
+                storeUrl:'@Url.Action("Find")',
+                listClassMUrl: '@Url.Action("ListData","ClassM")',
+                listClassSUrl: '@Url.Action("ListData","ClassS")'
+        });});
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })@Html.TextBoxFor(m => m.IsUsed, new { Value = "true", @style = "display:none;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.GoodsName)@Html.EditorFor(m => m.GoodsName)
+                </td>
+                <td>@Html.LabelFor(m => m.GoodsTypeID)@Html.fixedDropDownListFor(m => m.GoodsTypeID, (IEnumerable<SelectListItem>)ViewBag.GoodsType)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.uPrice)@Html.TextBoxFor(m => m.uPrice, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.unit)@Html.EditorFor(m => m.unit)
+                </td>
+            </tr>
+
+            <tr> 
+                <td>@Html.LabelFor(m => m.GoodsModel)@Html.DropDownListFor(m => m.GoodsModel, Enumerable.Empty<SelectListItem>(), new { zlerp = "combobox", style = "width:100px;" })</td>
+                <td>@Html.LabelFor(m => m.ClassBID)@Html.DropDownListFor(m => m.ClassBID, ViewBag.ClassBEquip as IEnumerable<SelectListItem>, new { style = "width:138px;" })</td>
+            </tr>
+            <tr> 
+                <td>@Html.LabelFor(m => m.ClassMID)@Html.DropDownListFor(m => m.ClassMID, Enumerable.Empty<SelectListItem>(), new { style = "width:138px;" })</td>
+                <td>@Html.LabelFor(m => m.ClassSID)@Html.DropDownListFor(m => m.ClassSID, Enumerable.Empty<SelectListItem>(), new { style = "width:138px;" })</td>
+                
+            </tr>
+
+            <tr>
+                <td>@Html.LabelFor(m => m.MinWarmContent)@Html.EditorFor(m => m.MinWarmContent)
+                </td>
+                <td>@Html.LabelFor(m => m.MaxWarmContent)@Html.EditorFor(m => m.MaxWarmContent)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, new { style = "width:342px;" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>

@@ -1,0 +1,55 @@
+﻿@model ZLERP.Model.ViewModels.PartStockViewModel 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/PartStockPlan/PartStockPlan.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        var options = {
+            stockPlanUrl: '@Url.Action("Find", "PartStockPlan")'
+            , auditUrl: '@Url.Action("Auditing")'
+            , stockPlanDetailUrl: '@Url.Action("Find", "PartStockPlanDetail")'
+            , getPartInfoUrl: '@Url.Action("Get", "PartInfo")'
+        };
+        $(function () {
+            partstockplanIndexInit(options);
+        });
+</script>
+}
+<div id="stockPlanGrid"></div>
+<div id="stockPlanForm" class="mvcform" style="display:none;">
+
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    @Html.HiddenFor(m => m.PartStockPlan.ID)
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartStockPlan.PartID)@Html.DropDownListFor(m => m.PartStockPlan.PartID, (SelectList)ViewBag.PartInfoDics, new { @class = "text", style = "width:120px;",id="PartID" })</td>
+        <td>@Html.LabelFor(m => m.PartStockPlan.PlanDate)@Html.EditorFor(m => m.PartStockPlan.PlanDate)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartStockPlan.PlanNum)@Html.EditorFor(m => m.PartStockPlan.PlanNum)</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr> 
+        <td>@Html.Label("单位")<input type="text" class="text-box single-line" id="UnitID" disabled="disabled" /></td>
+        <td>@Html.Label("当前库存")<input type="text" class="text-box single-line" id="Inventory" disabled="disabled" /></td>
+    </tr>
+</table>
+}
+</div>
+
+<div id="stockPlanDetailGrid"></div>
+<div id="stockPlanDetailForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    @Html.HiddenFor(m => m.PartStockPlanDetail.StockPlanID)
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartStockPlanDetail.DepartmentID)@Html.DropDownListFor(m => m.PartStockPlanDetail.DepartmentID, (SelectList)ViewBag.DepartDics, new { @class = "text" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartStockPlanDetail.PlanNum)@Html.EditorFor(m => m.PartStockPlanDetail.PlanNum)</td>
+    </tr>
+</table>
+}
+</div>
+
+

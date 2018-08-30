@@ -1,0 +1,59 @@
+﻿@model ZLERP.Model.PayBill 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/PayBill/PayBill.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            paybillIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.SupplyID)@Html.DropDownListFor(m => m.SupplyID, (IEnumerable<SelectListItem>)ViewBag.Supplies) @Html.HiddenFor(m => m.ID)</td>
+ 
+        <td>@Html.LabelFor(m => m.PayDate)@Html.EditorFor(m => m.PayDate, "DateTimeWithTime", new { defaultValue = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+   
+    </tr>
+    <tr  class="num"> 
+        <td>@Html.LabelFor(m => m.Cash)@Html.EditorFor(m => m.Cash)</td>
+ 
+        <td>@Html.LabelFor(m => m.CheckAmt)@Html.EditorFor(m => m.CheckAmt)</td>
+   
+    </tr>
+    <tr class="num"> 
+        <td>@Html.LabelFor(m => m.Discount)@Html.EditorFor(m => m.Discount)</td>
+ 
+        <td>@Html.LabelFor(m => m.LastDeposit)@Html.EditorFor(m => m.LastDeposit)</td>
+   
+    </tr>
+    <tr class="num"> 
+        <td>@Html.LabelFor(m => m.NewDeposit)@Html.EditorFor(m => m.NewDeposit)</td>
+ 
+        <td>@Html.LabelFor(m => m.OtherAdd)@Html.EditorFor(m => m.OtherAdd)</td>
+   
+    </tr>
+    <tr class="num"> 
+        <td>@Html.LabelFor(m => m.OtherSub)@Html.EditorFor(m => m.OtherSub)</td>
+ 
+        <td>@Html.LabelFor(m => m.Total)@Html.EditorFor(m => m.Total)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PayUser)@Html.EditorFor(m => m.PayUser)</td>
+ 
+        <td>@Html.LabelFor(m => m.ReceiveUser)@Html.EditorFor(m => m.ReceiveUser)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Buyer)@Html.DropDownListFor(m => m.Buyer, (IEnumerable<SelectListItem>)ViewBag.Buyes)</td>
+ 
+        <td>@Html.LabelFor(m => m.Memo)@Html.EditorFor(m => m.Memo)</td>
+    </tr>
+</table> 
+
+}
+</div>

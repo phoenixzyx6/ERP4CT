@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.Lab_Air2Origin, ZLERP.Model" table="Lab_Air2Origin" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="Lab_Air2OriginId">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="Lab_RecordID" column="Lab_RecordID" />
+    <property name="DependInfoID" column="DependInfoID" />
+    <property name="Type" column="Type" />
+    <property name="Grade" column="Grade" />
+    <property name="Description" column="Description" />
+    <property name="SuccessDate" column="SuccessDate" />
+    <property name="SuccessTemperature" column="SuccessTemperature" />
+    <property name="SuccessWet" column="SuccessWet" />
+    <property name="SpecificTemperature" column="SpecificTemperature" />
+    <property name="SpecificWet" column="SpecificWet" />
+    <property name="SpecificK" column="SpecificK" />
+    <property name="SpecificVoidage" column="SpecificVoidage" />
+    <property name="SpecificBarrelVolume" column="SpecificBarrelVolume" />
+    <property name="SpecificPowderDensity" column="SpecificPowderDensity" />
+    <property name="SpecificQuality1" column="SpecificQuality1" />
+    <property name="SpecificQuality2" column="SpecificQuality2" />
+    <property name="SpecificArea1" column="SpecificArea1" />
+    <property name="SpecificArea2" column="SpecificArea2" />
+    <property name="ContrastMortar" column="ContrastMortar" />
+    <property name="TestMortar" column="TestMortar" />
+    <property name="DryBeforeQuality" column="DryBeforeQuality" />
+    <property name="DryAfterQuality" column="DryAfterQuality" />
+    <property name="MachineRun" column="MachineRun" />
+    <property name="Remark" column="Remark" />
+    
+    <property name="SpecificArea" column="SpecificArea" />
+    <property name="FluidityRatio" column="FluidityRatio" />
+    <property name="ContentWater" column="ContentWater" />
+    
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <many-to-one name="Lab_DependInfo" column="DependInfoID" class="Lab_DependInfo" update="false" insert="false"/>
+    <many-to-one name="Lab_Record" column="Lab_RecordID" class="Lab_Record" update="false" insert="false"/>
+    <bag name="Lab_Air2ActiveInfos" lazy="true" cascade="all-delete-orphan" inverse="true" >
+      <key column="Lab_Air2OriginId"></key>
+      <one-to-many class="Lab_Air2ActiveInfo"></one-to-many>
+    </bag>
+    <bag name="Lab_Air2Densitys" lazy="true" cascade="all" inverse="true" >
+      <key column="Lab_Air2OriginId"></key>
+      <one-to-many class="Lab_Air2Density"></one-to-many>
+    </bag>
+  </class>
+</hibernate-mapping>

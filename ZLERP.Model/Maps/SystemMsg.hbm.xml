@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.SystemMsg, ZLERP.Model" table="SystemMsg" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="SystemMsgID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+    <property name="UserID" column="UserID" />
+    <property name="OperateObj" column="OperateObj" />
+    <property name="Url" column="Url" />
+    <property name="PID" column="PID" />
+		<property name="MsgTitle" column="MsgTitle" />
+		<property name="SendTime" column="SendTime" />
+		<property name="Sender" column="Sender" />
+		<property name="MsgType" column="MsgType" />
+		<property name="DealStatus" column="DealStatus" />
+		<property name="Assignee" column="Assignee" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <bag name="Attachments" where="ObjectType='SysMsg'" batch-size="30" cascade="delete" >
+      <key column="ObjectId"/>
+      <one-to-many class="Attachment" />
+    </bag>
+    <bag name="MyMsgs" lazy="true" cascade="all" inverse="true" >
+      <key column="SystemMsgID"></key>
+      <one-to-many class="MyMsg"></one-to-many>
+    </bag>
+	</class>
+</hibernate-mapping>

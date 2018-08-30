@@ -1,0 +1,735 @@
+﻿@model ZLERP.Model.ViewModels.FormulaDesignModel
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/Formula.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            formulaIndexInit({ storeUrl: '@Url.Action("Find")', //storeUrl
+                formulaItemStoreUrl: '@Url.Action("Find", "FormulaItem")', //formulaItemStoreUrl
+                itemUpdateUrl: '@Url.Action("Update", "FormulaItem")', //itemUpdateUrl
+                getFormulaUrl: '@Url.Action("Get", "Formula")', //getFormulaUrl
+                exportStuffUrl: '@Url.Action("ExportStuff", "Formula")',
+                conStrengthSelectUrl: '@Html.Raw(Url.Action("SearchSelect", "ConStrength", new{textField="ConStrengthCode", valueField="ConStrengthCode", orderby="ConStrengthCode"}))'
+            }); //ExportStuffUrl
+        });
+    </script>
+}
+<div class="mvcform" id="FormulaDesignDiv" style="float: left; width: 60%">
+    <button class="tbtn add" title="保存配比" role="button" aria-disabled="false" type="button"
+        onclick="SaveFormula();return false;">
+        保存配比</button>
+    
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform paddingStyle">
+            <tr>
+                <td>@Html.LabelFor(m => m.Formula.FormulaName)
+                </td>
+                <td>@Html.TextBoxFor(m => m.Formula.FormulaName, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.FormulaType)
+                </td>
+                <td>@Html.DicEditorFor(m => m.Formula.FormulaType, DicEnum.FType)
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.ConStrength)
+                </td>
+                <td>@Html.DropDownListFor(m => m.Formula.ConStrength, (IEnumerable<SelectListItem>)ViewBag.ConStrength)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Formula.CementBreed)
+                </td>
+                <td>@Html.TextBoxFor(m => m.Formula.CementBreed, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.Fce)
+                </td>
+                <td>@Html.TextBoxFor(m => m.Formula.Fce)
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.DesignStrength)
+                </td>
+                <td>@Html.TextBoxFor(m => m.Formula.DesignStrength)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Formula.Slump)
+                </td>
+                <td>@Html.DicEditorFor(m => m.Formula.Slump, DicEnum.Slump)
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.WCRate)
+                </td>
+                <td>@Html.EditorFor(m => m.Formula.WCRate)
+                </td>
+                <td>@Html.Label("砂率%")
+                </td>
+                <td>@Html.EditorFor(m => m.Formula.SCRate)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Formula.CaType)
+                </td>
+                <td>@Html.DicEditorFor(m => m.Formula.CaType, DicEnum.CAType)
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.MixingTime)
+                </td>
+                <td>@Html.EditorFor(m => m.Formula.MixingTime)
+                </td>
+                <td>@Html.LabelFor(m => m.Formula.SeasonType)
+                </td>
+                <td>@Html.DicEditorFor(m => m.Formula.SeasonType, DicEnum.Season)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Formula.Weight)
+                </td>
+                <td>@Html.TextBox("Formula.Weight",2400)
+                </td>
+            </tr>
+        </table>
+        <table class="mvcform paddingStyle">
+        <tr>
+            <td>
+                @Html.Label("原料")
+            </td>
+            <td>
+                标准用量(KG)
+            </td>
+            <td>
+                实际用量(KG)
+            </td>
+            <td>
+                试拌配方(KG)
+            </td>
+            <td>
+                <h4>
+                    拌合方数(m³)</h4>
+            </td>
+        </tr>
+        <tr>
+            
+            <td>
+                饮用水
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.WaAmount_S)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.WaAmount_R)
+            </td>
+            <td>
+                @Html.TextBox("WaAmount_E")
+            </td>
+            <td>
+                @Html.TextBox("Num", 1)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                水泥
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.CEAmount_S)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.CEAmount_R)
+            </td>
+            <td>
+                @Html.TextBox("CEAmount_E")
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                粗骨料
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.CaAmount_S)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.CaAmount_R)
+            </td>
+            <td>
+                @Html.TextBox("CaAmount_E")
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                细骨料
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.FaAmount_S)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.FaAmount_R)
+            </td>
+            <td>
+                @Html.TextBox("FaAmount_E")
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+           <td>
+            </td>
+            <td>
+                掺合料一取代率%
+            </td>
+            <td>
+                @Html.TextBox("AIR1Rate")
+            </td>
+            <td>
+                掺合料一系数
+            </td>
+            <td>
+                @Html.TextBox("AIR1Quo",1)
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                粉煤灰
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.AIR1Amount_S)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.AIR1Amount_R)
+            </td>
+            <td>
+                @Html.TextBox("AIR1Amount_E")
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+           <td>                
+            </td>
+            <td>
+                掺合料二取代率%
+            </td>
+            <td>
+                @Html.TextBox("AIR2Rate")
+            </td>
+            
+            <td>
+                
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                矿粉
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.AIR2Amount_S)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.AIR2Amount_R)
+            </td>
+            <td>
+                @Html.TextBox("AIR2Amount_E")
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+           <td>                
+            </td>
+            <td>
+                外加剂一掺量%
+            </td>
+            <td>
+                @Html.TextBox("ADM1Rate")
+            </td>
+            
+            <td>
+                
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                外加剂一
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.ADM1Amount_S)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.ADM1Amount_R)
+            </td>
+            <td>
+                @Html.TextBox("ADM1Amount_E")
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+           <td>                
+            </td>
+            <td>
+                外加剂二掺量%
+            </td>
+            <td>
+                @Html.TextBox("ADM2Rate")
+            </td>
+            
+            <td>
+                
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                外加剂二
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.ADM2Amount_S)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.ADM2Amount_R)
+            </td>
+            <td>
+                @Html.TextBox("ADM2Amount_E")
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                总量(KG)
+            </td>
+            <td>
+                @Html.TextBox("TAmount_S")
+            </td>
+            <td>
+                @Html.TextBox("TAmount_R")
+            </td>
+            <td>
+                @Html.TextBox("TAmount_E")
+            </td>
+            <td>
+            </td>
+        </tr>
+    </table>
+    }
+    
+</div>
+<div id="remarkDiv" style="float: right; width: 38%">
+    <h4>
+        1、计算配制强度Fcu,0；</h4>
+    <br/>
+    <h4>
+        2、求出相应的水灰比(如0.6)；</h4>
+    <br/>
+    <h4>
+        3、选取每m³混凝土的用水量（如180），并计算每m³混凝土的水泥用量；</h4>
+    <br/>
+    <div id="div1">
+        <table border="1" cellspacing="0" cellpadding="0">
+            <tr>
+                <td colspan="10" valign="top">
+                    一、用水量(kg)：(注：大坍落度的用水量可按90mm为基础，坍落度每增大20mm则用水量增加5kg)
+                </td>
+            </tr>
+            <tr>
+                <td width="114" colspan="2" valign="top">
+                    <p align="center">
+                        拌合物稠度</p>
+                </td>
+                <td width="227" colspan="4" valign="top">
+                    <p align="center">
+                        卵石最大粒径(mm)</p>
+                </td>
+                <td width="227" colspan="4" valign="top">
+                    <p align="center">
+                        碎石最大粒径(mm)</p>
+                </td>
+            </tr>
+            <tr>
+                <td width="57" valign="top">
+                    <p>
+                        项目</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        指标</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        10</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        20</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        31.5</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        40</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        16</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        20</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        31.5</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        40</p>
+                </td>
+            </tr>
+            <tr>
+                <td width="57" rowspan="4" valign="top">
+                    <p>
+                        坍落度(mm)</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        10~30</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        190</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        170</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        160</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        150</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        200</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        185</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        175</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        165</p>
+                </td>
+            </tr>
+            <tr>
+                <td width="57" valign="top">
+                    <p align="center">
+                        35~50</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        200</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        180</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        170</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        160</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        210</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        195</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        185</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        175</p>
+                </td>
+            </tr>
+            <tr>
+                <td width="57" valign="top">
+                    <p align="center">
+                        55~70</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        210</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        190</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        180</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        170</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        220</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        205</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        195</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        185</p>
+                </td>
+            </tr>
+            <tr>
+                <td width="57" valign="top">
+                    <p align="center">
+                        75~90</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        215</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        195</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        185</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        175</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        230</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        215</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        205</p>
+                </td>
+                <td width="57" valign="top">
+                    <p align="center">
+                        195</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <h4>
+        4、选取砂率（如35），计算粗骨料和细骨料的用量，并提出供试配用的计算配合比。</h4>
+    <br/>
+    <div id="div2">
+        <table border="1" cellspacing="0" cellpadding="0">
+            <tr>
+                <td colspan="7">
+                    二、砂率(%)：
+                </td>
+            </tr>
+            <tr>
+                <td width="81" rowspan="2" valign="top">
+                    <p align="center">
+                        水灰比(W/C)</p>
+                </td>
+                <td width="243" colspan="3" valign="top">
+                    <p align="center">
+                        卵石最大粒径(mm)</p>
+                </td>
+                <td width="244" colspan="3" valign="top">
+                    <p align="center">
+                        碎石最大粒径(mm)</p>
+                </td>
+            </tr>
+            <tr>
+                <td width="81" valign="top">
+                    <p align="center">
+                        10</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        20</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        40</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        16</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        20</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        40</p>
+                </td>
+            </tr>
+            <tr>
+                <td width="81" valign="top">
+                    <p align="center">
+                        0.40</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        26~32</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        25~31</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        24~30</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        30~35</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        29~34</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        27~32</p>
+                </td>
+            </tr>
+            <tr>
+                <td width="81" valign="top">
+                    <p align="center">
+                        0.50</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        30~35</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        29~34</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        28~33</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        33~38</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        32~37</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        30~35</p>
+                </td>
+            </tr>
+            <tr>
+                <td width="81" valign="top">
+                    <p align="center">
+                        0.60</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        33~38</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        32~37</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        31~36</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        36~41</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        35~40</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        33~38</p>
+                </td>
+            </tr>
+            <tr>
+                <td width="81" valign="top">
+                    <p align="center">
+                        0.70</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        36~41</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        35~40</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        34~39</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        39~41</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        38~43</p>
+                </td>
+                <td width="81" valign="top">
+                    <p align="center">
+                        36~41</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <h4>
+        5、根据取代率，确定掺合料用量。</h4>
+    </br>
+    <h4>
+        6、计算加入掺合料后，水泥的用量。</h4>
+    </br>
+    <h4>
+        7、根据外加剂掺量，计算外加剂用量。</h4>
+    </br>
+    <h4>8、具体流程，请遵照《JGJ55-2000 普通混凝土配合比设计规程》</h4>
+</div>

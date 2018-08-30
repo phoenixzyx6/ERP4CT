@@ -1,0 +1,78 @@
+﻿@model ZLERP.Model.ViewModels.EquipmentAndItems 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/Equipment/Equipment.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            equipmentIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                itemstoreUrl: '@Url.Action("Find", "EquipmentItem")',
+            listClassMUrl: '@Url.Action("ListData","ClassM")',
+            listClassSUrl: '@Url.Action("ListData","ClassS")',
+            listMaintenanceUrl: '@Url.Action("ListData","Maintenance")',
+            classTypeID: '@Request.RequestContext.RouteData.Values["id"]'
+            });
+        });
+</script>
+}
+<div id="EquipGrid" style=" float:left; width:65%;"></div>
+<div id="EquipItemGrid" style=" float:right; width:34.8%;"></div>
+<div id="EquipForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Equipment.ID)@Html.EditorFor(m => m.Equipment.ID)</td>
+ 
+        <td>@Html.LabelFor(m => m.Equipment.EquipmentName)@Html.EditorFor(m => m.Equipment.EquipmentName)</td>
+ 
+        <td>@Html.LabelFor(m => m.Equipment.Spec)@Html.EditorFor(m => m.Equipment.Spec)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Equipment.SupplyID)@Html.DropDownListFor(m => m.Equipment.SupplyID, (IEnumerable<SelectListItem>)ViewBag.supplyInfoList,"", new { style = "width:138px;" })</td>
+        <td colspan="2">@Html.LabelFor(m => m.Equipment.Brand)@Html.DicEditorFor(m => m.Equipment.Brand, DicEnum.Production, "", "") </td>
+    </tr>
+    <tr> 
+        @*<td>@Html.LabelFor(m => m.Equipment.ClassBID)@Html.AutoComplete("Equipment.ClassBID", "Equipment.ClassBName", "Combo", "ClassB", "ID", "ClassBName", "ClassID='" + @Request.RequestContext.RouteData.Values["id"] + "'")</td>*@
+        <td>@Html.LabelFor(m => m.Equipment.ClassBID)@Html.DropDownList("Equipment.ClassBID", (IEnumerable<SelectListItem>)ViewBag.ClassBList, "", new { style = "width:138px;" })</td>
+        <td>@Html.LabelFor(m => m.Equipment.ClassMID)@Html.DropDownListFor(m => m.Equipment.ClassMID, Enumerable.Empty<SelectListItem>(), new { @class = "text" })</td>
+        <td>@Html.LabelFor(m => m.Equipment.ClassSID)@Html.DropDownListFor(m => m.Equipment.ClassSID, Enumerable.Empty<SelectListItem>(), new { @class = "text" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Equipment.DepartmentID)@Html.DropDownListFor(m => m.Equipment.DepartmentID, (IEnumerable<SelectListItem>)ViewBag.departmentList, "")</td>
+        <td>@Html.LabelFor(m => m.Equipment.PurchaseDate)@Html.EditorFor(m => m.Equipment.PurchaseDate)</td>
+        <td>@Html.LabelFor(m => m.Equipment.EquipStatus) @Html.DicComboBoxFor(m => m.Equipment.EquipStatus, DicEnum.TyreStatus)</td>
+       
+    </tr>
+    <tr>
+        <td colspan="3">@Html.LabelFor(m => m.Equipment.Remark)@Html.TextAreaFor(m => m.Equipment.Remark, 1, 90, new { @class = "text" })</td>
+    </tr>
+</table>
+
+}
+</div>
+<div id="EquipItemForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+@Html.TextBoxFor(m => m.EquipmentItem.ID, new { style = "display:none;" })
+@Html.TextBoxFor(m => m.EquipmentItem.EquipmentID, new { style = "display:none;" })
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipmentItem.ItemName)@Html.DropDownListFor(m => m.EquipmentItem.MaintenanceID, Enumerable.Empty<SelectListItem>())</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipmentItem.Days)@Html.EditorFor(m => m.EquipmentItem.Days)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipmentItem.LatelyMaint)@Html.EditorFor(m => m.EquipmentItem.LatelyMaint)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.EquipmentItem.NextTimeMaint)@Html.EditorFor(m => m.EquipmentItem.NextTimeMaint)</td>
+    </tr>
+</table>
+
+}
+</div>

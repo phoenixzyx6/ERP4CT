@@ -1,0 +1,243 @@
+﻿@model ZLERP.Model.OpenCheck 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/OpenCheck/OpenCheck.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            opencheckIndexInit('@Url.Action("Find", "OpenCheck")',
+            '@Url.Action("Get", "ProduceTask")',
+            '@Url.Action("Get", "CustMixprop")',
+            '@Url.Action("GetItemsAmountById", "CustMixprop")',
+            '@Url.Action("Get", "OpenCheck")',
+            '@User.UserName()'
+            );
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <div id="OpenCheckDiv">
+            <table class="mvcform">
+                <tr>
+                    <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                    </td>
+                    <td>@Html.LabelFor(m => m.CheckMan)@Html.EditorFor(m => m.CheckMan)
+                    </td>
+                    <td>@Html.LabelFor(m => m.TaskID)@Html.AutoComplete("TaskID", "ProjectName", "Combo", "ProduceTask", "ID", "ProjectName")
+                    </td>
+                    <td>@Html.LabelFor(m => m.OpenTime)@Html.EditorFor(m => m.OpenTime, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })
+                    </td>
+                    <td>@Html.LabelFor(m => m.Principal)@Html.EditorFor(m => m.Principal)
+                    </td>
+                </tr>
+                <tr>
+                </tr>
+            </table>
+            <fieldset>
+                <legend>试验信息</legend>
+                <table class="mvcform">
+                    <tr>
+                        <td>@Html.LabelFor(m => m.CustMixpropID)@Html.AutoComplete("CustMixpropID", "MixpropCode", "Combo", "CustMixprop", "ID", "MixpropCode")
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.ConStrength)@Html.TextBoxFor(m => m.ConStrength)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.DeSlump)@Html.TextBoxFor(m => m.DeSlump)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.SCRate)@Html.TextBoxFor(m => m.SCRate)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(m => m.SIWRate)@Html.TextBoxFor(m => m.SIWRate)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.RIWRate)@Html.TextBoxFor(m => m.RIWRate)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.RIWRate1)@Html.TextBoxFor(m => m.RIWRate1)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.SIRRate)@Html.TextBoxFor(m => m.SIRRate)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.WAStuffID)@Html.DropDownListFor(m => m.WAStuffID, (IEnumerable<SelectListItem>)ViewBag.WAStuff)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.WAAmount)@Html.TextBoxFor(m => m.WAAmount)
+                        </td>
+                        <td>@Html.LabelFor(m => m.WAExamID)@Html.DropDownListFor(m => m.WAExamID, (IEnumerable<SelectListItem>)ViewBag.WAExam)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.WCRate)@Html.TextBoxFor(m => m.WCRate)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.CEStuffID)@Html.DropDownListFor(m => m.CEStuffID, (IEnumerable<SelectListItem>)ViewBag.CEStuff)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.CEAmount)@Html.TextBoxFor(m => m.CEAmount)
+                        </td>
+                        <td>@Html.LabelFor(m => m.CEExamID)@Html.DropDownListFor(m => m.CEExamID, (IEnumerable<SelectListItem>)ViewBag.CEExam)
+                        </td>
+                        <td>@Html.LabelFor(m => m.CESupplyID)@Html.DropDownListFor(m => m.CESupplyID, (IEnumerable<SelectListItem>)ViewBag.CESupply)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.FAStuffID)@Html.DropDownListFor(m => m.FAStuffID, (IEnumerable<SelectListItem>)ViewBag.FAStuff)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.FAAmount)@Html.TextBoxFor(m => m.FAAmount)
+                        </td>
+                        <td>@Html.LabelFor(m => m.FAExamID)@Html.DropDownListFor(m => m.FAExamID, (IEnumerable<SelectListItem>)ViewBag.FAExam)
+                        </td>
+                        <td>@Html.LabelFor(m => m.FASupplyID)@Html.DropDownListFor(m => m.FASupplyID, (IEnumerable<SelectListItem>)ViewBag.FASupply)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.CAStuffID)@Html.DropDownListFor(m => m.CAStuffID, (IEnumerable<SelectListItem>)ViewBag.CAStuff)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.CAAmount)@Html.TextBoxFor(m => m.CAAmount)
+                        </td>
+                        <td>@Html.LabelFor(m => m.CAExamID)@Html.DropDownListFor(m => m.CAExamID, (IEnumerable<SelectListItem>)ViewBag.CAExam)
+                        </td>
+                        <td>@Html.LabelFor(m => m.CASupplyID)@Html.DropDownListFor(m => m.CASupplyID, (IEnumerable<SelectListItem>)ViewBag.CASupply)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.CA1StuffID)@Html.DropDownListFor(m => m.CA1StuffID, (IEnumerable<SelectListItem>)ViewBag.CA1Stuff)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.CA1Amount)@Html.TextBoxFor(m => m.CA1Amount)
+                        </td>
+                        <td>@Html.LabelFor(m => m.CA1ExamID)@Html.DropDownListFor(m => m.CA1ExamID, (IEnumerable<SelectListItem>)ViewBag.CA1Exam)
+                        </td>
+                        <td>@Html.LabelFor(m => m.CA1SupplyID)@Html.DropDownListFor(m => m.CA1SupplyID, (IEnumerable<SelectListItem>)ViewBag.CA1Supply)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.AIR1StuffID)@Html.DropDownListFor(m => m.AIR1StuffID, (IEnumerable<SelectListItem>)ViewBag.AIRStuff)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.AIR1Amount)@Html.TextBoxFor(m => m.AIR1Amount)
+                        </td>
+                        <td>@Html.LabelFor(m => m.AIR1ExamID)@Html.DropDownListFor(m => m.AIR1ExamID, (IEnumerable<SelectListItem>)ViewBag.AIR1Exam)
+                        </td>
+                        <td>@Html.LabelFor(m => m.AIR1SupplyID)@Html.DropDownListFor(m => m.AIR1SupplyID, (IEnumerable<SelectListItem>)ViewBag.AIR1Supply)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.AIR2StuffID)@Html.DropDownListFor(m => m.AIR2StuffID, (IEnumerable<SelectListItem>)ViewBag.AIRStuff)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.AIR2Amount)@Html.TextBoxFor(m => m.AIR2Amount)
+                        </td>
+                        <td>@Html.LabelFor(m => m.AIR2ExamID)@Html.DropDownListFor(m => m.AIR2ExamID, (IEnumerable<SelectListItem>)ViewBag.AIR2Exam)
+                        </td>
+                        <td>@Html.LabelFor(m => m.AIR2SupplyID)@Html.DropDownListFor(m => m.AIR2SupplyID, (IEnumerable<SelectListItem>)ViewBag.AIR2Supply)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.ADM1StuffID)@Html.DropDownListFor(m => m.ADM1StuffID, (IEnumerable<SelectListItem>)ViewBag.ADMStuff)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.ADM1Amount)@Html.TextBoxFor(m => m.ADM1Amount)
+                        </td>
+                        <td>@Html.LabelFor(m => m.ADM1ExamID)@Html.DropDownListFor(m => m.ADM1ExamID, (IEnumerable<SelectListItem>)ViewBag.ADMExam)
+                        </td>
+                        <td>@Html.LabelFor(m => m.ADM1SupplyID)@Html.DropDownListFor(m => m.ADM1SupplyID, (IEnumerable<SelectListItem>)ViewBag.ADMSupply)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.ADM2StuffID)@Html.DropDownListFor(m => m.ADM2StuffID, (IEnumerable<SelectListItem>)ViewBag.ADMStuff)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.ADM2Amount)@Html.TextBoxFor(m => m.ADM2Amount)
+                        </td>
+                        <td>@Html.LabelFor(m => m.ADM2ExamID)@Html.DropDownListFor(m => m.ADM2ExamID, (IEnumerable<SelectListItem>)ViewBag.ADM2Exam)
+                        </td>
+                        <td>@Html.LabelFor(m => m.ADM2SupplyID)@Html.DropDownListFor(m => m.ADM2SupplyID, (IEnumerable<SelectListItem>)ViewBag.ADM2Supply)
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>鉴定结果</legend>
+                <table class="mvcform">
+                    <tr>
+                        <td>@Html.LabelFor(m => m.IsOut)@Html.CheckBoxFor(m => m.IsOut)
+                        </td>
+                        <td>@Html.LabelFor(m => m.Slump)@Html.EditorFor(m => m.Slump)
+                        </td>
+                        <td>@Html.LabelFor(m => m.MixGrade)@Html.EditorFor(m => m.MixGrade)
+                        </td>
+                        <td>@Html.LabelFor(m => m.OtherCap)@Html.EditorFor(m => m.OtherCap)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.CheckResult)@Html.EditorFor(m => m.CheckResult)
+                        </td>
+                        <td>@Html.LabelFor(m => m.AdjustMode)@Html.EditorFor(m => m.AdjustMode)
+                        </td>
+                        <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 1, 40, new { })
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+            <table>
+                <tr>
+                    <td>
+                        <button class="tbtn add" title="施工现场交接表" role="button" aria-disabled="false" type="button"
+                            onclick="OpenReportByPara('/Reports/QCC/R710802.aspx',null);return false;">
+                            <span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">
+                                施工现场交接表</span></button>
+                    </td>
+                    <td>
+                        <button class="tbtn add" title="施工技术说明书" role="button" aria-disabled="false" type="button"
+                            onclick="OpenReportByPara('/Reports/QCC/R710804.aspx',null);return false;">
+                            <span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">
+                                施工技术说明书</span></button>
+                    </td>
+                    <td>
+                        <button class="tbtn add" title="配合比例通知单" role="button" aria-disabled="false" type="button"
+                            onclick="OpenReportByPara('/Reports/QCC/R710801.aspx',null);return false;">
+                            <span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">
+                                配合比例通知单</span></button>
+                    </td>
+                    <td>
+                        <button class="tbtn add" title="开盘鉴定记录" role="button" aria-disabled="false" type="button"
+                            onclick="OpenReportByPara('/Reports/QCC/R710842.aspx',null);return false;">
+                            <span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">
+                                开盘鉴定记录</span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="tbtn add" title="配合比通知单(调整前)" role="button" aria-disabled="false" type="button"
+                            onclick="OpenReportByPara('/Reports/QCC/R710822.aspx',null);return false;">
+                            <span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">
+                                配合比通知单(调整前)</span></button>
+                    </td>
+                    <td>
+                        <button class="tbtn add" title="配合比通知单(调整后)" role="button" aria-disabled="false" type="button"
+                            onclick="OpenReportByPara('/Reports/QCC/R710823.aspx',null);return false;">
+                            <span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">
+                                配合比通知单(调整后)</span></button>
+                    </td>
+                    <td>
+                        <button class="tbtn add" title="打印出厂合格证" role="button" aria-disabled="false" type="button"
+                            onclick="OpenReportByPara('/Reports/QCC/R710803.aspx',null);return false;">
+                            <span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">
+                                打印质量证明书</span></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+</div>

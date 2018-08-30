@@ -1,0 +1,41 @@
+﻿@model ZLERP.Model.CarLeaseCostSet 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/CarLeaseCostSet/CarLeaseCostSet.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            IndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr>
+        <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })</td>   
+    </tr>
+    <tr>
+       <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarDics, "", new { style = "width:135px;" })
+       </td>
+        <td>@Html.LabelFor(m => m.CostItemName)@Html.DicEditorFor(m => m.CostItemName, DicEnum.CarLeaseCostType, new { style = "width:140px;" })</td>  
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.UnitPrice)@Html.EditorFor(m => m.UnitPrice,new {defaultvalue="0",style = "width:140px;" })</td> 
+        <td>@Html.LabelFor(m => m.Amount)@Html.EditorFor(m => m.Amount, new { defaultvalue = "0", style = "width:140px;" })</td>
+
+    </tr>
+    <tr>
+     <td>@Html.LabelFor(m => m.Money)@Html.EditorFor(m => m.Money)</td>
+     <td>@Html.LabelFor(m => m.CostDate)@Html.EditorFor(m => m.CostDate, "DateTimeWithTime")</td>
+    </tr>
+    <tr>
+     <td>@Html.LabelFor(m => m.Unit)@Html.EditorFor(m => m.Unit)</td>
+    </tr>
+    <tr>
+        <td colspan="2">@Html.LabelFor(m => m.Meno)@Html.TextAreaFor(m => m.Meno, 1, 53, new { })</td>   
+    </tr>
+
+</table>
+}
+</div>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Notice, ZLERP.Model" table="Notice" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="NoticeId">
+		 	<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="Title" column="Title" />
+		<property name="Content" column="Content" />
+		<property name="IsTop" column="IsTop" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <many-to-one name="CreateUser" column="Builder" fetch="join" class="User" insert="false" update="false"/>
+    <bag name="Attachments" where="ObjectType='Notice'" batch-size="30" cascade="delete" >
+      <key column="ObjectId"/>
+      <one-to-many class="Attachment" />
+    </bag>
+	</class>
+</hibernate-mapping>

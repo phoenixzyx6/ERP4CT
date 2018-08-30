@@ -1,0 +1,35 @@
+﻿@model ZLERP.Model.CarCard 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/CarCard/CarCard.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            carcardIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("卡号")@Html.EditorFor(m => m.ID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarList, new { style = "width:140px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.SupplyID)@Html.AutoComplete("SupplyID", "SupplyName", "Combo", "SupplyInfo", "ID", "SupplyName", "SupplyKind='Su2' or SupplyKind='Su5'")
+                </td>
+            </tr> 
+            <tr>
+                <td>@Html.LabelFor(m => m.CardType)@Html.DicEditorFor(m => m.CardType, DicEnum.CardType, "", "请选择")
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

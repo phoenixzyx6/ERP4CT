@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.DispatchList, ZLERP.Model" table="DispatchList" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="DispatchID">
+            <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="DispatchOrder" column="DispatchOrder" />
+		<property name="ProductLineID" column="ProductLineID" />
+		<property name="BetonFormula" column="BetonFormula" />
+		<property name="SlurryFormula" column="SlurryFormula" />
+		<property name="ProduceCube" column="ProduceCube" />
+		<property name="BetonCount" column="BetonCount" />
+		<property name="SlurryCount" column="SlurryCount" />
+		<property name="IsSlurry" column="IsSlurry" />
+		<property name="PCRate" column="PCRate" />
+		<property name="StartupTime" column="StartupTime" />
+		<property name="IsRunning" column="IsRunning" />
+		<property name="IsCompleted" column="IsCompleted" />
+		<property name="RemainCount" column="RemainCount" />
+		<property name="IsAverage" column="IsAverage" />
+		<property name="OneCube" column="OneCube" />
+		<property name="OnePCRate" column="OnePCRate" />
+		<property name="TwoCube" column="TwoCube" />
+		<property name="TwoPCRate" column="TwoPCRate" />
+		<property name="BTotalPot" column="BTotalPot" />
+		<property name="BNextPot" column="BNextPot" />
+		<property name="OneSlurryCube" column="OneSlurryCube" />
+		<property name="OneSlurryPCRate" column="OneSlurryPCRate" />
+		<property name="TwoSlurryCube" column="TwoSlurryCube" />
+		<property name="TwoSlurryPCRate" column="TwoSlurryPCRate" />
+		<property name="STotalPot" column="STotalPot" />
+		<property name="SNextPot" column="SNextPot" />
+        <property name="SynStatus" column="SynStatus" />
+        <property name="ShipDocID" column="ShipDocID" />
+        <property name="TaskID" column="TaskID" />
+        <property name="Remark" column="Remark" />
+		<property name="Field1" column="Field1" />
+		<property name="Field2" column="Field2" />
+		<property name="Field3" column="Field3" />
+		<property name="Field4" column="Field4" />
+		<property name="Field5" column="Field5" />
+    <property name="SendStatus" column="SendStatus" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<many-to-one name="ProduceTask" column="TaskID" class="ProduceTask" insert="false" update="false" />
+		<many-to-one name="ShippingDocument" column="ShipDocID" class="ShippingDocument" insert="false" update="false" />
+	</class>
+</hibernate-mapping>

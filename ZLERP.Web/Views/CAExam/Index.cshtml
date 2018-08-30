@@ -1,0 +1,166 @@
+﻿@model ZLERP.Model.CAExam 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/CAExam/CAExam.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            caexamIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+               <td>@Html.Label("试验编号")@Html.EditorFor(m => m.ID)
+                </td>
+                
+                <td>@Html.LabelFor(m => m.StuffID)@Html.fixedDropDownListFor(m => m.StuffID, (IEnumerable<SelectListItem>)ViewBag.CAStuff)
+                </td>
+                <td>@Html.LabelFor(m => m.ExamTime)@Html.EditorFor(m => m.ExamTime)
+                </td>
+                <td>@Html.LabelFor(m => m.ReportTime)@Html.EditorFor(m => m.ReportTime)
+                </td>                
+            </tr>            
+            <tr>
+            <td>@Html.LabelFor(m => m.DeputyNum)@Html.EditorFor(m => m.DeputyNum)
+                </td>
+                <td>@Html.LabelFor(m => m.ClayRate)@Html.EditorFor(m => m.ClayRate)
+                </td>
+                <td>@Html.LabelFor(m => m.ClayMete)@Html.EditorFor(m => m.ClayMete)
+                </td>
+                <td>@Html.LabelFor(m => m.SurDensity)@Html.EditorFor(m => m.SurDensity)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.StackDensity)@Html.EditorFor(m => m.StackDensity)
+                </td>
+                <td>@Html.LabelFor(m => m.TightDensity)@Html.EditorFor(m => m.TightDensity)
+                </td>
+                <td>@Html.LabelFor(m => m.RadioExamID)@Html.EditorFor(m => m.RadioExamID)
+                </td>
+                <td>@Html.LabelFor(m => m.ReportID)@Html.EditorFor(m => m.ReportID)
+                </td>
+            </tr>
+            <tr>
+                
+                <td>@Html.LabelFor(m => m.DrinkRate)@Html.EditorFor(m => m.DrinkRate)
+                </td>
+                <td>@Html.LabelFor(m => m.GrainContent)@Html.EditorFor(m => m.GrainContent)
+                </td>
+                <td>@Html.LabelFor(m => m.CrushVal)@Html.EditorFor(m => m.CrushVal)
+                </td>
+                <td>@Html.LabelFor(m => m.CarpGradeReg)@Html.EditorFor(m => m.CarpGradeReg)
+                </td>
+            </tr>
+            <tr>
+            <td>@Html.LabelFor(m => m.DrySampWeight)@Html.EditorFor(m => m.DrySampWeight)
+                </td>
+                <td>@Html.LabelFor(m => m.WetSampWeight)@Html.EditorFor(m => m.WetSampWeight)
+                </td>
+                <td>@Html.LabelFor(m => m.AvaRate)@Html.EditorFor(m => m.AvaRate)
+                </td>
+                <td>@Html.LabelFor(m => m.ExamGist)@Html.TextBox("ExamGist", Lang.Msg_ExamGistForCA)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <table width="900" border="1">
+  <tr>
+    <td width="120">筛孔尺寸(mm)</td>
+    <td width="50">100.0</td>
+    <td width="50">80.0</td>
+    <td width="50">63.0</td>
+    <td width="50">50.0</td>
+    <td width="50">40.0</td>
+    <td width="50">31.5</td>
+    <td width="50">25.0</td>
+    <td width="50">20.0</td>
+    <td width="50">16.0</td>
+    <td width="50">10.0</td>
+    <td width="50">5.0</td>
+    <td width="50">2.50</td>
+    <td width="50">底盘</td>
+  </tr>
+  <tr>
+    <td>筛余量g</td>
+    <td>@Html.TextBoxFor(m => m.S100, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.S800, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.S630, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.S500, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.S400, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.S315, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.S250, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.S200, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.S160, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.S10, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.S50, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.S25, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Sy_1, new { style = "width:50px" })</td>
+  </tr>
+  <tr>
+    <td>分计筛余%</td>
+    <td>@Html.TextBoxFor(m => m.Sy100, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Sy800, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Sy630, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Sy500, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Sy400, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Sy315, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Sy250, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Sy200, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Sy160, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Sy10, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Sy50, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Sy25, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Sy_2, new { style = "width:50px" })</td>
+  </tr>
+  <tr>
+    <td>累计筛余%</td>
+    <td>@Html.TextBoxFor(m => m.Ss100, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Ss800, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Ss630, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Ss500, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Ss400, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Ss315, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Ss250, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Ss200, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Ss160, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Ss10, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Ss50, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Ss25, new { style = "width:50px" })</td>
+    <td>@Html.TextBoxFor(m => m.Sy_3, new { style = "width:50px" })</td>
+  </tr>
+</table>
+                </td>
+            </tr>
+            
+            
+            <tr>
+                <td>@Html.LabelFor(m => m.TotalNum)@Html.EditorFor(m => m.TotalNum)
+                </td>
+                <td>@Html.LabelFor(m => m.AvaTime)@Html.EditorFor(m => m.AvaTime)
+                </td>
+                <td>@Html.LabelFor(m => m.CarpJudge)@Html.DicEditorFor(m => m.CarpJudge, DicEnum.Judge, "请选择", "请选择")
+                </td>
+                <td>@Html.LabelFor(m => m.IsUse)@Html.CheckBoxFor(m => m.IsUse)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Assessor)@Html.EditorFor(m => m.Assessor)
+                </td>
+                <td>@Html.LabelFor(m => m.Principal)@Html.EditorFor(m => m.Principal)
+                </td>         
+                <td>@Html.LabelFor(m => m.CommissionID)@Html.fixedDropDownListFor(m => m.CommissionID, (IEnumerable<SelectListItem>)ViewBag.Commission)
+                </td>                       
+            </tr>
+            <tr>
+            <td colspan="2">@Html.LabelFor(m => m.ExamResult)@Html.TextArea("ExamResult", Lang.Msg_ExamResultForCA, 1, 60, new { })
+                </td>
+            </tr>
+            
+        </table>
+
+    }
+</div>

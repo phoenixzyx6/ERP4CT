@@ -1,0 +1,372 @@
+﻿@model ZLERP.Model.StockPact
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/ajaxfileupload.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Views/StockPact.js")" type="text/javascript" language="javascript"> </script>
+    
+    <script type="text/javascript">
+        $(function () {
+            stockPactInit({
+                storeUrl: '@Url.Action("Find")',
+                SPCStoreUrl: '@Url.Action("Find", "StockPactChild")',
+                SPCUpdateUrl: '@Url.Action("Update", "StockPactChild")',
+                SPCDeleteUrl: '@Url.Action("Delete", "StockPactChild")',
+                SPCCStoreUrl: '@Url.Action("Find", "StockPactChildChild")', //发票和资源单-获取列表
+                SPCCUpdateUrl: '@Url.Action("Update", "StockPactChildChild")', //发票和资源单-修改
+                SPCCDeleteUrl: '@Url.Action("Delete", "StockPactChildChild")', //发票和资源单-删除
+                currentUser: '@User.UserName()',
+                uploadUrl: '@Url.Action("Upload", "Attachment")',//附加上传
+                priceStoreUrl: '@Url.Action("Find", "StockPactPriceSet")',
+                priceAddUrl: '@Url.Action("Add", "StockPactPriceSet")',
+                priceUpdateUrl: '@Url.Action("Update", "StockPactPriceSet")',
+                priceRowDeleteUrl: '@Url.Action("Delete", "StockPactPriceSet")'
+            });
+        });
+
+    </script>
+    <style type="text/css">
+        fieldset
+        {
+            padding: 0.1px;
+            margin: 1px;
+            width: 100%;
+            color: #333;
+            border: #06c dashed 1px;
+        }
+        legend
+        {
+            color: #1D5987;          
+            font-weight: bold;
+            background: #fff;
+            border: #b6b6b6 solid 1px;
+            padding: 1px 3px;
+        }
+
+    </style>
+}
+<div id="MyJqGrid">
+</div>
+<div id="SPCGrid" style="float: left; width: 49%">
+</div>
+<div id="SPCCGrid" style="float: right; width: 50%">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <fieldset>
+            <table class="mvcform">
+                <tr>
+                    <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                    </td>
+                    <td style="display: none">@Html.EditorFor(m => m.DianziString)
+                    </td>
+                    <td>@Html.LabelFor(m => m.StockPactNo)@Html.EditorFor(m => m.StockPactNo)
+                    </td>
+                    <td>@Html.LabelFor(m => m.PactName)@Html.EditorFor(m => m.PactName)
+                    </td>
+                    <td>@Html.LabelFor(m => m.EstablishTime)@Html.EditorFor(m => m.EstablishTime, "DateTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })
+                    </td>
+                    @* <td>@Html.LabelFor(m => m.GageUnit)@Html.EditorFor(m => m.GageUnit)</td>*@
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.SupplyID)@Html.AutoComplete("SupplyID", "SupplyName", "Combo", "SupplyInfo", "ID", "SupplyName")
+                    </td>
+                    <td>@Html.LabelFor(m => m.SourceAddr)@Html.EditorFor(m => m.SourceAddr)
+                    </td>
+                    <td>@Html.LabelFor(m => m.EstablishMan)@Html.EditorFor(m => m.EstablishMan)
+                    </td>
+                </tr>
+                 <tr>
+                    <td>@Html.LabelFor(m => m.ValidFrom)@Html.EditorFor(m => m.ValidFrom, "DateTime")
+                    </td>
+                    <td>@Html.LabelFor(m => m.ValidTo)@Html.EditorFor(m => m.ValidTo, "DateTime")
+                    </td>
+                    
+                    <td colspan="2">
+                    <label>
+                        合同附件
+                    </label><input type="file" id="uploadFile" name="upload" />
+                    <div id="Attachments" style="clear: both;">
+                    </div>
+                </td>
+                </tr>
+                @*<tr>
+                <td>
+                @Html.LabelFor(m => m.StuffID)@Html.AutoComplete("StuffID", "StuffName", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True")
+                </td>
+                <td>
+                @Html.LabelFor(m => m.StuffID1)@Html.AutoComplete("StuffID1", "StuffName1", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True")
+                </td>
+                <td>
+                @Html.LabelFor(m => m.StuffID2)@Html.AutoComplete("StuffID2", "StuffName2", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True")
+                </td>
+            </tr>*@ @*<tr>
+                <td style="display: none">@Html.LabelFor(m => m.Amount)@Html.TextBoxFor(m => m.Amount, new { Value = 0 })
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.StockPrice)@Html.TextBoxFor(m => m.StockPrice, new { Value = 0 })
+                </td>
+                <td>@Html.Label("数量(T)")@Html.TextBox("Amount_T",0)
+                </td>
+                <td>@Html.Label("单价(元/T)")@Html.TextBox("StockPrice_T",0)
+                </td>
+                <td>@Html.LabelFor(m => m.TaxRate)@Html.DicComboBoxFor(m => m.TaxRate, DicEnum.TaxRate)
+                </td>
+            </tr>*@ @*<tr>
+                                
+                <td>@Html.LabelFor(m => m.WarmPercent)@Html.EditorFor(m => m.WarmPercent)
+                </td>
+            </tr>*@ @*<tr>
+                <td>@Html.LabelFor(m => m.ValidFrom)@Html.EditorFor(m => m.ValidFrom)
+                </td>
+                <td>@Html.LabelFor(m => m.ValidTo)@Html.EditorFor(m => m.ValidTo)
+                </td>
+                <td>@Html.LabelFor(m => m.WeighBy)@Html.EditorFor(m => m.WeighBy)
+                </td>
+            </tr>*@ @* <tr>
+                <td colspan="2">
+                    磅差不超过（厂商数量*比例）@Html.DicEditorFor(m => m.lowbangcha, DicEnum.bangcha, "")
+                </td>
+                <td colspan="2">
+                    磅差超过（厂商数量*比例）@Html.DicEditorFor(m => m.highbangcha, DicEnum.bangcha, "")
+                </td>
+            </tr>*@ @*<tr>
+                <td>
+                    合同约定付款方式：
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    垫资 @Html.EditorFor(m => m.Dianzi1) 万元，垫满一次付 @Html.EditorFor(m => m.Dianzi2) %。供应量月结 @Html.EditorFor(m => m.Dianzi3) %，推迟 @Html.EditorFor(m => m.Dianzi4) 月付。供应量垫资月结 @Html.EditorFor(m => m.Dianzi6) %，推迟 @Html.EditorFor(m => m.Dianzi7) 月付。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    垫满 @Html.EditorFor(m => m.Dianzi5) 万元后，月结 @Html.EditorFor(m => m.Dianzi6) %，推迟
+                    @Html.EditorFor(m => m.Dianzi7) 月付
+                </td>
+                @*<td>@Html.LabelFor(m => m.DianziType)@Html.DicEditorFor(m => m.DianziType, DicEnum.DianziType,"")
+                </td>
+                <td id="dianzitd"style="display: none"><label id="dianzilabel"></label> @Html.EditorFor(m => m.DianziNum)  
+                </td>*@
+            </table>
+        </fieldset>
+        
+        <fieldset>
+            <legend>采购材料</legend>
+            <br />
+            <p>
+                <span style= "padding:6px;border:1px solid #DDECF7;">@Html.LabelFor(m => m.StuffID)@Html.AutoComplete("StuffID", "StuffName", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True")@Html.LabelFor(m => m.StockPrice)@Html.TextBoxFor(m => m.StockPrice, new { style = " width:60px;", Value = '0' })</span>
+                <span style= "padding:6px;border:1px solid #DDECF7;">@Html.LabelFor(m => m.StuffID1)@Html.AutoComplete("StuffID1", "StuffName1", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True")@Html.LabelFor(m => m.StockPrice1)@Html.TextBoxFor(m => m.StockPrice1, new { style = " width:60px;", Value = '0' })</span>
+                <span style= "padding:6px;border:1px solid #DDECF7;">@Html.LabelFor(m => m.StuffID2)@Html.AutoComplete("StuffID2", "StuffName2", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True")@Html.LabelFor(m => m.StockPrice2)@Html.TextBoxFor(m => m.StockPrice2, new { style = " width:60px;", Value = '0' })</span>
+                <span style= "padding:6px;border:1px solid #DDECF7;">@Html.LabelFor(m => m.StuffID3)@Html.AutoComplete("StuffID3", "StuffName3", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True")@Html.LabelFor(m => m.StockPrice3)@Html.TextBoxFor(m => m.StockPrice3, new { style = " width:60px;", Value = '0' })</span>
+                <span style= "padding:6px;border:1px solid #DDECF7;">@Html.LabelFor(m => m.StuffID4)@Html.AutoComplete("StuffID4", "StuffName4", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True")@Html.LabelFor(m => m.StockPrice4)@Html.TextBoxFor(m => m.StockPrice4, new { style = " width:60px;", Value = '0' })</span>
+            </p>
+            <p>
+                
+            </p>
+            <br />
+        </fieldset>
+
+        <fieldset>
+            <legend>磅差比例</legend>
+            <br />
+            <p>
+                磅差不超过（厂商数量*比例 @Html.DicEditorFor(m => m.lowbangcha, DicEnum.bangcha, "")
+                <br/>
+                磅差超过（厂商数量*比例) @Html.DicEditorFor(m => m.highbangcha, DicEnum.bangcha, "") @Html.LabelFor(m => m.BangchaRate)@Html.EditorFor(m => m.BangchaRate)
+            </p>
+            <br />
+        </fieldset>
+
+        <fieldset>
+            <legend>结算付款方式</legend>
+            <br />
+            <p>
+                垫 @Html.EditorFor(m => m.Dianzi1, new { style = "Width:30px" }) 万元,垫满一次付 @Html.EditorFor(m => m.Dianzi2)
+                %,月结 @Html.EditorFor(m => m.Dianzi3) %,推迟 @Html.EditorFor(m => m.Dianzi4) 月付
+            </p>
+            <br />
+        </fieldset>
+
+        <fieldset>
+            <legend>垫资付款方式</legend>
+            <br />
+            <p>
+                垫满 @Html.EditorFor(m => m.Dianzi5) 万元后，月结 @Html.EditorFor(m => m.Dianzi6) %，推迟
+                @Html.EditorFor(m => m.Dianzi7) 月付
+            </p>
+            <br />
+        </fieldset>
+    }
+</div>
+
+@*审核界面*@
+<div id="AuditingFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.ID)@Html.TextBoxFor(m => m.ID, new { readOnly = true })
+                </td>
+               
+            </tr>
+            <tr>
+             <td>@Html.LabelFor(m => m.AuditStatus)@Html.DicEditorFor(m => m.AuditStatus, DicEnum.AuditStatus)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Auditor)@Html.EditorFor(m => m.Auditor)
+                </td>               
+            </tr>
+            <tr>
+              <td>
+                @Html.LabelFor(m => m.AuditTime)@Html.EditorFor(m => m.AuditTime, "DateTimeWithTime", new { id = "audit_AuditTime", defaultValue = DateTime.Now.ToString("yyyy-MM-dd H:mm:ss") })
+               </td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="SPCCFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                <td>收取时间</td>
+                <td>
+                    @Html.EditorFor(m => m.StockPactChildChild.PayTime, "DateTime", new { defaultValue = DateTime.Now.ToString("yyyy-MM-dd") })
+                </td>
+                <td>资源单张数</td>
+                <td>
+                    @Html.TextBoxFor(m => m.StockPactChildChild.Zyszmd, new { type = "number", min = "1", Value = "1" })
+                </td>
+            </tr>
+            <tr>
+                <td>发票金额</td>
+                <td>
+                     @Html.EditorFor(m => m.StockPactChildChild.FapiaoMoney)
+                </td>
+                <td>发票号码</td>
+                <td>
+                     @Html.EditorFor(m => m.StockPactChildChild.FapiaoNumber)
+                </td>
+            </tr>
+            <tr>
+                <td>发票材料量(吨) </td>
+                <td>
+                    @Html.TextBoxFor(m => m.StockPactChildChild.FapiaoCailiao, new { type = "number", min = "0", Value = "1" })
+                </td>
+                <td>@Html.LabelFor(m => m.StockPactChildChild.StuffID)</td>
+                <td>
+                    @Html.AutoComplete("StuffID", "StuffName", "Combo", "StuffInfo", "ID", "StuffName")
+                </td>
+            </tr>
+            <tr>
+               
+            </tr>
+        </table>
+    }
+</div>
+
+@*付款界面*@
+<div id="PayFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.StockPactChild.PayTime)@Html.EditorFor(m => m.StockPactChild.PayTime, "DateTime")
+                </td>
+                <td>@Html.LabelFor(m => m.StockPactChild.PayMoney)@Html.TextBoxFor(m => m.StockPactChild.PayMoney, new { type = "number", min = "0" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.StockPactChild.StuffID)@Html.AutoComplete("StuffID", "StuffName", "Combo", "StuffInfo", "ID", "StuffName")
+                </td>
+            </tr>
+        </table> 
+    }
+</div>
+<div id="DianziDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>
+                    垫资金额将不计入欠款
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+            </tr>
+        </table> 
+    }
+</div>
+
+@*材料调价*@
+<div id="AdjustPriceForm" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+            </tr>
+            
+            <tr>
+                <td>@Html.LabelFor(m => m.StuffID)@Html.AutoComplete("StuffID", "StuffName", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True", new { ReadOnly="true"})
+                </td>
+                <td>@Html.LabelFor(m => m.StockPrice)@Html.TextBoxFor(m => m.StockPrice, new { style = " width:60px;", Value = '0' })
+                </td>
+                <td>
+                   <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" 
+                   role="button" id="tj1"><span class="ui-button-text">价格变动</span></button>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.StuffID1)@Html.AutoComplete("StuffID1", "StuffName1", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True")
+                </td>
+                <td>@Html.LabelFor(m => m.StockPrice1)@Html.TextBoxFor(m => m.StockPrice1, new { style = " width:60px;", Value = '0' })
+                </td>
+                <td>
+                   <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" 
+                   role="button" aria-disabled="false" id="tj2"><span class="ui-button-text">价格变动</span></button>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.StuffID2)@Html.AutoComplete("StuffID2", "StuffName2", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True")
+                </td>
+                <td>@Html.LabelFor(m => m.StockPrice2)@Html.TextBoxFor(m => m.StockPrice2, new { style = " width:60px;", Value = '0' })
+                </td>
+                <td>
+                   <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" 
+                   role="button" aria-disabled="false" id="tj3"><span class="ui-button-text">价格变动</span></button>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.StuffID3)@Html.AutoComplete("StuffID3", "StuffName3", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True")
+                </td>
+                <td>@Html.LabelFor(m => m.StockPrice3)@Html.TextBoxFor(m => m.StockPrice3, new { style = " width:60px;", Value = '0' })
+                </td>
+                <td>
+                   <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" 
+                   role="button" aria-disabled="false" id="tj4"><span class="ui-button-text">价格变动</span></button>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.StuffID4)@Html.AutoComplete("StuffID4", "StuffName4", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True")
+                </td>
+                <td>@Html.LabelFor(m => m.StockPrice4)@Html.TextBoxFor(m => m.StockPrice4, new { style = " width:60px;", Value = '0' })
+                </td>
+                <td>
+                   <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" 
+                   role="button" aria-disabled="false" id="tj5"><span class="ui-button-text">价格变动</span></button>
+                </td>
+            </tr>
+            
+        </table> 
+         
+    }
+</div>
+

@@ -1,0 +1,60 @@
+﻿@model ZLERP.Model.StuffSell 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/StuffSell/StuffSell.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            stuffsellIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                findSiloUrl: '@Html.Raw(Url.Action("ListData", "Silo", new {textField="SiloName", valueField="ID"}))'
+            });
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td  style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.CustomerID)@Html.AutoComplete("CustomerID", "CustName", "Combo", "Customer", "ID", "CustName")
+                </td>
+                <td>@Html.LabelFor(m => m.SellTime)@Html.EditorFor(m => m.SellTime)
+                </td>
+            </tr>
+            <tr>
+                 <td>@Html.LabelFor(m => m.StuffID)@Html.DropDownListFor(m=>m.StuffID, (IEnumerable<SelectListItem>)ViewBag.StuffList,"",null)
+                </td>
+                <td>@Html.LabelFor(m => m.SiloID)@Html.DropDownListFor(m => m.SiloID, Enumerable.Empty<SelectListItem>())
+                </td>
+         
+                
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.SellContractID)@Html.EditorFor(m => m.SellContractID)
+                </td>
+                <td>@Html.LabelFor(m => m.SellName)@Html.EditorFor(m => m.SellName)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.SellPrice)@Html.EditorFor(m => m.SellPrice)
+                </td>
+                <td>@Html.LabelFor(m => m.SellTotalPrice)@Html.EditorFor(m => m.SellTotalPrice)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Seller)@Html.EditorFor(m => m.Seller)
+                </td>
+                <td>@Html.LabelFor(m => m.IsReduce)@Html.CheckBoxFor(m => m.IsReduce)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 1, 60, new { })
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

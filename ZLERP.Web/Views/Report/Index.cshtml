@@ -1,0 +1,18 @@
+﻿<iframe id="reportFrame" width="100%" height="100%" onload = "$('#reportLoading').fadeOut()"  frameborder="0" src="@Url.Content(@ViewBag.ReportUrl)">
+</iframe>
+<div id="reportLoading" class="ui-corner-all" style="color:#f90;font-weight:bold;padding:2em;border:1px dashed #f90; text-align:center; background-color:#fff; z-index:10;position:absolute; left:50%; top:50%;">
+<img src="@Url.Content("~/Content/themes/default/images/ajax-loader.gif")" border="0" alt="数据加载中..."/>
+<br/>正在生成报表...</div>
+@section HeaderSection{
+<script type="text/javascript">
+    $(function () {
+        //reportFrame父控件高度
+        //$('#reportFrame').height($('#reportFrame').parent().height()); $(window.parent.document).find("#Docpreview").height()
+        //alert($('#reportFrame').height());rbaseDiv
+
+        $('#reportFrame').height($('#reportFrame').parent().height());
+        $.cookie("rFrameHeight", $('#reportFrame').height()-48,{ path: '/' });
+    });
+</script>
+
+}

@@ -1,0 +1,46 @@
+﻿@model ZLERP.Model.APBill 
+@section HeaderSection{ 
+<script src="@Url.Content("~/Scripts/Views/APBill/APBill.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            apbillIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td>@Html.LabelFor(m => m.SupplyID)@Html.AutoCompleteFor(m => m.SupplyID, m => m.SupplyName, "Combo", "SupplyInfo", "ID", "SupplyName", null) @Html.HiddenFor(m => m.ID)</td>
+ 
+        <td>@Html.LabelFor(m => m.Buyer)@Html.DropDownListFor(m => m.Buyer, (IEnumerable<SelectListItem>)ViewBag.Buyes)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Amount)@Html.EditorFor(m => m.Amount)</td>
+ 
+        <td>@Html.LabelFor(m => m.Total)@Html.EditorFor(m => m.Total)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Paied)@Html.EditorFor(m => m.Paied)</td>
+ 
+        <td>@Html.LabelFor(m => m.UnPay)@Html.TextBoxFor(m => m.UnPay, new { readOnly = true })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PayDate)@Html.EditorFor(m => m.PayDate, "DateTimeWithTime", new { defaultValue = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+ 
+        <td></td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Memo)@Html.EditorFor(m => m.Memo)</td>
+        <td></td>
+    </tr>
+</table>
+
+}
+</div>

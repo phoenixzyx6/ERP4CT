@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title  = "首页";
+ }
+    
+  <div class="grupo">
+    <div class="titular">
+      <h2><span>生产管理</span></h2>
+    </div>
+  </div>
+  <div class="grupo listaredondeada">
+    <div class="listaenlaces w50">
+      <ul class="links_imagen">
+        <li class="impar">@Html.ActionLink("今日计划", "Index", "Produce")</li>
+        <li class="par">@Html.ActionLink("今日任务", "Tasks", "Produce")</li>
+        <li class="impar prelast">@Html.ActionLink("生产方量统计", "ProduceStats", "Produce")</li>
+        <li class="par last">@Html.ActionLink("原料进货统计", "StuffInStats", "Produce")</li>
+         
+       
+      </ul>
+    </div>
+  </div>
+  <div class="grupo">
+    <div class="titular">
+      <h2><span>人员管理</span></h2>
+    </div>
+  </div> 
+  <div class="grupo listaredondeada">
+    <div class="listaenlaces w50">
+      <ul class="genericos">
+        <li class="impar"><a href="#">工长管理</a></li>
+        <li class="par"><a href="#">操作员管理</a></li>
+        <li class="impar prelast"><a href="#">司机管理</a></li>
+        <li class="par last"><a href="#">车辆管理</a></li>
+      </ul>
+    </div>
+  </div>

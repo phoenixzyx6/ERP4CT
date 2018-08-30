@@ -1,0 +1,48 @@
+﻿@model ZLERP.Model.TplManage 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/TplManage/TplManage.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            tplmanageIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="tplJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td style="height:1px;">@Html.TextBoxFor(m => m.ID, new { style="display:none;"})</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.TplType)@Html.DicEditorFor(m => m.TplType,DicEnum.TplType)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.TplName)@Html.TextBoxFor(m => m.TplName, new { style = "width:200px;" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.TplFileName)@Html.TextBoxFor(m => m.TplFileName, new { style = "width:200px;" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.TplUrl)@Html.TextBoxFor(m => m.TplUrl, new { style = "width:300px;" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PreviewUrl)@Html.TextBoxFor(m => m.PreviewUrl, new { style = "width:300px;" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Parms)@Html.TextAreaFor(m => m.Parms,1,40, new { style="width:300px;"})</td>
+    </tr>
+    <tr> 
+        <td>@Html.Label("参数说明")<span>：参数形式为Key/Value的json字串，多个参数用逗号隔开，如{"P1":"V1","P2":"V2"}，其中P*为页面传递参数名称(taskid)，V*为参数名称对应的字段名(taskid<=>TaskID)</span></td>
+    </tr>
+</table>
+}
+</div>
+

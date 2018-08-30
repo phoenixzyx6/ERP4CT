@@ -1,0 +1,60 @@
+﻿@model ZLERP.Model.ViewModels.PartStockContractViewModel 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/PartStockContract/PartStockContract.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            var options = {
+                contractUrl: '@Url.Action("Find","PartStockContract")'
+                , auditUrl: '@Url.Action("Auditing")'
+                , partStockPlanUrl: '@Url.Action("FindPlan","PartStockPlan")'
+                , itemsAddUrl: '@Url.Action("Add","PartStockContractItem")'
+                , updateItemsUrl: '@Url.Action("Update","PartStockContractItem")'
+                , contractItemUrl: '@Url.Action("Find","PartStockContractItem")'
+            };
+            partstockcontractIndexInit(options);
+        });
+</script>
+}
+<div id="contractGrid"></div>
+
+<div id="contractItemsGrid"></div>
+
+<div id="partPlanWindow" style="display:none;">
+    <div id="partPlanGrid"></div>
+</div>
+<div id="contractItemsForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m=>m.PartStockContractItem.ContractID)@Html.EditorFor(m => m.PartStockContractItem.ContractID)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartStockContractItem.StockPlanID)@Html.DropDownListFor(m => m.PartStockContractItem.StockPlanID, (SelectList)ViewBag.PartPlanDics, new { stype="width:130px;"})</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartStockContractItem.UnitPrice)@Html.EditorFor(m => m.PartStockContractItem.UnitPrice)</td>
+    </tr>
+</table>
+}
+</div>
+
+
+
+
+<div id="contractForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    @Html.HiddenFor(m => m.PartStockContract.ID)
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartStockContract.PartID)@Html.DropDownListFor(m => m.PartStockContract.PartID, (SelectList)ViewBag.PartInfoDics, new { @class = "text", style = "width:120px;", id = "PartID" })</td>
+        <td>@Html.LabelFor(m => m.PartStockContract.ContractDate)@Html.EditorFor(m => m.PartStockContract.ContractDate)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartStockContract.Buyer)@Html.EditorFor(m => m.PartStockContract.Buyer)</td>
+        <td>@Html.LabelFor(m => m.PartStockContract.Remark)@Html.EditorFor(m => m.PartStockContract.Remark)</td>
+    </tr>
+</table>
+}
+</div>

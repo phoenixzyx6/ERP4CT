@@ -1,0 +1,100 @@
+﻿@model ZLERP.Model.ViewModels.ConStrAssessAndItems
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/ConStrAssess/ConStrAssess.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            constrassessIndexInit('@Url.Action("Find", "ConStrAssess")',
+            '@Url.Action("Find", "ConStrAssessItem")',
+            '@Url.Action("Find", "M1AssessItem")',
+            '@Url.Action("AddByPid", "ConStrAssessItem")',
+            '@Url.Action("Update", "ConStrAssessItem")',
+            '@Url.Action("Update", "M1AssessItem")',
+            '@Url.Action("Stat", "ConStrAssess")'
+            );
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.csa.ID)@Html.EditorFor(m => m.csa.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.csa.ConStrength)@Html.DropDownListFor(m => m.csa.ConStrength, (IEnumerable<SelectListItem>)ViewBag.ConStrength)
+                </td>
+                <td>@Html.LabelFor(m => m.csa.CustMixpropID)@Html.AutoComplete("csa.CustMixpropID", "MixpropCode", "Combo", "CustMixprop", "ID", "MixpropCode")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.csa.TaskID)@Html.AutoComplete("csa.TaskID", "ProjectName", "Combo", "ProduceTask", "ID", "ProjectName")
+                </td>
+                <td>@Html.LabelFor(m => m.csa.AssessCriterion)@Html.TextBoxFor(m => m.csa.AssessCriterion, new { Value = "GBJ 107-87" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.csa.MoldDateFrom)@Html.EditorFor(m => m.csa.MoldDateFrom)
+                </td>
+                <td>@Html.LabelFor(m => m.csa.MoldDateTo)@Html.EditorFor(m => m.csa.MoldDateTo)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.csa.StrSource)@Html.EditorFor(m => m.csa.StrSource)
+                </td>
+                <td>@Html.LabelFor(m => m.csa.StrCount)@Html.EditorFor(m => m.csa.StrCount)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.csa.StatResult)@Html.EditorFor(m => m.csa.StatResult)
+                </td>
+                <td>@Html.LabelFor(m => m.csa.StanDiff)@Html.EditorFor(m => m.csa.StanDiff)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.csa.StatDate)@Html.EditorFor(m => m.csa.StatDate)
+                </td>
+                <td>@Html.LabelFor(m => m.csa.StatMethod)@Html.DicEditorFor(m => m.csa.StatMethod, DicEnum.StatMethod, "请选择", "请选择")
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+<div id="LeftDiv" style="float: left; width: 68%">
+    <div id="GridDiv" style="height: 50%">
+    </div>
+    <div id="m1GridDiv" style="height: 50%">
+    </div>
+</div>
+<div id="ItemsFormDiv" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        <table class="mvcform">
+            <tr>
+                <td style="display: none;">@Html.LabelFor(m => m.csaitem.ID)@Html.TextBoxFor(m => m.csaitem.ID, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.csaitem.ConStrAssessID)@Html.EditorFor(m => m.csaitem.ConStrAssessID, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.csaitem.ExamID)@Html.EditorFor(m => m.csaitem.ExamID, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.csaitem.Exam1Str)@Html.EditorFor(m => m.csaitem.Exam1Str, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.csaitem.Exam2Str)@Html.EditorFor(m => m.csaitem.Exam2Str, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.csaitem.Exam3Str)@Html.EditorFor(m => m.csaitem.Exam3Str, new { @class = "text" })
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+<div id="ItemsGridDiv" style="float: right; width: 30%">
+</div>

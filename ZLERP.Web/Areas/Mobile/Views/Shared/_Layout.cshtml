@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null;
+}
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
+<head>
+    <title>@ViewBag.Title</title>
+<meta name="description" content=" ">
+<meta name="keywors" content=" "> 
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">  
+<link href="@Url.Content("~/Content/mobile/css/comunesOPT.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/mobile/css/homeOPT.css")" rel="stylesheet" type="text/css"> 
+@RenderSection("Header", false)
+</head>
+<body >
+<div><a id="home"></a></div>
+<div id="p_menu">
+ 
+  <div id="or_headerNew">
+    <div class="tabs">
+      <ul>
+       @* <li id="head_miorange" class="last"><a target="_top" href="#" class="miorange"> </a></li>*@
+ @*       <li id="head_ayuda" class="off"><a target="_top" href="#" class="pys">ayuda</a></li>
+        <li id="head_tienda" class="off"><a target="_top" href="#" class="tienda">tienda</a></li>
+        <li id="head_ocio" class="off"><a target="_top" href="#" class="media">ocio</a></li>*@
+        <li id="head_menu" class="first active"><a  href="@Url.Action("Index","Home")" class="menu">菜单</a></li>
+        <li id="head_logo" class="logo"><a target="_top" href="#" class="logo">&nbsp;</a></li>
+      </ul>
+    </div>
+  </div>
+      @RenderBody()
+  
+  
+  <div class="oF">
+    <div class="oF_legal">
+      <ul>
+        <li><a target="_top"  href="#" id="footer_1">© ZOOMLION</a></li>
+        <li class="oF_separator">|</li>
+        <li><a href="@Url.RouteUrl("default", new {controller="Home" })" id="ftr_legal" title="legal" target="_top">电脑版</a></li>
+        <li class="oF_separator">|</li>
+        <li><a  href="#" id="ftr_cookies" title="" target="_top">@if (Request.IsAuthenticated)
+                                                                                       {
+                                                                                           @User.UserName() 
+                                                                                       }
+                                                                                       else { 
+                                                                                         <text>登录</text>
+                                                                                       }
+                                                                                          </a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="oF_clear"></div>  
+</div>  <div id="append_parent" style="background:#fff;"></div>
+</body>
+</html> 

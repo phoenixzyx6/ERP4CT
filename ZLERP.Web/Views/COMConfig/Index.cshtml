@@ -1,0 +1,52 @@
+﻿@model ZLERP.Model.COMConfig 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/COMConfig/COMConfig.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            comconfigIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.Label("COM代号")@Html.EditorFor(m=>m.ID)</td>
+ 
+        <td>@Html.LabelFor(m=>m.COMName)@Html.EditorFor(m=>m.COMName)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.PortName)@Html.EditorFor(m=>m.PortName)</td>
+ 
+        <td>@Html.LabelFor(m=>m.BaudRate)@Html.EditorFor(m=>m.BaudRate)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Parity)@Html.EditorFor(m=>m.Parity)</td>
+ 
+        <td>@Html.LabelFor(m=>m.DataBits)@Html.EditorFor(m=>m.DataBits)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.StopBits)@Html.EditorFor(m=>m.StopBits)</td>
+ 
+        <td>@Html.LabelFor(m=>m.BeginCode)@Html.EditorFor(m=>m.BeginCode)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.EndCode)@Html.EditorFor(m=>m.EndCode)</td>
+ 
+        <td>@Html.LabelFor(m=>m.DataModel)@Html.EditorFor(m=>m.DataModel)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.IsOpen)@Html.EditorFor(m => m.IsOpen)</td>
+ 
+        <td></td>
+    </tr>
+</table>
+
+}
+</div>

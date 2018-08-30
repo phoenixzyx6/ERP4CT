@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.Lab_Record, ZLERP.Model" table="Lab_Record" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="ID">
+      <generator class="native" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="Date" column="Date" />
+    <property name="Time" column="Time" />
+    <property name="Carno" column="Carno" />
+    <property name="Stuffid" column="Stuffid" />
+    <property name="Supplyid" column="Supplyid" />
+    <property name="StartDate" column="StartDate" />
+    <property name="EndDate" column="EndDate" />
+    <property name="IsWhole" column="IsWhole" />
+    <property name="ShowpeieNo" column="ShowpeieNo" />
+    <property name="Weight" column="Weight" />
+    <property name="SumWeight" column="SumWeight" />
+    <property name="stuffinid" column="stuffinid" />
+    <property name="FinalStuffTypeID" column="FinalStuffTypeID" />
+    <property name="StuffTypeID" column="StuffTypeID" />
+    <property name="Siloid" column="Siloid" />
+    <property name="InMan" column="InMan" />
+    <property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="Spec" column="Spec" />
+    
+    <many-to-one name="Silo" column="Siloid" class="Silo" update="false" insert="false"/>
+    <many-to-one name="StuffInfo" column="Stuffid" class="StuffInfo" update="false" insert="false"/>
+    <many-to-one name="SupplyInfo" column="Supplyid" class="SupplyInfo" update="false" insert="false"/>
+    <bag name="Lab_AirOrigins" lazy="true" cascade="all" inverse="true" >
+      <key column="Lab_RecordID"></key>
+      <one-to-many class="Lab_AirOrigin"></one-to-many>
+    </bag>
+    <bag name="Lab_AirReports" lazy="true" cascade="all" inverse="true" >
+      <key column="Lab_RecordID"></key>
+      <one-to-many class="Lab_AirReport"></one-to-many>
+    </bag>
+    
+    <bag name="Lab_Air2Reports" lazy="true" cascade="all" inverse="true" >
+      <key column="Lab_RecordID"></key>
+      <one-to-many class="Lab_Air2Report"></one-to-many>
+    </bag>
+    <bag name="Lab_Air2Origins" lazy="true" cascade="all" inverse="true" >
+      <key column="Lab_RecordID"></key>
+      <one-to-many class="Lab_Air2Origin"></one-to-many>
+    </bag>
+  </class>
+</hibernate-mapping>

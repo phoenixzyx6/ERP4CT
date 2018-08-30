@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.Role, ZLERP.Model" table="Role" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="RoleID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+    <property name="RoleName" column="RoleName" type="string"  />
+    <property name="Remark" column="Remark" type="string"  />
+    <property name="Builder" column="Builder" type="string"  />
+    <property name="BuildTime" column="BuildTime" type="DateTime"  />
+    <property name="Modifier" column="Modifier" type="string"  />
+    <property name="ModifyTime" column="ModifyTime" type="DateTime"  />
+    <property name="Version" column="Version" type="int"  />
+    <property name="Lifecycle" column="Lifecycle" type="int"  />
+    <property name="AutoID" column="AutoID" type="int"  insert="false" update="false" />
+    <property name="IsAdministrator" column="IsAdministrator" type="bool"  />
+    <bag name="SysFuncs" table="FuncRole" inverse="false" batch-size="30"  >
+      
+      <key column="RoleID"></key>
+      <many-to-many class="SysFunc"  column="SysFuncID"/>
+    </bag>
+    
+    <bag name="UserRoles" lazy="true" batch-size="30" inverse="true" >
+      <key column="RoleID"></key>
+      <one-to-many class="UserRole"></one-to-many>
+    </bag>
+
+  </class>
+</hibernate-mapping>

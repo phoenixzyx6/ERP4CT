@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.Lab_DependInfo, ZLERP.Model" table="Lab_DependInfo" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="DependInfoID">
+      <generator class="native" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="Name" column="Name" />
+    <property name="Description" column="Description" />
+    <property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <bag name="Lab_AirOrigins" lazy="true" cascade="all" inverse="true" >
+      <key column="DependInfoID"></key>
+      <one-to-many class="Lab_AirOrigin"></one-to-many>
+    </bag>
+    <bag name="Lab_AirReports" lazy="true" cascade="all" inverse="true" >
+      <key column="DependInfoID"></key>
+      <one-to-many class="Lab_AirReport"></one-to-many>
+    </bag>
+    <bag name="Lab_Air2Origins" lazy="true" cascade="all" inverse="true" >
+      <key column="DependInfoID"></key>
+      <one-to-many class="Lab_Air2Origin"></one-to-many>
+    </bag>
+  </class>
+</hibernate-mapping>

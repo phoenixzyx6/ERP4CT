@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Left";
+    int facId = Model.ID;
+}
+<script type="text/javascript">
+    var _factoryId = "@facId";
+</script>
+<div class="sd_allmenu">
+    <div class="sd_menu">
+        <div class="left">
+        </div>
+        <div class="center">
+            <div class=" floatright icon sd_downIcon">
+            </div>
+            <div class="icon car005004 ">
+            </div>
+            排队待命<span class="cnt"></span>
+        </div>
+        <div class="right">
+        </div>
+    </div>
+    <div class="sd_detail ui-corner-all" id="d_stand">
+    </div>
+    <div class="sd_menu" id="car005005">
+        <div class="left">
+        </div>
+        <div class="center">
+            <div class=" floatright icon sd_downIcon">
+            </div>
+            <div class="icon car005005 ">
+            </div>
+            执行任务<span class="cnt"></span>
+        </div>
+        <div class="right">
+        </div>
+    </div>
+    <div class="sd_detail ui-corner-all" id="d_running">
+    </div>
+    <div class="sd_menu">
+        <div class="left">
+        </div>
+        <div class="center">
+            <div class=" floatright icon sd_downIcon">
+            </div>
+            <div class="icon car005002AndNurse ">
+            </div>
+            休息养护<span class="cnt"></span>
+        </div>
+        <div class="right">
+        </div>
+    </div>
+    <div class="sd_detail ui-corner-all" id="d_rest">
+    </div>
+</div>
+<div class="sd_contextMenu  ui-corner-all" id="cm_rest">
+    <div class="sd_contextMenuItem" menuid="rest">
+        <div class="icon car005002" />
+        休息</div>
+    <div class="sd_contextMenuItem" menuid="modify">
+        <div class="icon car005003" />
+        养护</div>
+    <div class="sd_contextMenuItem" menuid="stand">
+        <div class="icon car005004" />
+        待命</div>
+</div>
+<div class="sd_contextMenu  ui-corner-all" id="cm_stand">
+    <div class="sd_contextMenuItem" menuid="rest">
+        <div class="icon car005002" />
+        休息</div>
+    <div class="sd_contextMenuItem" menuid="modify">
+        <div class="icon car005003" />
+        养护</div>
+        @*--同步 关闭--*@
+    <hr style="border: 1px solid lightgray; width: 95%; text-align: center;" />
+</div>
+<div class="sd_contextMenu  ui-corner-all" id="cm_input">
+    <div class="sd_contextMenuItem" menuid="run">
+         
+    <div class="sd_contextMenuItem" menuid="stand">
+        <div class="icon car005004" />
+        撤回</div>
+</div>
+<div class="sd_contextMenu  ui-corner-all" id="cm_running">
+    <div class="sd_contextMenuItem" menuid="back">
+        <div class="icon car005003" />
+        回厂</div>
+</div>
+<script src="../../Scripts/Views/schedule/schedule_left.js" type="text/javascript"></script>
+<script type="text/javascript">
+//    $(document).ready(function () {
+    initLeftPagejs();
+//    });
+</script>

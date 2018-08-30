@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.APBill, ZLERP.Model" table="APBill" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="APBillId">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="Amount" column="Amount" />
+		<property name="Total" column="Total" />
+		<property name="UnPay" column="UnPay" />
+		<property name="Paied" column="Paied" />
+		<property name="PayDate" column="PayDate" />
+		<property name="Memo" column="Memo" />
+		<property name="SupplyID" column="SupplyID" />
+		<property name="Buyer" column="Buyer" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <many-to-one name="Supply" class="SupplyInfo" column="SupplyID" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

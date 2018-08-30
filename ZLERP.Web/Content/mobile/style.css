@@ -1,0 +1,10 @@
+﻿body 
+{
+    font-family: Verdana Sans-Serif Arial;
+    margin:0;
+    font-size: 85%;
+}
+#top{width:100%; background:url("../themes/default/images/submenubg.gif") repeat-x left center; height:38px; line-height:38px;
+     padding:0 5px;}
+#container{padding:5px;}
+#footer{width:100%; padding:3px; background:#eee;}

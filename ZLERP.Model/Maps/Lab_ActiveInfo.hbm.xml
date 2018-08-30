@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.Lab_ActiveInfo, ZLERP.Model" table="Lab_ActiveInfo" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="Lab_ActiveInfoId">
+      <generator class="native" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="Lab_AirOriginId" column="Lab_AirOriginId" />
+    <property name="D7_1" column="D7_1" />
+    <property name="D7_2" column="D7_2" />
+    <property name="D7_3" column="D7_3" />
+    <property name="D28_1" column="D28_1" />
+    <property name="D28_2" column="D28_2" />
+    <property name="D28_3" column="D28_3" />
+    <property name="S7_1" column="S7_1" />
+    <property name="S7_2" column="S7_2" />
+    <property name="S7_3" column="S7_3" />
+    <property name="S28_1" column="S28_1" />
+    <property name="S28_2" column="S28_2" />
+    <property name="S28_3" column="S28_3" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <many-to-one name="Lab_AirOrigin" column="Lab_AirOriginId" class="Lab_AirOrigin" update="false" insert="false"/>
+  </class>
+</hibernate-mapping>

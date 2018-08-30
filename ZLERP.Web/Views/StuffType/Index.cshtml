@@ -1,0 +1,47 @@
+﻿@model ZLERP.Model.StuffType
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/StuffType.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            stuffTypeInit({
+                storeUrl: '@Url.Action("Find")',
+                updateUrl: '@Url.Action("Update")'
+            });
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.TypeID)@Html.DicEditorFor(m => m.TypeID, DicEnum.SType, "", "")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.FinalStuffType)@Html.DropDownListFor(m => m.FinalStuffType, new SelectListItem[] { new SelectListItem { Text = "FA--细骨料", Value = "FA" }, new SelectListItem { Text = "CA--粗骨料", Value = "CA" }, new SelectListItem { Text = "CE--水泥", Value = "CE" }, new SelectListItem { Text = "AIR--掺合料", Value = "AIR" }, new SelectListItem { Text = "WA--水", Value = "WA" }, new SelectListItem { Text = "ADM--外加剂", Value = "ADM" } }, "", new { @class = "text", style = "width:100px;", disabled = true })
+                    @Html.HiddenFor(m => m.ID, new { @class = "text" })
+                </td>
+            </tr>
+
+           <tr>
+                <td>@Html.LabelFor(m => m.StuffTypeName)@Html.TextBoxFor(m => m.StuffTypeName, new { @class = "text" })
+                </td>
+            </tr>
+
+            <tr>
+                <td>@Html.LabelFor(m => m.IsUsed)@Html.CheckBoxFor(m => m.IsUsed, new { Checked = true })
+                </td>
+            </tr>
+
+            <tr>
+                <td>@Html.LabelFor(m => m.OrderNum)@Html.TextBoxFor(m => m.OrderNum, new { Value = 0 })
+                </td>
+            </tr>
+
+        </table>
+    }
+</div>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.ReceiveBill, ZLERP.Model" table="ReceiveBill" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="ReceiveBillId">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="BeginDate" column="BeginDate" />
+		<property name="EndDate" column="EndDate" />
+		<property name="ReceiveDate" column="ReceiveDate" />
+		<property name="NewAmount" column="NewAmount" />
+		<property name="Cash" column="Cash" />
+		<property name="CheckAmt" column="CheckAmt" />
+		<property name="Discount" column="Discount" />
+		<property name="NewKeep" column="NewKeep" />
+		<property name="LastKeep" column="LastKeep" />
+		<property name="NewBad" column="NewBad" />
+		<property name="LastBad" column="LastBad" />
+		<property name="OtherAdd" column="OtherAdd" />
+		<property name="OtherSub" column="OtherSub" />
+		<property name="Total" column="Total" />
+		<property name="Sales" column="Sales" />
+		<property name="PayUser" column="PayUser" />
+		<property name="ReceiveUser" column="ReceiveUser" />
+		<property name="Memo" column="Memo" />
+		<property name="ContractID" column="ContractID" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <many-to-one name="Contract" class="Contract" column="ContractID" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

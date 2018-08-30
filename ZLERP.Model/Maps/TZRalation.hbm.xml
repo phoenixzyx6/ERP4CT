@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.TZRalation, ZLERP.Model" table="TZRalation" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="TZRalationID">
+		 	<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="SourceShipDocID" column="SourceShipDocID" />
+		<property name="TargetShipDocID" column="TargetShipDocID" />
+    <property name="SourceCube" column="SourceCube" />
+		<property name="Cube" column="Cube" />
+		<property name="CarID" column="CarID" />
+		<property name="Driver" column="Driver" />
+		<property name="ReturnType" column="ReturnType" />
+		<property name="ActionType" column="ActionType" />
+    <property name="ActionTime" column="ActionTime" />
+    <property name="ActionCube" column="ActionCube" />
+		<property name="ReturnReason" column="ReturnReason" />
+		<property name="IsAudit" column="IsAudit" />
+		<property name="IsCompleted" column="IsCompleted" />
+		<property name="Auditor" column="Auditor" />
+		<property name="AuditTime" column="AuditTime" />
+		<property name="DealMan" column="DealMan" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="AH" column="AH" />
+    <property name="TotalWeight" column="TotalWeight" />
+    <property name="CarWeight" column="CarWeight" />
+    <property name="Weight" column="Weight" />
+    <property name="Exchange" column="Exchange" />
+    <property name="IsLock" column="IsLock" />
+    <property name="TzRalationFlag" column="TzRalationFlag" />
+    
+    <many-to-one name="SourceShippingDocument" column="SourceShipDocID" class="ShippingDocument" insert="false" update="false" />
+    <many-to-one name="TargetShippingDocument" column="TargetShipDocID" class="ShippingDocument" insert="false" update="false" />
+    <many-to-one name="DriverUser" column="Driver" not-found="ignore" class="User" insert="false" update="false"/>
+	</class>
+</hibernate-mapping>

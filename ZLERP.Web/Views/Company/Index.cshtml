@@ -1,0 +1,64 @@
+﻿@model ZLERP.Model.Company
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/Company.js")" type="text/javascript" language="javascript"> </script>
+<script type="text/javascript">
+    $(function () {
+        companyIndexInit('@Url.Action("Find")');
+        
+    });
+</script>
+<link href="../../Scripts/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+<script src="../../Scripts/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+} 
+<div id="My-FormDiv" style="display:none;">
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.ID)
+<table class="mvcform">
+    <tr> 
+        <td>@Html.LabelFor(m => m.CompName)@Html.TextBoxFor(m => m.CompName, new { @class = "text" })</td>
+ 
+        <td>@Html.LabelFor(m => m.Principal)@Html.TextBoxFor(m => m.Principal, new { @class = "text" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.CompAddr)@Html.TextBoxFor(m => m.CompAddr, new { @class = "text" })</td>
+ 
+        <td>@Html.LabelFor(m => m.Country)@Html.TextBoxFor(m => m.Country, new { @class = "text" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Area)@Html.TextBoxFor(m => m.Area, new { @class = "text" })</td>
+ 
+        <td>@Html.LabelFor(m => m.Province)@Html.TextBoxFor(m => m.Province, new { @class = "text" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Tel)@Html.TextBoxFor(m => m.Tel, new { @class = "text" })</td>
+        <td>@Html.LabelFor(m => m.LinkMan)@Html.TextBoxFor(m => m.LinkMan, new { @class = "text" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Fax)@Html.TextBoxFor(m => m.Fax, new { @class = "text" })</td>
+        <td>@Html.LabelFor(m => m.Email)@Html.TextBoxFor(m => m.Email, new { @class = "text" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PostCode)@Html.TextBoxFor(m => m.PostCode, new { @class = "text" })</td>
+        <td>@Html.LabelFor(m => m.WebSite)@Html.TextBoxFor(m => m.WebSite, new { @class = "text" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Employees)@Html.TextBoxFor(m => m.Employees, new { @class = "text" })</td>
+        <td>@Html.LabelFor(m => m.RegAsset)@Html.TextBoxFor(m => m.RegAsset, new { @class = "text" })</td>
+    </tr>
+    <tr> 
+     
+        <td colspan = 2>@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, new { @class = "text" , style = "width:75%"})</td>
+    </tr>
+    
+     
+</table>
+
+}
+</div>
+<div id="My-JqGrid"></div>
+ 

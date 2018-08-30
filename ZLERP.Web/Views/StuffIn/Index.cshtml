@@ -1,0 +1,286 @@
+﻿@model ZLERP.Model.StuffIn
+@section HeaderSection{  
+ <script src="@Url.Content("~/Scripts/Views/StuffIn.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            stuffInInit({
+                storeUrl: '@Url.Action("Find")',
+                AuditUrl: '@Url.Action("SiloAudit")',
+                MultiAuditUrl: '@Url.Action("SiloMultiAudit")',
+                MultiAuditUrlZ: '@Url.Action("SiloMultiAuditZ")',
+                findSiloUrl: '@Html.Raw(Url.Action("ListData", "Silo", new {textField="SiloName", valueField="ID"}))',
+                GetStuffUrl: '@Url.Action("Get","StuffInfo")', // StuffInfo/Get
+                IsGuLiaoUrl: '@Url.Action("IsGuLiao","StuffInfo")', // StuffInfo/IsGuLiao
+                getprice: '@Url.Action("ListDataStuffInfo")',
+                getStuffPrice: '@Url.Action("getStuffInfoPrice")',
+                StuffPriceAdjust: '@Url.Action("StuffInPriceAdjust")'
+            });
+           
+        });
+
+        //当onkeydown 事件发生时调用hotkey函数 
+        $("#CarNo").keydown(function (e) {
+            if (e.keyCode == 13)
+            {
+               //alert("你按了键盘ENTER.");
+            }
+        }); 
+    </script>
+
+    <style type="text/css">
+       
+        .picinfo td
+        {
+           
+            text-align:center;
+            padding:5px;
+            
+        }
+        .picinfo img
+        {
+             width:180px;
+             border:1px solid #A6C9E2;    
+        }
+ 
+   </style>
+   <style type="text/css">
+        fieldset
+        {
+            padding: 1px;
+            margin: 1px;
+            width: 100%;
+            color: #333;
+            border: #06c dashed 1px;
+        }
+        legend
+        {
+            color: #1D5987;
+            
+            font-weight: bold;
+            background: #fff;
+            border: #b6b6b6 solid 1px;
+            padding: 3px 6px;
+        }
+    </style>
+<script id="tmplMetagePic" type="text/x-jquery-tmpl">
+        <div  class="picinfo" id = "picView">
+            <table>
+                <tr>
+                    <td><img id="MetagePic1" src = "${pic1}" /></td>
+                    <td><img id="MetagePic2" src = "${pic2}" /></td>
+                </tr>
+                <tr>
+                    <td><img id="MetagePic3" src = "${pic3}" /></td>
+                    <td><img id="MetagePic4" src = "${pic4}" /></td> 
+                </tr>
+            </table>
+        </div>
+ </script>
+}
+
+
+<div id="MyJqGrid">
+<!-- width: 48%; -->
+</div>
+
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>
+                   @* @Html.LabelFor(m => m.StockPactID)
+                      @Html.AutoComplete("StockPactID", "StockPactNo", "Combo", "StockPact", "ID", "StockPactNo")*@
+                   @Html.LabelFor(m => m.StockPactID)@Html.AutoComplete("StockPactID", "StockPactNo", "Combo", "StockPact", "ID", "StockPactNo")
+                   @*@Html.AutoComplete("StockPactID", "StockPactNo", "Combo", "StockPact", "ID", "StockPactNo", "StockPactNo", "", null)*@                  
+                </td>
+                <td>
+                    @Html.LabelFor(m => m.StuffID)@Html.DropDownListFor(m => m.StuffID, (IEnumerable<SelectListItem>)ViewBag.StuffList, "", new { style = "Width:138px" })
+                    @*@Html.LabelFor(m => m.StuffID)@Html.DropDownListFor(m => m.StuffID, Enumerable.Empty<SelectListItem>())*@
+                </td>
+                <td>
+                    @Html.LabelFor(m => m.SiloID)@Html.DropDownListFor(m => m.SiloID, Enumerable.Empty<SelectListItem>(), new { style = "Width:138px" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CarNo)@Html.EditorFor(m => m.CarNo)
+                </td>
+                <td>@Html.LabelFor(m => m.SupplyID)@Html.AutoComplete("SupplyID", "SupplyName", "ComboByKey", "SupplyInfo", "ID", "ShortName", "SupplyName", "supplykind in ('Su1','Su5') and IsUsed =1 ", null)
+                </td>
+                <td>@Html.LabelFor(m => m.TransportID)@Html.AutoComplete("TransportID", "TransportName", "ComboByKey", "SupplyInfo", "ID", "ShortName", "SupplyName", "supplykind in ('Su3','Su5') and IsUsed =1 ", null)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CustName)@Html.EditorFor(m => m.CustName)
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.GageUnit)@Html.TextBoxFor(m => m.GageUnit, new { Value = "公斤" })
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.TransportNum)@Html.TextBoxFor(m => m.TransportNum, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.TransportNum)@Html.TextBox("TransportNum_T", 0)
+                </td>
+                <td>@Html.LabelFor(m => m.UnitPrice)@Html.TextBox("UnitPrice", 0)
+                </td>
+            </tr>
+            <tr>
+                <td  style="display: none">@Html.LabelFor(m => m.SupplyNum)@Html.TextBoxFor(m => m.SupplyNum, new { Value = 0 })
+                </td>
+                <td  style="display: none">@Html.LabelFor(m => m.TotalNum)@Html.TextBoxFor(m => m.TotalNum, new { Value = 0 })
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.CarWeight)@Html.TextBoxFor(m => m.CarWeight, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.SupplyNum)@Html.TextBox("SupplyNum_T", 0)
+                </td>
+                <td>@Html.LabelFor(m => m.TotalNum)@Html.TextBox("TotalNum_T", 0)<span style="font-weight:bolder">(T)</span>
+                </td>
+                <td>@Html.LabelFor(m => m.CarWeight)@Html.TextBox("CarWeight_T", 0)<span style="font-weight:bolder">(T)</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.StockNum)@Html.TextBoxFor(m => m.StockNum, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.StockNum)@Html.TextBox("StockNum_T", 0, new { @data_val_required = "进货数量 字段是必需的", data_val = "true", readOnly = true })
+                </td>
+                <td>@Html.Label("扣含水")@Html.TextBoxFor(m => m.WRate, new { Value = 0 })
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.InNum)@Html.TextBoxFor(m => m.InNum, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.InNum)@Html.TextBox("InNum_T", 0, new { @data_val_required = "入库数量 字段是必需的", data_val = "true", readOnly = true })<span style="font-weight:bolder">(T)</span>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Proportion)@Html.TextBox("Proportion", 1, new { @data_val_required = "换算系数 字段是必需的", data_val = "true" })
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.FootNum)@Html.TextBoxFor(m => m.FootNum, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.FootNum)@Html.TextBox("FootNum_T", 0, new { @data_val_required = "结算数量 字段是必需的", data_val = "true", readOnly = true })
+                </td>
+                <td>@Html.LabelFor(m => m.Operator)@Html.EditorFor(m => m.Operator)
+                </td>
+            </tr>
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.Bangcha)@Html.TextBoxFor(m => m.Bangcha, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.Bangcha)@Html.TextBox("Bangcha_T", 0, new { @data_val_required = "磅差 字段是必需的", data_val = "true" })
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.FinalFootNum)@Html.TextBoxFor(m => m.FinalFootNum, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.FinalFootNum)@Html.TextBox("FinalFootNum_T", 0, new { @data_val_required = "最终结算数量 字段是必需的", data_val = "true", readOnly = true })
+                </td>
+                 <td>@Html.LabelFor(m => m.Driver)@Html.EditorFor(m => m.Driver)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.SourceAddr)@Html.EditorFor(m => m.SourceAddr)
+                </td>
+                <td>@Html.LabelFor(m => m.InDate)@Html.EditorFor(m => m.InDate, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })
+                </td>
+                <td>@Html.LabelFor(m => m.OutDate)@Html.EditorFor(m => m.OutDate, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })
+                </td>
+            </tr>
+            <tr>
+                @*<td>@Html.LabelFor(m => m.IsBack)@Html.CheckBoxFor(m => m.IsBack)
+                </td>*@
+                <td style="display: none">@Html.LabelFor(m => m.Bangcha2)@Html.TextBoxFor(m => m.Bangcha2, new { Value = 0 })
+                </td>
+                 <td>@Html.LabelFor(m => m.Bangcha2)@Html.TextBox("Bangcha2_T", "0", new { @data_val_required = "磅差2 字段是必需的", data_val = "true" })
+                </td>
+                <td>@Html.LabelFor(m => m.Remark)@Html.EditorFor(m => m.Remark)
+                </td>
+            </tr>
+            <tr>
+               
+                <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                @*<td>@Html.LabelFor(m => m.IsExam)@Html.CheckBoxFor(m => m.IsExam)
+                </td>*@
+            </tr>
+        </table>
+
+    }
+</div>
+
+<div id = "dlgMetagePicView" style = "text-align:center; vertical-align:middle">
+         
+</div>
+<div id = "dlgMetagePicDialog">
+</div>
+
+@*入库审核窗体*@
+<div id="ConfirmDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <center>
+        <table class="mvcform" >
+            <tr>
+                <td>所属合同</td>
+                <td>@Html.AutoComplete("StockPactID_S", "StockPactNo", "Combo", "StockPact", "ID", "StockPactNo")</td>
+            </tr>
+            <tr>
+                <td>材料</td>
+                <td>@Html.DropDownListFor(m => m.StuffID, Enumerable.Empty<SelectListItem>(), new { Name = "StuffID_S", style = "width:137px;" })</td>
+
+            </tr>
+            <tr>
+                <td>规格</td>
+                <td>@Html.EditorFor(m => m.Guige, new { }) </td>               
+            </tr>
+            <tr>
+                 <td>原料单价</td>
+                 <td>@Html.EditorFor(m => m.UnitPrice, new { }) </td>
+            </tr>
+            <tr>
+                <td>厂商数量</td>
+                <td>@Html.EditorFor(m => m.SupplyNum, new { }) (T)</td>
+            </tr>
+
+        </table> 
+        </center>
+        <br />
+        <fieldset>
+             <legend>注 意</legend>
+             
+             <p><font color="red">1.所选合同的材料，供应商需和入库单对应才能审核成功</font></p>
+             <p><font color="red">2.审核后将不允许删除，修改</font></p>
+             
+       </fieldset>
+        
+    }
+</div>
+
+@*入库单价调整窗体*@
+<div id="AdjustPriceForm" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <center>
+        <table class="mvcform" >
+            <tr>
+                <td>@Html.Label("开始时间") @Html.Editor("beginDate", "DateTimeWithTime", new { })
+                </td>
+                <td>@Html.Label("结束时间") @Html.Editor("endDate", "DateTimeWithTime", new { })
+                </td>
+            </tr>
+
+        </table> 
+        </center>
+        <br />
+        <fieldset>
+             <legend>注 意</legend>
+             
+             <p><font color="red">1.请务必在执行此操作前，确认原材料合同处已经把单价都维护进去了。</font></p>
+             <p><font color="red">2.请谨慎选择时间段，一旦执行时间段内的单价都会按照原材料合同调价修改</font></p>
+             
+       </fieldset>
+        
+    }
+    <div id="showProgress" style="display:none;text-align:center;color:#f90;font-weight:bold;position:absolute;top:50%; z-index:10;">
+    <img src="@Url.Content("~/Content/themes/default/images/ajax-loader.gif")" border="0" alt="请稍等,价格正在修改中，请勿关闭程序..."/>
+    <br/>请稍等,价格正在修改中，请勿关闭程序...
+    </div>
+</div>
+
+@*进出库历史记录弹出框*@
+<div id="stuffinHisWindow" style="display: none;">
+    <div id="stuffinHisGrid">
+    </div>
+</div>

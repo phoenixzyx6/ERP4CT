@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.ThreadTable, ZLERP.Model" table="ThreadTable" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" >
+		<id name="ID" column="ThreadTable_ID">
+		 	<generator class="native" />
+		</id>
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="value" column="value" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.TaskAss, ZLERP.Model" table="TaskAss" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="TaskAssID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="AssDate" column="AssDate" />
+		<property name="AssType" column="AssType" />
+		<property name="AssNum" column="AssNum" />
+		<property name="AssPrice" column="AssPrice" />
+		<property name="AssTotal" column="AssTotal" />
+		<property name="APMoney" column="APMoney" />
+		<property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="TaskID" column="TaskID" />
+    <many-to-one name="ProduceTask" column="TaskID" class="ProduceTask" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

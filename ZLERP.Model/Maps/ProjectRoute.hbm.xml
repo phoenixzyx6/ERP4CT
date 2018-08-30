@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.ProjectRoute, ZLERP.Model" table="ProjectRoute" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		 
+    <id name="ID" column="RouteId">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+		<version name="Version" column="Version" />
+		<property name="ProjectId" column="ProjectId" />
+		<property name="IsPrimary" column="IsPrimary" />
+		<property name="Times" column="Times" />
+    <property name="Source" column="Source" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <many-to-one name="Project" column="ProjectID" fetch="join" class="Project" insert="false" update="false"/>
+		<bag name="RouteDetails" lazy="true" cascade="all-delete-orphan" inverse="true" >
+			<key column="RouteId"></key>
+			<one-to-many class="RouteDetail"></one-to-many>
+		</bag>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,103 @@
+﻿@model ZLERP.Model.PurchaseMain
+@section HeaderSection{
+<script type="text/javascript">
+    
+</script>
+<script src="@Url.Content("~/Scripts/Views/PurchaseMain/PurchaseMain.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        var options = { storeUrl: '@Url.Action("Find")'
+                        , purchaseStoreUrl: '@Url.Action("Find", "Purchase")'
+                        , contractStoreUrl: '@Url.Action("Find", "PurchaseContract")'
+        };
+        $(function () {
+            PurchaseMainIndexInit(options);
+        });
+</script>
+}
+<div id="MyJqGrid" ></div>
+<div id="PurchaseGrids">
+    <div id="PurchaseGrid" style="float:left; width: 100%"></div>
+    <div id="ContractGrid" style="float:right;width: 49%;display:none;"></div>
+</div>
+
+
+<!--子表记录-->
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+    @Html.Hidden("purchase_id")
+        <td>@Html.Label("采购物资名称")@Html.TextBox("goodsname")</td>
+        @*<td>@Html.Label("入库数量")@Html.TextBox("num1", "", new { data_val_number = "字段 数量 必须是一个数字", data_val = "true" })</td>*@
+        @Html.Hidden("rknum")
+    </tr>
+    <tr>
+        <td>@Html.Label("数量")@Html.TextBox("num", "0", new { data_val_number = "字段 数量 必须是一个数字", data_val = "true" })</td>   
+        @*<td>@Html.Label("入库数量")@Html.TextBox("num1", "0", new { data_val_number = "字段 数量 必须是一个数字", data_val = "true" })</td>*@ 
+        
+        <td>@Html.Label("合同名称")@Html.TextBox("contractname")</td>
+    </tr>
+
+    <tr>
+        <td>@Html.Label("单价")@Html.TextBox("price", "0", new { data_val_number = "字段 单价 必须是一个数字", data_val = "true" })</td>
+        <td>@Html.Label("总价")@Html.TextBox("money", "0", new { data_val_number = "字段 总价 必须是一个数字",@readonly = "readonly",data_val = "true" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.Label("采购人电话")@Html.TextBox("tele")</td>
+ 
+        <td>@Html.Label("采购人")@Html.TextBox("man")</td>   
+    </tr>
+    <tr> 
+        <td>@Html.Label("采购时间")@Html.EditorFor(m => m.ModifyTime, "DateTimeWithTime", new { id = "date1", defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+ 
+        <td>@Html.Label("开票金额")@Html.TextBox("stickmoney","0")</td>   
+    </tr>
+    <tr> 
+        <td>@Html.Label("挂账金额")@Html.TextBox("nomoney","0")</td>
+        @*<td>@Html.Label("辅料供应商")@Html.DropDownList("supply", (IEnumerable<SelectListItem>)ViewBag.supply, new { style = "width:100px;", zlerp = "combobox" })</td>*@
+        <td>@Html.Label("辅料供应商")@Html.AutoComplete("SupplyID", "supply", "Combo", "SupplyInfo", "ID", "SupplyName", "IsUsed=1")</td>
+        <td style="display:none;">@Html.Label("票据编号")@Html.TextBox("stickno")
+        
+        </td>   
+    </tr>
+    <tr> 
+        
+        <td>@Html.Label("签订日期")@Html.EditorFor(m => m.BuildTime, "DateTimeWithTime", new { id = "date2", defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>   
+        <td>@Html.Label("辅料商电话")@Html.TextBox("supplytel")</td>   
+    </tr>
+    <tr style="display:none"> 
+        <td>@Html.Label("乙方人")@Html.TextBox("tow")</td>
+        <td>@Html.Label("甲方人")@Html.TextBox("one")</td>   
+        
+    </tr>
+    <tr> 
+        <td>@Html.Label("供货起始时间")@Html.EditorFor(m => m.BuildTime, "DateTimeWithTime", new { id = "date3", defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+ 
+        <td>@Html.Label("供货截至时间")@Html.EditorFor(m => m.BuildTime, "DateTimeWithTime", new { id = "date4", defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>   
+    </tr>
+    <tr>
+        <td>@Html.Label("运输商")@Html.DropDownList("supply1", (IEnumerable<SelectListItem>)ViewBag.supply1, new { style = "width:130px;" })</td>
+        <td>@Html.Label("运输商电话")@Html.TextBox("supplytel1")</td> 
+    </tr>
+</table>
+}
+</div>
+
+
+<div id="MyFormDiv1" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+    @Html.Hidden("purchase_id1")
+        <td>@Html.Label("采购物资名称")@Html.EditorFor(m => m.GoodsName)</td>
+        <td>@Html.Label("本单采购")@Html.TextBox("nums")</td>
+    </tr>
+    <tr>
+        <td>@Html.Label("本单已入库")@Html.TextBox("num1")</td>      
+        <td>@Html.Label("本次入库")@Html.TextBox("num2", "0", new { data_val_number = "字段 本次入库 必须是一个数字", data_val = "true" })</td>
+    </tr>
+</table>
+}
+</div>

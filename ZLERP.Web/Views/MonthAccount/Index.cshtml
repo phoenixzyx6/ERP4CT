@@ -1,0 +1,45 @@
+﻿@model ZLERP.Model.MonthAccount
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/MonthAccount/MonthAccount.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            customerIndexInit('@Url.Action("GetMonthAccount","MonthAccount")', '@Url.Action("Find", "MonthAccount")', '@Url.Action("GetFirstPinYin")');
+        });
+    </script>
+}
+<div id="custForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.Month)@Html.EditorFor(m => m.Month, new { defaultValue = DateTime.Now.ToString("yyyyMM") })
+                </td>
+                <td><span style="color:Red">(格式：201607)</span></td>
+            </tr>
+            
+        </table>
+    }
+
+    <br />
+    <fieldset>
+             <legend>注 意</legend>
+             
+             <p><font color="red">1.执行月结期间不要进行任何业务操作</font></p>
+             <p><font color="red">2.请核对当前月结周期的所有的业务单据，无误后才能进行此操作</font></p>
+             <p><font color="red">3.如材料存在盈亏，请对材料库存进行正确的盘点后再进行此操作</font></p>
+             <p><font color="red">4.月结完成后，相关的业务账将被封存，不允许再删除，修改</font></p>
+    </fieldset>
+    <div id="showProgress" style="display:none;text-align:center;color:#f90;font-weight:bold;position:absolute;top:75%; z-index:10;">
+    <img src="@Url.Content("~/Content/themes/default/images/ajax-loader.gif")" border="0" alt="请稍等,月结处理中，请勿关闭程序..."/>
+    <br/>请稍等,月结处理中，请勿关闭程序...
+    </div>
+</div>
+
+<!-- 左边Grid -->
+<div id="monthAccount1" style="float: left; width: 23%">
+</div>
+
+<!-- 右边Grid -->
+<div id="custid" style="float: right; width: 76%">
+   </div>

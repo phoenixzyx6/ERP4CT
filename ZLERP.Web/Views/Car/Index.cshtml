@@ -1,0 +1,204 @@
+﻿@model ZLERP.Model.ViewModels.CarAndDriver
+<div id="MyJqGrid" style="float: left; width: 68%">
+</div>
+<div id="DriverGrid" style="float: right; width: 30%">
+</div>
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/Car.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            carIndexInit('@Url.Action("Find")',
+            '@Url.Action("Find", "DriverForCar")',
+            '@Html.Raw(Url.Action("SearchSelect", "CarClass", new { textField = "ID", valueField = "CarClassName", orderby = "ID" }))',
+            '@DateTime.Today.AddDays(1).ToString("yyyyMMdd")');
+        });
+    </script>
+}
+<div id="DriverFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => m.DriverForCar.ID, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.DriverForCar.CarID)@Html.TextBoxFor(m => m.DriverForCar.CarID, new { @class = "text", readOnly = true })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.DriverForCar.UserID)@Html.AutoComplete("DriverForCar.UserID", "TrueName", "Combo", "User", "ID", "TrueName", string.Format("IsUsed=1 AND (UserType='{0}' or UserType='{1}')", UserType.Driver, UserType.MixerDriver), new { allowCache = false })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.DriverForCar.Driver)@Html.EditorFor(m => m.DriverForCar.Driver, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.DriverForCar.PlanClass)@Html.DicEditorFor(m => m.DriverForCar.PlanClass, DicEnum.PlanClass, "")
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+<div id="CarFormDiv" class="mvcform" style="display: none;">
+    <style type="text/css">
+        .mvcform label
+        {
+            width: 8em;
+        }
+    </style>
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.ID)@Html.EditorFor(m => m.Car.ID, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Car.CarNo)@Html.EditorFor(m => m.Car.CarNo, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.CarTypeID)@Html.DicEditorFor(m => m.Car.CarTypeID, DicEnum.CarType)
+                </td>
+                <td>@Html.LabelFor(m => m.Car.PumpTypeID)@Html.DicEditorFor(m => m.Car.PumpTypeID, DicEnum.PumpType, "")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.BelongTo)@Html.DicEditorFor(m => m.Car.BelongTo, DicEnum.CarBelong)
+                </td>
+                <td>@Html.LabelFor(m => m.Car.Owner)@Html.EditorFor(m => m.Car.Owner, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.RentCarName)@Html.DicEditorFor(m => m.Car.RentCarName, DicEnum.RentMC, "")
+                </td>
+                <td>@Html.LabelFor(m => m.Car.IsUsed)@Html.CheckBoxFor(m => m.Car.IsUsed, new { @class = "text", Checked = true })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.LastBackTime)@Html.EditorFor(m => m.Car.LastBackTime, "DateTimeWithTime")
+                </td>
+                <td>@Html.LabelFor(m => m.Car.CarStatus)@Html.DicEditorFor(m => m.Car.CarStatus, DicEnum.CarStatus)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.MaxCube)@Html.TextBoxFor(m => m.Car.MaxCube, new { @class = "text", Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.Car.CarWeight)@Html.TextBoxFor(m => m.Car.CarWeight, new { @class = "text", Value = 0 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.StuffWeight)@Html.TextBoxFor(m => m.Car.StuffWeight, new { @class = "text", Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.Car.Factory)@Html.EditorFor(m => m.Car.Factory, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.BuyDate)@Html.EditorFor(m => m.Car.BuyDate, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Car.LeaveFacDate)@Html.EditorFor(m => m.Car.LeaveFacDate, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.FacInnerID)@Html.EditorFor(m => m.Car.FacInnerID, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Car.EngineID)@Html.EditorFor(m => m.Car.EngineID, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.TerminalID)@Html.EditorFor(m => m.Car.TerminalID, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Car.SIM)@Html.EditorFor(m => m.Car.SIM, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.ChassisID)@Html.EditorFor(m => m.Car.ChassisID, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.Car.OilConsume)@Html.EditorFor(m => m.Car.OilConsume, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.CarClassID)@Html.DropDownListFor(m => m.Car.CarClassID, (IEnumerable<SelectListItem>)ViewBag.CarClassList)
+                </td>
+                <td>@Html.LabelFor(m => m.Car.OrderNum)@Html.TextBoxFor(m => m.Car.OrderNum, new { @class = "text", Value = 0 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.CarVINo)@Html.TextBoxFor(m => m.Car.CarVINo)
+                </td>
+                <td>@Html.LabelFor(m => m.Car.RegDate)@Html.EditorFor(m => m.Car.RegDate, "DateTime")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.IssuingDate)@Html.EditorFor(m => m.Car.IssuingDate, "DateTime")
+                </td>
+                <td>@Html.LabelFor(m => m.Car.Insurance)@Html.TextBoxFor(m => m.Car.Insurance)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.OperCertificate)@Html.TextBoxFor(m => m.Car.OperCertificate)
+                </td>
+                <td>@Html.LabelFor(m => m.Car.Remark)@Html.EditorFor(m => m.Car.Remark, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Car.CompanyID)@Html.fixedDropDownListFor(m => m.Car.CompanyID, (SelectList)ViewBag.CompanyDics)
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+<div id="UserFormDiv" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform" style="width: 100%">
+            <tr>
+                <td>@Html.LabelFor(m => m.User.ID)@Html.EditorFor(m => m.User.ID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.User.DepartmentID)@Html.DropDownListFor(m => m.User.DepartmentID, (IEnumerable<SelectListItem>)ViewBag.DepartmentList, new { @class = "requiredval" })
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+
+<div id="PlanClassDiv" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform" style="width: 100%">
+            
+            <tr>        
+            <td style="display:none">@Html.TextBox("ConfigName", "PlanClass")
+                </td>     
+                <td>@Html.Label("当前班组")@Html.DicEidtor("ConfigValue", "ConfigValue", DicEnum.PlanClass)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+<div id="AvailableCarFormDiv" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform" style="width: 100%">
+            <tr>
+                <td>@Html.Label("可用车辆")@Html.TextArea("availableCar", "", 5, 50, new {  @data_val_required = "可用车辆 字段是必需的", data_val = "true" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("车辆总数")@Html.Editor("carNum")
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

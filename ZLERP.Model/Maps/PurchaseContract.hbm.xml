@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.PurchaseContract, ZLERP.Model" table="PurchaseContract" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" >
+		<id name="ID" column="PurchaseContract_ID">
+		 	<generator class="native" />
+		</id>
+    <many-to-one name="Purchase" column="Purchase_ID" class="Purchase" insert="false" update="false" />
+    
+    <property name="Purchase_ID" column="Purchase_ID" />
+    <property name="PurchaseContract_Name" column="PurchaseContract_Name" />
+		<property name="GoodsID" column="GoodsID" />
+		<property name="GoodsName" column="GoodsName" />
+		<property name="PurchaseContract_SupplyTel" column="PurchaseContract_SupplyTel" />
+		<property name="PurchaseContract_Supply" column="PurchaseContract_Supply" />
+		<property name="PurchaseContract_Price" column="PurchaseContract_Price" />
+		<property name="PurchaseContract_Num" column="PurchaseContract_Num" />
+		<property name="PurchaseContract_Money" column="PurchaseContract_Money" />
+		<property name="PurchaseContract_One" column="PurchaseContract_One" />
+		<property name="PurchaseContract_Tow" column="PurchaseContract_Tow" />
+		<property name="PurchaseContract_Date" column="PurchaseContract_Date" />
+    <property name="PurchaseContract_StartDate" column="PurchaseContract_StartDate" />
+    <property name="PurchaseContract_EndDate" column="PurchaseContract_EndDate" />
+		<property name="Remark" column="Remark" />
+    <property name="PurchaseContract_Supply1" column="PurchaseContract_Supply1" />
+    <property name="PurchaseContract_SupplyTel1" column="PurchaseContract_SupplyTel1" />
+    <property name="PurchaseContract_state" column="PurchaseContract_state" />
+    <property name="PurchaseContract_SupplyID" column="PurchaseContract_SupplyID" />
+    <property name="PurchaseContract_SupplyID1" column="PurchaseContract_SupplyID1" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+	</class>
+</hibernate-mapping>

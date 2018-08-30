@@ -1,0 +1,157 @@
+﻿@model ZLERP.Model.PumpWork 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/PumpWork.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            pumpworkIndexInit({
+                pumpWorkStoreUrl:'@Url.Action("Find")',
+                listContractUrl:'@Url.Action("ListData", "Contract")',
+                listTaskUrl:'@Url.Action("ListData", "ProduceTask")',
+                listCarUrl: '@Url.Action("ListData", "Car")',
+                getPumpTypeCostStoreUrl: '@Url.Action("getPumpTypeAndPumpCost")'
+            });
+        });
+</script>
+}
+<div id="PumpWorkGrid"></div>
+<div id="pumpworkform" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.TextBoxFor(m => m.ID, new { @class = "text", style = "display:none;" })
+        @Html.LabelFor(m => m.Customer.CustName)@Html.AutoCompleteFor(m => m.CustomerID, m => m.Customer.CustName, "Combo", "Customer", "ID", "CustName", new { @class = "text" })
+        </td>
+        <td>@Html.LabelFor(m => m.Saler)@Html.EditorFor(m => m.Saler)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Contract.ContractName)@Html.DropDownListFor(m => m.ContractID, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:137px;" })</td>
+ 
+        <td>@Html.LabelFor(m => m.PumpDate)@Html.EditorFor(m => m.PumpDate, "DateTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.TaskID)@Html.DropDownListFor(m => m.TaskID, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:137px;" })</td>
+ 
+        <td>@Html.LabelFor(m => m.PumpType)@Html.DicEditorFor(m => m.PumpType, DicEnum.PumpType, "")</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:137px;" })</td>
+ 
+        <td>@Html.LabelFor(m => m.Driver)@Html.EditorFor(m => m.Driver)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.CustNum)@Html.TextBoxFor(m => m.CustNum, new { Value = 0 })</td>
+ 
+        <td>@Html.LabelFor(m => m.PumpNum)@Html.TextBoxFor(m => m.PumpNum, new { Value = 0 })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PumpPrice)@Html.EditorFor(m => m.PumpPrice)</td>
+ 
+        <td>@Html.LabelFor(m => m.PumpSum)@Html.TextBoxFor(m => m.PumpSum, new { readOnly = true })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.BeginDate)@Html.EditorFor(m => m.BeginDate,"DateTime")</td>
+ 
+        <td>@Html.LabelFor(m => m.EndDate)@Html.EditorFor(m => m.EndDate,"DateTime")</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.SlurryCustNum)@Html.TextBoxFor(m => m.SlurryCustNum, new { Value = 0 })</td>
+ 
+        <td>@Html.LabelFor(m => m.SlurryPumpNum)@Html.EditorFor(m => m.SlurryPumpNum)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.SlurryPumpPrice)@Html.EditorFor(m => m.SlurryPumpPrice)</td>
+ 
+        <td>@Html.LabelFor(m => m.SlurryPumpSum)@Html.TextBoxFor(m => m.SlurryPumpSum, new { readOnly = true })</td>
+   
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.Credit)@Html.TextBoxFor(m => m.Credit, new { readOnly = true })</td>
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 4, 58, new { @class = "text" })</td>
+    </tr>
+</table>
+
+}
+</div>
+
+@*编辑*@
+<div id="pumpworkeditform" class="mvcform" style=" display:none;">
+@using (Html.BeginForm())
+{ 
+    @Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.TextBoxFor(m => m.ID, new { @class = "text", style = "display:none;" })
+        @Html.LabelFor(m => m.Customer.CustName)@Html.TextBoxFor(m => m.CustomerID, new { @class = "text", id = "CustomerID_EDIT", disabled = true })
+        </td>
+        <td>@Html.LabelFor(m => m.Saler)@Html.EditorFor(m => m.Saler)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Contract.ContractName)@Html.TextBoxFor(m => m.ContractID, new { @class = "text", id = "ContractID_EDIT", style = "width:137px;", disabled = true })</td>
+ 
+        <td>@Html.LabelFor(m => m.PumpDate)@Html.EditorFor(m => m.PumpDate, "DateTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd"), id = "PumpDate_EDIT" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.TaskID)@Html.TextBoxFor(m => m.TaskID, new { @class = "text", id = "TaskID_EDIT", style = "width:137px;", readOnly = true })</td>
+ 
+        <td>@Html.LabelFor(m => m.PumpType)@Html.DicEidtor("PumpType","PumpType_EDIT", DicEnum.PumpType)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, Enumerable.Empty<SelectListItem>(), new { @class = "text", style = "width:137px;", id ="CarID_EDIT"})</td>
+ 
+        <td>@Html.LabelFor(m => m.Driver)@Html.EditorFor(m => m.Driver)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.CustNum)@Html.TextBoxFor(m => m.CustNum, new { id = "CustNum_EDIT", Value = 0 })</td>
+ 
+        <td>@Html.LabelFor(m => m.PumpNum)@Html.TextBoxFor(m => m.PumpNum, new { id = "PumpNum_EDIT", Value = 0 })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PumpPrice)@Html.TextBoxFor(m => m.PumpPrice, new { id = "PumpPrice_EDIT" })</td>
+ 
+        <td>@Html.LabelFor(m => m.PumpSum)@Html.TextBoxFor(m => m.PumpSum, new { id = "PumpSum_EDIT", readOnly = true })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.BeginDate)@Html.EditorFor(m => m.BeginDate, "DateTime", new { id = "BeginDate_EDIT" })</td>
+ 
+        <td>@Html.LabelFor(m => m.EndDate)@Html.EditorFor(m => m.EndDate, "DateTime", new { id = "EndDate_EDIT" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.SlurryCustNum)@Html.TextBoxFor(m => m.SlurryCustNum, new { id = "SlurryCustNum_EDIT", Value = 0 })</td>
+ 
+        <td>@Html.LabelFor(m => m.SlurryPumpNum)@Html.TextBoxFor(m => m.SlurryPumpNum, new { id = "SlurryPumpNum_EDIT" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.SlurryPumpPrice)@Html.TextBoxFor(m => m.SlurryPumpPrice, new { id = "SlurryPumpPrice_EDIT" })</td>
+ 
+        <td>@Html.LabelFor(m => m.SlurryPumpSum)@Html.TextBoxFor(m => m.SlurryPumpSum, new { id = "SlurryPumpSum_EDIT", readOnly = true })</td>
+   
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.Credit)@Html.TextBoxFor(m => m.Credit, new { id = "Credit_EDIT", readOnly = true })</td>
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 4, 58, new { @class = "text" })</td>
+    </tr>
+</table>
+
+}
+</div>

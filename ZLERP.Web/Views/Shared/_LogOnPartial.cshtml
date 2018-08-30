@@ -1,0 +1,16 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <text>欢迎您： <b class="planclss" style="text-decoration: underline; cursor: pointer;"></b>
+    <b class="username" title="点击修改基本信息" style="text-decoration: underline; cursor: pointer;color:Red;">@User.UserName()</b>
+    <b class="refreshCache" title="刷新缓存" style="text-decoration: underline; cursor: pointer;">刷新缓存</b>
+    <b class="userpwd" title="修改密码" style="text-decoration: underline; cursor: pointer;">修改密码</b>
+    <b class="help" title="帮助" style="text-decoration: underline; cursor: pointer;">帮助</b>
+    <b class="zt" title="切换帐套" style="text-decoration: underline; cursor: pointer;">切换帐套</b>
+    <b class="changeThemes" title="切换皮肤" style="text-decoration: underline; cursor: pointer;">切换皮肤</b>
+   
+    [ @Html.ActionLink("退出", "LogOff", "Account") ]</text>
+}
+else
+{
+    @:[ @Html.ActionLink("登录", "LogOn", "Account") ]
+}

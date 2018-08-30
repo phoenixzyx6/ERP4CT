@@ -1,0 +1,552 @@
+﻿@model ZLERP.Model.Lab_Record 
+@section HeaderSection{
+
+<script src="@Url.Content("~/Scripts/Views/Lab_Record/Lab_AIR2.js")" type="text/javascript" language="javascript"> </script>
+    
+    <script type="text/javascript">
+
+        $(function () {
+            lab_recordIndexInit('@Url.Action("Find")');
+        });
+
+        //打印原始记录
+        function printYsjl() {
+            var reportid = $("#Lab_Air2Origin_ID").val();
+            window.open("/Reports/Lab/R720402.aspx?reportid=" + reportid, 'top');
+        }
+
+        //打印检测结果
+        function tz() {
+            //window.location.href = "/Reports/Lab/R720201.aspx"
+            var reportid = $("#Lab_Air2Report_ID").val();
+            window.open("/Reports/Lab/R720401.aspx?reportid=" + reportid, 'top');
+        }
+
+        //公共调用方法
+        function Merger(gridName, CellName) {
+            //得到显示到界面的id集合
+            var mya = $("#" + gridName + "").getDataIDs();
+            //当前显示多少条
+            var length = mya.length;
+            for (var i = 0; i < length; i++) {
+                //从上到下获取一条信息
+                var before = $("#" + gridName + "").jqGrid('getRowData', mya[i]);
+                //定义合并行数
+                var rowSpanTaxCount = 1;
+                for (j = i + 1; j <= length; j++) {
+                    //和上边的信息对比 如果值一样就合并行数+1 然后设置rowspan 让当前单元格隐藏
+                    var end = $("#" + gridName + "").jqGrid('getRowData', mya[j]);
+                    if (before[CellName] == end[CellName]) {
+                        rowSpanTaxCount++;
+                        $("#" + gridName + "").setCell(mya[j], CellName, '', { display: 'none' });
+                    } else {
+                        rowSpanTaxCount = 1;
+                        break;
+                    }
+                    $("#" + CellName + "" + mya[i] + "").attr("rowspan", rowSpanTaxCount);
+                }
+            }
+        }
+
+    </script>
+    
+}
+
+<div style="float: left; width: 76%">
+    <div id="MyJqGrid">
+    </div>
+</div>
+<div style="float: right; width: 23%">
+    <div id="AirJqGrid">
+    </div>
+    <div id="Air2OriginJqGrid"></div>
+</div>
+
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    @Html.HiddenFor(m => m.ID)
+    <tr>
+       <td>@Html.LabelFor(m => m.ShowpeieNo)@Html.EditorFor(m => m.ShowpeieNo)</td>
+       <td>@Html.LabelFor(m => m.Spec)@Html.EditorFor(m => m.Spec)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Carno)@Html.EditorFor(m=>m.Carno)</td>
+        <td>@Html.LabelFor(m=>m.Date)@Html.EditorFor(m => m.Date, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Siloid)@Html.EditorFor(m => m.Siloid)</td>
+        <td>@Html.LabelFor(m => m.Stuffid)@Html.AutoComplete("Stuffid", "StuffName", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True")</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Supplyid)@Html.AutoComplete("Supplyid", "SupplyName", "Combo", "SupplyInfo", "ID", "ShortName", "SupplyName", "supplykind in ('Su1','Su5') and IsUsed =1 ", null)</td>
+        <td>@Html.LabelFor(m => m.StartDate)@Html.EditorFor(m => m.StartDate, "DateTimeWithTime")</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.EndDate)@Html.EditorFor(m => m.EndDate, "DateTimeWithTime")</td>
+        <td>@Html.LabelFor(m => m.IsWhole)@Html.CheckBoxFor(m => m.IsWhole)</td>
+    </tr>
+    <tr>       
+        <td>@Html.LabelFor(m => m.Weight)@Html.EditorFor(m => m.Weight)</td>
+        <td>@Html.LabelFor(m => m.SumWeight)@Html.EditorFor(m => m.SumWeight)</td>
+    </tr>
+    <tr> 
+        
+        <td>@Html.LabelFor(m => m.InMan)@Html.EditorFor(m => m.InMan)</td>
+        <td>@Html.LabelFor(m => m.Remark)@Html.EditorFor(m => m.Remark)</td>
+    </tr>
+</table>
+
+}
+</div>
+
+
+<div id="AirFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        
+        <table class="mvcform">
+        
+            <tr>
+                <td>@Html.LabelFor(m => m.Lab_Air2Report.Date)@Html.EditorFor(m => m.Lab_Air2Report.Date)
+                </td>
+                <td>@Html.LabelFor(m => m.Lab_Air2Report.ReportDate)@Html.EditorFor(m => m.Lab_Air2Report.ReportDate)
+                </td>
+                <td>@Html.Label("报告编号")@Html.TextBoxFor(m => m.Lab_Air2Report.ID, new { @readonly = "readonly", @style = "background:#CCCCCC;" })
+                </td>
+            </tr>
+            <tr>
+                @*<td>@Html.LabelFor(m => m.Lab_Air2Report.DependInfoID)@Html.fixedDropDownListFor(m => m.StuffID, (IEnumerable<SelectListItem>)ViewBag.AIRStuff)
+                </td>*@
+                <td colspan='2'>@Html.LabelFor(m => m.Lab_Air2Report.DependInfoID)@Html.DropDownListFor(m => m.Lab_Air2Report.DependInfoID, (IEnumerable<SelectListItem>)ViewBag.DependInfoList) 
+                </td>
+
+                <td>@Html.LabelFor(m => m.Lab_Air2Report.Unit)@Html.EditorFor(m => m.Lab_Air2Report.Unit)
+                </td>
+            </tr>
+
+            <tr>
+                  <td colspan="3">
+                    <table width="650" border="1">
+                         <tr>
+                             <td>
+                                 生产厂家
+                             </td>
+                             <td  colspan="2">
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.SupplyName, new { @readonly = "readonly", @style = "background:#CCCCCC;" })
+                             </td>
+                             <td colspan='2'>
+                                 样品级别
+                             </td>
+                             <td colspan='2'>
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.Grade, new { @readonly = "readonly", @style = "background:#CCCCCC;" })
+                             </td>
+                             
+                         </tr>
+                         <tr>
+                             <td>
+                                 出厂日期
+                             </td>
+                             <td  colspan="2">
+                                 @Html.EditorFor(m => m.Lab_Air2Report.GoDate)
+                             </td>
+                             <td>
+                                 样品编号
+                             </td>
+                             <td>
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.ShowpeieNo, new { @readonly = "readonly", @style = "background:#CCCCCC;" })
+                             </td>
+                             <td>
+                                 取样基数(吨)
+                             </td>
+                             <td  colspan="2">
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.Radix, new { style = "width:50px" })
+                             </td>
+                         </tr>
+                         <tr>
+                             <td  rowspan="2">
+                                 检测参数
+                             </td>
+                             <td  colspan="3" style="text-align: center;">
+                                 技术指标
+                             </td>
+                             <td  rowspan="2">
+                                 检测结果
+                             </td>
+                              <td  colspan="2" rowspan="2">
+                                 单项结论
+                             </td>
+                         </tr>
+                         <tr>
+                             <td>
+                                 S105
+                             </td>
+                             <td>
+                                 S95
+                             </td>
+                             <td>
+                                 S75
+                             </td>
+                             
+                         </tr>
+                         <tr>
+                             <td>
+                                密度(g/m3)
+                             </td>
+                             <td colspan='3'>
+                                 ≥2.8
+                             </td>
+                             
+                             <td>
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.DensityResult, new { @readonly = "readonly", @style = "background:#CCCCCC;" })
+                             </td>
+                             <td colspan="2">
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.DensityConclusion)
+                             </td>
+                         </tr>
+                         <tr>
+                             <td>
+                                 比表面积(㎡/kg) 
+                             </td>
+                             <td>
+                                 ≥500
+                             </td>
+                             <td>
+                                 ≥400
+                             </td>
+                             <td>
+                                 ≥300
+                             </td >
+                             <td>
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.SpecificResult, new { @readonly = "readonly", @style = "background:#CCCCCC;" })
+                             </td>
+                             <td colspan="2">
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.SpecificConclusion)
+                             </td>
+                         </tr>
+                          <tr>
+                             <td >
+                                活性指数（%）7d
+                             </td>
+                             <td>
+                                 ≥95
+                             </td>
+                             <td>
+                                 ≥75
+                             </td>
+                             <td>
+                                 ≥55
+                             </td >
+                             <td>
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.Active7dResult, new { @readonly = "readonly", @style = "background:#CCCCCC;" })
+                             </td>
+                             <td  colspan="2">
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.Active7dConclusion)
+                             </td>
+                         </tr>
+                         <tr>
+                             <td >
+                                活性指数（%）28d
+                             </td>
+                             <td>
+                                 ≥105
+                             </td>
+                             <td>
+                                 ≥95
+                             </td>
+                             <td>
+                                 ≥75
+                             </td >
+                             <td>
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.Active28dResult, new { @readonly = "readonly", @style = "background:#CCCCCC;" })
+                             </td>
+                             <td  colspan="2">
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.Active28dConclusion)
+                             </td>
+                         </tr>
+                         <tr>
+                             <td>
+                                流动度比(%) 
+                             </td>
+                             <td colspan='3'>
+                                 ≥95
+                             </td>
+                             
+                             <td>
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.FluidityResult, new { @readonly = "readonly", @style = "background:#CCCCCC;" })
+                             </td>
+                             <td colspan="2">
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.FluidityConclusion)
+                             </td>
+                         </tr>
+
+                         
+                          <tr>
+                             <td >
+                                 含水量(%)
+                             </td>
+                             <td colspan='3'>≤1.0</td>
+                             <td>
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.WaterResult, new { @readonly = "readonly", @style = "background:#CCCCCC;" })
+                             </td>
+                             <td  colspan="2">
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.WaterConclusion)
+                             </td>
+                         </tr>
+                                   
+                         <tr>
+                             <td >
+                                检验结论
+                             </td>
+                             <td colspan='3'>@Html.TextAreaFor(m => m.Lab_Air2Report.Conclusion ,3, 35,"")</td>
+                             <td>
+                                 备注
+                             </td>
+                             <td  colspan="2">
+                                 @Html.TextBoxFor(m => m.Lab_Air2Report.Remark)
+                             </td>
+                         </tr>
+                    </table>
+                  </td>
+            </tr>
+           
+        </table>
+        <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false" onclick="tz()">
+        <span class="ui-button-text">打印</span></button>
+    }
+</div>
+
+<div id="Air2OriginFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+
+<table class="mvcform"> 
+    <tr>
+      <td>
+         <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false" onclick="printYsjl()">
+         <span class="ui-button-text">打印</span></button>
+      </td>
+      <td align="right" style="border:0px;">检测编号：@Html.TextBoxFor(m => m.Lab_Air2Origin.ID, new { @readonly = "readonly", @style = "background:#CCCCCC;" })
+      </td>
+      
+    </tr>
+    <tr>
+        <td colspan="8">
+            <table width="650" border="1" >
+               <tr>
+                  <td rowspan="5">样品信息</td>
+               </tr>
+               <tr>
+                  <td>@Html.LabelFor(m => m.Lab_Air2Origin.ShowpeieNo)</td>
+                  <td colspan="6">@Html.TextBoxFor(m => m.Lab_Air2Origin.ShowpeieNo, new { @readonly = "readonly", @style = "background:#CCCCCC;" })</td>
+               </tr>
+               <tr>
+                  <td>@Html.LabelFor(m => m.Lab_Air2Origin.SupplyName)</td>
+                  <td colspan="6">@Html.TextBoxFor(m => m.Lab_Air2Origin.SupplyName, new { @readonly = "readonly", @style = "background:#CCCCCC;" })</td>
+               </tr>
+                <tr>
+                  <td>@Html.LabelFor(m => m.Lab_Air2Origin.Grade)</td>
+                  <td colspan="6">@Html.TextBoxFor(m => m.Lab_Air2Origin.Grade, new { @readonly = "readonly", @style = "background:#CCCCCC;" })</td>
+               </tr>
+               <tr>
+                  <td>@Html.LabelFor(m => m.Lab_Air2Origin.Description)</td>
+                  <td colspan="6">@Html.EditorFor(m => m.Lab_Air2Origin.Description)</td>
+               </tr>
+
+               <tr>
+                  <td rowspan="24">检测信息</td>
+               </tr>
+               <tr>
+                  <td>@Html.LabelFor(m => m.Lab_Air2Origin.DependInfoID)</td>
+                  <td colspan='6'>@Html.DropDownListFor(m => m.Lab_Air2Origin.DependInfoID, (IEnumerable<SelectListItem>)ViewBag.DependInfoList) 
+                </td>
+               </tr>
+                <tr>
+                  <td>@Html.LabelFor(m => m.Lab_Air2Origin.SuccessDate)</td>
+                  <td>@Html.EditorFor(m => m.Lab_Air2Origin.SuccessDate)</td>
+                  <td colspan="2">@Html.LabelFor(m => m.Lab_Air2Origin.SuccessTemperature)</td>
+                  <td>@Html.EditorFor(m => m.Lab_Air2Origin.SuccessTemperature)</td>
+                  <td>@Html.LabelFor(m => m.Lab_Air2Origin.SuccessWet)</td>
+                  <td>@Html.EditorFor(m => m.Lab_Air2Origin.SuccessWet)</td>
+               </tr>
+               <tr>
+                  <td style="text-align:center;">检测项目</td>
+                  <td colspan="6" style="text-align:center;">检测数据(或结果)</td>
+               </tr>
+               <tr>
+                  <td style="text-align:center;">密度</td>
+                  <td colspan='8'>
+                      <div id="Air2DensityJqGrid"></div>
+                  </td>
+               </tr>
+
+               <tr>
+                  <td rowspan="6" style="text-align:center;">比表面积</td>
+               </tr>
+               <tr>
+                  <td>温度</td>
+                  <td>@Html.TextBoxFor(m => m.Lab_Air2Origin.SpecificTemperature)</td>
+                  <td colspan='2'>湿度（%）</td>
+                  <td>@Html.TextBoxFor(m => m.Lab_Air2Origin.SpecificWet)</td>
+                  <td rowspan='3'>比表面积平均值     (m2/kg)</td>
+               </tr>
+               <tr>
+                  <td>容桶体积(cm3)</td>
+                  <td>@Html.TextBoxFor(m => m.Lab_Air2Origin.SpecificBarrelVolume)</td>
+                  <td colspan='2'>矿粉密度(g/cm3)</td>
+                  <td>@Html.TextBoxFor(m => m.Lab_Air2Origin.SpecificPowderDensity)</td>
+               </tr>
+               <tr>
+                  <td>K值</td>
+                  <td>@Html.TextBoxFor(m => m.Lab_Air2Origin.SpecificK)</td>
+                  <td colspan='2'>空隙率</td>
+                  <td>@Html.TextBoxFor(m => m.Lab_Air2Origin.SpecificVoidage)</td>
+               </tr>
+               <tr>
+                  <td rowspan='2'>矿粉质量(g)</td>
+                  <td>@Html.TextBoxFor(m => m.Lab_Air2Origin.SpecificQuality1)</td>
+                  <td rowspan='2' colspan='2'>比表面积(m2/kg)</td>
+                  <td>@Html.TextBoxFor(m => m.Lab_Air2Origin.SpecificArea1)</td>
+                  <td rowspan='2'>@Html.TextBoxFor(m => m.Lab_Air2Origin.SpecificArea, new { @readonly = "readonly", @style = "background:#CCCCCC;" })</td>
+               </tr>
+
+               <tr>                 
+                  <td>@Html.TextBoxFor(m => m.Lab_Air2Origin.SpecificQuality2)</td>
+                  <td>@Html.TextBoxFor(m => m.Lab_Air2Origin.SpecificArea2)</td>
+               </tr>
+               
+               
+               <tr>
+                  <td rowspan="3" style="text-align:center;">流动度比</td>
+               </tr>
+               <tr>
+                  <td colspan='2' style="white-space: nowrap;">@Html.LabelFor(m => m.Lab_Air2Origin.ContrastMortar)</td>
+                  <td colspan='2' style="white-space: nowrap;">@Html.LabelFor(m => m.Lab_Air2Origin.TestMortar)</td>
+                  <td colspan='2' style="white-space: nowrap;" >流动度比（%）</td>
+               </tr>
+               <tr>
+                  <td colspan='2' style="white-space: nowrap;">@Html.EditorFor(m => m.Lab_Air2Origin.ContrastMortar)</td>
+                  <td colspan='2' style="white-space: nowrap;">@Html.EditorFor(m => m.Lab_Air2Origin.TestMortar)</td>
+                  <td colspan='2' style="white-space: nowrap;" >@Html.TextBoxFor(m => m.Lab_Air2Origin.FluidityRatio, new { @readonly = "readonly", @style = "background:#CCCCCC;" })</td>
+               </tr>
+
+               <tr>
+                  <td rowspan="3" style="text-align:center;">含水量</td>
+               </tr>
+               <tr>
+                  <td colspan='2' style="white-space: nowrap;">@Html.LabelFor(m => m.Lab_Air2Origin.DryBeforeQuality)</td>
+                  <td colspan='2' style="white-space: nowrap;">@Html.LabelFor(m => m.Lab_Air2Origin.DryAfterQuality)</td>
+                  <td colspan='2' style="white-space: nowrap;" >含水量（%）</td>
+               </tr>
+               <tr>
+                  <td colspan='2' style="white-space: nowrap;">@Html.EditorFor(m => m.Lab_Air2Origin.DryBeforeQuality)</td>
+                  <td colspan='2' style="white-space: nowrap;">@Html.EditorFor(m => m.Lab_Air2Origin.DryAfterQuality)</td>
+                  <td colspan='2' style="white-space: nowrap;" >@Html.TextBoxFor(m => m.Lab_Air2Origin.ContentWater, new { @readonly = "readonly", @style = "background:#CCCCCC;" })</td>
+               </tr>            
+
+                <tr>
+                  <td style="text-align:center;">活性指数</td>
+                  <td colspan='8'>
+                      <div id="ActiveJqGrid"></div>
+                  </td>
+               </tr>
+
+                <tr>
+                  <td>主要仪器设备名称</td>
+                  <td colspan="3">□酸度计   □水泥胶砂搅拌机     □圆锥试模      □烘箱
+□玻璃板   □水泥净浆搅拌机     □分析天平      □天平
+□干燥器   □钢直尺             □其他</td>
+                  <td  style="white-space: nowrap;">@Html.LabelFor(m => m.Lab_Air2Origin.MachineRun)</td>
+                  <td colspan="3"  style="white-space: nowrap;">@Html.EditorFor(m => m.Lab_Air2Origin.MachineRun)</td>
+               </tr>
+               <tr>
+                  <td>备注</td>
+                  <td colspan='7'>@Html.TextBoxFor(m => m.Lab_Air2Origin.Remark, new { @style = "width:700px;" })</td>
+               </tr>
+            </table>
+        </td>
+    </tr>
+    
+    <tr> 
+        <td>@Html.HiddenFor(m => m.Lab_Air2Origin.Lab_RecordID)</td>
+   
+    </tr>
+    
+</table>
+    
+}
+</div>
+
+@*密度*@
+<div id="Air2DensityDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    @Html.HiddenFor(m => m.Lab_BurntInfo.ID)
+    <tr>
+       <td  colspan='3' align="right">检测编号</td>
+       <td align="right" style="border:0px;"> @Html.TextBoxFor(m => m.Lab_Air2Density.Lab_Air2OriginId, new { @readonly = "readonly", @style = "background:#CCCCCC;" })
+      </td>
+    </tr>
+    <tr>       
+        <td colspan='3' align="right">样品号</td>
+        <td>@Html.TextBoxFor(m => m.Lab_Air2Density.Sort)</td>
+    </tr>
+    <tr> 
+        <td colspan='3' align="right">@Html.LabelFor(m => m.Lab_Air2Density.OreQuality)</td>
+        <td>@Html.TextBoxFor(m => m.Lab_Air2Density.OreQuality)</td>
+    </tr>
+    <tr> 
+        <td colspan='3' align="right">@Html.LabelFor(m => m.Lab_Air2Density.InitialVolume)</td>
+        <td>@Html.TextBoxFor(m => m.Lab_Air2Density.InitialVolume)</td>
+    </tr>
+    <tr> 
+        <td colspan='3'  align="right">@Html.LabelFor(m => m.Lab_Air2Density.ASlagVolume)</td>
+        <td>@Html.TextBoxFor(m => m.Lab_Air2Density.ASlagVolume)</td>
+    </tr>
+    <tr> 
+        <td colspan='3'  align="right">@Html.LabelFor(m => m.Lab_Air2Density.BKeroseneVolume)</td>
+        <td>@Html.TextBoxFor(m => m.Lab_Air2Density.BKeroseneVolume)</td>
+    </tr>
+</table>
+
+}
+</div>
+
+
+@*活性指数*@
+<div id="ActiveInfoDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    @Html.HiddenFor(m => m.Lab_Air2ActiveInfo.ID)
+    <tr>
+       <td>检测编号 @Html.TextBoxFor(m => m.Lab_Air2ActiveInfo.Lab_Air2OriginId, new { @readonly = "readonly", @style = "background:#CCCCCC;" })</td>
+    </tr>
+    <tr>       
+        <td>@Html.LabelFor(m => m.Lab_Air2ActiveInfo.D7_1)@Html.TextBoxFor(m => m.Lab_Air2ActiveInfo.D7_1)</td>
+        <td>@Html.LabelFor(m => m.Lab_Air2ActiveInfo.D7_2)@Html.TextBoxFor(m => m.Lab_Air2ActiveInfo.D7_2)</td>
+        <td style="display:none">@Html.LabelFor(m => m.Lab_Air2ActiveInfo.D7_3)@Html.TextBoxFor(m => m.Lab_Air2ActiveInfo.D7_3)</td>
+    </tr>
+    <tr>       
+        <td>@Html.LabelFor(m => m.Lab_Air2ActiveInfo.D28_1)@Html.TextBoxFor(m => m.Lab_Air2ActiveInfo.D28_1)</td>
+        <td>@Html.LabelFor(m => m.Lab_Air2ActiveInfo.D28_2)@Html.TextBoxFor(m => m.Lab_Air2ActiveInfo.D28_2)</td>
+        <td style="display:none">@Html.LabelFor(m => m.Lab_Air2ActiveInfo.D28_3)@Html.TextBoxFor(m => m.Lab_Air2ActiveInfo.D28_3)</td>
+    </tr>
+    
+    <tr>       
+        <td>@Html.LabelFor(m => m.Lab_Air2ActiveInfo.S7_1)@Html.TextBoxFor(m => m.Lab_Air2ActiveInfo.S7_1)</td>
+        <td>@Html.LabelFor(m => m.Lab_Air2ActiveInfo.S7_2)@Html.TextBoxFor(m => m.Lab_Air2ActiveInfo.S7_2)</td>
+        <td style="display:none">@Html.LabelFor(m => m.Lab_Air2ActiveInfo.S7_3)@Html.TextBoxFor(m => m.Lab_Air2ActiveInfo.S7_3)</td>
+    </tr>
+    <tr>       
+        <td>@Html.LabelFor(m => m.Lab_Air2ActiveInfo.S28_1)@Html.TextBoxFor(m => m.Lab_Air2ActiveInfo.S28_1)</td>
+        <td>@Html.LabelFor(m => m.Lab_Air2ActiveInfo.S28_2)@Html.TextBoxFor(m => m.Lab_Air2ActiveInfo.S28_2)</td>
+        <td style="display:none">@Html.LabelFor(m => m.Lab_Air2ActiveInfo.S28_3)@Html.TextBoxFor(m => m.Lab_Air2ActiveInfo.S28_3)</td>
+    </tr>
+
+</table>
+
+}
+</div>

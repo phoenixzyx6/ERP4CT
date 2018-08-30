@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.Department, ZLERP.Model" table="Department" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="DepartmentID">
+      <generator class="native" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="DepartmentName" column="DepartmentName" />
+    <property name="ParentID" column="ParentID" />
+    <property name="ManagerID" column="ManagerID" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="CompanyID" column="CompanyID" />
+    <property name="IsLeaf" column="IsLeaf" />
+    <property name="DptLevel" column="DptLevel" />
+    
+    <many-to-one name="ParentDepartment" column="ParentID" not-found="ignore" class="Department" update="false" insert="false" />
+    <many-to-one name="Company"  column="CompanyID" class="Company" update="false" insert="false" />
+    <!--<bag name="Users" lazy="true" cascade="all-delete-orphan" inverse="true" >
+		    <key column="DepartmentID"></key>
+		    <one-to-many class="User"></one-to-many>
+	    </bag>-->
+    <many-to-one name="Manager" update="false" insert="false" not-found="ignore" column="ManagerID" class="User" />
+    <bag name="Equipments" lazy="true" batch-size="30" inverse="true" >
+      <key column="DepartmentID"></key>
+      <one-to-many class="Equipment"></one-to-many>
+    </bag>
+    <bag name="MntZls" lazy="true" batch-size="30" inverse="true" >
+      <key column="DepartmentID"></key>
+      <one-to-many class="MntZl"></one-to-many>
+    </bag>
+    <bag name="EquipMtLyItems" lazy="true" batch-size="30" inverse="true" >
+      <key column="DepartmentID"></key>
+      <one-to-many class="EquipMtLyItem"></one-to-many>
+    </bag>
+    <bag name="EquipMtLyReturnItems" lazy="true" batch-size="30" inverse="true" >
+      <key column="DepartmentID"></key>
+      <one-to-many class="EquipMtLyReturnItem"></one-to-many>
+    </bag>
+    <bag name="EquipTermlyMtItems" lazy="true" batch-size="30" inverse="true" >
+      <key column="DepartmentID"></key>
+      <one-to-many class="EquipTermlyMtItem"></one-to-many>
+    </bag>
+  </class>
+
+</hibernate-mapping>

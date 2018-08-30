@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.StuffInfo, ZLERP.Model" table="StuffInfo" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="StuffID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="StuffName" column="StuffName" />
+    <property name="StuffShortName" column="StuffShortName" />
+    <property name="RootIn" column="RootIn" />
+    <property name="Spec" column="Spec" />
+    <property name="Sizex" column="Sizex" />
+    <property name="SWConstantX" column="SWConstantX" />
+    <property name="SWConstantY" column="SWConstantY" />
+    <property name="SopRate" column="SopRate" />
+    <property name="Chlorin" column="Chlorin" />
+    <property name="Alkali" column="Alkali" />
+    <property name="Proportion" column="Proportion" />
+    <property name="Price" column="Price" />
+    <property name="Inventory" column="Inventory" />
+    <property name="StuffTypeID" column="StuffTypeID" />
+    <property name="MinWarmContent" column="MinWarmContent" />
+    <property name="MaxWarmContent" column="MaxWarmContent" />
+    <property name="IsUsed" column="IsUsed" />
+    <property name="IsMetage" column="IsMetage" />
+    <property name="BrightRate" column="BrightRate" />
+    <property name="DarkRate" column="DarkRate" />
+    <property name="TestType" column="TestType" />
+    <property name="OrderNum" column="OrderNum" />
+    <!--<property name="StuffID" column="StuffID" />-->
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <bag name="Silos" lazy="true" inverse="true" batch-size="30" >
+      <key column="StuffID"></key>
+      <one-to-many class="Silo"></one-to-many>
+    </bag>
+    <bag name="StuffIns" lazy="true" inverse="true" batch-size="30">
+      <key column="StuffID"></key>
+      <one-to-many class="StuffIn"></one-to-many>
+    </bag>
+    <bag name="CustMixpropItems" lazy="true" inverse="true" batch-size="30">
+      <key column="StuffID"></key>
+      <one-to-many class="CustMixpropItem"></one-to-many>
+    </bag>
+    <property name="SupplyID" column="SupplyID" />
+    <many-to-one name="SupplyInfo" column="SupplyID" class="SupplyInfo" update="false" insert="false"/>
+    <bag name="StockPacts" lazy="true" inverse="true" batch-size="30">
+      <key column="StuffID"></key>
+      <one-to-many class="StockPact"></one-to-many>
+    </bag>
+    <bag name="StockPlans" lazy="true" inverse="true" batch-size="30">
+      <key column="StuffID"></key>
+      <one-to-many class="StockPlan"></one-to-many>
+    </bag>
+    <bag name="StuffPrices" lazy="true" inverse="true" batch-size="30">
+      <key column="StuffID"></key>
+      <one-to-many class="StuffPrice"></one-to-many>
+    </bag>
+    <bag name="ProductRecordItems" lazy="true" inverse="true" batch-size="30">
+      <key column="StuffID"></key>
+      <one-to-many class="ProductRecordItem"></one-to-many>
+    </bag>
+    <bag name="CEExams" lazy="true" inverse="true" batch-size="30">
+      <key column="StuffID"></key>
+      <one-to-many class="CEExam"></one-to-many>
+    </bag>
+    <bag name="FAExams" lazy="true"  inverse="true" batch-size="30">
+      <key column="StuffID"></key>
+      <one-to-many class="FAExam"></one-to-many>
+    </bag>
+    <bag name="CAExams" lazy="true"  inverse="true" batch-size="30">
+      <key column="StuffID"></key>
+      <one-to-many class="CAExam"></one-to-many>
+    </bag>
+    <bag name="AIR2Exams" lazy="true"   inverse="true" batch-size="30">
+      <key column="StuffID"></key>
+      <one-to-many class="AIR2Exam"></one-to-many>
+    </bag>
+    <bag name="AIR1Exams" lazy="true"   inverse="true" batch-size="30">
+      <key column="StuffID"></key>
+      <one-to-many class="AIR1Exam"></one-to-many>
+    </bag>
+    <bag name="ADMExams" lazy="true"   inverse="true" batch-size="30">
+      <key column="StuffID"></key>
+      <one-to-many class="ADMExam"></one-to-many>
+    </bag>
+    <bag name="ADM2Exams" lazy="true"   inverse="true" batch-size="30">
+      <key column="StuffID"></key>
+      <one-to-many class="ADM2Exam"></one-to-many>
+    </bag>
+    <bag name="MonthAccounts"  lazy="true"   inverse="true" batch-size="30">
+      <key column="StuffId" />
+      <one-to-many class="MonthAccount" ></one-to-many>
+    
+    </bag>
+	  <bag name="StuffAccounts"  lazy="true"   inverse="true" batch-size="30">
+		  <key column="StuffId" />
+		  <one-to-many class="StuffAccount" ></one-to-many>
+
+	  </bag>
+    <many-to-one name="StuffType" fetch="join" column="StuffTypeID" class="StuffType" update="false" insert="false" />
+
+    <bag name="Lab_Records" lazy="true" cascade="all" inverse="true" >
+      <key column="Siloid"></key>
+      <one-to-many class="Lab_Record"></one-to-many>
+    </bag>
+  </class>
+</hibernate-mapping>

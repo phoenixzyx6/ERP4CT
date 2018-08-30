@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping namespace="ZLERP.Model" assembly="ZLERP.Model" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="ZLERP.Model.MonthAccount, ZLERP.Model" table="MonthAccount" lazy="true" >
+    <id name="Monthaccountid" column="MonthAccountId">
+      <generator class="identity" />
+    </id>
+    <property name="Month">
+      <column name="Month" sql-type="varchar" not-null="false" />
+    </property>
+    <property name="Begindate">
+      <column name="BeginDate" sql-type="datetime" not-null="false" />
+    </property>
+    <property name="Enddate">
+      <column name="EndDate" sql-type="datetime" not-null="false" />
+    </property>
+    <property name="Siloid">
+      <column name="SiloId" sql-type="varchar" not-null="false" />
+    </property>
+    <property name="Stuffid">
+      <column name="StuffId" sql-type="varchar" not-null="false" />
+    </property>
+    <property name="Currentcount">
+      <column name="CurrentCount" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="Currentamount">
+      <column name="CurrentAmount" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="Builder">
+      <column name="Builder" sql-type="varchar" not-null="false" />
+    </property>
+    <property name="Buildtime">
+      <column name="BuildTime" sql-type="datetime" not-null="false" />
+    </property>
+    <property name="Version">
+      <column name="Version" sql-type="int" not-null="false" />
+    </property>
+    <property name="Lifecycle">
+      <column name="Lifecycle" sql-type="int" not-null="false" />
+    </property>
+    <property name="Meno">
+      <column name="Meno" sql-type="varchar" not-null="false" />
+    </property>
+    <!--多对一关系-->
+    <many-to-one name="StuffInfo">
+      <column name="StuffId" sql-type="nvarchar" not-null="false" />
+    </many-to-one>
+    <many-to-one name="Silo">
+      <column name="SiloId" sql-type="nvarchar" not-null="false" />
+    </many-to-one>
+  </class>
+</hibernate-mapping>

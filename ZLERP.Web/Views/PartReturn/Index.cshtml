@@ -1,0 +1,41 @@
+﻿@model ZLERP.Model.PartReturn 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/PartReturn/PartReturn.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        var options = { storeUrl: '@Url.Action("Find")' };
+        $(function () {
+            partreturnIndexInit(options);
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    @Html.HiddenFor(m => m.ID)
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.ReturnDate)@Html.EditorFor(m => m.ReturnDate)</td>
+ 
+        <td>@Html.LabelFor(m => m.Recipientor)@Html.EditorFor(m => m.Recipientor)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.InvoiceNum)@Html.EditorFor(m => m.InvoiceNum)</td>
+ 
+        <td>@Html.LabelFor(m => m.OperateStatus)@Html.EditorFor(m => m.OperateStatus)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Purchaser)@Html.EditorFor(m => m.Purchaser)</td>
+ 
+        <td>@Html.LabelFor(m => m.Sender)@Html.EditorFor(m => m.Sender)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Remark)@Html.EditorFor(m => m.Remark)</td>
+        <td></td>
+    </tr>
+</table>
+}
+</div>

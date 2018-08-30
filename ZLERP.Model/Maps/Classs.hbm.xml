@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.Classs, ZLERP.Model" table="ClassS" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="ClassSID">
+      <generator class="assigned" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="ClassBID" column="ClassBID" />
+    <property name="ClassSName" column="ClassSName" />
+    <property name="ClassID" column="ClassID" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="ClassMID" column="ClassMID" />
+    <many-to-one name="ClassM" column="ClassMID" class="ClassM" update="false" insert="false"/>
+    <bag name="EquipMtLies" lazy="true" batch-size="30" inverse="true" >
+      <key column="ClassSID"></key>
+      <one-to-many class="EquipMtLy"></one-to-many>
+    </bag>
+    <bag name="EquipMtLyReturns" lazy="true" batch-size="30" inverse="true" >
+      <key column="ClassSID"></key>
+      <one-to-many class="EquipMtLyReturn"></one-to-many>
+    </bag>
+    <bag name="EquipTermlyMts" lazy="true" batch-size="30" inverse="true" >
+      <key column="ClassSID"></key>
+      <one-to-many class="EquipTermlyMt"></one-to-many>
+    </bag>
+    <bag name="MntZls" lazy="true" batch-size="30" inverse="true" >
+      <key column="ClassSID"></key>
+      <one-to-many class="MntZl"></one-to-many>
+    </bag>
+    <bag name="MntZlItems" lazy="true" batch-size="30" inverse="true" >
+      <key column="ClassSID"></key>
+      <one-to-many class="MntZlItem"></one-to-many>
+    </bag>
+  </class>
+</hibernate-mapping>

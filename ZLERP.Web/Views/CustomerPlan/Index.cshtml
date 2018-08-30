@@ -1,0 +1,97 @@
+﻿@model ZLERP.Model.CustomerPlan 
+@section HeaderSection{ 
+<script src="@Url.Content("~/Scripts/Views/CustomerPlan/CustomerPlan.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            customerplanIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                getUserUrl: '@Url.Action("Get", "User")',
+                tomorrowDate: '@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")'
+            });
+        });
+
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr>
+        <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })</td>
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.ContractID)@Html.AutoComplete("ContractID", "ContractName", "Combo", "CustomerPlan", "ID", "ContractName", "AuditStatus = 1 and ContractStatus!='3'", new { style = "width:320px" })</td>
+    </tr>
+   
+    <tr> 
+      <td colspan="2">@Html.LabelFor(m => m.ProjectName)@Html.DropDownListFor(m => m.ProjectName, Enumerable.Empty<SelectListItem>(), new { zlerp = "combobox", style="width:320px;" })</td>
+    </tr>
+    <tr><td colspan="2">@Html.LabelFor(m => m.ConstructUnit)@Html.TextBoxFor(m => m.ConstructUnit, new { style = "width:350px;" })</td>
+    </tr>
+    <tr><td>
+    @Html.LabelFor(m => m.ProjectAddr)@Html.TextBoxFor(m => m.ProjectAddr)
+    </td>
+    @*<td>@Html.LabelFor(m => m.SupplyUnit)@Html.DropDownListFor(m => m.SupplyUnit, (IEnumerable<SelectListItem>)ViewBag.SupplyUnit, new { style = "width:137px" })</td>*@
+    <td>
+       @Html.LabelFor(m => m.SupplyUnit)@Html.DicEditorFor(m => m.SupplyUnit, DicEnum.SupplyUnitSupplyUnit, new { style = "width:140px;" })
+    </td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.ConsPos)@Html.EditorFor(m => m.ConsPos)</td>
+   
+   
+        @*<td>@Html.LabelFor(m => m.ConStrength)@Html.DropDownListFor(m => m.ConStrength, (IEnumerable<SelectListItem>)ViewBag.ConStrength, new {@data_val_required = "砼强度 字段是必需的", data_val = "true", zlerp = "combobox" })</td>*@
+       <td>@Html.LabelFor(m => m.ConStrength)@Html.DropDownListFor(m => m.ConStrength, Enumerable.Empty<SelectListItem>(), new { @data_val_required = "砼强度 字段是必需的", data_val = "true", zlerp = "combobox" })</td>
+
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Slump)@Html.DicComboBoxFor(m => m.Slump, DicEnum.Slump, new { style = "width:80px;" })</td>
+        <td>
+        @Html.LabelFor(m => m.CastMode)@Html.DicComboBoxFor(m => m.CastMode, DicEnum.CastMode, new { style = "width:137px;" })
+        @*@Html.LabelFor(m => m.CastMode)@Html.DicEditorFor(m => m.CastMode, DicEnum.CastMode, new { style = "width:140px;" })*@
+        @*@Html.LabelFor(m => m.CastMode)@Html.DropDownListFor(m => m.CastMode, Enumerable.Empty<SelectListItem>(), "")*@
+        </td> 
+    </tr>
+    <tr>
+     <td>@Html.LabelFor(m => m.PlanCube)@Html.EditorFor(m => m.PlanCube)</td>
+        <td>@Html.LabelFor(m => m.NeedDate)@Html.DropDownListFor(m => m.NeedDate, (IEnumerable<SelectListItem>)ViewBag.NeedDateList, new { style = "width:80px;", zlerp = "combobox" })</td>
+       
+    </tr>
+    @*<tr>
+        <td>@Html.LabelFor(m => m.PiepLen)@Html.EditorFor(m => m.PiepLen)</td>
+        <td>@Html.LabelFor(m => m.PumpMan)@Html.DropDownListFor(m => m.PumpMan, (IEnumerable<SelectListItem>)ViewBag.PumpManList, new { style = "width:137px;" })</td>
+    </tr>*@
+    <tr> 
+         <td>@Html.LabelFor(m => m.LinkMan)@Html.DropDownListFor(m => m.LinkMan, (IEnumerable<SelectListItem>)ViewBag.LinkManList, new { zlerp = "combobox" })</td>
+
+        <td>@Html.LabelFor(m => m.PlanDate)@Html.EditorFor(m => m.PlanDate, "DateTime", new { defaultValue = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") })</td>
+        
+    </tr>
+    <tr> 
+         <td>@Html.LabelFor(m => m.Tel)@Html.EditorFor(m => m.Tel)</td>
+       <td>@Html.LabelFor(m => m.PumpName)@Html.DropDownListFor(m => m.PumpName, (SelectList)ViewBag.PumpList, "", new { style = "width:137px;" })</td>
+      
+  
+    </tr>
+     <tr>
+        <td>@Html.LabelFor(m => m.TaskID)@Html.DropDownListFor(m => m.TaskID, Enumerable.Empty<SelectListItem>(), new { style = "width:137px;" })</td>
+        <td>@Html.LabelFor(m => m.PumpMan)@Html.DropDownListFor(m => m.PumpMan, (IEnumerable<SelectListItem>)ViewBag.PumpManList, new { style = "width:137px;" })
+        </td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.RegionID)@Html.DropDownListFor(m => m.RegionID, (IEnumerable<SelectListItem>)ViewBag.Regions, new { style = "width:137px;" })</td>
+        <td>@Html.LabelFor(m => m.PiepLen)@Html.TextBoxFor(m => m.PiepLen)</td>
+    </tr>
+    <tr> 
+    
+        <td colspan='4'>@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, new { style = "width:350px;" })</td>
+  
+    </tr> 
+</table> 
+}
+</div>
+
+<script type="text/javascript">
+
+</script>

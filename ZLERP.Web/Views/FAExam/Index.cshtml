@@ -1,0 +1,187 @@
+﻿@model ZLERP.Model.FAExam 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/FAExam/FAExam.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            faexamIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("试验编号")@Html.EditorFor(m => m.ID)
+                </td>
+                
+                <td>@Html.LabelFor(m => m.StuffID)@Html.fixedDropDownListFor(m => m.StuffID, (IEnumerable<SelectListItem>)ViewBag.FAStuff)
+                </td>
+                <td>@Html.LabelFor(m => m.CarpGrade)@Html.DicEditorFor(m => m.CarpGrade, DicEnum.JP, "请选择", "请选择")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ExamTime)@Html.EditorFor(m => m.ExamTime)
+                </td>
+                <td>@Html.LabelFor(m => m.ReportTime)@Html.EditorFor(m => m.ReportTime)
+                </td>
+                <td>@Html.LabelFor(m => m.DeputyNum)@Html.EditorFor(m => m.DeputyNum)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ClayRate)@Html.EditorFor(m => m.ClayRate)
+                </td>
+                <td>@Html.LabelFor(m => m.ClayMete)@Html.EditorFor(m => m.ClayMete)
+                </td>
+                <td>@Html.LabelFor(m => m.SurDensity)@Html.EditorFor(m => m.SurDensity)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.StackDensity)@Html.EditorFor(m => m.StackDensity)
+                </td>
+                <td>@Html.LabelFor(m => m.TightDensity)@Html.EditorFor(m => m.TightDensity)
+                </td>
+                <td>@Html.LabelFor(m => m.RadioExamID)@Html.EditorFor(m => m.RadioExamID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ReportID)@Html.EditorFor(m => m.ReportID)
+                </td>
+                <td>@Html.LabelFor(m => m.Mesh)@Html.EditorFor(m => m.Mesh)
+                </td>
+                <td>@Html.LabelFor(m => m.DrinkRate)@Html.EditorFor(m => m.DrinkRate)
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="3" align="center">
+                    <h2>
+                        筛分析(mm)</h2>
+                </td>
+            </tr>
+            <tr>
+            <td colspan="3" align="center">
+                <table width="847" border="1">
+  <tr>
+    <td colspan="2">筛孔尺寸(mm)</td>
+    <td width="87">5.00</td>
+    <td width="94">2.50</td>
+    <td width="68">1.25</td>
+    <td width="67">0.63</td>
+    <td width="85">0.315</td>
+    <td width="106">0.160</td>
+    <td width="76">剩余量</td>
+  </tr>
+  <tr>
+    <td width="106">第一组</td>
+    <td width="100">筛余量g</td>
+    <td>@Html.TextBoxFor(m => m.GrainNum50, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.GrainNum25, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.GrainNum125, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.GrainNum063, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.GrainNum315, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.GrainNum160, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.SiftBelow, new { style = "width:80px" })</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>分计筛余%</td>    
+    <td>@Html.TextBoxFor(m => m.fjsy50_1, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.fjsy25_1, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.fjsy125_1, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.fjsy063_1, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.fjsy315_1, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.fjsy160_1, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.fjsy_1, new { style = "width:80px" })</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>累计筛余%</td>
+    <td>@Html.TextBoxFor(m => m.ljsy50_1, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.ljsy25_1, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.ljsy125_1, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.ljsy063_1, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.ljsy315_1, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.ljsy160_1, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.ljsy_1, new { style = "width:80px" })</td>
+  </tr>
+  <tr>
+    <td>第二组</td>
+    <td>筛余量g</td>
+    <td>@Html.TextBoxFor(m => m.syl50_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.syl25_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.syl125_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.syl063_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.syl315_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.syl160_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.syl_2, new { style = "width:80px" })</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>分计筛余%</td>
+    <td>@Html.TextBoxFor(m => m.fjsy50_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.fjsy25_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.fjsy125_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.fjsy063_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.fjsy315_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.fjsy160_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.fjsy_2, new { style = "width:80px" })</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>累计筛余%</td>
+    <td>@Html.TextBoxFor(m => m.ljsy50_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.ljsy25_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.ljsy125_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.ljsy063_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.ljsy315_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.ljsy160_2, new { style = "width:80px" })</td>
+    <td>@Html.TextBoxFor(m => m.ljsy_2, new { style = "width:80px" })</td>
+  </tr>
+</table>
+</td>
+            </tr>            
+            
+            <tr>
+                <td>@Html.LabelFor(m => m.WetSampWeight)@Html.EditorFor(m => m.WetSampWeight)
+                </td>
+                <td>@Html.LabelFor(m => m.DrySampWeight)@Html.EditorFor(m => m.DrySampWeight)
+                </td>
+                <td>@Html.LabelFor(m => m.WaRate)@Html.EditorFor(m => m.WaRate)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AvaRate)@Html.EditorFor(m => m.AvaRate)
+                </td>
+                <td>@Html.LabelFor(m => m.AvaTime)@Html.EditorFor(m => m.AvaTime)
+                </td>
+                <td>@Html.LabelFor(m => m.ExamGist)@Html.TextBox("ExamGist", Lang.Msg_ExamGistForFA)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.StandJudge)@Html.DicEditorFor(m => m.StandJudge, DicEnum.Judge, "请选择", "请选择")
+                </td>
+                <td>@Html.LabelFor(m => m.ConcessionJudge)@Html.DicEditorFor(m => m.ConcessionJudge, DicEnum.Judge, "请选择", "请选择")
+                </td>
+                <td>@Html.LabelFor(m => m.CommissionID)@Html.fixedDropDownListFor(m => m.CommissionID, (IEnumerable<SelectListItem>)ViewBag.Commission)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Assessor)@Html.EditorFor(m => m.Assessor)
+                </td>
+                <td>@Html.LabelFor(m => m.Principal)@Html.EditorFor(m => m.Principal)
+                </td>
+                <td>@Html.LabelFor(m => m.IsUse)@Html.CheckBoxFor(m => m.IsUse)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">@Html.LabelFor(m => m.ExamResult)@Html.TextArea("ExamResult", Lang.Msg_ExamResultForFA, 1, 90, new { })
+                </td>
+            </tr>
+            
+        </table>
+
+    }
+</div>

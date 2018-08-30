@@ -1,0 +1,122 @@
+﻿@*原材料基本信息*@
+
+@model ZLERP.Model.StuffInfo
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/StuffInfo.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            stuffInfoIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                TreeUrl: '@Url.Action("FindTree", "StuffType")'
+            });
+        });
+    </script>
+}
+
+@*<table width="100%">
+    <tbody>
+        <tr>
+            <td width="200" valign="top">
+                <div id="sysFuncs" class="ztree" style="overflow: scroll;height:100%;width:200px;">
+                </div>
+            </td>
+           <td >
+                <div id="MyJqGrid" style="float: left; width: 100%; overflow: auto;">
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>*@
+
+
+<div id="MyJqGrid">
+</div>
+
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.StuffName)@Html.EditorFor(m => m.StuffName)
+                </td>
+                <td>@Html.LabelFor(m => m.StuffShortName)@Html.EditorFor(m => m.StuffShortName)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.SupplyID)@Html.AutoComplete("SupplyID", "SupplyName", "ComboByKey", "SupplyInfo", "ID","ShortName", "SupplyName", "SupplyKind in('Su1','Su2','Su5') AND IsUsed=1",null)
+                </td>
+                <td>@Html.LabelFor(m => m.StuffTypeID)@Html.fixedDropDownListFor(m => m.StuffTypeID, (IEnumerable<SelectListItem>)ViewBag.StuffType)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.RootIn)@Html.EditorFor(m => m.RootIn)
+                </td>
+                <td>@Html.LabelFor(m => m.Spec)@Html.DicEditorFor(m => m.Spec, DicEnum.ST,"")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Sizex)@Html.EditorFor(m => m.Sizex)
+                </td>
+                <td>@Html.LabelFor(m => m.SWConstantX)@Html.EditorFor(m => m.SWConstantX)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.SWConstantY)@Html.EditorFor(m => m.SWConstantY)
+                </td>
+                <td>@Html.LabelFor(m => m.SopRate)@Html.TextBoxFor(m => m.SopRate, new { Value = 1 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Chlorin)@Html.EditorFor(m => m.Chlorin)
+                </td>
+                <td>@Html.LabelFor(m => m.Alkali)@Html.EditorFor(m => m.Alkali)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Proportion)@Html.EditorFor(m => m.Proportion)
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.Price)@Html.EditorFor(m => m.Price)
+                </td>
+                <td>@Html.LabelFor(m => m.Price)@Html.TextBox("Price_T", 0)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("库存量(T)")@Html.TextBox("Inventory_T", 0)
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.Inventory)@Html.TextBoxFor(m => m.Inventory, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.IsUsed)@Html.CheckBoxFor(m => m.IsUsed, new { Checked = true})
+                   &nbsp;&nbsp; &nbsp;&nbsp;@Html.LabelFor(m => m.IsMetage)@Html.CheckBoxFor(m => m.IsMetage)
+                </td>
+            </tr>
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.MinWarmContent)@Html.TextBoxFor(m => m.MinWarmContent, new { Value = 0 })
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.MaxWarmContent)@Html.TextBoxFor(m => m.MaxWarmContent, new { Value = 0 })
+                </td>
+                <td>@Html.Label("最小库存量(T)")@Html.TextBox("MinWarmContent_T", 0)
+                </td>
+                <td>@Html.Label("最大库存量(T)")@Html.TextBox("MaxWarmContent_T", 0)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.BrightRate)@Html.TextBoxFor(m => m.BrightRate, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.OrderNum)@Html.TextBoxFor(m => m.OrderNum, new { Value = 0 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.DarkRate)@Html.TextBoxFor(m => m.DarkRate, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.TestType)@Html.EditorFor(m => m.TestType)
+                </td>
+            </tr>
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

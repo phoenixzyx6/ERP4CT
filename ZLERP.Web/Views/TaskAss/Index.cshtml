@@ -1,0 +1,47 @@
+﻿@model ZLERP.Model.TaskAss 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/TaskAss/TaskAss.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            taskassIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display:none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.TaskID)@Html.AutoComplete("TaskID", "ProjectName", "Combo", "ProduceTask", "ID", "ProjectName")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AssDate)@Html.EditorFor(m => m.AssDate)
+                </td>
+                <td>@Html.LabelFor(m => m.AssType)@Html.DicEditorFor(m => m.AssType,DicEnum.AssType)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AssNum)@Html.EditorFor(m => m.AssNum)
+                </td>
+                <td>@Html.LabelFor(m => m.AssPrice)@Html.EditorFor(m => m.AssPrice)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AssTotal)@Html.EditorFor(m => m.AssTotal)
+                </td>
+                <td>@Html.LabelFor(m => m.APMoney)@Html.EditorFor(m => m.APMoney)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 3, 50, new { })
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

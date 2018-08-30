@@ -1,0 +1,68 @@
+﻿@model ZLERP.Model.SysFunc 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/SysFunc.js")" type="text/javascript" language="javascript"> </script>
+         
+    <script type="text/javascript">
+        $(function () {
+            sysFuncInit({
+                storeUrl: '@Url.Action("FindFuncs")'
+            });
+        });
+    </script>
+    
+ }
+
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv2" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.ID)@Html.TextBoxFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.FuncName)@Html.TextBoxFor(m => m.FuncName)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.FuncDesc)@Html.TextBoxFor(m => m.FuncDesc)
+                </td>
+                <td>@Html.LabelFor(m => m.ParentID)@Html.DropDownTreeFor(m => m.ParentID, "FindTree")
+                    
+                </td>
+                
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.IsLeaf)@Html.CheckBoxFor(m => m.IsLeaf)
+                </td>
+                <td>@Html.LabelFor(m => m.ButtonPos)@Html.TextBoxFor(m => m.ButtonPos, new { Value = 0 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.IsButton)@Html.CheckBoxFor(m => m.IsButton)
+                </td>
+                <td>@Html.LabelFor(m => m.Icon)@Html.TextBoxFor(m => m.Icon)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.URL)@Html.TextAreaFor(m => m.URL, new { rows = 3, cols = 55 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.HandlerName)@Html.TextBoxFor(m => m.HandlerName)
+                </td>
+                <td>@Html.LabelFor(m => m.HandlerFile)@Html.TextBoxFor(m => m.HandlerFile)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Flag)@Html.TextBoxFor(m => m.Flag, new { Value = 0 })
+                </td>
+                <td>@Html.LabelFor(m => m.OrderNum)@Html.TextBoxFor(m => m.OrderNum, new { @Value = 0 })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.IsDisabled)@Html.CheckBoxFor(m => m.IsDisabled, new { @class = "chk_1" })
+            </tr>
+        </table> 
+    }
+</div>

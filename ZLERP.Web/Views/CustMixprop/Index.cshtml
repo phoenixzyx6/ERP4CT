@@ -1,0 +1,104 @@
+﻿@model ZLERP.Model.ViewModels.CustMixAndItems
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/CustMixprop.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            custMixpropIndexInit({
+            storeUrl:'@Url.Action("Find")',
+            itemStoreUrl:'@Url.Action("Find", "CustMixpropItem")',
+            updateItemUrl: '@Url.Action("Update", "CustMixpropItem")',
+            exportStuffUrl:'@Url.Action("ExportStuff")',
+            conStrengthSelectUrl: '@Html.Raw(Url.Action("SearchSelect", "ConStrength", new{textField="ConStrengthCode", valueField="ConStrengthCode", orderby="ConStrengthCode"}))'
+            });
+        });
+    </script>
+}
+<div id="CusFormDiv" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.cmp.MixpropCode)@Html.TextBoxFor(m => m.cmp.MixpropCode, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.cmp.ConStrength)@Html.fixedDropDownListFor(m => m.cmp.ConStrength, (IEnumerable<SelectListItem>)ViewBag.ConStrength)
+                </td>
+                <td>@Html.LabelFor(m => m.cmp.CementType)@Html.DicEditorFor(m => m.cmp.CementType, DicEnum.CType)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.cmp.Slump)@Html.DicEditorFor(m => m.cmp.Slump, DicEnum.Slump)
+                </td>
+                <td>@Html.LabelFor(m => m.cmp.ImpGrade)@Html.TextBoxFor(m => m.cmp.ImpGrade, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.cmp.CarpRadii)@Html.TextBoxFor(m => m.cmp.CarpRadii, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.cmp.Weight)@Html.TextBoxFor(m => m.cmp.Weight, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.cmp.WCRate)@Html.TextBoxFor(m => m.cmp.WCRate, new { @class = "text" })
+                </td>
+                <td>@Html.Label("水泥型号")@Html.TextBoxFor(m => m.cmp.OXY, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.cmp.Mesh)@Html.TextBoxFor(m => m.cmp.Mesh, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.cmp.MixpropRate)@Html.TextBoxFor(m => m.cmp.MixpropRate, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.cmp.SCRate)@Html.TextBoxFor(m => m.cmp.SCRate, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.cmp.RIWRate)@Html.TextBoxFor(m => m.cmp.RIWRate, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.cmp.SIRRate)@Html.TextBoxFor(m => m.cmp.SIRRate, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.cmp.SIWRate)@Html.TextBoxFor(m => m.cmp.SIWRate, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.cmp.AdmixtureType)@Html.TextBoxFor(m => m.cmp.AdmixtureType, new { @class = "text" })
+                </td>
+                <td style="display: none;">@Html.LabelFor(m => m.cmp.ID)@Html.TextBoxFor(m => m.cmp.ID, new { @class = "text" })
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+<div id="CusGridDiv" style="float: left; width: 68%">
+</div>
+<div id="CusItemsFormDiv" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        <table class="mvcform">
+            <tr>
+                <td style="display: none;">@Html.LabelFor(m => m.cmpitems.ID)@Html.TextBoxFor(m => m.cmpitems.ID, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.cmpitems.CustMixpropID)@Html.TextBoxFor(m => m.cmpitems.CustMixpropID, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.cmpitems.StuffID)@Html.DropDownListFor(m => m.cmpitems.StuffID, (IEnumerable<SelectListItem>)ViewBag.StuffID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.cmpitems.Amount)@Html.TextBoxFor(m => m.cmpitems.Amount, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.cmpitems.StandardAmount)@Html.TextBoxFor(m => m.cmpitems.StandardAmount, new { @class = "text" })
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+<div id="ConItemsGridDiv" style="float: right; width: 30%">
+</div> 

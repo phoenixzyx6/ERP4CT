@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.OpenCheck, ZLERP.Model" table="OpenCheck" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="OpenCheckID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="ReSlump" column="ReSlump" />
+		<property name="DeSlump" column="DeSlump" />
+    <property name="ConStrength" column="ConStrength" />
+		<property name="WCRate" column="WCRate" />
+		<property name="SCRate" column="SCRate" />
+		<property name="SIWRate" column="SIWRate" />
+		<property name="RIWRate" column="RIWRate" />
+    <property name="RIWRate1" column="RIWRate1" />
+		<property name="SIRRate" column="SIRRate" />
+    <property name="WAStuffID" column="WAStuffID" />
+    <property name="WAAmount" column="WAAmount" />
+    <property name="WAExamID" column="WAExamID" />
+		<property name="CEStuffID" column="CEStuffID" />
+		<property name="CEExamID" column="CEExamID" />
+		<property name="CESupplyID" column="CESupplyID" />
+		<property name="CEAmount" column="CEAmount" />
+		<property name="FAStuffID" column="FAStuffID" />
+		<property name="FAExamID" column="FAExamID" />
+		<property name="FASupplyID" column="FASupplyID" />
+		<property name="FAAmount" column="FAAmount" />
+		<property name="CAStuffID" column="CAStuffID" />
+		<property name="CAExamID" column="CAExamID" />
+		<property name="CASupplyID" column="CASupplyID" />
+		<property name="CAAmount" column="CAAmount" />
+    <property name="CA1StuffID" column="CA1StuffID" />
+    <property name="CA1ExamID" column="CA1ExamID" />
+    <property name="CA1SupplyID" column="CA1SupplyID" />
+    <property name="CA1Amount" column="CA1Amount" />
+		<property name="ADM1StuffID" column="ADM1StuffID" />
+		<property name="ADM1ExamID" column="ADM1ExamID" />
+		<property name="ADM1SupplyID" column="ADM1SupplyID" />
+		<property name="ADM1Amount" column="ADM1Amount" />
+		<property name="AIR1StuffID" column="AIR1StuffID" />
+		<property name="AIR1ExamID" column="AIR1ExamID" />
+		<property name="AIR1SupplyID" column="AIR1SupplyID" />
+		<property name="AIR1Amount" column="AIR1Amount" />
+		<property name="AIR2StuffID" column="AIR2StuffID" />
+		<property name="AIR2ExamID" column="AIR2ExamID" />
+		<property name="AIR2SupplyID" column="AIR2SupplyID" />
+		<property name="AIR2Amount" column="AIR2Amount" />
+		<property name="ADM2StuffID" column="ADM2StuffID" />
+		<property name="ADM2ExamID" column="ADM2ExamID" />
+		<property name="ADM2SupplyID" column="ADM2SupplyID" />
+		<property name="ADM2Amount" column="ADM2Amount" />
+		<property name="ADM3StuffID" column="ADM3StuffID" />
+		<property name="ADM3ExamID" column="ADM3ExamID" />
+		<property name="ADM3SupplyID" column="ADM3SupplyID" />
+		<property name="ADM3Amount" column="ADM3Amount" />
+		<property name="Slump" column="Slump" />
+		<property name="MixGrade" column="MixGrade" />
+		<property name="OtherCap" column="OtherCap" />
+		<property name="CheckResult" column="CheckResult" />
+		<property name="AdjustMode" column="AdjustMode" />
+		<property name="Remark" column="Remark" />
+		<property name="Principal" column="Principal" />
+		<property name="CheckMan" column="CheckMan" />
+		<property name="IsOut" column="IsOut" />
+		<property name="OpenTime" column="OpenTime" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="CustMixpropID" column="CustMixpropID" />
+    <many-to-one name="CustMixprop" column="CustMixpropID" class="CustMixprop" update="false" insert="false"/>
+    <property name="TaskID" column="TaskID" />
+		<many-to-one name="ProduceTask" column="TaskID" class="ProduceTask" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

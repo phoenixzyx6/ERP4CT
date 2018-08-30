@@ -1,0 +1,40 @@
+﻿@model ZLERP.Model.ProjectRoute 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/ProjectRoute/ProjectRoute.js")" type="text/javascript" language="javascript"> </script>
+    <script src="@Url.Content("~/Scripts/Views/Map/abc_track.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            projectrouteIndexInit({ storeUrl: '@Url.Action("Find")' });
+        });
+    </script>
+}
+<div id="projectrouteAll">
+    <div id="left" style="width: 29.5%; float: left; height: 100%;">
+        <div id="projectrouteGrid" class="top" >
+        </div>
+    </div>
+    <div id="right" style="width: 70%; float: right; height: 100%;">
+        <div id="projectMap">
+            </div>
+    </div>
+</div>
+<div id="projectrouteDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ProjectId)@Html.EditorFor(m => m.ProjectId)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Times)@Html.EditorFor(m => m.Times)
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

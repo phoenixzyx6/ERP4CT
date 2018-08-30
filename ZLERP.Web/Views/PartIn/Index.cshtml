@@ -1,0 +1,70 @@
+﻿@model ZLERP.Model.ViewModels.PartInAndItem
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/PartIn/PartIn.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        var options = {
+            storeUrl: '@Url.Action("Find")'
+            , importContractUrl: '@Url.Action("Find","PartStockContract")'
+            , auditUrl: '@Url.Action("Auditing")'
+            , itemsUrl: '@Url.Action("Find","PartInItem")'
+            , partInSaveUrl: '@Url.Action("Update")'
+        };
+        $(function () {
+            partinIndexInit(options);
+        });
+</script>
+}
+<div id="partInGrid"style="float: left; width: 42%"></div>
+
+<div id="itemsGrid"style="float: right; width: 56%"></div>
+
+<div id="contractWindow" style="display:none;">
+    <div id="contractGrid"></div>
+</div>
+
+<div id="partInForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    @Html.HiddenFor(m => m.PartIn.ID)
+<table class="mvcform"> 
+    <tr> 
+		<td>@Html.LabelFor(m => m.PartIn.Recipientor)@Html.TextBoxFor(m => m.PartIn.Recipientor, new { Value = @User.UserName() })</td>
+        <td>@Html.LabelFor(m => m.PartIn.StockDate)@Html.EditorFor(m => m.PartIn.StockDate, new { defaultValue = DateTime.Now.ToString("yyyy-MM-dd") })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartIn.TotalMoney)@Html.EditorFor(m => m.PartIn.TotalMoney)</td>
+        <td>@Html.LabelFor(m => m.PartIn.TotalPayment)@Html.EditorFor(m => m.PartIn.TotalPayment)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartIn.IsPayment)@Html.CheckBoxFor(m => m.PartIn.IsPayment)</td>
+        
+    </tr>
+    <tr>
+    <td colspan="2">@Html.LabelFor(m => m.PartIn.Remark)@Html.TextAreaFor(m => m.PartIn.Remark, 1, 50, new { @class = "text" })</td>
+    </tr>
+</table>
+}
+</div>
+
+
+<div id="partInItemForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    @Html.HiddenFor(m => m.PartInItem.PartInID)
+<table class="mvcform"> 
+    <tr> 
+		<td>@Html.LabelFor(m => m.PartInItem.PartInfoID)@Html.DropDownListFor(m=>m.PartInItem.PartInfoID, (IEnumerable<SelectListItem>)ViewBag.PartInfoList , new { style = "width:130px;"})</td>
+        <td>@Html.LabelFor(m => m.PartInItem.InNum)@Html.EditorFor(m => m.PartInItem.InNum)</td>
+    </tr>
+    <tr> 
+		<td>@Html.LabelFor(m => m.PartInItem.UnitPrice)@Html.EditorFor(m => m.PartInItem.UnitPrice)</td>
+        <td>@Html.LabelFor(m => m.PartInItem.BarCode)@Html.EditorFor(m => m.PartInItem.BarCode)</td>
+    </tr>
+    <tr> 
+		<!--td>@Html.LabelFor(m => m.PartInItem.ContractID)@Html.EditorFor(m => m.PartInItem.ContractID)</td-->
+        <td colspan=2>@Html.LabelFor(m => m.PartInItem.Remark)@Html.TextAreaFor(m => m.PartInItem.Remark, 1, 50, new { @class = "text" })</td>
+        
+    </tr>
+</table>
+}
+</div>

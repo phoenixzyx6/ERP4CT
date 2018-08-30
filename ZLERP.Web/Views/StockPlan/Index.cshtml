@@ -1,0 +1,103 @@
+﻿@model ZLERP.Model.StockPlan 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/StockPlan.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            stockPlanInit({
+                storeUrl: '@Url.Action("Find")',
+                currentUser:'@User.UserName()'
+            });
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.PlanMan)@Html.EditorFor(m => m.PlanMan)
+                </td>
+                <td>@Html.LabelFor(m => m.PlanDate)@Html.EditorFor(m => m.PlanDate, "DateTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.StockPactID)@Html.AutoComplete("StockPactID", "PactName", "Combo", "StockPact", "ID", "ID", "AuditStatus=1")
+                </td>
+                <td>@Html.LabelFor(m => m.SupplyID)@Html.AutoComplete("SupplyID", "SupplyName", "Combo", "SupplyInfo", "ID", "SupplyName")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.StuffID)@Html.AutoComplete("StuffID", "StuffName", "Combo", "StuffInfo", "ID", "StuffName")
+                </td>
+                <td>@Html.LabelFor(m => m.SourceAddr)@Html.EditorFor(m => m.SourceAddr)
+                </td>
+            </tr>
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.PlanAmount)@Html.TextBoxFor(m => m.PlanAmount, new { Value = 0 })
+                </td>
+                <td>@Html.Label("计划数量(T)")@Html.TextBox("PlanAmount_T",0)
+                </td>
+                <td>@Html.LabelFor(m => m.CustName)@Html.EditorFor(m => m.CustName)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Conveyancer)@Html.EditorFor(m => m.Conveyancer)
+                </td>
+                <td>@Html.LabelFor(m => m.TransportMode)@Html.EditorFor(m => m.TransportMode)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.GageUnit)@Html.EditorFor(m => m.GageUnit)
+                </td>
+                <td>@Html.LabelFor(m => m.Price)@Html.EditorFor(m => m.Price)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.BeginDate)@Html.EditorFor(m => m.BeginDate)
+                </td>
+                <td>@Html.LabelFor(m => m.EndDate)@Html.EditorFor(m => m.EndDate)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ExecStatus)@Html.EditorFor(m => m.ExecStatus)
+                </td>
+                <td>@Html.LabelFor(m => m.QualityNeed)@Html.EditorFor(m => m.QualityNeed)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.WeighBy)@Html.EditorFor(m => m.WeighBy)
+                </td>
+                <td>@Html.LabelFor(m => m.CloseReason)@Html.EditorFor(m => m.CloseReason)
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+<div id="AuditingFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.ID)@Html.TextBoxFor(m => m.ID, new { readOnly = true })
+                </td>
+                <td>@Html.LabelFor(m => m.AuditStatus)@Html.DicEditorFor(m => m.AuditStatus, DicEnum.AuditStatus)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Auditor)@Html.EditorFor(m => m.Auditor)
+                </td>
+                <td>@Html.LabelFor(m => m.AuditTime)@Html.EditorFor(m => m.AuditTime, new { id = "audit_AuditTime" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.AuditInfo)@Html.TextAreaFor(m => m.AuditInfo)
+                </td>
+            </tr>
+        </table>
+    }
+</div>

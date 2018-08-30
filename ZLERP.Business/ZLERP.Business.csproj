@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9FA3CDC9-2189-4381-9599-6567F0BFEB92}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZLERP.Business</RootNamespace>
+    <AssemblyName>ZLERP.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>../ZOOMLION.ERP3.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lib.Web.Mvc">
+      <HintPath>..\ZLERP.Web\bin\Lib.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\ZLERP.Web\bin\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\AssemblyVersion.cs">
+      <Link>Properties\AssemblyVersion.cs</Link>
+    </Compile>
+    <Compile Include="AttachmentService.cs" />
+    <Compile Include="AuthorizationService.cs" />
+    <Compile Include="CacheHelper.cs" />
+    <Compile Include="CarHistoryService.cs" />
+    <Compile Include="CarRepairService.cs" />
+    <Compile Include="CompanyService.cs" />
+    <Compile Include="ConsMixpropService.cs" />
+    <Compile Include="ConStrengthService.cs" />
+    <Compile Include="ContractPumpService.cs" />
+    <Compile Include="ContractService.cs" />
+    <Compile Include="ControlSystem\ControlSystemHelper.cs" />
+    <Compile Include="CustomerService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DutyPlanService.cs" />
+    <Compile Include="EquipMtLyService.cs" />
+    <Compile Include="EquipTermlyMtItemService.cs" />
+    <Compile Include="FormulaItemService.cs" />
+    <Compile Include="GoodsBorrowService.cs" />
+    <Compile Include="GoodsCheckService.cs" />
+    <Compile Include="GoodsInService.cs" />
+    <Compile Include="GoodsInvalidateService.cs" />
+    <Compile Include="GoodsOutService.cs" />
+    <Compile Include="GoodsRevertService.cs" />
+    <Compile Include="GPSHelper.cs" />
+    <Compile Include="ManualProduceService.cs" />
+    <Compile Include="MntZlService.cs" />
+    <Compile Include="MonthAccountService.cs" />
+    <Compile Include="MyMsgService.cs" />
+    <Compile Include="ProjectService.cs" />
+    <Compile Include="PublicService.cs" />
+    <Compile Include="PumpWorkService.cs" />
+    <Compile Include="PurchaseContractService.cs" />
+    <Compile Include="PurchasePlanByEquipService.cs" />
+    <Compile Include="PurchaseService.cs" />
+    <Compile Include="RemindinfoService.cs" />
+    <Compile Include="RoleService.cs" />
+    <Compile Include="Service References\GPSService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SMSHelper.cs" />
+    <Compile Include="StockPactService.cs" />
+    <Compile Include="StuffInPriceAdjustService.cs" />
+    <Compile Include="SystemMsgService.cs" />
+    <Compile Include="TyreChangeService.cs" />
+    <Compile Include="TZRalationService.cs" />
+    <Compile Include="UserRoleService.cs" />
+    <Compile Include="UserService.cs" />
+    <Compile Include="SysConfigService.cs" />
+    <Compile Include="StuffInfoService.cs" />
+    <Compile Include="DicService.cs" />
+    <Compile Include="ProduceTaskService.cs" />
+    <Compile Include="SysFuncService.cs" />
+    <Compile Include="ProductLineService.cs" />
+    <Compile Include="DispatchListService.cs" />
+    <Compile Include="ShippingDocumentService.cs" />
+    <Compile Include="CarService.cs" />
+    <Compile Include="SiloService.cs" />
+    <Compile Include="FormulaService.cs" />
+    <Compile Include="StockPlanService.cs" />
+    <Compile Include="CustMixpropItemService.cs" />
+    <Compile Include="CommissionItemService.cs" />
+    <Compile Include="SettlementService.cs" />
+    <Compile Include="TyreRepairService.cs" />
+    <Compile Include="SysLogService.cs" />
+    <Compile Include="ConStrAssessService.cs" />
+    <Compile Include="ConsMixpropItemService.cs" />
+    <Compile Include="CarOilService.cs" />
+    <Compile Include="StuffInService.cs" />
+    <Compile Include="CustomerPlanService.cs" />
+    <Compile Include="ContractOtherPriceService.cs" />
+    <Compile Include="PartBorrowReturnService.cs" />
+    <Compile Include="CEExamService.cs" />
+    <Compile Include="FAExamService.cs" />
+    <Compile Include="CAExamService.cs" />
+    <Compile Include="AIR1ExamService.cs" />
+    <Compile Include="AIR2ExamService.cs" />
+    <Compile Include="ADMExamService.cs" />
+    <Compile Include="ADM2ExamService.cs" />
+    <Compile Include="QualityExamService.cs" />
+    <Compile Include="CustMixpropService.cs" />
+    <Compile Include="PartBorrowItemService.cs" />
+    <Compile Include="ProductRecordItemService.cs" />
+    <Compile Include="CarLendItemService.cs" />
+    <Compile Include="ScheduleService.cs" />
+    <Compile Include="AlarmLogService.cs" />
+    <Compile Include="YearAccountService.cs" />
+    <Compile Include="ProductRecordService.cs" />
+    <Compile Include="ProjectRouteService.cs" />
+    <Compile Include="TZRalationHistoryService.cs" />
+    <Compile Include="GoodsInHistoryService.cs" />
+    <Compile Include="Synmonitor.cs" />
+    <Compile Include="PurchasePlanService.cs" />
+    <Compile Include="ThreadTableService.cs" />
+    <Compile Include="GoodsInfoService.cs" />
+    <Compile Include="PurchaseMainService.cs" />
+    <Compile Include="StuffInfoPriceService.cs" />
+    <Compile Include="EquipMtLyItemService.cs" />
+    <Compile Include="ThreadIDService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZLERP.Gps\ZLERP.Gps.csproj">
+      <Project>{BCC52A58-1F90-476C-AF5C-5890031739C9}</Project>
+      <Name>ZLERP.Gps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLERP.IControlSystem\ZLERP.IControlSystem.csproj">
+      <Project>{E34DFAAE-06AC-4E43-95DA-ABF233327DDC}</Project>
+      <Name>ZLERP.IControlSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLERP.IRespository\ZLERP.IRepository.csproj">
+      <Project>{82C73E05-9622-4BDD-8FD8-7182EEF5F2BC}</Project>
+      <Name>ZLERP.IRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLERP.JBZKZ12\ZLERP.JBZKZ12.csproj">
+      <Project>{26C932A5-E5A4-41FE-9DD5-7CC89CE32F7B}</Project>
+      <Name>ZLERP.JBZKZ12</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLERP.License\ZLERP.License.Client.csproj">
+      <Project>{6A26936B-349E-48F2-97D1-6EF5889DEC65}</Project>
+      <Name>ZLERP.License.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLERP.Model\ZLERP.Model.csproj">
+      <Project>{772D60F4-C404-41B5-BDF3-000A8BA87F52}</Project>
+      <Name>ZLERP.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLERP.NHibernateRepository\ZLERP.NHibernateRepository.csproj">
+      <Project>{33462E2E-4F42-4BA1-BFF0-3422FFA30A4B}</Project>
+      <Name>ZLERP.NHibernateRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLERP.Resources\ZLERP.Resources.csproj">
+      <Project>{2DA438E1-73E3-4C05-9742-380BA99A2D81}</Project>
+      <Name>ZLERP.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\GPSService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GPSService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GPSService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GPSService\EntryService.wsdl" />
+    <None Include="Service References\GPSService\EntryService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GPSService\EntryService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GPSService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GPSService\EntryService.disco" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

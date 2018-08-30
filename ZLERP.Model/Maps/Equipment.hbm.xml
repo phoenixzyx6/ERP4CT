@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.Equipment, ZLERP.Model" table="Equipment" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="EquipmentID">
+      <generator class="assigned" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="EquipmentName" column="EquipmentName" />
+    <property name="Spec" column="Spec" />
+    <property name="Brand" column="Brand" />
+    <property name="ClassBID" column="ClassBID" />
+    <property name="ClassMID" column="ClassMID" />
+    <property name="ClassSID" column="ClassSID" />
+    <property name="PurchaseDate" column="PurchaseDate" />
+    <property name="EquipStatus" column="EquipStatus" />
+    <property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="DepartmentID" column="DepartmentID" />
+    <property name="SupplyID" column="SupplyID" />
+    <many-to-one name="ClassB" column="ClassBID" class="ClassB" update="false" insert="false" />
+    <many-to-one name="ClassM" column="ClassMID" class="ClassM" update="false" insert="false" />
+    <many-to-one name="Classs" column="ClassSID" class="Classs" update="false" insert="false" />
+    <many-to-one name="Department" column="DepartmentID" class="Department" update="false" insert="false"/>
+    <many-to-one name="SupplyInfo" column="SupplyID" class="SupplyInfo" update="false" insert="false"/>
+    <bag name="EquipmentItems" lazy="true" batch-size="30" inverse="true" >
+      <key column="EquipmentID"></key>
+      <one-to-many class="EquipmentItem"></one-to-many>
+    </bag>
+    <bag name="EquipMtLies" lazy="true" batch-size="30" inverse="true" >
+      <key column="EquipmentID"></key>
+      <one-to-many class="EquipMtLy"></one-to-many>
+    </bag>
+    <bag name="EquipMtLyReturns" lazy="true" batch-size="30" inverse="true" >
+      <key column="EquipmentID"></key>
+      <one-to-many class="EquipMtLyReturn"></one-to-many>
+    </bag>
+    <bag name="EquipTermlyMts" lazy="true" batch-size="30" inverse="true" >
+      <key column="EquipmentID"></key>
+      <one-to-many class="EquipTermlyMt"></one-to-many>
+    </bag>
+    <bag name="MntZls" lazy="true" batch-size="30" inverse="true" >
+      <key column="EquipmentID"></key>
+      <one-to-many class="MntZl"></one-to-many>
+    </bag>
+
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,110 @@
+﻿@model ZLERP.Model.ViewModels.QualityExamAndItems 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/QualityExam/QualityExam.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            qualityexamIndexInit(
+            '@Url.Action("Find", "QualityExam")',
+            '@Url.Action("Find", "QualityExamItem")',
+            '@Url.Action("Update", "QualityExamItem")',
+            '@Url.Action("AddWithQEId", "QualityExamItem")'
+            );
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MySubGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("编号")@Html.EditorFor(m => m.QualityExam.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.QualityExam.QualityType)@Html.fixedDropDownListFor(m => m.QualityExam.QualityType, (IEnumerable<SelectListItem>)ViewBag.ExamTypes)
+                </td>                
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.QualityExam.CommissionID)@Html.fixedDropDownListFor(m => m.QualityExam.CommissionID, (IEnumerable<SelectListItem>)ViewBag.Commission)
+                </td>
+                <td>@Html.LabelFor(m => m.QualityExam.ExamDate)@Html.EditorFor(m => m.QualityExam.ExamDate, "DateTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.QualityExam.ConStrength)@Html.fixedDropDownListFor(m => m.QualityExam.ConStrength, (IEnumerable<SelectListItem>)ViewBag.ConStrength)
+                </td>
+                <td>@Html.LabelFor(m => m.QualityExam.CustMixpropID)@Html.fixedDropDownListFor(m => m.QualityExam.CustMixpropID, (IEnumerable<SelectListItem>)ViewBag.CustMixprop)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.QualityExam.ConserveCondition)@Html.EditorFor(m => m.QualityExam.ConserveCondition)
+                </td>
+                <td>@Html.LabelFor(m => m.QualityExam.ExamNum)@Html.EditorFor(m => m.QualityExam.ExamNum)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.QualityExam.DoMan)@Html.EditorFor(m => m.QualityExam.DoMan)
+                </td>
+                <td>@Html.LabelFor(m => m.QualityExam.ExamMan)@Html.EditorFor(m => m.QualityExam.ExamMan)
+                </td>
+            </tr>
+            <tr>                
+                <td colspan="2">@Html.LabelFor(m => m.QualityExam.Remark)@Html.TextAreaFor(m => m.QualityExam.Remark, 1, 50, null)
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+
+<div id="MySubFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td style="display:none">@Html.LabelFor(m=>m.QualityExamItem.ID)@Html.EditorFor(m=>m.QualityExamItem.ID)</td>
+ 
+        <td>@Html.LabelFor(m=>m.QualityExamItem.QualityExamID)@Html.EditorFor(m=>m.QualityExamItem.QualityExamID)</td>
+        <td>@Html.LabelFor(m=>m.QualityExamItem.Sizex)@Html.EditorFor(m => m.QualityExamItem.Sizex)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.QualityExamItem.ExamBlockGroupID)@Html.EditorFor(m=>m.QualityExamItem.ExamBlockGroupID)</td>
+ 
+        <td>@Html.LabelFor(m=>m.QualityExamItem.ExamBodyID)@Html.EditorFor(m=>m.QualityExamItem.ExamBodyID)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.QualityExamItem.DoTime)@Html.EditorFor(m => m.QualityExamItem.DoTime)</td>
+ 
+        <td>@Html.LabelFor(m=>m.QualityExamItem.TestTime)@Html.EditorFor(m => m.QualityExamItem.TestTime)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.QualityExamItem.Load1)@Html.EditorFor(m=>m.QualityExamItem.Load1)</td>
+ 
+        <td>@Html.LabelFor(m=>m.QualityExamItem.Strength1)@Html.EditorFor(m=>m.QualityExamItem.Strength1)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.QualityExamItem.Load2)@Html.EditorFor(m=>m.QualityExamItem.Load2)</td>
+ 
+        <td>@Html.LabelFor(m=>m.QualityExamItem.Strength2)@Html.EditorFor(m=>m.QualityExamItem.Strength2)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.QualityExamItem.Load3)@Html.EditorFor(m=>m.QualityExamItem.Load3)</td>
+ 
+        <td>@Html.LabelFor(m=>m.QualityExamItem.Strength3)@Html.EditorFor(m=>m.QualityExamItem.Strength3)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.QualityExamItem.AgeTime)@Html.EditorFor(m=>m.QualityExamItem.AgeTime)</td>
+        <td></td>
+    </tr>
+</table>
+
+}
+</div>

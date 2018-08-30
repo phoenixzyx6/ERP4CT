@@ -1,0 +1,26 @@
+﻿@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/ReportNav.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            userIndexInit({
+                sysFuncTreeUrl: '@Url.Action("FindReportTree", "SysFunc")'
+            });
+        });
+    </script>
+ 
+}
+<table width="100%">
+    <tbody>
+        <tr>
+            <td width="200" valign="top">
+                <div id="sysFuncs" class="ztree" style="overflow: scroll;">
+                </div>
+            </td>
+            <td style=" vertical-align:top;" id="reportdiv">
+                <div id="reportshow" style="float: left; width: 100%; overflow: auto; min-height:580px;height:100%;">
+                欢迎使用报表导航
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

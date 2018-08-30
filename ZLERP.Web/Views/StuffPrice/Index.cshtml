@@ -1,0 +1,37 @@
+﻿@model ZLERP.Model.StuffPrice 
+@section HeaderSection{ 
+<script src="@Url.Content("~/Scripts/Views/StuffPrice/StuffPrice.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            stuffpriceIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.SupplyID)@Html.DropDownListFor(m => m.SupplyID, (IEnumerable<SelectListItem>)ViewBag.Supplies, new { style = "width:137px;" })
+         @Html.TextBoxFor(m => m.ID, new { Style = "display:none" }) 
+        </td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.StuffID)@Html.DropDownListFor(m => m.StuffID, (IEnumerable<SelectListItem>)ViewBag.StuffList, new { style = "width:137px;" })</td>
+  </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.PriceDate)@Html.EditorFor(m => m.PriceDate, "DateTime", new { defaultValue = DateTime.Today.ToString("yyyy-MM-dd") })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.UnitPrice)@Html.EditorFor(m=>m.UnitPrice)</td>
+  </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Remark)@Html.TextAreaFor(m=>m.Remark)</td>
+    </tr>
+</table>
+
+}
+</div>

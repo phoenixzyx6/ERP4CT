@@ -1,0 +1,63 @@
+﻿@model ZLERP.Model.ContractPump 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/ContractPump.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            contractpumpIndexInit({
+                contractStoreUrl: '@Url.Action("Find","Contract")',
+                contractPumpStoreUrl: '@Url.Action("Find")',
+                pumpPriceUpdateUrl: '@Url.Action("Update")' 
+            });
+        });
+    </script>
+}
+<div id="ContractGrid" style="float:left;width:43%"></div>
+<div style="float:right;width:57%; height:100%;">
+<div class="grid-toolbar ContractGrid-toolbar"></div>
+<div class="ui-jqgrid ui-widget ui-widget-content ui-corner-all" style="border-left:none;">
+<div class="mvcform" id="ContractPumpForm">
+    @using (Html.BeginForm("", "", FormMethod.Post, new { id = "ContractPumpForms" }))
+    { 
+        @Html.ValidationSummary()
+        <table class="mvcform paddingStyle" style="margin:3px;">
+            <tr>
+                <td>@Html.Label("签订日期")@Html.TextBox("SignDate", "", new { disabled = "true" })</td>
+                <td colspan="2">单号 @Html.TextBox("ContractIDs", "", new { disabled = "true" })</td>
+            </tr>
+            <tr>
+                <td colspan="3">@Html.Label("客户名称")@Html.TextBox("CustName", "", new { disabled = "true", style = "width:250px;" })</td>
+            </tr>
+            <tr>
+                <td colspan="3">@Html.Label("合同名称")@Html.TextBox("ContractName", "", new { disabled = "true", style = "width:250px;" })</td>
+            </tr>
+            <tr>
+                <td>@Html.Label("签订总方量")@Html.TextBox("SignTotalCube", "", new { disabled = "true" })</td><td colspan="2"><button class="tbtn add" title="泵车价格设定/导入泵车" role="button" aria-disabled="false" type ="button" onclick="ImportPump();return false;">导入泵车</button></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.SetDate)</td><td>@Html.LabelFor(m => m.PumpType)</td><td>@Html.LabelFor(m => m.PumpPrice)</td>
+            </tr>
+            <tr>
+                <td>
+                @Html.TextBoxFor(m => m.ID, new { @class = "text", style = "display:none;" })
+                @Html.TextBoxFor(m => m.ContractID, new { @class = "text", style = "display:none;" })
+                @Html.EditorFor(m => m.SetDate, "DateTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })
+                </td>
+                <td>@Html.DicEditorFor(m => m.PumpType, DicEnum.CastMode, "")</td>
+                <td>@Html.EditorFor(m => m.PumpPrice)</td>
+            </tr>
+            <tr>
+                <td colspan="3"><button class="tbtn add" title="泵车价格设定/保存设定" role="button" aria-disabled="false" type ="button" onclick="pumpPriceSave();return false;"><span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">保存设定</span></button></td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="ContractPumpGrid" style="margin:3px;"></div>
+</div>
+</div>
+@*导入泵车弹出框*@
+<div id="ImportPumpForm" style="display:none;">
+    <div id="pumpTypeGrid"></div>
+</div>

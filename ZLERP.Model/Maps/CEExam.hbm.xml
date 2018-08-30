@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.CEExam, ZLERP.Model" table="CEExam" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="CEExamID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="ExamTime" column="ExamTime" />
+    <property name="ReportTime" column="ReportTime" />
+		<property name="DeputyNum" column="DeputyNum" />
+		<property name="RadioExamID" column="RadioExamID" />
+		<property name="Invariability" column="Invariability" />
+		<property name="FineDegree" column="FineDegree" />
+		<property name="StanWaRate" column="StanWaRate" />
+		<property name="BurnLossNum" column="BurnLossNum" />
+		<property name="BeginFreTime" column="BeginFreTime" />
+		<property name="EndFreTime" column="EndFreTime" />
+		<property name="KZd3_1" column="KZd3_1" />
+		<property name="KZd3_2" column="KZd3_2" />
+		<property name="KZd3_3" column="KZd3_3" />
+		<property name="KZd28_1" column="KZd28_1" />
+		<property name="KZd28_2" column="KZd28_2" />
+		<property name="KZd28_3" column="KZd28_3" />
+		<property name="KYd3_1" column="KYd3_1" />
+		<property name="KYd3_2" column="KYd3_2" />
+		<property name="KYd3_3" column="KYd3_3" />
+		<property name="KYd3_4" column="KYd3_4" />
+		<property name="KYd3_5" column="KYd3_5" />
+		<property name="KYd3_6" column="KYd3_6" />
+		<property name="KYd28_1" column="KYd28_1" />
+		<property name="KYd28_2" column="KYd28_2" />
+		<property name="KYd28_3" column="KYd28_3" />
+		<property name="KYd28_4" column="KYd28_4" />
+		<property name="KYd28_5" column="KYd28_5" />
+		<property name="KYd28_6" column="KYd28_6" />
+		<property name="AvaTime" column="AvaTime" />
+		<property name="StandJudge" column="StandJudge" />
+		<property name="Assessor" column="Assessor" />
+		<property name="Principal" column="Principal" />
+		<property name="IsUse" column="IsUse" />
+		<property name="ExamGist" column="ExamGist" />
+		<property name="ExamResult" column="ExamResult" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="CommissionID" column="CommissionID" />
+    <many-to-one name="Commission" column="CommissionID" class="Commission" update="false" insert="false"/>
+    <property name="StuffID" column="StuffID" />
+		<many-to-one name="StuffInfo" column="StuffID" class="StuffInfo" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

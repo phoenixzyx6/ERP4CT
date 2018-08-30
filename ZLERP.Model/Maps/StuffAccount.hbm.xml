@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.StuffAccount, ZLERP.Model" table="StuffAccount" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="StuffAccountID">
+			<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="SiloId" column="SiloId" />
+		<property name="StuffId" column="StuffId" />
+		<property name="CurrentCount" column="CurrentCount" />
+		<property name="CurrentMoney" column="CurrentMoney" />
+		<property name="StuffAccountMainId" column="StuffAccountMainId" />
+		<property name="Meno" column="Meno" />
+		<property name="BuildTime" column="BuildTime" update="false"/>
+		<property name="Builder" column="Builder" update="false"/>
+		<property name="ModifyTime" column="ModifyTime" insert="false"/>
+		<property name="Modifier" column="Modifier" insert="false"/>
+		<property name="Lifecycle" column="Lifecycle" />
+
+		<many-to-one name="StuffAccountMain" column="StuffAccountMainId" class="StuffAccountMain" update="false" insert="false"/>
+		<many-to-one name="StuffInfo" column="StuffId" class="StuffInfo" update="false" insert="false"/>
+		<many-to-one name="Silo" column="SiloId" class="Silo" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

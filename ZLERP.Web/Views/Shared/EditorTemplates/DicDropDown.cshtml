@@ -1,0 +1,16 @@
+﻿@{
+    var data = @ViewData[ViewData["ParentID"].ToString()];
+    var list = Enumerable.Empty<SelectListItem>();
+    if(data != null){
+        list = new SelectList(data as IEnumerable<ZLERP.Model.Dic>, "TreeCode", "DicName");
+    }  
+}
+@{
+    IDictionary<string, object> htmlAttributes = new Dictionary<string, object>();
+    int count = ViewData.Keys.ToList().IndexOf("ParentID") + 1;
+    for (int i = count; i < ViewData.Count;i++ )
+    {
+        htmlAttributes.Add(ViewData.ElementAt(i));
+    }
+    @Html.DropDownListFor(m => m, list, htmlAttributes);
+}

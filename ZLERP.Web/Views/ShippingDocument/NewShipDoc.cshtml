@@ -1,0 +1,298 @@
+﻿@model ZLERP.Model.ShippingDocument
+@{
+    //运输单模板列表，默认选择值为"ShippingDocument.xml"的项
+    var ShipTempList = new SelectList(ViewBag.ShipTempItems, "TreeCode", "DicName", "ShippingDocument.xml");   
+ }
+@section HeaderSection{ 
+    <script src="@Url.Content("~/Scripts/Views/NewShipDoc.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        var lastDoc = null;
+        $(function () {
+            $("#ShipDocType").children("option[value='1']").remove();
+            $("#ShipDocType").children("option[value='拖泵票']").remove();
+            $("#ShipDocType").children("option[value='移泵票']").remove();
+        });
+        $(function () {
+            setTimeout(function () {
+                $('input[name=TaskID]').bind('change', function (s) {
+                    var taskid = $('input[name=TaskID]', '#NewShipDocForm').val();
+                    var shipDocType = $('#ShipDocType').val();
+                    if (!isEmpty(taskid)) {
+                        setFormValues('NewShipDocForm', '@Url.Action("GetLastPrintDocByTaskId")', { taskid: taskid, shipDocType: shipDocType }, function (response) {
+                            if (response.Result) {
+                                lastDoc = response.Data;
+                                $('#CarID').attr('disabled', false);
+                            } else {
+                                lastDoc = null;
+                                $('#CarID').attr('disabled', true);
+                            }
+                            $('#CarID').val("");
+                            $('#ShipDocType').val(shipDocType)
+                            $('#shipping-doc-id').val('');
+                        });
+                    }
+                    $('#CarID').val("");
+                });
+            }, 500);
+            $('#CarID').bind('change', function (s) {
+                var taskid = $('input[name=TaskID]', '#NewShipDocForm').val();
+                if (isEmpty(taskid)) {
+                    showMessage('提示', '请先选择工程名称！');
+                    return;
+                }
+                $('#ProduceDate').val('@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")');
+                $('#DeliveryTime').val('@DateTime.Now.AddMinutes(8).ToString("yyyy-MM-dd HH:mm:ss")');
+                var carid = $(this).val();
+                var shipDocType = $('#ShipDocType').val();
+                var driverList = $('#Driver');
+                driverList.empty();
+                ajaxRequest('@Url.Action("GetInfo", "Car")', { id: carid }, false, function (response) {
+                    var users = response.Users;
+                    if (!isEmpty(users)) {
+                        //设定司机
+                        for (var i = 0; i < users.length; i++) {
+                            var user = users[i];
+                            driverList.append("<option value=\"" + user.UserID + "\">" + user.TrueName + "</option>");
+                        }
+                    }
+                });
+                if (shipDocType == '0')
+                    ajaxRequest('@Url.Action("Get", "Car")', { id: carid }, false, function (response) {
+                        if (response.Result) {
+                            var MaxCube = response.Data['MaxCube'];
+                            var ljcs = lastDoc['ProvidedTimes'];
+                            var ljfl = lastDoc['ProvidedCube'];
+                            $('#BetonCount').val(MaxCube);
+                            $('#ParCube').val(MaxCube);
+                            $('#ShippingCube').val(MaxCube);
+                            $('#SignInCube').val(MaxCube);
+
+                            $('#ProvidedTimes').val(parseFloat(ljcs) + 1);
+                            $('#ProvidedCube').val((parseFloat(ljfl) + MaxCube).toFixed(2));
+                        }
+                    });
+                else
+                    ajaxRequest('@Url.Action("GetLastPrintDocByTaskId")', { taskid: taskid, shipDocType: shipDocType, carid: carid }, false, function (response) {
+                        if (response.Result) {
+                            $('#ProvidedTimes').val(parseFloat(response.Data['ProvidedTimes']) + 1);
+                        }
+                        else {
+                            $('#ProvidedTimes').val(1);
+                        }
+                        $('#BetonCount').val(0);
+                        $('#ParCube').val(0);
+                        $('#SlurryCount').val(0);
+                        $('#ProvidedCube').val(0);
+                        $('#PlanCube').val(0);
+                        $('#ShippingCube').val(0);
+                        $('#SignInCube').val(0);
+                        $('#shipping-doc-id').val('');
+                    });
+            });
+
+            $('#ShipDocType').bind('change', function (s) {
+                var shipDocType = $('#ShipDocType').val();
+                $('form', '#NewShipDocForm')[0].reset();
+                $('#ShipDocType').val(shipDocType);
+                $('#CarID').attr('disabled', false);
+                $('input[name=TaskID]', '#NewShipDocForm').val('');
+            });
+
+            $('#ProductLineID').bind('change', function () {
+
+                var txt = $('option:selected', this).text()
+                $('#ProductLineName').val(txt);
+            });
+            $('#ProductLineID').trigger('change');
+        });
+    </script>
+}
+
+<div id="NewShipDocForm" class="mvcform">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    @Html.HiddenFor(m => m.ID, new { id = "shipping-doc-id" })
+    @Html.HiddenFor(m => m.ProjectName)
+    @Html.HiddenFor(m => m.ProjectAddr)
+    @Html.HiddenFor(m => m.ProjectID)
+    @Html.HiddenFor(m => m.CustomerID)
+    @Html.HiddenFor(m => m.ContractID)
+    @Html.HiddenFor(m => m.CustMixpropID)
+    @Html.HiddenFor(m => m.ConsMixpropID)
+    @Html.HiddenFor(m => m.IsEffective, new { Value = true})
+@*    <tr> 
+        <td>@Html.LabelFor(m => m.ShipDocType)@Html.DicEditorFor(m => m.ShipDocType, DicEnum.ShipDocType)
+        <td>@Html.LabelFor(m => m.ProjectName)@Html.AutoCompleteFor(m => m.TaskID, m => m.ProjectName, "TodayTaskCombo", "ProduceTask", "ID", "ProjectName", null)
+        <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarDics, new { @class = "text", style = "width:110px;", id = "CarID" })</td>
+    </tr>
+    
+    <tr> 
+        <td>@Html.LabelFor(m => m.ProduceDate)@Html.EditorFor(m => m.ProduceDate, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })</td>
+ 
+        <td>@Html.LabelFor(m => m.ContractName)@Html.EditorFor(m => m.ContractName)</td>
+ 
+        <td>@Html.LabelFor(m => m.ConStrength)@Html.EditorFor(m => m.ConStrength)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.CastMode)@Html.EditorFor(m => m.CastMode)</td>
+ 
+        <td>@Html.LabelFor(m => m.ConsPos)@Html.EditorFor(m => m.ConsPos)</td>
+ 
+        <td>@Html.LabelFor(m => m.PumpName)@Html.DropDownListFor(m => m.PumpName, (SelectList)ViewBag.PumpList, "", new { style = "width:110px;" })</td>
+   
+    </tr>
+     
+    <tr> 
+        <td>@Html.LabelFor(m => m.CarpRadii)@Html.EditorFor(m => m.CarpRadii)</td>
+ 
+        <td>@Html.LabelFor(m => m.CementBreed)@Html.EditorFor(m => m.CementBreed)</td>
+ 
+        <td>@Html.LabelFor(m => m.RealSlump)@Html.EditorFor(m => m.RealSlump)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.SignInCube)@Html.EditorFor(m => m.SignInCube, new { id = "SignInCube" })</td>
+        <td>@Html.LabelFor(m => m.BetonCount)@Html.EditorFor(m => m.BetonCount, new { id = "BetonCount" })</td>
+ 
+        <td>@Html.LabelFor(m => m.SlurryCount)@Html.EditorFor(m => m.SlurryCount)</td>
+ 
+        
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.ParCube)@Html.EditorFor(m => m.ParCube, new { id = "ParCube" })</td>
+ 
+        <td>@Html.LabelFor(m => m.ProvidedCube)@Html.EditorFor(m => m.ProvidedCube, new { id = "ProvidedCube" })</td>
+ 
+        <td>@Html.LabelFor(m => m.PlanCube)@Html.EditorFor(m => m.PlanCube)</td>
+   
+    </tr> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.CustName)@Html.EditorFor(m => m.CustName)</td>
+         <td>@Html.LabelFor(m => m.Driver)@Html.fixedDropDownListFor(m => m.Driver, Enumerable.Empty<SelectListItem>()) 
+        </td>
+         <td>@Html.LabelFor(m => m.ProvidedTimes)@Html.EditorFor(m => m.ProvidedTimes, new { id = "ProvidedTimes" })</td>
+    </tr>
+   
+    <tr> 
+        <td>@Html.LabelFor(m => m.Surveyor)@Html.EditorFor(m => m.Surveyor)</td>
+ 
+        <td>@Html.LabelFor(m => m.Operator)@Html.EditorFor(m => m.Operator)</td>
+ 
+        <td>@Html.LabelFor(m => m.PlanClass)@Html.EditorFor(m => m.PlanClass)</td>
+   
+    </tr>
+ 
+    <tr> 
+        <td>@Html.LabelFor(m => m.ProductLineID)@Html.DropDownListFor(m => m.ProductLineID, (SelectList)ViewBag.productLineDics, new { @class = "text", style = "width:110px;" })
+        @Html.HiddenFor(m => m.ProductLineName)
+        </td>
+ 
+        <td>@Html.LabelFor(m => m.RegionID)@Html.EditorFor(m => m.RegionID)</td>
+ 
+        <td>@Html.LabelFor(m => m.SupplyUnit)@Html.EditorFor(m => m.SupplyUnit)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.ConstructUnit)@Html.EditorFor(m => m.ConstructUnit)</td>
+ 
+        <td>@Html.LabelFor(m => m.EntrustUnit)@Html.EditorFor(m => m.EntrustUnit)</td>
+ 
+        <td>@Html.LabelFor(m => m.Remark)@Html.EditorFor(m => m.Remark)</td>
+   
+    </tr>
+
+    <tr> 
+        <td>@Html.LabelFor(m => m.Tel)@Html.EditorFor(m => m.Tel)</td>
+ 
+        <td>@Html.LabelFor(m => m.ProjectID)@Html.EditorFor(m => m.ProjectID)</td>
+        <td>@Html.LabelFor(m => m.LinkMan)@Html.EditorFor(m => m.LinkMan)</td>
+   
+    </tr>
+    <tr>
+    <td>@Html.Label("发货单模板:")@Html.DropDownList("TemplateID", ShipTempList)</td>
+    <td>@Html.LabelFor(m => m.ShippingCube)@Html.EditorFor(m => m.ShippingCube, new { id = "ShippingCube" })</td>
+    
+    <td>@Html.LabelFor(m => m.ProjectAddr)@Html.EditorFor(m => m.ProjectAddr)</td>
+    </tr>*@
+
+
+    <tr> 
+        <td>@Html.LabelFor(m => m.ShipDocType)@Html.DicEditorFor(m => m.ShipDocType, DicEnum.ShipDocType)</td>
+        <td>@Html.LabelFor(m => m.ProjectName)@Html.AutoCompleteFor(m => m.TaskID, m => m.ProjectName, "TodayTaskCombo", "ProduceTask", "ID", "ProjectName", null)</td>
+        <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarDics, new { @class = "text", style = "width:110px;", id = "CarID" })</td>
+    </tr>
+    
+    <tr> 
+        <td>@Html.LabelFor(m => m.ProduceDate)@Html.EditorFor(m => m.ProduceDate, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+        <td>@Html.LabelFor(m => m.ContractName)@Html.EditorFor(m => m.ContractName)</td> 
+        <td>@Html.LabelFor(m => m.Driver)@Html.EditorFor(m => m.Driver)</td>   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.DeliveryTime)@Html.EditorFor(m => m.DeliveryTime, "DateTimeWithTime", new { defaultValue = @DateTime.Now.AddMinutes(8).ToString("yyyy-MM-dd HH:mm:ss") })</td>
+        <td>@Html.LabelFor(m => m.CustName)@Html.EditorFor(m => m.CustName)</td> 
+        <td>@Html.LabelFor(m => m.BetonCount)@Html.EditorFor(m => m.BetonCount, new { id = "BetonCount" })</td>   
+    </tr>
+     
+    <tr> 
+        <td>@Html.LabelFor(m => m.ConStrength)@Html.EditorFor(m => m.ConStrength)</td> 
+        <td>@Html.LabelFor(m => m.ConstructUnit)@Html.EditorFor(m => m.ConstructUnit)</td> 
+        <td>@Html.LabelFor(m => m.SlurryCount)@Html.EditorFor(m => m.SlurryCount)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.CastMode)@Html.EditorFor(m => m.CastMode)</td> 
+        <td>@Html.LabelFor(m => m.ProjectAddr)@Html.EditorFor(m => m.ProjectAddr)</td> 
+        <td>@Html.LabelFor(m => m.ParCube)@Html.EditorFor(m => m.ParCube, new { id = "ParCube" })</td>   
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.ConsPos)@Html.EditorFor(m => m.ConsPos, new { id = "SignInCube" })</td>
+        <td>@Html.LabelFor(m => m.RegionID)@Html.EditorFor(m => m.RegionID)</td> 
+        <td>@Html.LabelFor(m => m.SignInCube)@Html.EditorFor(m => m.SignInCube, new { id = "SignInCube" })</td>
+   
+    </tr> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.PumpName)@Html.DropDownListFor(m => m.PumpName, (SelectList)ViewBag.PumpList, "", new { style = "width:110px;" })</td>
+        <td>@Html.LabelFor(m => m.PlanCube)@Html.EditorFor(m => m.PlanCube)</td> 
+        <td>@Html.LabelFor(m => m.ProvidedCube)@Html.EditorFor(m => m.ProvidedCube, new { id = "ProvidedCube" })</td>
+    </tr>
+   
+    <tr> 
+        <td>@Html.LabelFor(m => m.RealSlump)@Html.EditorFor(m => m.RealSlump)</td>         
+        <td>@Html.LabelFor(m => m.LinkMan)@Html.EditorFor(m => m.LinkMan)</td> 
+        <td>@Html.LabelFor(m => m.ProvidedTimes)@Html.EditorFor(m => m.ProvidedTimes, new { id = "ProvidedTimes" })</td>
+   
+    </tr>
+ 
+    <tr> 
+        <td>@Html.LabelFor(m => m.ProductLineID)@Html.DropDownListFor(m => m.ProductLineID, (SelectList)ViewBag.productLineDics, new { @class = "text", style = "width:110px;" })
+            @Html.HiddenFor(m => m.ProductLineName)
+        </td>          
+        <td>@Html.LabelFor(m => m.Tel)@Html.EditorFor(m => m.Tel)</td> 
+        <td>@Html.LabelFor(m => m.ShippingCube)@Html.EditorFor(m => m.ShippingCube, new { id = "ShippingCube" })</td>
+           
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Surveyor)@Html.EditorFor(m => m.Surveyor)</td>        
+        <td>@Html.LabelFor(m => m.EntrustUnit)@Html.EditorFor(m => m.EntrustUnit)</td> 
+        <td>@Html.LabelFor(m => m.SupplyUnit)@Html.EditorFor(m => m.SupplyUnit)</td>
+   
+    </tr>
+
+    <tr> 
+        <td>@Html.LabelFor(m => m.Operator)@Html.EditorFor(m => m.Operator)</td>         
+        <td>@Html.LabelFor(m => m.PlanClass)@Html.EditorFor(m => m.PlanClass)</td>
+        <td>@Html.LabelFor(m => m.Remark)@Html.EditorFor(m => m.Remark)</td>
+   
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.Signer)@Html.EditorFor(m => m.Signer)</td> 
+        <td>@Html.Label("发货单模板")@Html.DropDownList("TemplateID", ShipTempList)</td>
+    </tr>
+     
+</table>
+}
+</div>
+

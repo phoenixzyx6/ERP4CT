@@ -1,0 +1,50 @@
+﻿@model ZLERP.Model.Dic　
+@section HeaderSection{
+<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/Views/Dic/SubTree.js")"> </script>
+<script type="text/javascript">
+  $(function(){
+      var options = {
+          storeUrl: '@Url.Action("FindDics")'
+            , ParentID: '@Request.RequestContext.RouteData.Values["ID"].ToString()'
+      };
+      $(function () {
+          dicIndexInit(options);
+      });
+  });
+ </script>
+} 
+<div id="grid"></div> 
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ID)@Html.TextBoxFor(m=>m.ID)</td> 
+        <td>@Html.LabelFor(m=>m.DicName)@Html.TextBoxFor(m=>m.DicName)</td>   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.TreeCode)@Html.TextBoxFor(m => m.TreeCode, new { @data_val_required = "节点代码 字段是必需的" })</td> 
+        <td>@Html.LabelFor(m=>m.Des)@Html.TextBoxFor(m=>m.Des)</td>   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.ParentID)@Html.DropDownTreeFor(m => m.ParentID, "FindDicsTree", new { id = Request.RequestContext.RouteData.Values["ID"].ToString() }, Request.RequestContext.RouteData.Values["ID"].ToString())</td> 
+        <td>@Html.LabelFor(m=>m.IsLeaf)@Html.CheckBoxFor(m=>m.IsLeaf)</td>   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.OrderNum)@Html.TextBoxFor(m=>m.OrderNum, new { @class = "text", Value="0" })</td> 
+        <td>  
+        </td>   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Field1)@Html.TextBoxFor(m => m.Field1, new { style = "ime-mode:disabled" })</td> 
+        <td>@Html.LabelFor(m=>m.Field2)@Html.TextBoxFor(m=>m.Field2)</td>   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Field3)@Html.TextBoxFor(m=>m.Field3)</td> 
+        <td>@Html.LabelFor(m=>m.Field4)@Html.TextBoxFor(m=>m.Field4)</td>
+    </tr>
+   
+</table>
+
+}
+</div> 

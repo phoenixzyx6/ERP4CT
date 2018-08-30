@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.ContractItem, ZLERP.Model" table="ContractItems" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="ContractItemsID">
+		 	<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="ConStrength" column="ConStrength" />
+		<property name="UnPumpPrice" column="UnPumpPrice" />
+		<property name="PumpCost" column="PumpCost" />
+		<property name="SlurryPrice" column="SlurryPrice" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="ContractID" column="ContractID" />
+    <property name="TranPrice" column="TranPrice" />
+    <many-to-one name="Contract" column="ContractID" class="Contract" update="false" insert="false" />
+		<bag name="IdentitySettings" lazy="true"  inverse="true" >
+			<key column="ContractItemsID"></key>
+			<one-to-many class="IdentitySetting"></one-to-many>
+		</bag>
+    <bag name="ProduceTasks" lazy="true" inverse="true" >
+      <key column="ContractItemsID"></key>
+      <one-to-many class="ProduceTask"></one-to-many>
+    </bag>
+	</class>
+</hibernate-mapping>

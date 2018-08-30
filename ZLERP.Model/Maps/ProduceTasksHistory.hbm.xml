@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.ProduceTasksHistory, ZLERP.Model" table="ProduceTasksHistory" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="AutoID">
+		 	<generator class="native" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="TaskID" column="TaskID" />
+		<property name="ContractID" column="ContractID" />
+		<property name="ProjectName" column="ProjectName" />
+		<property name="ProjectAddr" column="ProjectAddr" />
+		<property name="Seller" column="Seller" />
+		<property name="ConstructUnit" column="ConstructUnit" />
+		<property name="ConsPosType" column="ConsPosType" />
+		<property name="ConsPos" column="ConsPos" />
+		<property name="ContractItemsID" column="ContractItemsID" />
+		<property name="PlanCube" column="PlanCube" />
+		<property name="NeedTimes" column="NeedTimes" />
+		<property name="PumpType" column="PumpType" />
+		<property name="NeedDate" column="NeedDate" />
+		<property name="BuildUnit" column="BuildUnit" />
+		<property name="SupplyUnit" column="SupplyUnit" />
+		<property name="SupplyUnitTel" column="SupplyUnitTel" />
+		<property name="IsCommission" column="IsCommission" />
+		<property name="CompPrincipal" column="CompPrincipal" />
+		<property name="LinkMan" column="LinkMan" />
+		<property name="Tel" column="Tel" />
+		<property name="IsDatum" column="IsDatum" />
+		<property name="CarpGrade" column="CarpGrade" />
+		<property name="Carper" column="Carper" />
+		<property name="CarpRadii" column="CarpRadii" />
+		<property name="BetonTag" column="BetonTag" />
+		<property name="CementBreed" column="CementBreed" />
+		<property name="ConStrength" column="ConStrength" />
+		<property name="WCRate" column="WCRate" />
+		<property name="MixpropRate" column="MixpropRate" />
+		<property name="Slump" column="Slump" />
+		<property name="CastMode" column="CastMode" />
+		<property name="OtherDemand" column="OtherDemand" />
+		<property name="Auditor" column="Auditor" />
+		<property name="AuditTime" column="AuditTime" />
+		<property name="AuditStatus" column="AuditStatus" />
+		<property name="IsCompleted" column="IsCompleted" />
+		<property name="CompleteDate" column="CompleteDate" />
+		<property name="Remark" column="Remark" />
+		<property name="Distance" column="Distance" />
+		<property name="RegionID" column="RegionID" />
+		<property name="IsSlurry" column="IsSlurry" />
+		<property name="SlurryFormula" column="SlurryFormula" />
+		<property name="TaskType" column="TaskType" />
+		<property name="CementType" column="CementType" />
+		<property name="BetonFormula" column="BetonFormula" />
+		<property name="IsFormulaSend" column="IsFormulaSend" />
+		<property name="CustMixpropID" column="CustMixpropID" />
+		<property name="ImpGrade" column="ImpGrade" />
+		<property name="ImyGrade" column="ImyGrade" />
+		<property name="ImdGrade" column="ImdGrade" />
+		<property name="ImyCriterion" column="ImyCriterion" />
+		<property name="ImzCriterion" column="ImzCriterion" />
+		<property name="IsImpExp" column="IsImpExp" />
+		<property name="IsImzExp" column="IsImzExp" />
+		<property name="AdditiveType" column="AdditiveType" />
+		<property name="IdentityValue" column="IdentityValue" />
+		<property name="PlanClass" column="PlanClass" />
+		<property name="ProductPrincipal" column="ProductPrincipal" />
+		<property name="ForkLift" column="ForkLift" />
+		<property name="Field1" column="Field1" />
+		<property name="Field2" column="Field2" />
+		<property name="Field3" column="Field3" />
+		<property name="Field4" column="Field4" />
+		<property name="Field5" column="Field5" />
+		<property name="Act" column="Act" />
+		<property name="ExecTime" column="ExecTime" />
+    <property name="ExecMan" column="ExecMan" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+	</class>
+</hibernate-mapping>

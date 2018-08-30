@@ -1,0 +1,40 @@
+﻿@model ZLERP.Model.Dic　
+@section HeaderSection{
+<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/Views/Dic/TyreBrand.js")"> </script>
+<script type="text/javascript">
+  $(function(){
+      var options = {
+          storeUrl: '@Url.Action("FindDics")',
+           ParentID: '@Request.RequestContext.RouteData.Values["ID"].ToString()'
+      };
+      $(function () {
+          dicIndexInit(options);
+      });
+  });
+ </script>
+} 
+<div id="grid"></div> 
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td>@Html.HiddenFor(m=>m.ID)@Html.LabelFor(m=>m.DicName)@Html.TextBoxFor(m=>m.DicName)</td>   
+    </tr>
+    <tr> 
+        <td>@Html.Label("联系人")@Html.TextBoxFor(m=>m.Field3)@Html.HiddenFor(m => m.TreeCode)</td> 
+         <td>@Html.Label("联系电话")@Html.TextBoxFor(m=>m.Field2)</td>   
+    </tr>
+    <tr>  
+        <td colspan = "2">@Html.CheckBoxFor(m => m.IsLeaf, new { style = "display:none;", Checked = true })@Html.Label("联系地址")@Html.TextAreaFor(m => m.Field1, 1,50,null)@Html.HiddenFor(m => m.ParentID, new { id = Request.RequestContext.RouteData.Values["ID"].ToString(), Value = Request.RequestContext.RouteData.Values["ID"].ToString() })</td>   
+    </tr>
+    <tr> 
+        <td colspan = "2">@Html.HiddenFor(m => m.Field4)@Html.LabelFor(m => m.Des)@Html.TextAreaFor(m => m.Des, 1, 50, null)@Html.HiddenFor(m => m.OrderNum, new { @class = "text", Value = "0" })</td> 
+    </tr>
+    
+   
+   
+</table>
+
+}
+</div> 

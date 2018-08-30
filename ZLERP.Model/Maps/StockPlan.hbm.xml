@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.StockPlan, ZLERP.Model" table="StockPlan" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="StockPlanID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="PlanDate" column="PlanDate" />
+		<property name="PlanMan" column="PlanMan" />
+		<property name="CustName" column="CustName" />
+		<property name="SourceAddr" column="SourceAddr" />
+		<property name="Conveyancer" column="Conveyancer" />
+		<property name="TransportMode" column="TransportMode" />
+		<property name="WeighBy" column="WeighBy" />
+		<property name="PlanAmount" column="PlanAmount" />
+		<property name="GageUnit" column="GageUnit" />
+		<property name="Price" column="Price" />
+		<property name="BeginDate" column="BeginDate" />
+		<property name="EndDate" column="EndDate" />
+		<property name="ExecStatus" column="ExecStatus" />
+		<property name="QualityNeed" column="QualityNeed" />
+		<property name="Auditor" column="Auditor" />
+		<property name="AuditTime" column="AuditTime" />
+		<property name="AuditStatus" column="AuditStatus" />
+		<property name="AuditInfo" column="AuditInfo" />
+		<property name="CloseReason" column="CloseReason" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+    <property name="StockPactID" column="StockPactID" />
+		<many-to-one name="StockPact" column="StockPactID" class="StockPact" update="false" insert="false"/>
+    <property name="StuffID" column="StuffID" />
+    <many-to-one name="StuffInfo" column="StuffID" class="StuffInfo" insert="false" update="false"/>
+    <property name="SupplyID" column="SupplyID" />
+    <many-to-one name="SupplyInfo" column="SupplyID" class="SupplyInfo" insert="false" update="false"/>
+	</class>
+</hibernate-mapping>

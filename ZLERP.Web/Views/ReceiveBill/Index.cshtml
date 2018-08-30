@@ -1,0 +1,83 @@
+﻿@model ZLERP.Model.ReceiveBill 
+@section HeaderSection{ 
+<script src="@Url.Content("~/Scripts/Views/ReceiveBill/ReceiveBill.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            receivebillIndexInit({ storeUrl: '@Url.Action("Find")',
+                getSendCubeUrl: '@Url.Action("GetSendCube")'
+            });
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td>@Html.LabelFor(m => m.ContractID)@Html.AutoCompleteFor(m => m.ContractID, m => m.ContractName, "Combo", "Contract", "ID", "ContractName", null)
+        @Html.HiddenFor(m=>m.ID)
+        </td>
+ 
+        <td>@Html.LabelFor(m=>m.ReceiveDate)@Html.EditorFor(m => m.ReceiveDate, "DateTimeWithTime", new { defaultValue = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+   
+    </tr>
+     <tr> 
+        <td>@Html.LabelFor(m=>m.BeginDate)@Html.EditorFor(m=>m.BeginDate,"DateTime")</td>
+ 
+        <td>@Html.LabelFor(m=>m.EndDate)@Html.EditorFor(m => m.EndDate, "DateTime", new { defaultValue = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd") })</td>
+   
+    </tr>
+     <tr> 
+        <td>@Html.LabelFor(m=>m.NewAmount)@Html.EditorFor(m=>m.NewAmount)</td>
+ 
+        <td>@Html.LabelFor(m=>m.ReceiveUser)@Html.DropDownListFor(m => m.ReceiveUser, (IEnumerable<SelectListItem>)ViewBag.ReceiveUsers)</td>
+   
+    </tr>
+   
+   
+    <tr class="num"> 
+        <td>@Html.LabelFor(m=>m.Cash)@Html.EditorFor(m=>m.Cash)</td>
+ 
+        <td>@Html.LabelFor(m=>m.CheckAmt)@Html.EditorFor(m=>m.CheckAmt)</td>
+   
+    </tr>
+    <tr class="num"> 
+        <td>@Html.LabelFor(m=>m.Discount)@Html.EditorFor(m=>m.Discount)</td>
+ 
+        <td>@Html.LabelFor(m=>m.NewKeep)@Html.EditorFor(m=>m.NewKeep)</td>
+   
+    </tr>
+    <tr class="num"> 
+        <td>@Html.LabelFor(m=>m.LastKeep)@Html.EditorFor(m=>m.LastKeep)</td>
+ 
+        <td>@Html.LabelFor(m=>m.NewBad)@Html.EditorFor(m=>m.NewBad)</td>
+   
+    </tr>
+    <tr class="num"> 
+        <td>@Html.LabelFor(m=>m.LastBad)@Html.EditorFor(m=>m.LastBad)</td>
+ 
+        <td>@Html.LabelFor(m=>m.OtherAdd)@Html.EditorFor(m=>m.OtherAdd)</td>
+   
+    </tr>
+    <tr class="num"> 
+        <td>@Html.LabelFor(m=>m.OtherSub)@Html.EditorFor(m=>m.OtherSub)</td>
+ 
+        <td>@Html.LabelFor(m=>m.Total)@Html.TextBoxFor(m => m.Total, new { readOnly = true })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Sales)@Html.DropDownListFor(m => m.Sales, (IEnumerable<SelectListItem>)ViewBag.Sales)</td>
+ 
+        <td>@Html.LabelFor(m=>m.PayUser)@Html.EditorFor(m=>m.PayUser)</td>
+   
+    </tr>
+    <tr> 
+         
+ 
+        <td colspan="2">@Html.LabelFor(m=>m.Memo)@Html.TextAreaFor(m=>m.Memo, 2, 50,null)</td>
+    </tr>
+</table>
+
+}
+</div>

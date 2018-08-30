@@ -1,0 +1,167 @@
+﻿@model ZLERP.Model.ViewModels.ContractAndItems
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/ajaxfileupload.js")" type="text/javascript" language="javascript"> </script>
+    <script src="@Url.Content("~/Scripts/Views/Contract/PayIndex.js")" type="text/javascript" language="javascript"> </script>
+
+    <script type="text/javascript">
+        $(function () {
+            payIndexInit({
+                ContractStoreUrl: '@Url.Action("Find")'
+            });
+        });
+    </script>
+}
+<div id="buttonToolbar">
+</div>
+<div style="float: left; width: 69%">
+    <div id="Contractid">
+    </div>
+    <div id="dzGrid">
+    </div>
+</div>
+<div style="float: right; width: 30%">
+    <div id="productGrid">
+    </div>
+    <div id="jstzGrid">
+    </div>
+    <div id="payGrid">
+    </div>
+</div>
+<div id="JSTZForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td colspan="2">@Html.TextBoxFor(m => m.ContractJSTZ.ID, new { @class = "text", style = "display:none" })
+                    @Html.LabelFor(m => m.Contract.ContractName)@Html.HiddenFor(m => m.ContractJSTZ.ContractID, new { @class = "text" })<span
+                        id="ContractName_project" style="color: Red;"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractJSTZ.ChangeDate)@Html.EditorFor(m => m.ContractJSTZ.ChangeDate)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractJSTZ.JSDate)@Html.EditorFor(m => m.ContractJSTZ.JSDate)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractJSTZ.AdjustType)@Html.DicEditorFor(m => m.ContractJSTZ.AdjustType, DicEnum.ContractAccAdjust, new { width = "137px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractJSTZ.ChangeMoney)@Html.TextBoxFor(m => m.ContractJSTZ.ChangeMoney, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.ContractJSTZ.Remark)@Html.TextAreaFor(m => m.ContractJSTZ.Remark, new { @class = "text" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="DZForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td colspan="2">@Html.HiddenFor(m => m.ContractDZ.ID)
+                    @Html.LabelFor(m => m.Contract.ContractName)@Html.HiddenFor(m => m.ContractDZ.ContractID, new { @class = "text" })<span
+                        id="ContractName_project3" style="color: Red;"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>应收款日期 @Html.EditorFor(m => m.ContractDZ.DZDate)
+                </td>
+            </tr>
+            <tr>
+                <td>应收款金额 @Html.EditorFor(m => m.ContractDZ.DZMoney)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.ContractDZ.Remark)@Html.TextAreaFor(m => m.ContractDZ.Remark)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="PayForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td colspan="2">@Html.TextBoxFor(m => m.ContractPay.ID, new { @class = "text", style = "display:none" })
+                    @Html.LabelFor(m => m.Contract.ContractName)@Html.HiddenFor(m => m.ContractPay.ContractID, new { @class = "text" })<span
+                        id="ContractName_project2" style="color: Red;"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractPay.PayDate)@Html.EditorFor(m => m.ContractPay.PayDate)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractPay.PayType)@Html.DicEditorFor(m => m.ContractPay.PayType, DicEnum.ContractPayType)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractPay.PayMoney)@Html.TextBoxFor(m => m.ContractPay.PayMoney, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ContractPay.Manager)@Html.TextBoxFor(m => m.ContractPay.Manager, new { @class = "text" })
+                    @*@Html.AutoComplete("Manager", "ManagerName", "Combo", "User", "ID", "TrueName")*@
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.ContractPay.Remark)@Html.TextAreaFor(m => m.ContractPay.Remark, new { @class = "text" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="ConfirmForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.TextBoxFor(m => m.Contract.ID, new { @class = "text", style = "display:none" })
+                    @Html.LabelFor(m => m.Contract.ContractName) <span id="ContractName_project1" style="color: Red;">
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="color: Red;">请确保结算前已填写好混凝土价格</span>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.FootDate)@Html.EditorFor(m => m.Contract.FootDate)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+@*授信额度设置*@
+<div id="CreditForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td colspan="2">@Html.TextBoxFor(m => m.Contract.ID, new { @class = "text", style = "display:none" })
+                    @Html.LabelFor(m => m.Contract.ContractName)
+                    <span id="C_ContractName" style="color: Red;"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Contract.CreditMoney)@Html.EditorFor(m => m.Contract.CreditMoney)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+

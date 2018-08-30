@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.PurchaseMain, ZLERP.Model" table="PurchaseMain" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" >
+		<id name="ID" column="Main_ID">
+		 	<generator class="native" />
+		</id>
+    <many-to-one name="PurchasePlan" column="PurchasePlan_ID" class="PurchasePlan" insert="false" update="false" />
+    <bag name="Purchases" lazy="true" batch-size="30" inverse="true" >
+      <key column="Main_ID"></key>
+      <one-to-many class="Purchase"></one-to-many>
+    </bag>
+    <property name="Main_Num" column="Main_Num" />
+	<property name="GoodsID" column="GoodsID" />
+	<property name="GoodsName" column="GoodsName" />
+	<property name="GoodsTypeID" column="GoodsTypeID" />
+	<property name="GoodsTypeName" column="GoodsTypeName" />
+	<property name="Main_Sate" column="Main_Sate" />
+	<property name="Main_Price" column="Main_Price" />
+	<property name="Main_Sumprice" column="Main_Sumprice" />
+	<property name="Main_Money" column="Main_Money" />
+	<property name="Main_NoMoney" column="Main_NoMoney" />
+	<property name="Main_num1" column="Main_num1" />
+	<property name="Remark" column="Remark" />
+   
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />	
+	</class>
+</hibernate-mapping>

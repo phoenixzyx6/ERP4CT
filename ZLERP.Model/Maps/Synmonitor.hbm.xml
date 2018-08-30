@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Synmonitor, ZLERP.Model" table="Synmonitor" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" >
+		<id name="ID" column="id">
+		 	<generator class="native" />
+		</id>
+    <property name="tb_name" column="tb_name" />
+    <property name="tb_action" column="tb_action" />
+		<property name="key_name" column="key_name" />
+		<property name="key_value" column="key_value" />
+		<property name="key_type" column="key_type" />
+		<property name="action_time" column="action_time" />
+		<property name="ProductLineID" column="ProductLineID" />
+	</class>
+</hibernate-mapping>

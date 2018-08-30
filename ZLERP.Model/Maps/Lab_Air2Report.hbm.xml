@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.Lab_Air2Report, ZLERP.Model" table="Lab_Air2Report" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="Reportid">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="Lab_RecordID" column="Lab_RecordID" />
+    <property name="DependInfoID" column="DependInfoID" />
+    <property name="Date" column="Date" />
+    <property name="ReportDate" column="ReportDate" />
+    <property name="Unit" column="Unit" />
+    <property name="Grade" column="Grade" />
+    <property name="Type" column="Type" />
+    <property name="GoDate" column="GoDate" />
+    <property name="Radix" column="Radix" />
+    <property name="DensityResult" column="DensityResult" />
+    <property name="DensityConclusion" column="DensityConclusion" />
+    <property name="SpecificResult" column="SpecificResult" />
+    <property name="SpecificConclusion" column="SpecificConclusion" />
+    <property name="Active7dResult" column="Active7dResult" />
+    <property name="Active7dConclusion" column="Active7dConclusion" />
+    <property name="Active28dResult" column="Active28dResult" />
+    <property name="Active28dConclusion" column="Active28dConclusion" />
+    <property name="FluidityResult" column="FluidityResult" />
+    <property name="FluidityConclusion" column="FluidityConclusion" />
+    <property name="WaterResult" column="WaterResult" />
+    <property name="WaterConclusion" column="WaterConclusion" />
+    <property name="Conclusion" column="Conclusion" />
+    <property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <many-to-one name="Lab_Record" column="Lab_RecordID" class="Lab_Record" update="false" insert="false"/>
+  </class>
+</hibernate-mapping>

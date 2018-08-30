@@ -1,0 +1,49 @@
+﻿@model IList<ZLERP.Model.ShippingDocument>
+@{
+    ViewBag.Title = "生产方量统计";
+    
+ } 
+ 
+ @section Header{
+ <link href="@Url.Content("~/Content/mobile/css/calendar.css")" rel="stylesheet" type="text/css">  
+ <script language="javascript" type="text/javascript" src="@Url.Content("~/Scripts/calendar.js")" ></script>
+ }
+    <div style="padding:3px; font-size:1.3em; background:#fff;"> 
+        <h1>生产方量统计 </h1>
+
+        <div>
+        @using (Html.BeginForm())
+        {
+            <p class="botonlink">
+          
+              <label for="text1">日期从: 
+              @Html.TextBox("StartDate", "", new { Class = "inputtxt", onclick = "showcalendar(event,this);" })@Html.ValidationMessage("StartDate")
+              </label>
+            
+            
+            <label for="text1">至:
+            @Html.TextBox("EndDate", "", new { Class = "inputtxt", onclick = "showcalendar(event,this);" })
+              @Html.ValidationMessage("EndDate")</label>
+             
+            <input type="submit" class="btn" value="查询" />
+            </p>
+        }
+        </div>
+        @if (Model != null)
+        {
+         <p style="color:red;">
+        总出票方量：@Math.Round(Model.Sum(p => p.ParCube), 1)
+         
+        总调度方量：@Math.Round(Model.Sum(p => p.SendCube), 1)
+        </p>
+        <table>
+        <tr>
+        <th>工程名称</th> <th>砼强度</th> <th>出票方量</th> <th>调度方量</th>
+        </tr>
+        @foreach (var proj in Model)
+        { 
+           <tr> <td>@proj.ProjectName</td> <td>@proj.ConStrength</td> <td>@Math.Round(proj.ParCube, 1)</td> <td> @Math.Round(proj.SendCube, 1)</td> </tr>
+        }
+        </table>
+        }
+    </div>

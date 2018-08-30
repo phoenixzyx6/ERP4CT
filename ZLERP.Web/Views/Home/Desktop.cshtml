@@ -1,0 +1,182 @@
+﻿@model IList<ZLERP.Model.MyMsg>
+@section HeaderSection{
+    <style type="text/css">
+        .taskinfo
+        {
+            width: 15.4%;
+            margin: .5em .5em 0 0;
+            float: left;
+            padding: 0.3em 0.2em 0.3em 0.5em;
+            height: 118px;
+        }
+        .taskinfo span
+        {
+            color: #2E6E9E;
+        }
+        .taskinfo label
+        {
+            width: 5em;
+            text-align: right;
+            display: inline-block;
+            margin-right: .5em;
+        }
+    </style>
+}
+<div id="accordion">
+    <h3>
+        <a href="#">通知公告</a></h3>
+    <div>
+        @if (ViewBag.Notice != null)
+        {
+            <h2 style="text-align: center; padding: .5em 0">
+                @ViewBag.Notice.Title</h2>
+            <div style="line-height: 1.7em">
+                @Html.Raw(ViewBag.Notice.Content)
+                @if (ViewBag.Notice.Attachments.Count > 0)
+                { 
+                    <ul>
+                        <li><strong>附件：</strong></li>
+                        @foreach (ZLERP.Model.Attachment att in ViewBag.Notice.Attachments)
+                        { 
+                            <li><a href="@Url.Content(att.FileUrl)" target="_blank">@att.Title</a></li>
+                        }
+                    </ul>
+                }
+            </div>
+            <p style="text-align: right;">
+                @ViewBag.Notice.CreateUser.TrueName<br />
+                @ViewBag.Notice.BuildTime.ToString(Lang.Format_DateTime_String)
+            </p>
+        }
+        else
+        { 
+            <p>
+                暂无公告</p>
+        }
+    </div>
+</div>
+<div id="task-grid" style="width: 100%; margin-top: 1em;">
+    
+    <div style="width:100%; height:auto; display:inline-block; overflow-y:auto;overflow-x:hidden">
+        @foreach (ZLERP.Model.MyMsg msg in ViewBag.TotalMsg)
+        { 
+            <div class="taskinfo ui-widget-content ui-corner-all" id="@msg.ID">
+                <div class="ui-widget-header ui-corner-all ui-helper-clearfix" style="padding: .3em;">
+                    @msg.SystemMsg.MsgType <span style="float: right; font-weight: normal;"><a href="javascript:void(0);" id = "@msg.ID">
+                        <span style="color: Green;">✎</span>标记为已读</a></span>
+                </div>
+                <label>
+                    消息标题:</label><span style="color: Red;">@if (@msg.SystemMsg.MsgTitle.Length > 10)
+                                                           { @msg.SystemMsg.MsgTitle.Substring(0, 10).ToString()}
+                                                           else { @msg.SystemMsg.MsgTitle}</span><br />
+                <label>
+                    处理对象:</label>@if (!(string.IsNullOrEmpty(msg.SystemMsg.Url)))
+                                 {<span onclick="openToUrl('@msg.SystemMsg.Url','@msg.SystemMsg.PID')" title="点击跳转至目标页面" style="color:Green; text-decoration:underline; cursor:pointer;">@msg.SystemMsg.OperateObj</span>}
+                                 else
+                                 { if (@msg.SystemMsg.HasAttachments)
+                                   { <img src="../../Content/themes/default/images/fj.gif" alt="" style=" vertical-align:middle;"/>}<span>＜详细见消息主体＞ </span>}<br />
+                <label>
+                    发送者:</label><span>@msg.SystemMsg.Sender</span><br />
+                <label>
+                    发送时间:</label><span>@msg.SystemMsg.SendTime</span>
+            </div>
+        }
+    </div>
+    <div>
+    <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" style="padding: .5em;position:fixed;bottom:0;margin:auto;"
+        tabindex="-1">
+        <a style="color: Red;">我的未处理消息</a> (共:<span id="TotalMsgCount" style="color: Red;
+            font-weight: bold;">@ViewBag.TotalMsg.Count</span>条) [<a href="javascript:void(0);"
+                onclick="refresh();">刷新</a>] [<a href="#" id="showmore">查看更多…</a>] <a style="color:#f00; margin-left:15px;" href="@Url.Content("~/Reports/Produce/Kanban.aspx")" target="_blank" >
+                    调度看板</a> <a style="color: Green;" href="@Url.Content("~/Reports/Produce/LinkManRecord.aspx")" target="_blank" >
+                        前场工长记录</a>@* <a style="color:#f00; margin-left:15px;" href="@Url.Content("~/Reports/Produce/ddKanban.aspx?plid=001")" target="_blank" >
+                    1#线看板</a> <a style="color:#f00; margin-left:15px;" href="@Url.Content("~/Reports/Produce/ddKanban.aspx?plid=002")" target="_blank" >
+                    2#线看板</a>*@
+        </h3>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        // $("#draggable").draggable();
+        $("#accordion").accordion();
+        $('span.pumpType').each(function () {
+            var obj = $(this);
+            obj.replaceWith($(dicNormalRenderer(obj.text(), 'PumpType')));
+        });
+        $("div .taskinfo a").unbind("click");
+        $("div .taskinfo a").bind("click", function () {//标记为已读
+            var _ID = this.id;
+            ajaxRequest(
+                    "/MyMsg.mvc/toReaded",
+                    {
+                        ids: _ID
+                    },
+                    true,
+                    function (response) {
+                        if (response.Result) {
+                            $("div #" + _ID).first().remove();
+                            $("#TotalMsgCount").text($("div .taskinfo").length);
+                            if ($("div .taskinfo").length == 0) {
+                                $("#systemmsg_id").fadeOut("fast");
+                            } else {
+                                $("#msgcount").text($("div .taskinfo").length);
+                            }
+                        }
+                    }
+                );
+        })
+        $("#showmore").bind("click", function () {
+            if ($("a[rev=0103]")) {
+                $("a[rev=0103]").trigger("click");
+            }
+        });
+        window.openToUrl = function (url, pid) {
+            $(".active").removeClass();
+            $("#menu a[rev=" + pid + "]").parent().addClass("active");
+            //console.dir($("#menu a[rev=" + pid + "]"));
+            $("#scollbox").empty();
+            var pid = pid;
+            if (pid in subMenuCache) {
+                $("#scollbox").append(subMenuCache[pid]);
+
+            }
+            else {
+                subMenuCache[pid] = '';
+                $.each(subMenus, function (i, n) {
+                    if (n.PID == pid) {
+                        if (n.IsL) {
+                            n.Url = appendFuncId(n.Url, n.ID);
+                            var menuHtml = '<li><a onclick= openUrl(this,"' + n.Url + '") rev="' + n.ID + '" href="javascript:void(0)" ><span>' + n.Name + '</span></a></li>';
+                            $("#scollbox").append(menuHtml);
+                            subMenuCache[pid] += menuHtml;
+
+                        }
+                        else {
+                            var menuHtml = '<li><a id="func_' + n.ID + '" onclick="openUrl(this,\'\')" class="fgmenu" href="javascript:void(0)" ><span><div style="margin-top:3px;float:right;"  class="ui-icon ui-icon-triangle-1-s" ></div>' + n.Name + '</span></a><div style="display:none;">' + renderSubMenu(n.ID) + '</div></li>';
+                            $("#scollbox").append(menuHtml);
+                            subMenuCache[pid] += menuHtml;
+
+                        }
+                    }
+                });
+            }
+            $('#scollbox').css('margin-left', '0px');
+            $('a.fgmenu', '#scollbox').each(function () {
+                $(this).fgmenu({
+                    content: $(this).next().html(),
+                    flyOut: true
+                });
+            });
+            var func_id = url.substr(url.indexOf("f=") + 2);
+            $("#menu_2 a[rev=" + func_id + "]").click();
+        }
+
+        window.refresh = function () {
+            openToUrl("Home.mvc/Desktop?f=0101", "01");
+
+
+        }
+    });
+</script>

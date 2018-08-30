@@ -1,0 +1,59 @@
+﻿@model IList<ZLERP.Model.LinkManRecord>
+@section HeaderSection{
+    <style type="text/css">
+        .linkmaninfo
+        {
+            padding: 2px;
+            line-height: 1.5em;
+            width: 300px;
+            height: 200px;
+            overflow-y: auto;
+            float: left;
+            margin: 0 5px 5px 0;
+        }
+        table.inner
+        {
+            border-left: 1px solid #ccc;
+            border-top: 1px solid #ccc;
+            width: 100%;
+        }
+        .inner td, .inner th
+        {
+            border-width: 0 1px 1px 0;
+            border-style: solid;
+            border-color: #ccc;
+            text-align: center;
+        }
+    </style>
+}
+<div id="LinkManDiv">
+    @foreach (var t in Model.Select(m=>m.Builder).Distinct())
+    {
+        <div class="linkmaninfo ui-widget-content ui-corner-all">
+            <div class="ui-widget-header ui-corner-all ui-helper-clearfix" style="padding: .3em;">
+                @t
+            </div>
+            <table cellspacing="0" class="inner" width="100%">
+                @*<tr>
+                    <th>
+                        内容
+                    </th>
+                    <th>
+                        时间
+                    </th>
+                </tr>*@
+                @foreach (var l in Model.Where(m => m.Builder == t).OrderByDescending(m => m.BuildTime))
+                { 
+                    <tr>
+                    <td style="width:120px;">
+                        @l.BuildTime.ToString("yyyy-MM-dd HH:mm:ss")
+                    </td>
+                    <td>
+                        @l.Content
+                    </td>
+                </tr>
+                }
+            </table>
+        </div>
+    }
+</div>

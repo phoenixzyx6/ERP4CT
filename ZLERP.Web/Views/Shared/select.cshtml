@@ -1,0 +1,8 @@
+﻿@model Dictionary<int?, string>
+<select>
+    <option value=""></option>
+    @foreach (KeyValuePair<int?, string> value in Model)
+    { 
+        <option value="@value.Key.ToString()">@value.Value</option>
+    }
+</select>

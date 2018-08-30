@@ -1,0 +1,104 @@
+﻿@*采购计划*@
+@model ZLERP.Model.PurchasePlan 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/PurchasePlan/PurchasePlan.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            var options = {
+                storeUrl: '@Url.Action("Find")'
+                , getGoodsUrl: '@Url.Action("Get","GoodsInfo")'
+            };
+            PurchasePlanIndexInit(options);
+        });
+</script>
+}
+
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    @Html.HiddenFor(m => m.ID)
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.PurchasePlan_NeedDate)@Html.EditorFor(m => m.PurchasePlan_NeedDate)</td>
+ 
+        <td id='w1'>@Html.LabelFor(m => m.GoodsName)@Html.AutoComplete("GoodsID", "GoodsName", "Combo", "GoodsInfo", "ID", "GoodsName", "isused=1")
+        
+        </td>
+
+        <td id='w2'>@Html.Label("物资名称")@Html.TextBox("GoodsName1")</td>
+   
+    </tr>
+        
+    <tr>
+        <td>@Html.LabelFor(m => m.PurchasePlan_num)@Html.EditorFor(m => m.PurchasePlan_num)</td>
+        <td>@Html.Label("库存数量")@Html.TextBox("ContentNum", "0")</td>
+    </tr>
+        
+    <tr>
+        <td>@Html.LabelFor(m => m.planmoney)@Html.TextBoxFor(m => m.planmoney)</td>
+        <td>@Html.LabelFor(m => m.planprice)@Html.TextBoxFor(m => m.planprice)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.Unit)@Html.TextBoxFor(m => m.Unit)</td>
+        <td>@Html.LabelFor(m => m.GoodsModel)@Html.TextBoxFor(m => m.GoodsModel)</td>
+    </tr>
+    <tr>
+        <td colspan="2">@Html.LabelFor(m => m.PurchasePlan_reason)@Html.TextAreaFor(m => m.PurchasePlan_reason, new { style = "width:345px;" })</td>
+    </tr>
+
+    <tr>
+        <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, new { style = "width:345px;" })</td>
+    </tr>
+
+    <tr>
+        <td>@Html.LabelFor(m => m.PurchasePlan_state)@Html.DicEditorFor(m => m.PurchasePlan_state, DicEnum.PurchasePlan_state)</td>
+        
+    </tr>
+</table>
+}
+</div>
+
+<div id="ConfirmDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>累计预估价格 @Html.TextBox("leiji")
+                </td>
+            </tr>
+        </table> 
+    }
+</div>
+
+@*
+<div id="MyFormDiv1" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    @Html.HiddenFor(m => m.ID)
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.PurchasePlan_NeedDate)@Html.EditorFor(m => m.PurchasePlan_NeedDate)</td>
+ 
+        <td>@Html.LabelFor(m => m.GoodsName)@Html.EditorFor(m=>m.GoodsName)</td>
+   
+    </tr>
+        
+    <tr>
+        <td>@Html.LabelFor(m => m.PurchasePlan_num)@Html.EditorFor(m => m.PurchasePlan_num)</td>
+        <td>@Html.LabelFor(m => m.PurchasePlan_state)@Html.DicEditorFor(m => m.PurchasePlan_state, DicEnum.PurchasePlan_state)</td>
+    </tr>
+    
+    <tr>
+        <td colspan="2">@Html.LabelFor(m => m.PurchasePlan_reason)@Html.TextAreaFor(m => m.PurchasePlan_reason, new { style = "width:345px;" })</td>
+    </tr>
+    <tr>
+        <td colspan="2">@Html.LabelFor(m => m.PurchasePlan_audit_opinion)@Html.TextAreaFor(m => m.PurchasePlan_audit_opinion, new { style = "width:345px;" })</td>
+    </tr>
+    <tr>
+        <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, new { style = "width:345px;" })</td>
+    </tr>
+    
+</table>
+}
+</div>*@

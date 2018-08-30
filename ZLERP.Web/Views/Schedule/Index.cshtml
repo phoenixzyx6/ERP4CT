@@ -1,0 +1,33 @@
+﻿@model ZLERP.Model.Company
+  
+ 
+<script type="text/javascript">
+    var intervalSpan = gSysConfig.DataRefTime * 1000; var _facId = parseInt("@Model.ID");
+    var companyinfo = { name:"@Model.CompName",lon:@Model.Longtide ,lat: @Model.Latitude,range:@Model.Range };
+</script>
+<div id="main_content" class="content_div ui-corner-all" style="width: 100%;  border: 1px solid lightgray;">
+    <div class="west_div" style="overflow: auto;">
+    </div>
+    <div class="center_div" style="overflow: auto;">
+    </div>
+     
+</div>
+ 
+<script src="../../Scripts/Views/schedule/schedule_index.js" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/Views/Map/alarm_part.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        initPagejs();
+
+        //报警列表浮动栏
+        var opts = {
+            afterRender: "main_content",
+            pgurl: "../../AlarmLog.mvc/InnerIndex",
+            tburl: "../../AlarmLog.mvc/GetAlarmInfos",
+            centerPoint: companyinfo.lon + ',' + companyinfo.lat,
+            interval: 60
+        };
+        window.setTimeout(function () { alarm_part.init(opts); }, 1000);
+    });
+    
+</script>

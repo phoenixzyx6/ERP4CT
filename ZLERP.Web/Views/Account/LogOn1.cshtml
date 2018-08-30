@@ -1,0 +1,173 @@
+﻿@model ZLERP.Model.ViewModels.LogOnUserModel
+@{
+    Layout = null; 
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>用户登录 - @Lang.Global_ProductName</title>
+     <link href="../../Content/Account/login.css" rel="stylesheet" type="text/css" />
+     <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script> 
+     <script src="@Url.Content("~/Scripts/jquery.cookie.js")" type="text/javascript"></script>
+     <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+     <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script> 
+
+      <script type="text/javascript">
+          var imgSrc;
+          var logonUrl = '@Url.Action("LogOn")';
+          $(function () {
+
+              detectBrowser();            
+              var captchaImg = $('#CaptchaImage');
+              imgSrc = captchaImg.attr('src');
+              captchaImg.parent('a').bind('click', function () {
+                  captchaImg.attr('src', imgSrc + '?' + new Date().getTime());
+              });
+
+              var lastName = $.cookie('UserName');
+              if (lastName && lastName != '') {
+                  if ($('#UserName').val() == '') {
+                      $('#UserName').val(lastName);
+                  }
+                  $('#Password').focus();
+                  return;
+              }
+              else {
+                  $('#UserName').focus();
+              }
+              //防止登录页面被直接加载到页面某个部分
+              if(location.href.indexOf(logonUrl) <= 0)
+              {
+                  window.location.href = logonUrl;
+              }              
+          });
+          function detectBrowser(){
+            if($.browser.msie === true){
+                if ($.browser.version * 1 < 8) {
+                    var form = $('form');
+                    //form.slideUp(800);
+                    setTimeout(function () {
+                        form.append('<div id="warning" style="display:none;"><h3 style="color:#F00;">您的浏览器版本过低，大部份功能可能无法正常使用，请更换浏览器为IE8+, 谷歌,火狐, Safari.</h3></div>');
+                        
+                        $('#warning').fadeIn(100).delay(300).fadeOut(100).delay(300).fadeIn(200).fadeOut(100).delay(300).fadeIn(200);
+                        $('body').css('background', '#999');
+                    },
+                    800);
+                    return false;
+                }
+            }
+            return true;
+          }
+      </script>
+    <style type="text/css"> 
+    body {
+	background-image: url(@Url.Content("~/Content/themes/default/images/login_bg.gif"));
+	background-repeat: repeat-y;
+	background-position:center;
+	font-family:微软雅黑,黑体,Arial;
+	font-size:12pt;
+}
+p{margin:0 0 5px 0}
+ a:link{color:#333;text-decoration:none;}
+    a:hover{text-decoration:underline}
+input{
+	 height:2em; line-height:2em; width:260px;border-radius:5px; border:1px solid #ccc; font-family:Verdana, Geneva, sans-serif; padding:0 5px;
+	}
+    select{
+	 height:2em; line-height:2em; width:270px;font-family:Verdana, Geneva, sans-serif;
+	}
+	.btn{width:124px; height:50px; border:none; color:#fff; font-size:24px; font-family:微软雅黑; background:url(@Url.Content("~/Content/themes/default/images/login_btn.gif")) no-repeat left center; margin-top:5px;}
+	.vcode{width:120px; height:2em; line-height:2em;}
+    .field-validation-error{color:#f00; font-size:9pt; clear:both; display:block;}
+    .input-validation-error{border-color:#f00; background-color:#FFEEEE}
+</style> 
+</head>
+<body style="text-align:center;">
+ @using (Html.BeginForm())
+ {
+<table style="margin:auto; margin-top:150px"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td style="background-position: left center; background-repeat: no-repeat; background-image: url(@Url.Content("~/Content/themes/default/images/login_l.png")); " width="42" height="337">&nbsp;</td>
+    <td width="300"  style="background-position: left center; background-repeat: repeat-x; background-image: url(@Url.Content("~/Content/themes/default/images/login_m.png")); ">
+    <div style="padding-left:10px; text-align:left;">
+    <p>用户账号</p>
+    <p>@Html.TextBoxFor(p => p.UserName, new { TabIndex = 1 })@Html.ValidationMessageFor(p => p.UserName)</p>
+    <p>用户密码</p>
+    <p>@Html.PasswordFor(p => p.Password, new { TabIndex = 2})@Html.ValidationMessageFor(p => p.Password)</p>
+    <p style="display:none;">帐套年份</p>
+    <p style="display:none;">@Html.DropDownListFor(m => m.YearAccountID, (IEnumerable<SelectListItem>)ViewBag.YearAccount,"默认")</p>
+   
+    @if (ViewBag.EnableLogOnCaptcha)
+    {
+         <p>验 证 码</p>
+        <p>@Html.TextBoxFor(p => p.CaptchaCode, new { TabIndex = 3, @Class="vcode"})  
+        <a href="javascript:void 0;" title="刷新验证码">
+        <img style=" vertical-align:bottom; height:2em;" alt="验证码" src="@Url.Action("Create", "Captcha")" id="CaptchaImage"/></a>
+        @Html.ValidationMessageFor(p => p.CaptchaCode)
+        </p>
+     } 
+    
+    <p style="text-align:center;">
+    <button type="submit" class="btn" name="sernam"  >登 录</button>
+    @Html.ValidationMessage("form")
+    </p>
+    </div> 
+    </td>
+    <td width="328" valign="bottom" align="right" style="background-position: left center; background-repeat: no-repeat; background-image: url(@Url.Content("~/Content/themes/default/images/login_r.png")); ">
+    <p style="padding:0 30px 30px 0; color:#666; font-size:9pt;">
+    <img src="@Url.Content("~/Content/themes/default/images/zoomlion_s.png")" border="0"/>
+    </p></td>
+  </tr>
+</table>
+ }
+ <div style="position:absolute; bottom:0; left:0; width:100%; color:#666; font-size:9pt;">
+ <p>
+ <a  href="@Url.Content("~/Content/Files/IE8.exe")" target="_blank">下载IE8</a> | 
+    <a  href="@Url.Content("~/Content/Files/firefox.exe")" target="_blank">下载火狐浏览器</a> | 
+   <a  href="@Url.Content("~/Content/Files/chrome.exe")" target="_blank">下载谷歌浏览器</a> 
+ </p>
+ <p>
+@ViewBag.LinceseInfo  (@Html.ERPVersion()) 
+<a href="@Url.Action("Index", "Reg")">程序注册</a>
+<br /> 
+ <a href="http://www.zoomlion.com" target="_blank">中联重科股份有限公司</a> &copy; 版权所有<br/>
+公司地址：湖南省长沙市岳麓区麓谷大道677号   
+服务电话：0731-89751796  <br/>
+服务热线：400 887 6677 <br/>
+ </p>
+<p style="text-align:right; margin-top:-30px; padding:10px;"> 
+  
+ </p>
+ </div> 
+    
+ <!-- 代码begin -->
+<style>
+*{ margin:0; padding:0; list-style:none}
+img{ border:0;}
+.lanrenzhijia_service{ width:40px; height:200px; background:url("../../Content/Account/img/lanrenzhijia.png") no-repeat; position:fixed; right:0px; top:200px;}
+.lanrenzhijia_service ul{ display:block; width:160px; height:200px; float:left; position:relative;}
+.lanrenzhijia_service ul .right_bar{ position:absolute;width:40px; height:200px; left:0; top:0; display:block;}
+.lanrenzhijia_service ul .right_qq{ position:absolute; width:120px; height:85px; right:0; top:0; display:block;}
+.lanrenzhijia_service ul .right_phone{ position:absolute; width:120px; height:105px; padding-top:10px;right:0; bottom:0; display:block; text-align:center; color:#555; font-size:16px; font-family:'Microsoft Yahei'; text-decoration:none;}
+</style>
+<div class="lanrenzhijia_service">
+  <ul>
+    <span class="right_bar"></span>
+    <a href="http://wpa.qq.com/msgrd?v=3&uin=00000000&site=qq&menu=yes" class="right_qq" target="_blank"></a>
+    <span class="right_phone">0731-89751796</span>
+  </ul>
+</div>
+
+<script  type="text/javascript">
+    $(function () {
+        $(".lanrenzhijia_service").hover(function () {
+            $(this).animate({ width: '160px' });
+        }, function () {
+            $(this).animate({ width: '40px' });
+        });
+    });
+</script>
+<!-- 代码end -->
+</body>
+</html>

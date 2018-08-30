@@ -1,0 +1,1622 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.vodofo.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.vodofo.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.vodofo.com/">
+      <s:element name="getLoginKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strLoginName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLoginKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getLoginKeyResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Logout">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strLoginKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogoutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LogoutResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCurrentVehicleInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strLoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumberPlateLists" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCurrentVehicleInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getCurrentVehicleInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLatestVehicleInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strLoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strStartTime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLatestVehicleInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getLatestVehicleInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getVehicleSumInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strLoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumberPlateLists" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strStartTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strEndTime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getVehicleSumInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getVehicleSumInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getHistoryVehicleInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strLoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumberPlateLists" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strStartTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strEndTime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getHistoryVehicleInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getHistoryVehicleInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getObjectAddress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strLoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strVehicleNum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getObjectAddressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getObjectAddressResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getObjectAddressByDateTime">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strLoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strVehicleNum" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dt" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getObjectAddressByDateTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getObjectAddressByDateTimeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCurrentRegion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strLoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumberPlateLists" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCurrentRegionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getCurrentRegionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getRegionByDateTime">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strLoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumberPlateLists" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dt" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getRegionByDateTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getRegionByDateTimeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sendMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strLoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumberPlateLists" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strMessage" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sendMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sendMessageResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ABRange">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NumberPlateA" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumberPlateB" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Meters" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ABRangeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ABRangeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Add_Customer_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Contacter" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TEL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Add_Customer_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Add_Customer_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Update_Customer_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CustomerID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Contacter" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TEL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Update_Customer_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Update_Customer_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Delete_Customer_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CustomerID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Delete_Customer_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Delete_Customer_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Get_Customer_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Get_Customer_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EMV_Get_Customer_InfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Add_Mixing_Station_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Contacter" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TEL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMaxLng" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMaxLat" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMinLng" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMinLat" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Add_Mixing_Station_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Add_Mixing_Station_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Update_Mixing_Station_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="StationID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="StationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Contacter" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TEL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMaxLng" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMaxLat" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMinLng" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMinLat" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Update_Mixing_Station_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Update_Mixing_Station_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Delete_Mixing_Station_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="StationID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Delete_Mixing_Station_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Delete_Mixing_Station_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Get_Mixing_Station_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StationName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Get_Mixing_Station_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EMV_Get_Mixing_Station_InfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Add_Construction_Site_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CustomerID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Contactor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TEL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMaxLng" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMaxLat" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMinLng" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMinLat" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Add_Construction_Site_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Add_Construction_Site_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Update_Construction_Site_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CSID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CustomerID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Contactor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TEL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMaxLng" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMaxLat" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMinLng" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="dMinLat" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Update_Construction_Site_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Update_Construction_Site_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Delete_Construction_Site_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CSID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Delete_Construction_Site_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Delete_Construction_Site_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Get_Construction_Site_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CSName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Get_Construction_Site_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EMV_Get_Construction_Site_InfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Add_Task_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TaskCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CSID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PartID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="BetonGradeID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FeedingWay" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PlanAmount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="PlanTime" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iUnloadMinutes" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iReturnMinutes" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ScoutMan" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iStatus" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Add_Task_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Add_Task_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Update_Task_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TaskCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CSID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PartID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="BetonGradeID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FeedingWay" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PlanAmount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="PlanTime" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iUnloadMinutes" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iReturnMinutes" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ScoutMan" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iStatus" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Update_Task_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Update_Task_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Delete_Task_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Delete_Task_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Delete_Task_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Get_Task_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TaskCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Get_Task_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EMV_Get_Task_InfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Add_Dispatch_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DispatchCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VehicleNum" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TaskID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dFactAmount" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="PlanLeaveTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Driver" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ShiftType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Add_Dispatch_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Add_Dispatch_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Update_Dispatch_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DispatchID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="DispatchCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VehicleNum" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TaskID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dFactAmount" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="PlanLeaveTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Driver" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ShiftType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Update_Dispatch_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Update_Dispatch_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Delete_Dispatch_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DispatchID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Delete_Dispatch_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EMV_Delete_Dispatch_InfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Get_Dispatch_Info">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DispatchCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Get_Dispatch_InfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EMV_Get_Dispatch_InfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Get_ProjectPart">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Get_ProjectPartResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EMV_Get_ProjectPartResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Get_BetonGrade">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EMV_Get_BetonGradeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EMV_Get_BetonGradeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getLoginKeySoapIn">
+    <wsdl:part name="parameters" element="tns:getLoginKey" />
+  </wsdl:message>
+  <wsdl:message name="getLoginKeySoapOut">
+    <wsdl:part name="parameters" element="tns:getLoginKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapIn">
+    <wsdl:part name="parameters" element="tns:Logout" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapOut">
+    <wsdl:part name="parameters" element="tns:LogoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCurrentVehicleInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:getCurrentVehicleInfo" />
+  </wsdl:message>
+  <wsdl:message name="getCurrentVehicleInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:getCurrentVehicleInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLatestVehicleInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:getLatestVehicleInfo" />
+  </wsdl:message>
+  <wsdl:message name="getLatestVehicleInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:getLatestVehicleInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getVehicleSumInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:getVehicleSumInfo" />
+  </wsdl:message>
+  <wsdl:message name="getVehicleSumInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:getVehicleSumInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getHistoryVehicleInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:getHistoryVehicleInfo" />
+  </wsdl:message>
+  <wsdl:message name="getHistoryVehicleInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:getHistoryVehicleInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getObjectAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:getObjectAddress" />
+  </wsdl:message>
+  <wsdl:message name="getObjectAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:getObjectAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="getObjectAddressByDateTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:getObjectAddressByDateTime" />
+  </wsdl:message>
+  <wsdl:message name="getObjectAddressByDateTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:getObjectAddressByDateTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCurrentRegionSoapIn">
+    <wsdl:part name="parameters" element="tns:getCurrentRegion" />
+  </wsdl:message>
+  <wsdl:message name="getCurrentRegionSoapOut">
+    <wsdl:part name="parameters" element="tns:getCurrentRegionResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRegionByDateTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:getRegionByDateTime" />
+  </wsdl:message>
+  <wsdl:message name="getRegionByDateTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:getRegionByDateTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:sendMessage" />
+  </wsdl:message>
+  <wsdl:message name="sendMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:sendMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="ABRangeSoapIn">
+    <wsdl:part name="parameters" element="tns:ABRange" />
+  </wsdl:message>
+  <wsdl:message name="ABRangeSoapOut">
+    <wsdl:part name="parameters" element="tns:ABRangeResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Add_Customer_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Add_Customer_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Add_Customer_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Add_Customer_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Update_Customer_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Update_Customer_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Update_Customer_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Update_Customer_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Delete_Customer_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Delete_Customer_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Delete_Customer_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Delete_Customer_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Get_Customer_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Get_Customer_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Get_Customer_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Get_Customer_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Add_Mixing_Station_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Add_Mixing_Station_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Add_Mixing_Station_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Add_Mixing_Station_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Update_Mixing_Station_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Update_Mixing_Station_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Update_Mixing_Station_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Update_Mixing_Station_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Delete_Mixing_Station_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Delete_Mixing_Station_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Delete_Mixing_Station_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Delete_Mixing_Station_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Get_Mixing_Station_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Get_Mixing_Station_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Get_Mixing_Station_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Get_Mixing_Station_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Add_Construction_Site_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Add_Construction_Site_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Add_Construction_Site_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Add_Construction_Site_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Update_Construction_Site_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Update_Construction_Site_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Update_Construction_Site_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Update_Construction_Site_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Delete_Construction_Site_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Delete_Construction_Site_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Delete_Construction_Site_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Delete_Construction_Site_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Get_Construction_Site_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Get_Construction_Site_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Get_Construction_Site_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Get_Construction_Site_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Add_Task_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Add_Task_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Add_Task_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Add_Task_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Update_Task_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Update_Task_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Update_Task_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Update_Task_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Delete_Task_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Delete_Task_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Delete_Task_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Delete_Task_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Get_Task_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Get_Task_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Get_Task_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Get_Task_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Add_Dispatch_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Add_Dispatch_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Add_Dispatch_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Add_Dispatch_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Update_Dispatch_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Update_Dispatch_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Update_Dispatch_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Update_Dispatch_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Delete_Dispatch_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Delete_Dispatch_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Delete_Dispatch_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Delete_Dispatch_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Get_Dispatch_InfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Get_Dispatch_Info" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Get_Dispatch_InfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Get_Dispatch_InfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Get_ProjectPartSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Get_ProjectPart" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Get_ProjectPartSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Get_ProjectPartResponse" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Get_BetonGradeSoapIn">
+    <wsdl:part name="parameters" element="tns:EMV_Get_BetonGrade" />
+  </wsdl:message>
+  <wsdl:message name="EMV_Get_BetonGradeSoapOut">
+    <wsdl:part name="parameters" element="tns:EMV_Get_BetonGradeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="getLoginKey">
+      <wsdl:input message="tns:getLoginKeySoapIn" />
+      <wsdl:output message="tns:getLoginKeySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input message="tns:LogoutSoapIn" />
+      <wsdl:output message="tns:LogoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentVehicleInfo">
+      <wsdl:input message="tns:getCurrentVehicleInfoSoapIn" />
+      <wsdl:output message="tns:getCurrentVehicleInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLatestVehicleInfo">
+      <wsdl:input message="tns:getLatestVehicleInfoSoapIn" />
+      <wsdl:output message="tns:getLatestVehicleInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getVehicleSumInfo">
+      <wsdl:input message="tns:getVehicleSumInfoSoapIn" />
+      <wsdl:output message="tns:getVehicleSumInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getHistoryVehicleInfo">
+      <wsdl:input message="tns:getHistoryVehicleInfoSoapIn" />
+      <wsdl:output message="tns:getHistoryVehicleInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getObjectAddress">
+      <wsdl:input message="tns:getObjectAddressSoapIn" />
+      <wsdl:output message="tns:getObjectAddressSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getObjectAddressByDateTime">
+      <wsdl:input message="tns:getObjectAddressByDateTimeSoapIn" />
+      <wsdl:output message="tns:getObjectAddressByDateTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentRegion">
+      <wsdl:input message="tns:getCurrentRegionSoapIn" />
+      <wsdl:output message="tns:getCurrentRegionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getRegionByDateTime">
+      <wsdl:input message="tns:getRegionByDateTimeSoapIn" />
+      <wsdl:output message="tns:getRegionByDateTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="sendMessage">
+      <wsdl:input message="tns:sendMessageSoapIn" />
+      <wsdl:output message="tns:sendMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ABRange">
+      <wsdl:input message="tns:ABRangeSoapIn" />
+      <wsdl:output message="tns:ABRangeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Customer_Info">
+      <wsdl:input message="tns:EMV_Add_Customer_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Add_Customer_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Customer_Info">
+      <wsdl:input message="tns:EMV_Update_Customer_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Update_Customer_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Customer_Info">
+      <wsdl:input message="tns:EMV_Delete_Customer_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Delete_Customer_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Customer_Info">
+      <wsdl:input message="tns:EMV_Get_Customer_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Get_Customer_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Mixing_Station_Info">
+      <wsdl:input message="tns:EMV_Add_Mixing_Station_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Add_Mixing_Station_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Mixing_Station_Info">
+      <wsdl:input message="tns:EMV_Update_Mixing_Station_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Update_Mixing_Station_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Mixing_Station_Info">
+      <wsdl:input message="tns:EMV_Delete_Mixing_Station_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Delete_Mixing_Station_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Mixing_Station_Info">
+      <wsdl:input message="tns:EMV_Get_Mixing_Station_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Get_Mixing_Station_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Construction_Site_Info">
+      <wsdl:input message="tns:EMV_Add_Construction_Site_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Add_Construction_Site_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Construction_Site_Info">
+      <wsdl:input message="tns:EMV_Update_Construction_Site_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Update_Construction_Site_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Construction_Site_Info">
+      <wsdl:input message="tns:EMV_Delete_Construction_Site_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Delete_Construction_Site_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Construction_Site_Info">
+      <wsdl:input message="tns:EMV_Get_Construction_Site_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Get_Construction_Site_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Task_Info">
+      <wsdl:input message="tns:EMV_Add_Task_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Add_Task_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Task_Info">
+      <wsdl:input message="tns:EMV_Update_Task_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Update_Task_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Task_Info">
+      <wsdl:input message="tns:EMV_Delete_Task_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Delete_Task_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Task_Info">
+      <wsdl:input message="tns:EMV_Get_Task_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Get_Task_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Dispatch_Info">
+      <wsdl:input message="tns:EMV_Add_Dispatch_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Add_Dispatch_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Dispatch_Info">
+      <wsdl:input message="tns:EMV_Update_Dispatch_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Update_Dispatch_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Dispatch_Info">
+      <wsdl:input message="tns:EMV_Delete_Dispatch_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Delete_Dispatch_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Dispatch_Info">
+      <wsdl:input message="tns:EMV_Get_Dispatch_InfoSoapIn" />
+      <wsdl:output message="tns:EMV_Get_Dispatch_InfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_ProjectPart">
+      <wsdl:input message="tns:EMV_Get_ProjectPartSoapIn" />
+      <wsdl:output message="tns:EMV_Get_ProjectPartSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_BetonGrade">
+      <wsdl:input message="tns:EMV_Get_BetonGradeSoapIn" />
+      <wsdl:output message="tns:EMV_Get_BetonGradeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getLoginKey">
+      <soap:operation soapAction="http://www.vodofo.com/getLoginKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="http://www.vodofo.com/Logout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentVehicleInfo">
+      <soap:operation soapAction="http://www.vodofo.com/getCurrentVehicleInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLatestVehicleInfo">
+      <soap:operation soapAction="http://www.vodofo.com/getLatestVehicleInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVehicleSumInfo">
+      <soap:operation soapAction="http://www.vodofo.com/getVehicleSumInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getHistoryVehicleInfo">
+      <soap:operation soapAction="http://www.vodofo.com/getHistoryVehicleInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getObjectAddress">
+      <soap:operation soapAction="http://www.vodofo.com/getObjectAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getObjectAddressByDateTime">
+      <soap:operation soapAction="http://www.vodofo.com/getObjectAddressByDateTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentRegion">
+      <soap:operation soapAction="http://www.vodofo.com/getCurrentRegion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRegionByDateTime">
+      <soap:operation soapAction="http://www.vodofo.com/getRegionByDateTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendMessage">
+      <soap:operation soapAction="http://www.vodofo.com/sendMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ABRange">
+      <soap:operation soapAction="http://www.vodofo.com/ABRange" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Customer_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Add_Customer_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Customer_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Update_Customer_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Customer_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Delete_Customer_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Customer_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Get_Customer_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Mixing_Station_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Add_Mixing_Station_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Mixing_Station_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Update_Mixing_Station_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Mixing_Station_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Delete_Mixing_Station_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Mixing_Station_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Get_Mixing_Station_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Construction_Site_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Add_Construction_Site_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Construction_Site_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Update_Construction_Site_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Construction_Site_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Delete_Construction_Site_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Construction_Site_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Get_Construction_Site_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Task_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Add_Task_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Task_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Update_Task_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Task_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Delete_Task_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Task_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Get_Task_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Dispatch_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Add_Dispatch_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Dispatch_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Update_Dispatch_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Dispatch_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Delete_Dispatch_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Dispatch_Info">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Get_Dispatch_Info" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_ProjectPart">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Get_ProjectPart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_BetonGrade">
+      <soap:operation soapAction="http://www.vodofo.com/EMV_Get_BetonGrade" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getLoginKey">
+      <soap12:operation soapAction="http://www.vodofo.com/getLoginKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap12:operation soapAction="http://www.vodofo.com/Logout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentVehicleInfo">
+      <soap12:operation soapAction="http://www.vodofo.com/getCurrentVehicleInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLatestVehicleInfo">
+      <soap12:operation soapAction="http://www.vodofo.com/getLatestVehicleInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVehicleSumInfo">
+      <soap12:operation soapAction="http://www.vodofo.com/getVehicleSumInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getHistoryVehicleInfo">
+      <soap12:operation soapAction="http://www.vodofo.com/getHistoryVehicleInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getObjectAddress">
+      <soap12:operation soapAction="http://www.vodofo.com/getObjectAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getObjectAddressByDateTime">
+      <soap12:operation soapAction="http://www.vodofo.com/getObjectAddressByDateTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentRegion">
+      <soap12:operation soapAction="http://www.vodofo.com/getCurrentRegion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRegionByDateTime">
+      <soap12:operation soapAction="http://www.vodofo.com/getRegionByDateTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendMessage">
+      <soap12:operation soapAction="http://www.vodofo.com/sendMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ABRange">
+      <soap12:operation soapAction="http://www.vodofo.com/ABRange" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Customer_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Add_Customer_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Customer_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Update_Customer_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Customer_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Delete_Customer_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Customer_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Get_Customer_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Mixing_Station_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Add_Mixing_Station_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Mixing_Station_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Update_Mixing_Station_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Mixing_Station_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Delete_Mixing_Station_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Mixing_Station_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Get_Mixing_Station_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Construction_Site_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Add_Construction_Site_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Construction_Site_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Update_Construction_Site_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Construction_Site_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Delete_Construction_Site_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Construction_Site_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Get_Construction_Site_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Task_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Add_Task_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Task_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Update_Task_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Task_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Delete_Task_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Task_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Get_Task_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Add_Dispatch_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Add_Dispatch_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Update_Dispatch_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Update_Dispatch_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Delete_Dispatch_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Delete_Dispatch_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_Dispatch_Info">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Get_Dispatch_Info" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_ProjectPart">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Get_ProjectPart" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EMV_Get_BetonGrade">
+      <soap12:operation soapAction="http://www.vodofo.com/EMV_Get_BetonGrade" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://localhost/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://localhost/Service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

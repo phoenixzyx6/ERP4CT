@@ -1,0 +1,33 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    Layout = null;
+    }
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>程序错误</title>
+ </head>
+ <body style="line-height:1.5em; font-size:9pt;">
+ <a href="@Url.Action("Index","Home")"><img src="@Url.Content("~/Content/erpimage/logo.gif")" alt="ERP3" border="0"/></a>
+ <div style="border: 1px solid #fad42e; background: #fbec88; padding:.5em; margin:.5em 0; font-weight:bold; color: #363636;">
+ 非常抱歉，程序运行过程中出现错误，出现本页面请清空浏览器缓存并重新登录系统后重试！
+ <br />
+ 如按以上操作后仍出现该错误，请联系页面下方的服务人员！
+ </div>
+<div style="border: 1px solid #cd0a0a; background: #fef1ec; color:#cd0a0a; padding:1em;"> 
+    @Model.ControllerName/@Model.ActionName<br />
+    @if (Model.Exception != null)
+    {
+        @Html.Raw(Model.Exception.ToString().Replace("\r\n", "<br/>"))
+    }
+</div>
+
+ <div id="footer" style="text-align: center; font-size:9pt;">
+      <p><a href="http://www.zoomlion.com" target="_blank">中联重科股份有限公司</a> &copy; 版权所有<br/>
+公司地址：湖南省长沙市岳麓区麓谷大道677号   
+服务电话：(+086)139-0846-0237 <br/>
+ </p>
+    </div>
+</body>
+</html>

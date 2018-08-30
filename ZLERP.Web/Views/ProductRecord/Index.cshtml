@@ -1,0 +1,113 @@
+﻿@model ZLERP.Model.ViewModels.ShipAndProductRecordAndItems
+@section HeaderSection{
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/daterangepicker.jQuery.js")"></script>
+    <script src="@Url.Content("~/Scripts/Views/ProductRecord.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            productrecordIndexInit('@Url.Action("Find", "ShippingDocument")', '@Url.Action("Find", "ProductRecord")',
+            '@Url.Action("Find", "ProductRecordItem")', '@Html.Raw(Url.Action("ListData", "Silo", new {textField="SiloName", valueField="ID"}))', '@Url.Action("CopyRecord", "ProductRecord")');
+        });
+
+    </script>
+}
+<div id="shippDocGrid" style="float: left; width: 64%">
+</div>
+<div id="right" style="float: right; width: 35%">
+    <div id="ProductRecordGrid">
+    </div>
+    <div id="ProductRecordItemsGrid">
+    </div>
+</div>
+<div id="ItemsDiv" style="display: none; width: 500">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>     <td>@Html.LabelFor(m => m.ProductRecord.ShipDocID)@Html.AutoComplete("ProductRecord.ShipDocID", "ProjectName", "Combo", "ShippingDocument", "ID", "ID")</td>
+                <td style="display: none">
+                    @Html.LabelFor(m => m.ProductRecord.ID)@Html.TextBoxFor(m => m.ProductRecord.ID, new { @class = "text" })
+                </td>
+                <td>
+                    @Html.Label("当盘方量")@Html.TextBoxFor(m => m.ProductRecord.ProduceCube, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("盘容量")@Html.TextBoxFor(m => m.ProductRecord.PCRate, new { @class = "text" })
+                </td>
+                <td>
+                    @Html.LabelFor(m => m.ProductRecord.PotTimes)@Html.TextBoxFor(m => m.ProductRecord.PotTimes, new { @class = "text" })
+                </td>
+            </tr>
+        </table>
+        <table class="subgridform">
+            <tr>
+                <td>
+                    <div id="SubGridDiv">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="SubDiv" style="display: none; width: 500">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display: none">
+                    @Html.LabelFor(m => m.ProductRecordItem.ProductRecordID)@Html.TextBoxFor(m => m.ProductRecordItem.ProductRecordID, new { @class = "text" })
+                </td>
+                <td>@Html.LabelFor(m => m.ProductRecordItem.StuffID)@Html.DropDownListFor(m => m.ProductRecordItem.StuffID, (IEnumerable<SelectListItem>)ViewBag.StuffList, "", null)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ProductRecordItem.SiloID)@Html.DropDownListFor(m => m.ProductRecordItem.SiloID, Enumerable.Empty<SelectListItem>())
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.ProductRecordItem.ActualAmount)@Html.EditorFor(m => m.ProductRecordItem.ActualAmount)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="PotTimess" style="display: none; width: 500">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>
+                    <span style="">第</span>@Html.TextBox("Pots", "", new { @class = "text", style = "width:30px;", @data_val_required = "盘数 字段是必需的", data_val = "true" })<span>盘</span>
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*自定义时间*@
+<div id="SelectTimeForm" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("起始时间")@Html.Editor("rBeginTime", "DateTimeWithTime")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("终止时间")@Html.Editor("rEndTime", "DateTimeWithTime")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("自动关闭")@Html.CheckBox("rIsAutoClose")
+                </td>
+            </tr>
+        </table>
+    }
+</div>

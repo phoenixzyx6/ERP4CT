@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.FuncRole, ZLERP.Model" table="FuncRole" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="FuncRoleId">
+      <generator class="native" />
+    </id>
+    <property name="SysFuncId" column="SysFuncId" />
+    <property name="RoleID" column="RoleID" />
+
+    <!--<many-to-one name="SysFuncId" column="SysFuncId" class="SysFunc" />-->
+    <!--<many-to-one name="RoleID" column="RoleID" class="Role"/>-->
+    
+  </class>
+</hibernate-mapping>

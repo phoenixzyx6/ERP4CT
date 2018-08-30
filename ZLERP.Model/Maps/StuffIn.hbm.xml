@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.StuffIn, ZLERP.Model" table="StuffIn" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="StuffInID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="CustName" column="CustName" />
+		<property name="GageUnit" column="GageUnit" />
+		<property name="TransportNum" column="TransportNum" />
+		<property name="SupplyNum" column="SupplyNum" />
+		<property name="TotalNum" column="TotalNum" />
+    <property name="CarWeight" column="CarWeight" />
+    <property name="DarkWeight" column="DarkWeight" />
+    <property name="Guige" column="Guige" />
+    <property name="Bangcha" column="Bangcha" />
+		<property name="StockNum" column="StockNum" />
+		<property name="WRate" column="WRate" />
+		<property name="InNum" column="InNum" />
+		<property name="Proportion" column="Proportion" />
+    <property name="FootNum" column="FootNum" />
+    <property name="FinalFootNum" column="FinalFootNum" />
+		<property name="Driver" column="Driver" />
+		<property name="SourceAddr" column="SourceAddr" />
+		<property name="InDate" column="InDate" />
+		<property name="OutDate" column="OutDate" />
+		<property name="AH" column="AH" />
+		<property name="IsBack" column="IsBack" />
+		<property name="Remark" column="Remark" />
+    <property name="pic1" column="pic1" />
+    <property name="pic2" column="pic2" />
+    <property name="pic3" column="pic3" />
+    <property name="pic4" column="pic4" />
+		<property name="CarNo" column="CarNo" />
+		<property name="Operator" column="Operator" />
+		<property name="FootStatus" column="FootStatus" />
+		<property name="UnitPrice" column="UnitPrice" />
+		<property name="TransUnitPrice" column="TransUnitPrice" />
+		<property name="TotalPrice" column="TotalPrice" />
+		<property name="TotalTransPrice" column="TotalTransPrice" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="SiloID" column="SiloID"  />
+    <property name="Spec" column="Spec" />
+    <property name="IsMonth" column="IsMonth" />
+    <property name="Bangcha2" column="Bangcha2" />
+    
+		<many-to-one name="Silo" column="SiloID" class="Silo" update="false" insert="false"/>
+    <property name="StuffID" column="StuffID"  />
+		<many-to-one name="StuffInfo" column="StuffID" class="StuffInfo" update="false" insert="false"/>
+    <property name="SupplyID" column="SupplyID"  />
+		<many-to-one name="SupplyInfo" column="SupplyID" class="SupplyInfo" update="false" insert="false"/>
+    
+    <property name="TransportID" column="TransportID"  />
+		<many-to-one name="TransportInfo" column="TransportID" class="SupplyInfo" update="false" insert="false"/>
+    <property name="StockPactID" column="StockPactID"  />
+		<many-to-one name="StockPact" column="StockPactID" class="StockPact" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

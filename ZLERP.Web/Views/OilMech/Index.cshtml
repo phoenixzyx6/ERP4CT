@@ -1,0 +1,31 @@
+﻿@model ZLERP.Model.OilMech 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/OilMech/OilMech.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            oilmechIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("加油机枪号")@Html.EditorFor(m => m.ID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.OilMechName)@Html.EditorFor(m => m.OilMechName)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.SiloID)@Html.AutoComplete("SiloID", "SiloName", "Combo", "Silo", "ID", "SiloName", "SiloName like '%油%'")
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

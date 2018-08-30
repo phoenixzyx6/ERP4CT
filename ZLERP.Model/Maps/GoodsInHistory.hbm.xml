@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.GoodsInHistory, ZLERP.Model" table="GoodsInHistory" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="GoodsInID">
+      <generator class="native" />
+		</id>
+    <property name="GoodsInIDHistory" column="GoodsInIDHistory" />
+    <property name="GoodsID" column="GoodsID" />
+		<property name="SupplyName" column="SupplyName" />
+		<property name="TransportName" column="TransportName" />
+		<property name="InNum" column="InNum" />
+		<property name="InPrice" column="InPrice" />
+		<property name="InTime" column="InTime" />
+		<property name="Operator" column="Operator" />
+		<property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="action_u" column="action_u" />
+    <property name="GoodsName" column="GoodsName" />
+  </class>
+</hibernate-mapping>

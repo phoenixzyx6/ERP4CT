@@ -1,0 +1,286 @@
+﻿@model ZLERP.Model.Lab_Record 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/Lab_Record/Lab_CA.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            lab_recordIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid" style="float: left; width: 76%">
+</div>
+<div style="float: right; width: 23%">
+    <div id="CAJqGrid">
+    </div>
+    <div id="CAItemsJqGrid">
+    </div>
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            @Html.HiddenFor(m => m.ID)
+            <tr>
+                <td>@Html.LabelFor(m => m.ShowpeieNo)@Html.EditorFor(m => m.ShowpeieNo)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Carno)@Html.EditorFor(m => m.Carno)
+                </td>
+                <td>@Html.LabelFor(m => m.Date)@Html.EditorFor(m => m.Date, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Siloid)@Html.EditorFor(m => m.Siloid)
+                </td>
+                <td>@Html.LabelFor(m => m.Stuffid)@Html.AutoComplete("Stuffid", "StuffName", "Combo", "StuffInfo", "ID", "StuffName", "IsUsed=True")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Supplyid)@Html.AutoComplete("Supplyid", "SupplyName", "Combo", "SupplyInfo", "ID", "ShortName", "SupplyName", "supplykind in ('Su1','Su5') and IsUsed =1 ", null)
+                </td>
+                <td>@Html.LabelFor(m => m.StartDate)@Html.EditorFor(m => m.StartDate, "DateTimeWithTime")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.EndDate)@Html.EditorFor(m => m.EndDate, "DateTimeWithTime")
+                </td>
+                <td>@Html.LabelFor(m => m.IsWhole)@Html.CheckBoxFor(m => m.IsWhole)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Weight)@Html.EditorFor(m => m.Weight)
+                </td>
+                <td>@Html.LabelFor(m => m.SumWeight)@Html.EditorFor(m => m.SumWeight)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.InMan)@Html.EditorFor(m => m.InMan)
+                </td>
+                <td>@Html.LabelFor(m => m.Remark)@Html.EditorFor(m => m.Remark)
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+<div id="CAFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        @Html.HiddenFor(m => m.Lab_CA.ID)
+        @Html.HiddenFor(m => m.Lab_CA.Lab_RecordID)
+        @Html.HiddenFor(m => m.Lab_CA.GUIGE)
+        @Html.LabelFor(m => m.Lab_CA.Description)@Html.EditorFor(m => m.Lab_CA.Description)
+        <table class="mvcform paddingStyle">
+            <tr>
+                <td>@Html.LabelFor(m => m.Lab_CA.Depend)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA.Depend)
+                </td>
+                <td>@Html.LabelFor(m => m.Lab_CA.Date)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA.Date, "DateTime")
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="CAItemsFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        @Html.HiddenFor(m => m.Lab_CA_Items.ID)
+        @Html.HiddenFor(m => m.Lab_CA_Items.Lab_CAID)
+        @Html.LabelFor(m => m.Lab_CA_Items.NO)@Html.EditorFor(m => m.Lab_CA_Items.NO)
+        <table class="mvcform paddingStyle">
+            <tr>
+                <td colspan="3" bgcolor="LightSkyBlue">
+                    含水率（%）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    容器质量(g)
+                </td>
+                <td>
+                    烘干前试样+容器(g)
+                </td>
+                <td>
+                    烘干后试样+容器(g)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.R)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.YRQ)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.YRH)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" bgcolor="LightSkyBlue">
+                    颗粒级配（试样质量500g）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    筛孔尺寸(mm)
+                </td>
+                <td>
+                    4.75
+                </td>
+                <td>
+                    2.36
+                </td>
+                <td>
+                    1.18
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    筛余量（g）
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.S1)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.S2)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.S3)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    0.6
+                </td>
+                <td>
+                    0.3
+                </td>
+                <td>
+                    0.15
+                </td>
+                <td>
+                    筛底
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.S4)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.S5)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.S6)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.SD)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" bgcolor="LightSkyBlue">
+                    含泥量
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    洗前干砂质量m0(g)
+                </td>
+                <td>
+                    @Html.EditorFor(m => m.Lab_CA_Items.LQ)
+                </td>
+                <td>
+                    洗后干砂质量m1(g)
+                </td>
+                <td>
+                    @Html.EditorFor(m => m.Lab_CA_Items.LH)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" bgcolor="LightSkyBlue">
+                    泥块含量
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    试验前干砂质量m0(g)
+                </td>
+                <td>
+                    @Html.EditorFor(m => m.Lab_CA_Items.LKQ)
+                </td>
+                <td>
+                    试验后干砂质量m1(g)
+                </td>
+                <td>
+                    @Html.EditorFor(m => m.Lab_CA_Items.LKH)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" bgcolor="LightSkyBlue">
+                    表观密度
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    干砂
+                </td>
+                <td>
+                    试样+水+瓶m1 (g)
+                </td>
+                <td>
+                    水+瓶m2 (g)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.SHA)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.YSP)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.SP)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" bgcolor="LightSkyBlue">
+                    堆积密度
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    容量筒质量G2 (g)
+                </td>
+                <td>
+                    容量筒容积 V(L)
+                </td>
+                <td>
+                    筒+砂 G1 (g)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.DG)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.DV)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.DTS)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" bgcolor="LightSkyBlue">
+                    紧密密度
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    容量筒质量G2 (g)
+                </td>
+                <td>
+                    容量筒容积 V(L)
+                </td>
+                <td>
+                    筒+砂 G1 (g)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.JG)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.JV)
+                </td>
+                <td>@Html.EditorFor(m => m.Lab_CA_Items.JTS)
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

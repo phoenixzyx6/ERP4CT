@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.QualityExamItem, ZLERP.Model" table="QualityExamItems" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="ExamBlockID">
+      <generator class="native" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="ExamBlockGroupID" column="ExamBlockGroupID" />
+    <property name="ExamBodyID" column="ExamBodyID" />
+    <property name="DoTime" column="DoTime" />
+    <property name="TestTime" column="TestTime" />
+    <property name="Load1" column="Load1" />
+    <property name="Strength1" column="Strength1" />
+    <property name="Load2" column="Load2" />
+    <property name="Strength2" column="Strength2" />
+
+    <property name="Load3" column="Load3" />
+    <property name="Strength3" column="Strength3" />
+    <property name="Modulus" column="Modulus" />
+    <property name="StrengthValue" column="StrengthValue" />
+    <property name="Sizex" column="Sizex" />
+    
+    <property name="AgeTime" column="AgeTime" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="QualityExamID" column="QualityExamID" />
+    <many-to-one name="QualityExam" column="QualityExamID" class="QualityExam" update="false" insert="false"/>
+  </class>
+</hibernate-mapping>

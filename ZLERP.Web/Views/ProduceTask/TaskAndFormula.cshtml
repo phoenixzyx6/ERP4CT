@@ -1,0 +1,291 @@
+﻿@model ZLERP.Model.ProduceTask 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/ProduceTask/TaskAndFormula.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        @if (ViewBag.Buttons3 != null)
+        {
+            @:var buttons3 = @ViewBag.Buttons3;
+        }
+        @if (ViewBag.Buttons4 != null)
+        {
+            @:var buttons4 = @ViewBag.Buttons4;
+        }
+        $(function () {
+            taskAndFormulaInit({
+            storeUrl:'@Url.Action("Find")',
+            updateProduceTaskUrl:'@Url.Action("Update", "ProduceTask")',
+            getProduceTaskUrl:'@Url.Action("Get", "ProduceTask")',
+            getConsMixpropUrl:'@Url.Action("GenConsMix", "ProduceTask")',
+            consMixpropStoreUrl:'@Url.Action("Find", "ConsMixprop")',
+            mixpropItemsStoreUrl:'@Url.Action("Find", "ConsMixpropItem")',
+            mixpropItemsSaveUrl:'@Url.Action("Update", "ConsMixpropItem")',
+            listFormulaUrl:'@Url.Action("ListData", "Formula")',
+            listMixpropUrl:'@Url.Action("ListData", "CustMixprop")', 
+            getRateSet:'@Url.Action("Get", "RateSet")',
+            taskGridTitle:'@Lang.Title_TaskGrid',
+            consGridTitle:'@Lang.Title_ConsGrid', taskFormTitle:'@Lang.Title_TaskGrid',
+            VAL_ERROR:gSysConfig["VAL_ERROR"] //容重允许误差值
+            });
+        });
+    </script>
+}
+<div id="TaskGridDiv">
+</div>
+<div id="ConsMixAndItemsDiv">
+    <div id="ConsGridDiv" style="float: left; width: 68%">
+    </div>
+    <div id="ConItemsGridDiv" style="float: right; width: 30%">
+    </div>
+</div>
+@*生产任务表单*@
+<div id="BasicForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+   {
+       
+        <div id="formula-tabs" class="mvcform" style="float: left; width: 54%;">
+            <ul>
+                <li><a href="#task-info">任务单基本信息</a></li>
+                <li><a href="#formula-info">任务单技术参数</a></li>
+            </ul>
+            <div id="task-info">
+                <table class="mvcform">
+                    <tr>
+                        <td style="display: none">@Html.LabelFor(m => m.ID)@Html.TextBoxFor(m => m.ID, new { @class = "text", readOnly = true })
+                        </td>
+                        <td colspan="2">@Html.LabelFor(m => m.ProjectName)@Html.TextAreaFor(m => m.ProjectName, 1, 50, new { @class = "text", disabled = true })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">@Html.LabelFor(m => m.CustName)@Html.TextAreaFor(m => m.CustName, 1, 50, new { @class = "text", disabled = true })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.ProjectAddr)@Html.TextBoxFor(m => m.ProjectAddr, new { @class = "text", disabled = true })
+                        </td>
+                        <td>@Html.LabelFor(m => m.RegionID)@Html.DropDownListFor(m => m.RegionID, (IEnumerable<SelectListItem>)ViewBag.Regions, new { @class = "text", disabled = true })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">@Html.LabelFor(m => m.ConsPos)@Html.TextAreaFor(m => m.ConsPos, 1, 50, new { @class = "text", disabled = true })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.ConStrength)@Html.TextBoxFor(m => m.ConStrength, new { @class = "text", disabled = true })
+                        </td>
+                        <td>@Html.LabelFor(m => m.CastMode)@Html.TextBoxFor(m => m.CastMode, new { @class = "text", disabled = true })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.Slump)@Html.TextBoxFor(m => m.Slump, new { @class = "text", disabled = true })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.CarpGrade)@Html.TextBoxFor(m => m.CarpGrade, new { @class = "text", disabled = true })
+                        </td>
+                        <td>@Html.LabelFor(m => m.PlanCube)@Html.TextBoxFor(m => m.PlanCube, new { @class = "text", disabled = true })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.NeedDate)@Html.TextBoxFor(m => m.NeedDate, new { @class = "text", disabled = true })
+                        </td>
+                        <td>@Html.LabelFor(m => m.IdentityValue)@Html.TextBoxFor(m => m.IdentityValue, new { @class = "text", disabled = true })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">@Html.LabelFor(m => m.OtherDemand)@Html.TextAreaFor(m => m.OtherDemand, 2, 50, new { @class = "text", disabled = true })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 2, 50, new { @class = "text", disabled = true })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.BetonTag)@Html.TextBoxFor(m => m.BetonTag, new { @class = "text", disabled = true })
+                        </td>
+                        <td>@Html.LabelFor(m => m.CementType)@Html.TextBoxFor(m => m.CementType, new { @class = "text", disabled = true })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.BetonFormula)@Html.fixedDropDownListFor(m => m.BetonFormula, Enumerable.Empty<SelectListItem>())
+                        </td>
+                        <td>@Html.LabelFor(m => m.SlurryFormula)@Html.fixedDropDownListFor(m => m.SlurryFormula, Enumerable.Empty<SelectListItem>())
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="formula-info">
+                <table class="mvcform">
+                    <tr>
+                        <td>@Html.LabelFor(m => m.CustMixpropID)@Html.fixedDropDownListFor(m => m.CustMixpropID, Enumerable.Empty<SelectListItem>())
+                        </td>
+                        <td>@Html.LabelFor(m => m.Field1)@Html.fixedDropDownListFor(m => m.Field1, (IEnumerable<SelectListItem>)ViewBag.RateSetList)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.IsDatum)@Html.CheckBoxFor(m => m.IsDatum, new { @class = "text" })
+                        </td>
+                        <td>@Html.LabelFor(m => m.IsOut)@Html.CheckBoxFor(m => m.IsOut, new { @class = "text", disabled = true })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.Carper)@Html.TextBoxFor(m => m.Carper, new { @class = "text" })
+                        </td>
+                        <td>@Html.LabelFor(m => m.CarpRadii)@Html.TextBoxFor(m => m.CarpRadii, new { @class = "text" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.AdditiveType)@Html.TextBoxFor(m => m.AdditiveType, new { @class = "text" })
+                        </td>
+                        <td>@Html.LabelFor(m => m.CementBreed)@Html.TextBoxFor(m => m.CementBreed, new { @class = "text" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.MixpropRate)@Html.TextBoxFor(m => m.MixpropRate, new { @class = "text" })
+                        </td>
+                        <td>@Html.LabelFor(m => m.ImyGrade)@Html.TextBoxFor(m => m.ImyGrade, new { @class = "text" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="display: none">@Html.LabelFor(m => m.WCRate)@Html.TextBoxFor(m => m.WCRate, new { @class = "text" })
+                        </td>
+                        <td>@Html.LabelFor(m => m.ImpGrade)@Html.TextBoxFor(m => m.ImpGrade, new { @class = "text" })
+                        </td>
+                        <td>@Html.LabelFor(m => m.ImdGrade)@Html.TextBoxFor(m => m.ImdGrade, new { @class = "text" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.IsImpExp)@Html.CheckBoxFor(m => m.IsImpExp, new { @class = "text" })
+                        </td>
+                        <td>@Html.LabelFor(m => m.ImyCriterion)@Html.TextBoxFor(m => m.ImyCriterion, new { @class = "text" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.IsImzExp)@Html.CheckBoxFor(m => m.IsImzExp, new { @class = "text" })
+                        </td>
+                        <td>@Html.LabelFor(m => m.ImzCriterion)@Html.TextBoxFor(m => m.ImzCriterion, new { @class = "text" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.SIWRate)@Html.TextBoxFor(m => m.SIWRate, new { @class = "text" })
+                        </td>
+                        <td>@Html.LabelFor(m => m.SIRRate)@Html.TextBoxFor(m => m.SIRRate, new { @class = "text" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.RIWRate)@Html.TextBoxFor(m => m.RIWRate, new { @class = "text" })
+                        </td>
+                        <td>@Html.LabelFor(m => m.RIWRate1)@Html.TextBoxFor(m => m.RIWRate1, new { @class = "text" })
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="xxxx">
+                <fieldset>
+                    <legend>机组信息</legend>
+                    <div id="pldiv" style="float: left; padding: 5px;">
+                        @for (var i = 0; i < ViewBag.ProductLineList.Count; i++)
+                        {
+                            string temp = @ViewBag.ProductLineList[i].ProductLineName;
+                            string plid = @ViewBag.ProductLineList[i].ID;  
+                            @Html.Label(temp);
+                            @Html.CheckBox(plid, true);
+
+                        }
+                        @Html.Hidden("plist")
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        
+        <div id="divGroup" style="float: right; width: 45%;">
+            <fieldset>
+                <legend id="legend01" style="font-size: 16px; font-weight:bolder;color: Red; ">001</legend>
+                <div id="pldiv2" style="float: left; padding: 5px; font-size: 16px; font-weight:bolder">
+                    @for (var i = 0; i < ViewBag.ProductLineList.Count; i++)
+                    {
+                        string temp = @ViewBag.ProductLineList[i].ProductLineName;
+                        string plid = @ViewBag.ProductLineList[i].ID;
+
+                        if (i == 0)
+                        {                        
+                        @Html.RadioButton("plgroup", plid, true);
+                        }
+                        else
+                        {
+                        @Html.RadioButton("plgroup", plid, false);
+                        }
+                                                                                                           
+                        @Html.Label(temp);
+                    }
+                    @Html.Hidden("plist")
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>配比信息(上表为混凝土<label id="lbhntrz" style=" color:Red; font-weight:bolder">0</label>下表为砂浆<label id="lbsjrz" style=" color:Red; font-weight:bolder">0</label>)</legend>
+                <div id="Beton-Grid">
+                </div>
+                <div id="Slurry-Grid">
+                </div>
+            </fieldset>
+        </div>
+   }
+    }
+</div>
+
+
+<div id="yjxfForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+            <div id="task-info1">
+                <table class="mvcform">
+                    <tr>
+                        <td>混凝土配比 @Html.DropDownList("BetonFormula1", Enumerable.Empty<SelectListItem>(), new { @id = "BetonFormula1" })
+                        </td>
+                        <td>砂浆配比 @Html.DropDownList("SlurryFormula1", Enumerable.Empty<SelectListItem>(), new { @id = "SlurryFormula1" })
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="xxxx1">
+                <fieldset>
+                    <legend>机组信息</legend>
+                    <div id="pldiv1" style="float: left; padding: 5px;">
+                        @for (var i = 0; i < ViewBag.ProductLineList.Count; i++)
+                        {
+                            string temp = @ViewBag.ProductLineList[i].ProductLineName;
+                            string plid = @ViewBag.ProductLineList[i].ID;  
+                            @Html.Label(temp);
+                            @Html.CheckBox(plid, true);
+
+                        }
+                        @Html.Hidden("plist1")
+                    </div>
+                </fieldset>
+            </div>
+    }
+</div>
+@*配比审核*@ @*<div id="AuditForm" style="display:none;">
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td>@Html.Label("编号")@Html.TextBox("ConsMixprop.ID", new { @class = "text", readOnly = true })</td> 
+    </tr>
+    <tr> 
+        <td>@Html.Label("客户配比名称")@Html.TextBox("ConsMixprop.FormulaName", new { @class = "text", disabled = true })</td> 
+    </tr>
+
+    <tr> 
+        <td>@Html.LabelFor(m => m.ConsMixprop.AuditStatus)@Html.DicEditor("ConsMixprop.AuditStatus", DicEnum.AuditStatus)</td> 
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.ConsMixprop.AuditInfo)@Html.TextAreaFor(m => m.ConsMixprop.AuditInfo)</td> 
+    </tr>
+
+</table>
+}
+</div>*@ 

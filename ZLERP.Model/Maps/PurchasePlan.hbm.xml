@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.PurchasePlan, ZLERP.Model" table="PurchasePlan" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" >
+		<id name="ID" column="PurchasePlan_ID">
+		 	<generator class="native" />
+		</id>
+    <property name="PurchasePlan_NeedDate" column="PurchasePlan_NeedDate" />
+		<property name="GoodsID" column="GoodsID" />
+		<property name="GoodsName" column="GoodsName" />
+		<property name="GoodsTypeID" column="GoodsTypeID" />
+		<property name="GoodsTypeName" column="GoodsTypeName" />
+		<property name="PurchasePlan_num" column="PurchasePlan_num" />
+		<property name="PurchasePlan_reason" column="PurchasePlan_reason" />
+		<property name="PurchasePlan_planstate" column="PurchasePlan_planstate" />
+		<property name="PurchasePlan_state" column="PurchasePlan_state" />
+		<property name="PurchasePlan_claimer" column="PurchasePlan_claimer" />
+		<property name="PurchasePlan_auditor" column="PurchasePlan_auditor" />
+		<property name="PurchasePlan_audit_date" column="PurchasePlan_audit_date" />
+		<property name="PurchasePlan_audit_opinion" column="PurchasePlan_audit_opinion" />
+    <property name="Unit" column="Unit" />
+    
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Remark" column="Remark" />
+    <property name="goodsername" column="goodsername" />
+    <property name="goodsertime" column="goodsertime" />
+
+		<property name="planmoney" column="planmoney" />
+		<property name="planprice" column="planprice" />
+    <many-to-one name="GoodsInfo" column="GoodsID" class="GoodsInfo" update="false" insert="false"/>
+	</class>
+</hibernate-mapping>

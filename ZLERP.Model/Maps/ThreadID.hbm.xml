@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.ThreadID, ZLERP.Model" table="ThreadID" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" >
+		<id name="ID" column="ID">
+		 	<generator class="native" />
+		</id>
+    
+		<property name="typeID" column="typeID" />
+    <property name="typename" column="typename" />
+		<property name="currentDate" column="currentDate" />
+		<property name="remark" column="remark" />
+    
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    
+	</class>
+</hibernate-mapping>

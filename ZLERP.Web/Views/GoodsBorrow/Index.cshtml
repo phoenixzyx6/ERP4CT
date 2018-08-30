@@ -1,0 +1,51 @@
+﻿@model ZLERP.Model.GoodsBorrow 
+@section HeaderSection{
+<script type="text/javascript">
+
+</script>
+<script src="@Url.Content("~/Scripts/Views/GoodsBorrow/GoodsBorrow.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            goodsborrowIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                getGoodsUrl: '@Url.Action("Get","GoodsInfo")'
+            });
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.GoodsID)@Html.AutoComplete("GoodsID", "GoodsName", "Combo", "GoodsInfo", "ID", "GoodsName", "isused=1", new { style = "width:102px" })</td>
+        <td>@Html.LabelFor(m => m.DepartmentID)@Html.DropDownListFor(m => m.DepartmentID, (IEnumerable<SelectListItem>)ViewBag.Department, new { style = "width:137px;" })</td>
+           
+    </tr>
+    <tr> 
+        <td>@Html.Label("库存数量")@Html.TextBox("ContentNum", "0")</td>
+        <td>@Html.LabelFor(m=>m.BorrowMan)@Html.EditorFor(m=>m.BorrowMan)</td>
+           
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.BorrowNum)@Html.EditorFor(m=>m.BorrowNum)</td>  
+        <td>@Html.LabelFor(m=>m.BorrowReason)@Html.EditorFor(m=>m.BorrowReason)</td>      
+        
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.BorrowTime)@Html.EditorFor(m => m.BorrowTime, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+        <td>@Html.LabelFor(m=>m.Operator)@Html.TextBoxFor(m => m.Operator, new { Value = User.UserName() })</td>
+
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m=>m.Remark)@Html.TextAreaFor(m => m.Remark, new { style = "width:345px;" })
+        </td>        
+    </tr>
+</table>
+}
+</div>

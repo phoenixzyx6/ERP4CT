@@ -1,0 +1,75 @@
+﻿@model ZLERP.Model.GoodsOut 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/GoodsOut/GoodsOut.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            goodsoutIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                getGoodsUrl: '@Url.Action("Get","GoodsInfo")'
+                , getprice: '@Url.Action("ListDataPrice")'
+                , getNumPrice: '@Url.Action("getNumPrice")'
+            });
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.GoodsID)@Html.AutoComplete("GoodsID", "GoodsName", "Combo", "GoodsInfo", "ID", "GoodsName", "isused=1", new { style = "width:102px" })
+                </td>
+                <td>@Html.LabelFor(m => m.DepartmentID)@Html.DropDownListFor(m => m.DepartmentID, (IEnumerable<SelectListItem>)ViewBag.Department, new { style = "width:137px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.price)@Html.DropDownListFor(m => m.price, Enumerable.Empty<SelectListItem>(), new { style = "width:137px;" })
+                </td>
+                <td>@Html.LabelFor(m => m.OutMan)@Html.EditorFor(m => m.OutMan)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("库存数量")@Html.TextBox("ContentNum", "0")
+                </td>
+                <td>@Html.LabelFor(m => m.OutTime)@Html.EditorFor(m => m.OutTime, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.OutNum)@Html.EditorFor(m => m.OutNum)
+                </td>
+                <td>@Html.LabelFor(m => m.Operator)@Html.TextBoxFor(m => m.Operator, new { Value = User.UserName() })
+                </td>
+            </tr>
+            <tr id="id2">
+                <td>@Html.Label("同步到汽修")@Html.CheckBox("MC", false)
+                </td>
+                <td>@Html.DropDownList("carID", (SelectList)ViewBag.CarList, new { style = "width:100px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("同步到机修")@Html.CheckBox("ME", false)
+                </td>
+                <td>@Html.Label("送修人")@Html.TextBox("lingyongren", "")
+                </td>
+            </tr>
+            <tr id='id3'>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.OutReason)@Html.TextAreaFor(m => m.OutReason, new { style = "width:345px;" })
+                </td>
+                <td>@Html.LabelFor(m => m)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, new { style = "width:345px;" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>

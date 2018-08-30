@@ -1,0 +1,437 @@
+﻿@using ZLERP.Model
+@{
+    //Layout = null;
+    string cacheKeystr = ViewBag.LoginName;
+    DateTime nowTime = DateTime.Now;
+    string nowTime2 = nowTime.ToString("yyyy-MM-dd HH:mm:ss");
+    string zeroTime = nowTime.Date.ToString("yyyy-MM-dd HH:mm:ss");
+
+    SelectList CarSelectList = (SelectList)ViewBag.CarSelectList;
+    SelectList ProjLngLatSelectList = (SelectList)ViewBag.ProjLngLatSelectList;
+    SelectList IconLayerList = (SelectList)ViewBag.IconLayerList;
+    bool limitregionright = ViewBag.limitregionright;
+    bool projectsetright = ViewBag.projectsetright;
+    bool hotmarksetright = ViewBag.hotmarksetright;
+    bool projrangesetright = ViewBag.projrangesetright;
+    bool homemarksetright = ViewBag.homemarksetright;
+    Company companyInfo = (Company)ViewBag.CompanyInfo;
+}
+@section HeaderSection{    
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/commonmap.js")"></script>
+    <script type="text/javascript">
+    var cacheKeystr = "@cacheKeystr";
+    var reftimes = gSysConfig.DataRefTime * 1000;  //一分钟更新一次 
+    var oilhidden = (gSysConfig.AddOilFn == 'true');
+    var acchidden = (gSysConfig.AddAccFlagFn == 'true');
+    var bthidden = (gSysConfig.AddBeaterStatusFn == 'true');
+    var disthidden = (gSysConfig.AddDistanceFn == 'true');
+ 
+    var companyinfo = { name:"@companyInfo.CompName",lon:@companyInfo.Longtide ,lat: @companyInfo.Latitude,range:@companyInfo.Range };
+    var factoryLat = companyinfo.lat;
+    var factoryLng = companyinfo.lon;
+ 
+    // var ismapsetproject = (' isMapSetProject' == 'True');
+
+    var limitregionright = ('@limitregionright' == 'True');
+    var projectsetright = ('@projectsetright' == 'True');
+    var hotmarksetright = ('@hotmarksetright' == 'True');
+    var projrangesetright = ('@projrangesetright' == 'True');
+    var homemarksetright = ('@homemarksetright' == 'True');
+
+    var outerLayout, innerLayout, southLayout;
+ 
+     $("#startTime").val('@zeroTime');
+     $("#endTime").val('@nowTime2');
+     
+      
+    </script>
+    <script src="@Url.Content("~/Scripts/Views/Map/abc_index.js")" type="text/javascript" language="javascript"> </script>
+    <script src="@Url.Content("~/Scripts/Views/Map/abc_track.js")" type="text/javascript" language="javascript"> </script>
+    <script src="@Url.Content("~/Scripts/Views/Map/abc_ztree.js")" type="text/javascript" language="javascript"> </script>
+    <script src="@Url.Content("~/Scripts/Views/Map/alarm_part.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        initPagejs();
+
+        //报警列表浮动栏
+        var opts = {
+            afterRender: "main_content",
+            pgurl: "../../AlarmLog.mvc/InnerIndex",
+            tburl: "../../AlarmLog.mvc/GetAlarmInfos",
+            centerPoint: factoryLng + ',' + factoryLat,
+            interval: 60
+        };
+        window.setTimeout(function () { alarm_part.init(opts); }, 1000);
+        $(function ($) {
+            $(".iconTips,#tools").show();
+            $("#main_content").css("border", "1px solid blue");
+
+
+        });
+        $("#PandC-tabs").tabs();
+
+        /******  查找输入框的回车事件 ********/
+        $("input[name='CarSearch']").keypress(function (e) {
+            if (e.keyCode == 13) {
+                $("#btn_CarSearch").trigger("click");
+            }
+        });
+
+        $("input[name='ProjectSearch']").keypress(function (e) {
+            if (e.keyCode == 13) {
+                $("#btn_ProjectSearch").trigger("click");
+            }  
+         });
+    </script>
+}
+<div class="content_div ui-corner-all" id="main_content" style="width: 99.5%; height: 99.5%;
+    border: none">
+    <div class="center_div">
+        <!--左上的地图-->
+        <div class="map_div">
+            <div class="iconTips" style="position: absolute; top: 16px; left: 70px; z-index: 1001;
+                display: none;">
+                <table>
+                    <tr>
+                        <td>
+                            <img alt="行驶" src="../../Content/erpimage/mapimage/map/Car/1/green/0.gif" />
+                        </td>
+                        <td>
+                            行驶|
+                        </td>
+                        <td>
+                            <img alt="停车" src="../../Content/erpimage/mapimage/map/Car/1/green/stop.png" />
+                        </td>
+                        <td>
+                            停车|
+                        </td>
+                        <td>
+                            <img alt="卸料" src="../../Content/erpimage/mapimage/map/Car/1/roll.gif" />
+                        </td>
+                        <td>
+                            卸料|
+                        </td>
+                        <td>
+                            <div class="inlineBlock20 grenBlock">
+                            </div>
+                        </td>
+                        <td>
+                            正常|
+                        </td>
+                        <td>
+                            <div class="inlineBlock20 redBlock">
+                            </div>
+                        </td>
+                        <td>
+                            报警|
+                        </td>
+                        <td>
+                            <div class="inlineBlock20 yllwBlock">
+                            </div>
+                        </td>
+                        <td>
+                            熄火
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="btns_div" style="padding: 0 2px 3px 5px; float: right; width: 600px;
+                position: absolute; right: 20px; top: 16px; z-index: 1002;">
+                <span id="tools" class="ui-widget-header ui-corner-all" style="padding: 8px 4px 7px 4px;
+                    border: 1px solid #79B7E7; display: none;"><span id="tool"><span>工具：</span>
+                        @*<button id="magnify">
+                            放大</button>
+                        <button id="dwindle">
+                            缩小</button>*@
+                        <button id="onekeyinout">
+                            一键缩放</button>
+                        <button id="rule">
+                            测距</button>
+                    </span><span id="pen"><span>电子围栏：</span>
+                        <button id="show">
+                            显示</button>
+                        <button id="setPen">
+                            设置</button>
+                        <button id="savePen">
+                            保存</button>
+                    </span></span>
+            </div>
+            <div id="dvMap" style="background-color: #FFFFFF; cursor: default; display: block"
+                class="ui-widget-content ui-corner-all border1">
+            </div>
+        </div>
+        <!--左下的状态信息-->
+        <div class="info_div">
+            <table id="carinfojqgrd">
+            </table>
+        </div>
+    </div>
+    <div class="list_div" id="accordion" style="margin-bottom: 40px; display: none">
+        <!--监控定位-->
+        <h3>
+            <a href="#">监控定位</a></h3>
+        <div style="padding: 2px;">
+             <div id="PandC-tabs">
+                  <ul>
+		                <li><a href="#tabs-1"> 工地 </a></li>
+                        <li><a href="#tabs-2"> 车辆 </a></li>
+	               </ul>
+
+                    <div id="tabs-1">
+                        <div style="margin-top:5px">
+                                @Html.TextBox("ProjectSearch","" ,new { style = "width:120px;margin-left:10px;margin-right:10px"  })
+                                @Html.Button("查找", "id='btn_ProjectSearch' title='查找工地' class='icon refresh' onclick=\"searchNode('treeDemo_Project')\"")
+                        </div>
+                        <div>
+                            <ul id="treeDemo_Project" class="ztree">
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div id = "tabs-2">
+                        <div style="margin-top:5px">
+                                @Html.TextBox("CarSearch","" ,new { style = "width:120px;margin-left:10px;margin-right:10px"  })
+                                @Html.Button("查找", "id='btn_CarSearch' title='查找车辆' class='icon refresh' onclick=\"searchNode('treeDemo_Car')\"")
+                        </div>
+                        <div>
+                            <ul id="treeDemo_Car" class="ztree">
+                            </ul>
+                        </div>
+                    </div>
+              </div>
+        </div>
+        <!--轨迹回放-->
+        <h3>
+            <a id="trackPlayAccd" href="#">轨迹回放</a></h3>
+        <div style="padding: 2px;">
+            <div class="mvcform" style="padding-left: 10px;">
+                <div>
+                    轨迹线条颜色描述：
+                    <div class="lineDesc">
+                        低速0-9<div class="green_div">
+                        </div>
+                        中速10-69<div class="blue_div">
+                        </div>
+                        超速70+<div class="red_div">
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                    <br />
+                    选择车辆：@Html.DropDownList("carList", CarSelectList, new { @class = "requiredval", @style = "width:83%;height:27px;font-size:13px;" })
+                    <br />
+                    起始时间：@Html.TextBox("startTime", null, new { zlerp = "datetimepicker", @class = "timebox requiredval datepicker", style = "width:93%;height:24px;font-size:13px;" })
+                    <br />
+                    截止时间：@Html.TextBox("endTime", null, new { zlerp = "datetimepicker", @class = "timebox requiredval datepicker", style = "width:93%;height:24px;font-size:13px;" })
+                    <br />
+                    点 间 距：
+                    <select id="tolerance" class="requiredval" style="width: 83%; height: 27px; font-size: 13px;">
+                        <option value="10">---10米---</option>
+                        <option value="50" selected="selected">---50米---</option>
+                        <option value="100">---100米---</option>
+                        <option value="200">---200米---</option>
+                        <option value="500">---500米---</option>
+                    </select>
+                    <br />
+                    <br />
+                </div>
+                <div>@Html.Button("下载轨迹数据", "class='icon down' onclick=\"GetPoints()\"")@Html.Button("清除轨迹", "class='icon clear' onclick=\"ClearTrackLine()\"")</div>
+                <div>
+                    数据状态：<span style="color: red" id="statusMsg" onclick="showAllLine()">未加载</span></div>
+                <br />
+                <hr />
+                <br />
+                按帧播放模式：<br />
+                <input id="thetimer" name="thetimer" value="800" type="hidden" />
+                <div class="sliderDiv">
+                    快<div id="speed">
+                    </div>
+                    慢</div>
+                <div class="sliderDiv">
+                    始<div id="trace">
+                    </div>
+                    终</div>
+                <div id="playerDiv">
+                    <input type="radio" id="playBtn" name="player" onclick="startTrack()" /><label for="playBtn"
+                        style="text-align: center">播放</label>
+                    <input type="radio" id="pauseBtn" name="player" onclick="pauseTrack()" /><label for="pauseBtn"
+                        style="text-align: center">暂停</label>
+                    <input type="radio" id="stopBtn" name="player" onclick="stopTrack()" /><label for="stopBtn"
+                        style="text-align: center">停止</label>
+                </div>
+            </div>
+        </div>
+        <!--路线管理-->
+        <h3>
+            <a id="luxiangl" href="#" style="display:none;">导航查询</a></h3>
+        <div style="padding: 2px;display:none;">
+            <div style="padding: 5px 0px 0px 5px; font-size: 12px; height: 500px">
+                <div>
+                    <b>导航终点</b><br />
+                    @Html.DropDownList("projLngLatList", ProjLngLatSelectList, new { @class = "text", @data_val_required = "工地 字段是必需的", @style = "width:83%;height:27px;font-size:13px;" })
+                    <textarea cols='36' rows='1' id='xys_points' style="font-size: 120%; display: none;"></textarea><br />
+                    <br />
+                    <b>导航规则：</b>
+                    <select id='routeType' style="width: 83%; height: 27px; font-size: 13px;">
+                        <option value="0">0速度优先（快速路优先）</option>
+                        <option value="1">1费用优先（尽量避开收费道路）</option>
+                        <option value="2">2距离优先 （距离最短）</option>
+                        <option value="5">5不走快速路（不走快速路，不包含高速路）</option>
+                        <option value="6">6国道优先</option>
+                        <option value="7">7省道优先</option>
+                        <option value="8">8不走高速路</option>
+                    </select><br />
+                    <br />
+                    <button class="jq_btn" onclick='search();'>
+                        查询</button>
+                    <br />
+                    <br />
+                </div>
+                <hr size="1" noshade="noshade" style="border: 1px #cccccc dotted;" />
+                <div id="result_title">
+                    <b>驾车导航搜索结果：</b></div>
+                <div id='result' class='floatLeft' style="height: 260px; overflow: auto; width: 95%;
+                    margin-top: 2px">
+                </div>
+                <br />
+                <button class="jq_btn" onclick='clearRouteOverlays()'>
+                    清除路线</button>
+                <button class="jq_btn" style='margin-left: 10px;' onclick='savePathToProj()'>
+                    保存该路线</button>
+                <br />
+                <br />
+            </div>
+        </div>
+        <!--地图设定-->
+        <h3>
+            <a id="ditusheding" href="#"  style="display:none;">地图设定</a></h3>
+        <div style="padding: 2px;display:none;">
+            <br />
+            <br />
+            <button class="jq_btn" onclick="javascript:_abcMap.addTileLayer_TRAFFIC()">
+                添加交通图层</button>
+            <button class="jq_btn" onclick="javascript:_abcMap.removeTileLayer_TRAFFIC()">
+                移除交通图层</button>
+            <br />
+            <br />
+            <hr />
+            <br />
+            <button class="jq_btn" onclick="javascript:_abcMap.addGoogleLayer()">
+                添加谷歌图层</button>
+            <button class="jq_btn" onclick="javascript:_abcMap.removeGoogleLayer()">
+                移除谷歌图层</button>
+            <br />
+            <br />
+            <hr />
+            <br />
+            <button class="jq_btn" onclick="javascript:_abcMap.clearMap()">
+                清除所有地图图标</button>
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
+<!-- 标定工地 -->
+<div style="display: none;" class="mvcform" id="markProjectDiv">
+    @using (Html.BeginForm())
+    {
+        <table class="mvcform">
+            <tr>
+                <td colspan="2">@Html.Label("工地")@Html.AutoComplete("ID", "PName", "GetProject", "Project", "ID", "ProjectName", "ProjectName", "IsShow=1", new { style = "width:74%" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("工地编号")@Html.TextBox("ProjectID", "", new { disabled = true })
+                </td>
+                <td>@Html.Label("工地名称")@Html.TextBox("ProjectName", "", new { disabled = true })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.Label("工程地址")@Html.TextBox("ProjectAddr", "", new { disabled = true })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("联系人")@Html.TextBox("LinkMan", "", new { disabled = true })
+                </td>
+                <td>@Html.Label("联系电话")@Html.TextBox("Tel", "", new { disabled = true })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.Label("备注")@Html.TextArea("Remark", "", new { disabled = true, style = "width:80%;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("经度")@Html.TextBox("Longitude", "", new { readOnly = true })
+                </td>
+                <td>@Html.Label("纬度")@Html.TextBox("Latitude", "", new { readOnly = true })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("工地范围")@Html.TextBox("PlaceRange", "") (m)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<!-- 搅拌站标定 -->
+<div style="display: none;" class="mvcform" id="markCompanyDiv">
+    @using (Html.BeginForm())
+    {
+        <table class="mvcform">
+            <tr>
+                <td colspan="2">@Html.Label("搅拌站")@Html.AutoComplete("ID", "CName", "GetCompany", "Company", "ID", "CompName", "", new { style = "width:74%" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("站编号")@Html.TextBox("CompanyID", "", new { disabled = true })
+                </td>
+                <td>@Html.Label("站名称")@Html.TextBox("CompName", "", new { disabled = true })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.Label("站地址")@Html.TextBox("CompAddr", "", new { disabled = true })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("联系人")@Html.TextBox("LinkMan", "", new { disabled = true })
+                </td>
+                <td>@Html.Label("联系电话")@Html.TextBox("Tel", "", new { disabled = true })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.Label("负责人")@Html.TextBox("Principal", "", new { disabled = true, style = "width:80%;" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("经度")@Html.TextBox("Longtide", "", new { readOnly = true })
+                </td>
+                <td>@Html.Label("纬度")@Html.TextBox("Latitude", "", new { readOnly = true })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("站范围")@Html.TextBox("Range", "") (m)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<div style="display: none;" id="bounddiv" class="pageDialog">
+    围栏名称：<input type="text" class="TextBox" id="boundName" /><br />
+    <div style="padding: 3px 0 3px 0;">
+        设定类型：<select id="IsOutAlarm" class="DropDownList">
+            <option value="0">驶入该区域 报警</option>
+            <option value="1">离开该区域 报警</option>
+        </select><br />
+    </div>
+    提示：<font color="DarkGray">添加“离开该区域报警”请时设置范围较大的电子围栏，否则车辆会经常越界报警！</font>
+</div>
+<!-- 分割的单独操作功能 -->
+<!-- 设置工地范围 -->
+<div style="display: none;" id="projrangediv" class="pageDialog">
+    <form id="EditRange">
+    <input id="MProjId" name="MProjId" value="" type="hidden" />
+    <br />
+    范围：<input id="MProjRange" name="MProjRange" value="" type="text" class="TextBox" />(米)
+    </form>
+</div>

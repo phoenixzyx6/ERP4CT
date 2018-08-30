@@ -1,0 +1,39 @@
+﻿@model ZLERP.Model.YearAccount 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/YearAccount/YearAccount.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            IndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("帐套号")@Html.EditorFor(m => m.ID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.YearValue)@Html.EditorFor(m => m.YearValue)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.BeginDate)@Html.EditorFor(m => m.BeginDate, new { defaultValue = DateTime.Now.ToString("yyyy-MM-dd") })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.DBPath)@Html.TextAreaFor(m => m.DBPath,2,40,null)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.IsRun)@Html.EditorFor(m => m.IsRun)
+                </td>
+            </tr>            
+        </table>
+
+    }
+</div>

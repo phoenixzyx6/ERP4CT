@@ -1,0 +1,104 @@
+﻿@model ZLERP.Model.CarProjectCube 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/CarProjectCube/CarProjectCube.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            IndexInit('@Url.Action("Find")');
+        });
+        function setWxz() {
+            $("#EndCube").val('1000000000');
+        }
+</script>
+}
+
+<!-- 左边Grid -->
+<div id="MyJqGridMain" style="float: left; width: 35%">
+</div>
+
+<!-- 右边Grid -->
+<div style="float: right; width: 64%">
+ 
+    <div id="MyJqGrid">
+    </div>
+    <div id="MyJqGridCar">
+    </div>
+</div>
+
+<div id="MyFormDivMain" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+    {@Html.ValidationSummary()
+    <table class="mvcform"> 
+        <tr> 
+            <td >@Html.Hidden("ID")
+           </td>
+        </tr>
+        <tr> 
+            <td>@Html.Label("方案名称")@Html.Editor("Name", "", new { @data_val_required = "方案名称 字段是必需的", data_val = "true" })</td>
+        </tr>
+        <tr> 
+            <td>@Html.Label("执行时间")@Html.Editor("RunTime", "DateTime", new { })
+            </td>
+        </tr>
+        <tr> 
+            <td>@Html.Label("备  注")@Html.TextBox("Meno", "", new { })</td>
+        </tr>
+    </table>
+
+    }
+</div>
+
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+        <table class="mvcform"> 
+        <tr> 
+           <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+           </td>
+        </tr>
+        <tr> 
+            <td>@Html.LabelFor(m => m.StartCube)@Html.EditorFor(m => m.StartCube)</td>
+   
+        </tr>
+        <tr> 
+            <td>@Html.LabelFor(m => m.EndCube)@Html.EditorFor(m => m.EndCube)</td>
+            <td><a style="color:Red" onclick="setWxz();">无限制</a></td>
+        </tr>
+        <tr> 
+            <td>@Html.LabelFor(m => m.Cube)@Html.EditorFor(m => m.Cube)</td>
+        </tr>
+        <tr> 
+            <td style="display: none">@Html.LabelFor(m => m.CarProjectCubeMainId)@Html.EditorFor(m => m.CarProjectCubeMainId)</td>
+   
+        </tr>
+    </table>
+
+    }
+</div>
+
+<div id="MyFormDivCar" class="mvcform" style="display:none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+        <table class="mvcform"> 
+        <tr> 
+           <td>@Html.Hidden("ID")
+           </td>
+        </tr>
+        <tr> 
+            <td>@Html.Label("车 号")@Html.DropDownList("CarID", (SelectList)ViewBag.CarDics, "", new { style = "width:135px;" })</td>
+   
+        </tr>
+        <tr> 
+            <td>@Html.Label("备 注")@Html.Editor("Meno")</td>
+        </tr>
+        <tr> 
+            <td style="display: none">@Html.Editor("CarProjectCubeMainId")</td>
+   
+        </tr>
+    </table>
+
+    }
+</div>

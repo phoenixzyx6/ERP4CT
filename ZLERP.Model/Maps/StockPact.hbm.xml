@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.StockPact, ZLERP.Model" table="StockPact" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="StockPactID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="StockPactNo" column="StockPactNo" />
+		<property name="PactName" column="PactName" />
+		<property name="Amount" column="Amount" />
+		<property name="GageUnit" column="GageUnit" />
+		<property name="StockPrice" column="StockPrice" />
+		<property name="QualityNeed" column="QualityNeed" />
+		<property name="EstablishTime" column="EstablishTime" />
+		<property name="EstablishMan" column="EstablishMan" />
+		<property name="ValidFrom" column="ValidFrom" />
+		<property name="ValidTo" column="ValidTo" />
+		<property name="TaxRate" column="TaxRate" />
+		<property name="WarmPercent" column="WarmPercent" />
+		<property name="WeighBy" column="WeighBy" />
+		<property name="SourceAddr" column="SourceAddr" />
+    <property name="FootMode" column="FootMode" />
+    <property name="DianziType" column="DianziType" />
+    <property name="DianziNum" column="DianziNum" />
+    <property name="DianziMoney" column="DianziMoney" />
+    <property name="lowbangcha" column="lowbangcha" />
+    <property name="highbangcha" column="highbangcha" />
+    <property name="Dianzi1" column="Dianzi1" />
+    <property name="Dianzi2" column="Dianzi2" />
+    <property name="Dianzi3" column="Dianzi3" />
+    <property name="Dianzi4" column="Dianzi4" />
+    <property name="Dianzi5" column="Dianzi5" />
+    <property name="Dianzi6" column="Dianzi6" />
+    <property name="Dianzi7" column="Dianzi7" />
+    <property name="DianziString" column="DianziString" />
+    <property name="BangchaRate" column="BangchaRate" />
+    <property name="IsDianzi" column="IsDianzi" />
+		<property name="Auditor" column="Auditor" />
+		<property name="AuditTime" column="AuditTime" />
+		<property name="AuditStatus" column="AuditStatus" />
+		<property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="SupplyID" column="SupplyID" />
+    <many-to-one name="SupplyInfo" column="SupplyID" class="SupplyInfo" insert="false" update="false"/>
+    <property name="StuffID" column="StuffID" />
+		<property name="StuffID1" column="StuffID1" />
+		<property name="StuffID2" column="StuffID2" />
+    <property name="StuffID3" column="StuffID3" />
+    <property name="StuffID4" column="StuffID4" />
+    <property name="StockPrice1" column="StockPrice1" />
+    <property name="StockPrice2" column="StockPrice2" />
+    <property name="StockPrice3" column="StockPrice3" />
+    <property name="StockPrice4" column="StockPrice4" />
+    
+		<many-to-one name="StuffInfo" column="StuffID" class="StuffInfo"  insert="false" update="false"/>
+		<many-to-one name="StuffInfo1" column="StuffID1" class="StuffInfo"  insert="false" update="false"/>
+		<many-to-one name="StuffInfo2" column="StuffID2" class="StuffInfo"  insert="false" update="false"/>
+    <many-to-one name="StuffInfo3" column="StuffID3" class="StuffInfo"  insert="false" update="false"/>
+    <many-to-one name="StuffInfo4" column="StuffID4" class="StuffInfo"  insert="false" update="false"/>
+    
+		<bag name="StockPlans" lazy="true" batch-size="30" inverse="true" >
+			<key column="StockPactID"></key>
+			<one-to-many class="StockPlan"></one-to-many>
+		</bag>
+		<bag name="StuffIns" lazy="true" batch-size="30" inverse="true" >
+			<key column="StockPactID"></key>
+			<one-to-many class="StuffIn"></one-to-many>
+		</bag>
+    <bag name="Attachments" where="ObjectType='StockPact'" batch-size="30" cascade="delete" >
+      <key column="ObjectId"/>
+      <one-to-many class="Attachment" />
+    </bag>
+	</class>
+</hibernate-mapping>

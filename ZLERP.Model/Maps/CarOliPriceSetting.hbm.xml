@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"  encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.CarOilPriceSetting, ZLERP.Model" table="CarOilPriceSetting" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="CarOilPriceSettingID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+    <property name="StartDate" column="StartDate" type="DateTime"  />
+    <property name="EndDate" column="EndDate" type="DateTime"  />
+    <property name="OilPrice" column="OilPrice" type="decimal"  />
+  </class>
+</hibernate-mapping>

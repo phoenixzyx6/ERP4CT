@@ -1,0 +1,48 @@
+﻿@model ZLERP.Model.ProduceTask
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/ProduceTask/OpenCheck.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            TaskIndexInit('@Url.Action("Find")');
+        });
+    </script>
+    <style type="text/css">
+        .tinfo th
+        {
+            text-align: right;
+            padding-right: .5em;
+            width: 8em;
+            color: #2E6E9E;
+            font-weight: normal; 
+            
+        }
+        .tinfo th,.tinfo td{border:1px solid #A6C9E2; padding:3px;}
+        .itemhover
+        {
+            background-color:#FFAE48;
+            color:Black;
+        }
+        .itemDelhover
+        {
+            background-color:#E2C753;
+            color:Black;
+            }
+    </style>
+}
+<div id="TaskGrid">
+</div>
+@*模版选择*@
+<div id="SelectTpl" class="mvcform" style="display: none;">
+    <div id="allTpl">
+    <fieldset  id="New" style = " padding-left:10px; padding-bottom:3px; border:1px dashed #A6C9E2" >
+        <legend><b>资料名称</b></legend>
+        <div id="newTpl"></div>
+    </fieldset>
+    </div>
+    <div id="hisTpl">
+    <fieldset  id="His" style = " padding-left:10px; border:1px dashed #A6C9E2" >
+        <legend><b>最近打印时间</b></legend>
+        <div id="onehisTpl"></div>
+    </fieldset>
+    </div>
+</div>

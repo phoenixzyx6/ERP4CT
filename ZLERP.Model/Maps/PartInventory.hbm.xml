@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.PartInventory, ZLERP.Model" table="PartInventory" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="InventoryID">
+            <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="InventoryDate" column="InventoryDate" />
+		<property name="InventoryMan" column="InventoryMan" />
+		<property name="Remark" column="Remark" />
+    <property name="Auditor" column="Auditor" />
+    <property name="AuditTime" column="AuditTime" />
+    <property name="AuditStatus" column="AuditStatus" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<bag name="PartInventoryDetails" lazy="true" batch-size="30" inverse="true" >
+			<key column="InventoryID"></key>
+			<one-to-many class="PartInventoryDetail"></one-to-many>
+		</bag>
+	</class>
+</hibernate-mapping>

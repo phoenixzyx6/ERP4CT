@@ -1,0 +1,41 @@
+﻿@model ZLERP.Model.StuffExam 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/StuffExam/StuffExam.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            stuffexamIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>            
+                <td>@Html.LabelFor(m => m.StuffID)@Html.fixedDropDownListFor(m => m.StuffID, (IEnumerable<SelectListItem>)ViewBag.StuffList)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.LabelFor(m => m.TechnicalParam)@Html.TextBoxFor(m => m.TechnicalParam, new { @class = "text"})<span>如强度等级、模数、骨料粒径、掺合料级别等</span>
+                </td>
+            </tr>
+            <tr>
+            <td>@Html.LabelFor(m => m.SupplyID)@Html.EditorFor(m => m.SupplyID)
+            </td>
+            
+            <td>@Html.LabelFor(m => m.InDate)@Html.EditorFor(m => m.InDate)
+            </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.IsUsed)@Html.CheckBoxFor(m => m.IsUsed)
+                </td>
+                <td>@Html.LabelFor(m => m.ExamTypeName)@Html.EditorFor(m => m.ExamTypeName)
+            </td>
+            </tr>
+        </table>
+    }
+</div>

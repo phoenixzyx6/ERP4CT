@@ -1,0 +1,47 @@
+﻿@model ZLERP.Model.Department
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/Department.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            departmentIndexInit('@Url.Action("FindDepartments")');
+        });
+    </script>
+}
+<div id="departmentForm" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        @Html.HiddenFor(m => m.ID)
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.CompanyID)@Html.fixedDropDownListFor(m => m.CompanyID, (SelectList)ViewBag.CompanyDics)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.DepartmentName)@Html.TextBoxFor(m => m.DepartmentName, new { @class = "text" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ParentID)@Html.DropDownTreeFor(m => m.ParentID, "FindTree")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.DptLevel)@Html.TextBoxFor(m => m.DptLevel)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.ManagerID)@Html.DropDownListFor(m => m.ManagerID, (SelectList)ViewBag.Managers, new { @class = "text" })
+                    @*@Html.AutoCompleteFor(m => m.ManagerID, m => m.ManagerName, "Combo", "User", "TrueName","ID", new { @class = "text" })*@
+                    @*@Html.LabelFor(m => m.ManagerID)@Html.TextBoxFor(m => m.ManagerID, new { @class = "text" })*@
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.IsLeaf)@Html.CheckBoxFor(m => m.IsLeaf)
+                </td>
+            </tr>            
+        </table>
+
+    }
+</div>
+<div id="department-grid">
+</div>

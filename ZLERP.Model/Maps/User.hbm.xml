@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.User, ZLERP.Model" table="Users" lazy="true"
+    dynamic-insert="true" dynamic-update="true"  batch-size="30" optimistic-lock="version">
+		<id name="ID" column="UserID">
+		 	<generator class="assigned" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="TrueName" column="TrueName" />
+		<property name="Password" column="Password" />
+		<property name="Nation" column="Nation" />
+		<property name="Birthday" column="Birthday" />
+		<property name="CommAddr" column="CommAddr" />
+		<property name="NationAddr" column="NationAddr" />
+		<property name="IDCard" column="IDCard" />
+		<property name="PostCode" column="PostCode" />
+		<property name="BloodType" column="BloodType" />
+		<property name="Sex" column="Sex" />
+		<property name="IsMarried" column="IsMarried" />
+		<property name="MaxEducate" column="MaxEducate" />
+		<property name="BankID" column="BankID" />
+		<property name="Team" column="Team" /> 
+		<property name="DigitSign" column="DigitSign" />
+		<property name="DriverIdentity" column="DriverIdentity" />
+		<property name="Email" column="Email" />
+		<property name="Tel" column="Tel" />
+		<property name="Mobile" column="Mobile" />
+        <property name="ClassType" column="ClassType" />
+		
+		<property name="DepartmentID" column="DepartmentID" />
+		<property name="ManagerID" column="ManagerID" />
+		<property name="UserType" column="UserType" />
+		<property name="IsUsed" column="IsUsed" />
+		<property name="IsVisited" column="IsVisited" />
+		<property name="ValidFrom" column="ValidFrom" />
+		<property name="ValidTo" column="ValidTo" />
+		<property name="Remark" column="Remark" />
+		<property name="UserCode" column="UserCode" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<many-to-one name="Department" column="DepartmentID" class="Department" />
+    <bag name="SysFuncs" table="SysPower" inverse="false" batch-size="30"  >
+      <key column="UserID"/>
+      <many-to-many class="SysFunc" order-by="OrderNum ASC, SysFuncID ASC" column="SysFuncID"/>
+    </bag>
+
+		<bag name="DriverForCars" lazy="true" batch-size="30" >
+			<key column="UserID"></key>
+			<one-to-many class="DriverForCar"></one-to-many>
+		</bag>
+		<bag name="MntZls" lazy="true" inverse="true" batch-size="30" >
+			<key column="UserID"></key>
+			<one-to-many class="MntZl"></one-to-many>
+		</bag>
+		<bag name="EquipMtLyItems" lazy="true" inverse="true" batch-size="30" >
+			<key column="UserID"></key>
+			<one-to-many class="EquipMtLyItem"></one-to-many>
+		</bag>
+		<bag name="EquipMtLyReturns" lazy="true" inverse="true" batch-size="30" >
+			<key column="SendMan"></key>
+			<one-to-many class="EquipMtLyReturn"></one-to-many>
+		</bag>
+		<bag name="EquipMtLyReturnItems" lazy="true" inverse="true" batch-size="30" >
+			<key column="UserID"></key>
+			<one-to-many class="EquipMtLyReturnItem"></one-to-many>
+		</bag>
+		<bag name="EquipTermlyMtItems" lazy="true" inverse="true" batch-size="30" >
+			<key column="UserID"></key>
+			<one-to-many class="EquipTermlyMtItem"></one-to-many>
+		</bag>
+    <bag name="UserRoles" lazy="true" inverse="true" batch-size="30" >
+      <key column="UserID" />
+      <one-to-many class="UserRole" />
+    </bag>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,47 @@
+﻿@model ZLERP.Model.CarRepair 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/CarRepair/CarRepair.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            carrepairIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr>
+        <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })</td>   
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.RepairType)@Html.DicEditorFor(m => m.RepairType, DicEnum.CarRepairType, new { style = "width:140px;" })</td>
+        <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarList, new { style = "width:140px;" })</td>   
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.RepairTime)@Html.EditorFor(m => m.RepairTime, "DateTimeWithTime")</td>
+        <td>@Html.LabelFor(m => m.ReturnTime)@Html.EditorFor(m => m.ReturnTime, "DateTimeWithTime")</td>
+    </tr>
+    <tr>
+    <td>
+    <td>@Html.LabelFor(m => m.CarMan)@Html.EditorFor(m => m.CarMan)</td>
+    </td></tr>
+    <tr>
+        
+        <td>@Html.LabelFor(m => m.RepairAddr)@Html.EditorFor(m => m.RepairAddr)</td>
+        <td>@Html.LabelFor(m => m.summoney)@Html.EditorFor(m => m.summoney)</td>
+    </tr>
+    <tr>
+        <td colspan="2">@Html.LabelFor(m => m.RepairReason)@Html.TextAreaFor(m => m.RepairReason, 1, 53, new { })</td>   
+    </tr>
+    <tr>
+        <td colspan="2">@Html.LabelFor(m => m.RepairDes)@Html.TextAreaFor(m => m.RepairDes, 1, 53, new { })</td>   
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.RepairCost)@Html.TextBoxFor(m => m.RepairCost, new { Value=0})</td>
+        <td>@Html.LabelFor(m => m.RepairMan)@Html.EditorFor(m => m.RepairMan)</td>
+    </tr>
+</table>
+}
+</div>

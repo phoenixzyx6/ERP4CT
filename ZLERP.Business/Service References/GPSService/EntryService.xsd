@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ProjectAdd">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="contractNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="address" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="buildUnit" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="constructUnit" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="linkMan" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="linkTel" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="latitude" nillable="true" type="xs:double" />
+        <xs:element minOccurs="0" name="longtidue" nillable="true" type="xs:double" />
+        <xs:element minOccurs="0" name="placeRange" nillable="true" type="xs:double" />
+        <xs:element minOccurs="0" name="cpOrder" type="xs:int" />
+        <xs:element minOccurs="0" name="isShow" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProjectAddResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProjectEdit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="keyContractNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newContractNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="address" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="buildUnit" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="constructUnit" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="linkMan" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="linkTel" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="latitude" nillable="true" type="xs:double" />
+        <xs:element minOccurs="0" name="longtidue" nillable="true" type="xs:double" />
+        <xs:element minOccurs="0" name="placeRange" nillable="true" type="xs:double" />
+        <xs:element minOccurs="0" name="cpOrder" type="xs:int" />
+        <xs:element minOccurs="0" name="isShow" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProjectEditResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TaskTryGetInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="taskNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TaskTryGetInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="TaskTryGetInfoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TaskList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="contractNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="customName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TaskListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="TaskListResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TaskAdd">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="taskNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="contractNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="customName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LinkMan" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LinkTel" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ConstructUnit" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ConsPosType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ConsPos" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PlanCube" type="xs:double" />
+        <xs:element minOccurs="0" name="IsConsign" type="xs:boolean" />
+        <xs:element minOccurs="0" name="Consign" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="TransportationType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="GradeName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Slump" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="BeginTime" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Completed" type="xs:boolean" />
+        <xs:element minOccurs="0" name="CompleteTime" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Remarks" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TaskAddResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TaskEdit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="keyTaskNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newtaskNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="contractNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="customName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LinkMan" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LinkTel" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ConstructUnit" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ConsPosType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ConsPos" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PlanCube" type="xs:double" />
+        <xs:element minOccurs="0" name="ProvidedCube" type="xs:double" />
+        <xs:element minOccurs="0" name="IsConsign" type="xs:boolean" />
+        <xs:element minOccurs="0" name="Consign" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="TransportationType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="GradeName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Slump" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="BeginTime" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Completed" type="xs:boolean" />
+        <xs:element minOccurs="0" name="CompleteTime" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Remarks" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TaskEditResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TaskComplete">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="taskNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TaskCompleteResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TaskGetInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="taskNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TaskGetInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="TaskGetInfoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarTaskTryGetInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carTaskNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarTaskTryGetInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CarTaskTryGetInfoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarTaskList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="taskNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carTaskNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarTaskListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CarTaskListResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarTaskAdd">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carTaskNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="taskNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carNum" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="driverName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cube" type="xs:double" />
+        <xs:element minOccurs="0" name="sendTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="backTime" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="productLineName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="remarks" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarTaskAddResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarTaskGetInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carTaskNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarTaskGetInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CarTaskGetInfoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Login">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LoginResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginWithKey">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginWithKeyResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Logout">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LogoutResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarAdd">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carNum" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="customNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="terminalID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sim" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="owner" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idCard" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carWeight" nillable="true" type="xs:double" />
+        <xs:element minOccurs="0" name="carCapacity" nillable="true" type="xs:double" />
+        <xs:element minOccurs="0" name="underpan" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarAddResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarEdit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="keyCarNum" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newCarNum" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="customNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="terminalID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sim" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="owner" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idCard" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carWeight" nillable="true" type="xs:double" />
+        <xs:element minOccurs="0" name="carCapacity" nillable="true" type="xs:double" />
+        <xs:element minOccurs="0" name="underpan" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarEditResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarGetDrivers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carNum" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarGetDriversResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CarGetDriversResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarAddDriver">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carNum" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="driverName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarAddDriverResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarDeleteDriver">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carNum" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="driverName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarDeleteDriverResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarGetLastestGpsInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carNum" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarGetLastestGpsInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CarGetLastestGpsInfoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarGetInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carNum" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarGetInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CarGetInfoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarSearchGpsInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carNum" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="beginTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endTime" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarSearchGpsInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CarSearchGpsInfoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarListLastestGpsInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarListLastestGpsInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CarListLastestGpsInfoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CarListResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarTryGetInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carNum" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarTryGetInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CarTryGetInfoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarRun">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carNum" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarRunResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarRepeal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carNum" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarRepealResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarTaskComplete">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carNum" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarTaskCompleteResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarRest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carNum" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarRestResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarWaiting">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="carNum" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarWaitingResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DriverTryGetInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DriverTryGetInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DriverTryGetInfoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DriverAdd">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tel" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DriverAddResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DriverEdit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="keyName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tel" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DriverEditResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DriverGetInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DriverGetInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DriverGetInfoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DriverGetCars">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DriverGetCarsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DriverGetCarsResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DriverList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DriverListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DriverListResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProjectTryGetInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="contractNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProjectTryGetInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ProjectTryGetInfoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProjectList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProjectListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ProjectListResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProjectGetInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tokenKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="contractNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProjectGetInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ProjectGetInfoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

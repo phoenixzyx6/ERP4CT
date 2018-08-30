@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.GPSInfos, ZLERP.Model" table="GPSInfo" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="ID">
+      <generator class="native" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="Trace" column="Trace"/>
+    <property name="TerminalID" column="TerminalID"/>
+    <property name="Longtidue" column="Longtidue"/>
+    <property name="Latitude" column="Latitude"/>
+    <property name="OriginLongtidue" column="OriginLongtidue"/>
+    <property name="OriginLatitude" column="OriginLatitude"/>
+    <property name="Speed" column="Speed"/>
+    <property name="Height" column="Height"/>
+    <property name="Direction" column="Direction"/>
+    <property name="Oil" column="Oil"/>
+    <property name="Distance" column="Distance"/>
+    <property name="UnLoad" column="UnLoad"/>
+    <property name="UnLoadTme" column="UnLoadTme"/>
+    <property name="Place" column="Place"/>
+    <property name="ErrorCode" column="ErrorCode"/>
+    <property name="Sendtime" column="Sendtime"/>
+    <property name="Receivetime" column="Receivetime"/>
+    <property name="AccFlag" column="AccFlag"/>
+    <property name="BeaterStatus" column="BeaterStatus"/>
+    <property name="OriginOil" column="OriginOil"/>
+    <property name="AccOnCount" column="AccOnCount"/>
+
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    
+	</class>
+</hibernate-mapping>

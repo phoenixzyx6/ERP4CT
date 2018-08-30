@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Training, ZLERP.Model" table="Training" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="TrainingID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="TrainName" column="TrainName" />
+		<property name="TrainDate" column="TrainDate" />
+		<property name="TrainContent" column="TrainContent" />
+		<property name="TrainCost" column="TrainCost" />
+		<property name="TrainTeacher" column="TrainTeacher" />
+		<property name="Plans" column="Plans" />
+		<property name="Infact" column="Infact" />
+		<property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<bag name="TrainRecords" lazy="true" cascade="all-delete-orphan" inverse="true" >
+			<key column="TrainingID"></key>
+			<one-to-many class="TrainRecord"></one-to-many>
+		</bag>
+	</class>
+</hibernate-mapping>

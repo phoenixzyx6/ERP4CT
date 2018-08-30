@@ -1,0 +1,67 @@
+﻿@model ZLERP.Model.CarIMA 
+@section HeaderSection{
+
+<script src="@Url.Content("~/Scripts/Views/CarIMA/CarIMA.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            carimaIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+    <table class="mvcform"> 
+         <tr>
+             <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+             </td>
+        </tr>
+        <tr> 
+            <td>@Html.LabelFor(m => m.CarID)@Html.DropDownListFor(m => m.CarID, (SelectList)ViewBag.CarDics, "", new { style = "width:135px;" })
+            </td>
+            <td>@Html.LabelFor(m=>m.CarNo)@Html.EditorFor(m=>m.CarNo)
+            </td>
+        </tr>
+        <tr> 
+            <td>@Html.LabelFor(m=>m.InsuranceDate)@Html.EditorFor(m=>m.InsuranceDate)
+            </td>
+            <td>@Html.LabelFor(m=>m.InsuranceIsHandle)@Html.CheckBoxFor(m=>m.InsuranceIsHandle)
+            </td>
+        </tr>
+        <tr> 
+            <td>@Html.LabelFor(m=>m.CarAnnualVerDate)@Html.EditorFor(m=>m.CarAnnualVerDate)
+            </td>
+            <td>@Html.LabelFor(m=>m.CarAnnualVerIsHandle)@Html.CheckBoxFor(m=>m.CarAnnualVerIsHandle)
+            </td>
+        </tr>
+        <tr> 
+            <td>@Html.LabelFor(m=>m.CerAnnualVerDate)@Html.EditorFor(m=>m.CerAnnualVerDate)
+            </td>
+            <td>@Html.LabelFor(m=>m.CerAnnualVerIsHandle)@Html.CheckBoxFor(m=>m.CerAnnualVerIsHandle)
+            </td>
+        </tr>
+        <tr>        
+            <td>@Html.LabelFor(m=>m.FMaintainNextTime)@Html.EditorFor(m=>m.FMaintainNextTime)
+            </td>
+            <td>@Html.LabelFor(m=>m.FMaintainIsHandle)@Html.CheckBoxFor(m=>m.FMaintainIsHandle)
+            </td>
+        
+        </tr>
+
+        <tr>        
+            <td>@Html.LabelFor(m=>m.SMaintainNextTime)@Html.EditorFor(m=>m.SMaintainNextTime)
+            </td>
+            <td>@Html.LabelFor(m=>m.SMaintainIsHandle)@Html.CheckBoxFor(m=>m.SMaintainIsHandle)
+            </td>     
+        </tr>
+        <tr> 
+            <td>@Html.LabelFor(m=>m.RoadBridge)@Html.EditorFor(m=>m.RoadBridge)
+            </td>
+            <td>@Html.LabelFor(m => m.BusInsuranceDate)@Html.EditorFor(m => m.BusInsuranceDate)
+            </td>
+        </tr>
+    </table>
+
+}
+</div>

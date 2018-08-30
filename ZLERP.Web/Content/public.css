@@ -1,0 +1,430 @@
+﻿
+
+/*菜单按钮*/
+.menuBar
+{
+    padding:0px  0px 3px 0px ;
+    display: inline-block;
+}
+.map_div .menuButton
+{
+    margin: 0;
+}
+.menuButton
+{
+    border: none;
+    cursor: pointer;
+    margin: 0px 3px;
+    vertical-align:bottom;
+    display:inline-block;
+    *display:inline;
+    zoom:1;
+    /*padding:0px  0px 3px 0px ;*/
+}
+.menuButton div
+{
+    border:none;
+    vertical-align: middle;
+    margin: 0px;
+    padding: 0px;
+    display:inline-block;
+    *display:inline;
+    zoom:1;
+    border:0px none ;
+}
+.menuButton .center
+{
+    background-image: url(erpimage/mapimage/button/button.png);
+    background-repeat: repeat-x;
+    background-position: 0px -46px;
+    position:relative;
+    padding:0px 3px;
+    line-height:23px;
+    height: 23px;
+    *padding-top:3px;
+    *line-height:20px;
+    *height: 20px;
+    
+}
+.menuButton .left
+{
+    background-image: url(erpimage/mapimage/button/button.png);
+    background-repeat: repeat-x;
+    background-position: 0px 0px;
+    width: 3px;
+    height: 23px;
+    line-height:23px;
+}
+.menuButton .right
+{
+    background-image: url(erpimage/mapimage/button/button.png);
+    background-repeat: repeat-x;
+    background-position: 0px -23px;
+    width: 3px;
+    height: 23px;
+    line-height:23px;
+}
+.menuButton:hover
+{
+    color: Blue;
+}
+.menuButton:hover .center
+{
+    background-position: 0px -115px;
+}
+.menuButton:hover .left
+{
+    background-position: 0px -69px;
+}
+.menuButton:hover .right
+{
+    background-position: 0px -92px;
+}
+.menuButton:active
+{
+    position: relative;
+    top: 1px;
+    left: 1px;
+}
+/*end 菜单按钮*/
+/*icon 图标*/
+.icon .center
+{
+    padding-left:18px;
+}
+.icon span
+{
+    display: block;
+    width: 16px;
+    height: 16px;
+    position:absolute;
+    margin-top: -8px;
+    top:50%;
+    left:0px;
+    background : url("erpimage/mapimage/icon/icons.png");
+}
+ 
+.completeIcon
+{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left:10px;
+    background: url("erpimage/mapimage/icon/icons.png") repeat scroll -32px -48px transparent;
+}
+.assignDriver span
+{
+    background-position: -48px -48px;
+}
+.uncheck span
+{
+    background-position: -32px -64px;
+}
+.checked span
+{
+    background-position: -48px -64px;
+}
+.change span
+{
+    background-position: -64px -64px;
+}
+.home span {
+    background-position: -128px -16px;
+}
+.big span
+{
+    background-position: -80px -64px;
+}
+.small span
+{
+    background-position: -96px -64px;
+}
+.move span
+{
+    background-position: -112px -64px;
+}
+.line span
+{
+    background-position: -128px -64px;
+}
+.clear span
+{
+    background-position: -144px -64px;
+}
+.datasave span
+{
+    background-position: -0px -80px;
+}
+.dataset span
+{
+    background-position: -16px -80px;
+}
+.upcross span
+{
+    background-position: -32px -80px;
+}
+.ringalert span
+{
+    background-position: -48px -80px;
+}
+.alarm
+{
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin-left:10px;
+    background: url("erpimage/mapimage/icon/icons.png") repeat scroll -64px -80px transparent;
+}
+.noalarm
+{
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin-left:10px;
+    background: url("erpimage/mapimage/icon/icons.png") repeat scroll -80px -80px transparent;
+}
+.layer span
+{
+    background-position: -96px -80px;
+}
+.leftexpand
+{
+    width: 16px;
+    height: 16px;
+    background: url("erpimage/mapimage/icon/icons.png") repeat scroll -80px -80px transparent;
+    background-position: -112px -80px;
+}
+.rightexpand
+{
+    width: 16px;
+    height: 16px;
+    background: url("erpimage/mapimage/icon/icons.png") repeat scroll -80px -80px transparent;
+    background-position: -128px -80px;
+}
+
+/*icon 图标 end*/
+
+/*车辆调度页面的CSS*/
+.sd_allmenu
+{
+    overflow:auto;
+    border-bottom: none;
+    border-top: none;
+    height:100%;
+}
+.sd_menu
+{
+    position: relative;
+    height: 23px;
+    margin-top: 2px;
+    cursor: pointer;
+}
+.sd_menu .detail
+{
+    padding: 0px 2px;
+    display: none;
+    position: relative;
+}
+.sd_menu .left
+{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 3px;
+    height: 23px;
+    background-image: url(erpimage/mapimage/button/button.png);
+    background-repeat: repeat-x;
+    background-position: 0px 0px;
+}
+.sd_menu .right
+{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 3px;
+    height: 23px;
+    background-image: url(erpimage/mapimage/button/button.png);
+    background-repeat: repeat-x;
+    background-position: 0px -23px;
+}
+    
+.sd_menu .center
+{
+    background-image: url(erpimage/mapimage/button/button.png);
+    background-repeat: repeat-x;
+    background-position: 0px -46px;
+    height: 23px;
+    padding: 0px 5px 0px 24px;
+}
+.sd_allmenu .icon, .sd_help .icon
+{
+    position: absolute;
+    left: 5px;
+    top: 3px;
+    width: 16px;
+    height: 16px;
+    background-image: url(erpimage/mapimage/icon/icons.png);
+}
+.sd_help
+{
+    border-bottom: none; float:right
+}
+.sd_help .icon
+{
+    position: static;
+    display: inline-block;
+}
+.car005002AndNurse
+{
+    background-position: -128px -48px;
+}
+.car005004
+{
+    background-position: -112px -48px;
+}
+.car005005
+{
+    background-position: -96px -48px;
+}
+.car005001
+{
+    background-position: -112px -32px;
+}
+.car005002
+{
+    background-position: -80px -48px;
+}
+.car005003
+{
+    background-position: 0 -48px;
+}
+.car005008
+{
+    background-position: -144px -48px;
+}
+.car005006{ background-position: -16px -64px }
+.car005007{ background-position: 0px -64px }
+.sd_menu .center .floatright
+{
+    float: right;
+    position: static;
+    margin-top: 3px;
+}
+.sd_upIcon
+{
+    background-position: 0px -32px;
+}
+.sd_downIcon
+{
+    background-position: -16px -32px;
+}
+.sd_car
+{
+    position: relative;
+    display: inline-block;
+    border: 1px solid lightgray;
+    padding: 0px 2px 0px 2px;
+    margin: 1px;
+    cursor: pointer;
+}
+.sd_car .icon
+{
+    left: 1px;
+}
+.sd_detail
+{
+    border: 1px solid #bbbbff;
+    display: none;
+    border-top:none;
+    min-height:75px;
+}
+.sd_contextMenu
+{
+    display: none;
+    border: 1px solid #6666ff;
+    padding: 2px;
+    z-index: 999;
+    position: absolute;
+    top: 20px;
+    width: 100px;
+    left: 0px;
+    background-color: White;
+}
+.sd_contextMenuItem
+{
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer;
+}
+.sd_MenuItemOver
+{
+    background-color: #FFFFCC;
+}
+
+.pj .main
+{
+    position:relative;
+    height:80px;
+    border-bottom: 1px solid #000;
+    background-color: #D8E8FE;
+}
+.pj .detail{ display:none;}
+.pj .icon
+{
+    width:16px;
+    height:16px;
+    background-image: url(erpimage/mapimage/icon/icons.png);
+}
+.pj .dtIcon{ position:absolute; right:2px; bottom:2px; cursor: pointer;}
+.pj .main .factoryIcon
+{
+    float:left;
+    cursor:pointer;
+    height: 50px;
+    width: 48px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(erpimage/mapimage/icon/building.png);
+}
+.pj .main .info{cursor:pointer;height: 24px;}
+.pj .main .cars { height: 24px; margin-left:50px; overflow:hidden;}
+.pj .pjcar{ margin:0px 1px; display:inline-block; cursor:pointer;border: 1px solid #bbb; background-color:#2FCD33; border-radius: 5px 5px 5px 5px;  }
+.pj .task .path .go .pjcar, .pj .task .path .back .pjcar{ position:absolute;}
+.pj .task { margin-left:20px; margin-right:5px; height: 80px; border-bottom: 1px dashed #000; position : relative;}
+.pj .task .produceLine{ width: 105px;height: 58px; float:left; overflow:hidden;}
+.pj .task .CubeInfo{ width: 42px;height: 58px; float:right; overflow:hidden; line-height:18px; text-align :right;}
+.pj .task .CubeInfo .tk_PlanCube{ color: Red;  font-weight: bold; }
+.pj .task .CubeInfo .tk_ProvidedCube{ color: #F89406;  font-weight: bold; }
+.pj .task .CubeInfo .tk_Times{ color: Green;  font-weight: bold;}
+.pj .task .factoryIcon{ width: 40px; height: 58px; float:left;
+                         background-image: url(erpimage/mapimage/icon/factory.png); 
+                         background-position:center; background-repeat:no-repeat;}
+.pj .task .buildingIcon{ width: 40px; height: 58px;float:right; 
+                         background-image: url(erpimage/mapimage/icon/building.png);
+                         background-position:center; background-repeat:no-repeat; }
+.pj .task .atBuilding{ width: 65px; height: 58px;float:right; overflow:hidden;}
+.pj .task .path { padding-left: 110px; padding-right: 110px; height:58px;}
+.pj .task .taskDes { height:22px;position:relative;}
+.pj .task .path .go, .pj .task .path .back{  height: 22px; position:relative;}
+.pj .task .path .info { border:1px solid blue; }
+.pj_showCarDetail .pjcar .icon{  margin-top:2px; float:left; }
+.inlineBlock16{ display: inline-block; width:16px; height:16px; margin-bottom:-4px;}
+.inlineBlock16_pic{ display: inline-block; width:23px; height:23px; margin-bottom:-6px;}
+.inlineBlock20{ display: inline-block; width:20px; height:20px; border-radius: 5px 5px 5px 5px;margin-bottom:3px;}
+.redBlock{background-color:#E22516; border: 1px solid #E22516;}
+.grenBlock{background-color:#15C529; border: 1px solid #15C529;}
+.yllwBlock{background-color:#FADB1A; border: 1px solid #FADB1A;}
+.sd_help .carStop,.pj .carStop{ background-color:#ffff56;/*yellow*/ border: 1px solid #cccccc ;}
+.sd_help .gpsInvalid,.pj .gpsInvalid{ background-color:#cccccc; border: 1px solid #cccccc; }
+.sd_help .gprsInvalid,.pj .gprsInvalid{ background-color:#FF6347; border: 1px solid #ff3737;  }
+.unload { background-color:#ABEBF9; border: 1px solid #cccccc;  } 
+.c_alarm { background-color:#FB433B; border: 1px solid #cccccc;}
+.c_run { background-color:#2FCD33; border: 1px solid #cccccc;}
+.c_shutdown { background-color:#FBE24A; border: 1px solid #cccccc;}
+.southBarAlarm { background-color:#FF6347;}
+/*车辆调度页面的CSS end */
+/*地图页面的提示对话框样式 begin */
+.infodlg ul li{padding:1px 6px 2px 20px;}
+nbsp{margin-left:10px;}
+bluefont{color:#0099FF }redfont{color:OrangeRed }greenfont{color:Green}orangefont{color:Orange}
+/*地图页面的提示对话框样式 end */

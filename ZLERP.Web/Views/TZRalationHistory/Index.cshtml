@@ -1,0 +1,12 @@
+﻿@model ZLERP.Model.TZRalationHistory
+@section HeaderSection{ 
+ <script src="@Url.Content("~/Scripts/Views/TZRalationHistory.js")" type="text/javascript" language="javascript"> </script>
+<script type="text/javascript">
+    $(function () {
+        tzrelationInit({
+            storeUrl: '@Url.Action("Find")'
+        });
+    });
+</script>
+}
+<div id="MyJqGrid"></div> 

@@ -1,0 +1,40 @@
+﻿@model ZLERP.Model.ConPrice 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/ConPrice.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            conpriceIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<div id="conpriceGrid"></div>
+<div id="conpriceForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+
+    <tr> 
+        <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })@Html.LabelFor(m=>m.ConStrengthCode)@Html.fixedDropDownListFor(m => m.ConStrengthCode, (IEnumerable<SelectListItem>)ViewBag.ConStrengthList)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.SettingDate)@Html.EditorFor(m => m.SettingDate, "DateTime", new {defaultValue=@DateTime.Now.ToString("yyyy-MM-dd") })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.InfoPrice)@Html.TextBoxFor(m => m.InfoPrice, new { Value=0})</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.PumpPrice)@Html.TextBoxFor(m => m.PumpPrice, new { Value = 0 })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.SlurryPrice)@Html.TextBoxFor(m => m.SlurryPrice, new { Value = 0 })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.Remark)@Html.TextAreaFor(m => m.Remark, 3, 18, new { @class="text"})</td>
+    </tr>
+</table>
+}
+</div>

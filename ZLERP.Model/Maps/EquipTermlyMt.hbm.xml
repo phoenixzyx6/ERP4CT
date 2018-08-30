@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.EquipTermlyMt, ZLERP.Model" table="EquipTermlyMt" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="EquipTermlyMtID">
+		 	<generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="MtDate" column="MtDate" />
+		<property name="BeMtDate" column="BeMtDate" />
+		<property name="DelayReason" column="DelayReason" />
+		<property name="IsEntrust" column="IsEntrust" />
+		<property name="PayableSum" column="PayableSum" />
+		<property name="Remark" column="Remark" />
+		<property name="YM" column="YM" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="ClassBID" column="ClassBID" />
+    <property name="ClassMID" column="ClassMID" />
+    <property name="ClassSID" column="ClassSID" />
+    <property name="EquipmentID" column="EquipmentID" />
+    <property name="MaintenanceID" column="MaintenanceID" />
+		<many-to-one name="ClassB" column="ClassBID" class="ClassB" update="false" insert="false"/>
+		<many-to-one name="ClassM" column="ClassMID" class="ClassM" update="false" insert="false"/>
+		<many-to-one name="Classs" column="ClassSID" class="Classs" update="false" insert="false"/>
+		<many-to-one name="Equipment" column="EquipmentID" class="Equipment" update="false" insert="false"/>
+		<many-to-one name="Maintenance" column="MaintenanceID" class="Maintenance" update="false" insert="false"/>
+		<bag name="EquipTermlyMtItems" lazy="true" inverse="true" >
+			<key column="EquipTermlyMtID"></key>
+			<one-to-many class="EquipTermlyMtItem"></one-to-many>
+		</bag>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,96 @@
+﻿@model ZLERP.Model.StuffIn
+@section HeaderSection{  
+ <script src="@Url.Content("~/Scripts/Views/StuffIn/PriceConfirm.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            priceConfirmInit({
+                storeUrl: '@Url.Action("Find")',
+                executeUrl: '@Url.Action("ExecutePrice")'
+            });
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.CarNo)@Html.EditorFor(m => m.CarNo)
+                </td>
+                <td>@Html.LabelFor(m => m.StuffID)@Html.AutoComplete("StuffID", "StuffName", "Combo", "StuffInfo", "ID", "StuffName")
+                </td>
+                <td>@Html.LabelFor(m => m.SiloID)@Html.AutoComplete("SiloID", "SiloName", "Combo", "Silo", "ID", "SiloName")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.StockPactID)@Html.AutoComplete("StockPactID", "StockPactNo", "Combo", "StockPact", "ID", "StockPactNo")
+                </td>
+                <td>@Html.LabelFor(m => m.SupplyID)@Html.AutoComplete("SupplyID", "SupplyName", "Combo", "SupplyInfo", "ID", "SupplyName", "SupplyKind='Su2'")
+                </td>
+                <td>@Html.LabelFor(m => m.TransportID)@Html.AutoComplete("TransportID", "TransportName", "Combo", "SupplyInfo", "ID", "SupplyName", "SupplyKind='Su3'")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CustName)@Html.EditorFor(m => m.CustName)
+                </td>
+                <td>@Html.LabelFor(m => m.GageUnit)@Html.EditorFor(m => m.GageUnit)
+                </td>
+                <td>@Html.LabelFor(m => m.TransportNum)@Html.EditorFor(m => m.TransportNum)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.SupplyNum)@Html.EditorFor(m => m.SupplyNum)
+                </td>
+                <td>@Html.LabelFor(m => m.TotalNum)@Html.EditorFor(m => m.TotalNum)
+                </td>
+                <td>@Html.LabelFor(m => m.CarWeight)@Html.EditorFor(m => m.CarWeight)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.StockNum)@Html.EditorFor(m => m.StockNum)
+                </td>
+                <td>@Html.LabelFor(m => m.WRate)@Html.EditorFor(m => m.WRate)
+                </td>
+                <td>@Html.LabelFor(m => m.InNum)@Html.EditorFor(m => m.InNum)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Proportion)@Html.EditorFor(m => m.Proportion)
+                </td>
+                <td>@Html.LabelFor(m => m.FootNum)@Html.EditorFor(m => m.FootNum)
+                </td>
+                <td>@Html.LabelFor(m => m.Driver)@Html.EditorFor(m => m.Driver)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.SourceAddr)@Html.EditorFor(m => m.SourceAddr)
+                </td>
+                <td>@Html.LabelFor(m => m.InDate)@Html.EditorFor(m => m.InDate)
+                </td>
+                <td>@Html.LabelFor(m => m.OutDate)@Html.EditorFor(m => m.OutDate)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AH)@Html.DicEditorFor(m => m.AH, DicEnum.AH, "请选择", "请选择")
+                </td>
+                <td>@Html.LabelFor(m => m.IsBack)@Html.CheckBoxFor(m => m.IsBack)
+                </td>
+                <td>@Html.LabelFor(m => m.Remark)@Html.EditorFor(m => m.Remark)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Operator)@Html.EditorFor(m => m.Operator)
+                </td>
+                <td>@Html.LabelFor(m => m.FootStatus)@Html.EditorFor(m => m.FootStatus)
+                </td>
+                <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.IsExam)@Html.CheckBoxFor(m => m.IsExam)
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

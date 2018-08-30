@@ -1,0 +1,156 @@
+﻿@model ZLERP.Model.AIR1Exam 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/AIR1Exam/AIR1Exam.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            air1examIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("试验编号")@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.ExamTime)@Html.EditorFor(m => m.ExamTime, new { id = "edit_ExamTime" })
+                </td>
+                <td>@Html.LabelFor(m => m.ReportTime)@Html.EditorFor(m => m.ReportTime, new { id = "edit_ReportTime" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.StuffID)@Html.fixedDropDownListFor(m => m.StuffID, (IEnumerable<SelectListItem>)ViewBag.AIRStuff)
+                </td>
+                <td>@Html.LabelFor(m => m.DeputyNum)@Html.EditorFor(m => m.DeputyNum)
+                </td>
+                <td>@Html.LabelFor(m => m.RadioExamID)@Html.EditorFor(m => m.RadioExamID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.WaRate)@Html.EditorFor(m => m.WaRate)
+                </td>
+                <td>@Html.LabelFor(m => m.AvaTime)@Html.EditorFor(m => m.AvaTime)
+                </td>
+                <td>@Html.LabelFor(m => m.ExamGist)@Html.TextBox("ExamGist")
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table width="650" border="1">
+                        <tr>
+                            <td width="100">
+                                &nbsp;
+                            </td>
+                            <td width="100">
+                                细度(%)
+                            </td>
+                            <td width="100">
+                                烧失量(%)
+                            </td>
+                            <td width="100">
+                                需水量比(%)
+                            </td>
+                            <td width="100">
+                                三氧化硫(%)
+                            </td>
+                            <td width="100">
+                                安定性
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                I级
+                            </td>
+                            <td>
+                                &lt;=12
+                            </td>
+                            <td>
+                                &lt;=5
+                            </td>
+                            <td>
+                                &lt;=95
+                            </td>
+                            <td>
+                                &lt;=3
+                            </td>
+                            <td>
+                                合格
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                II级
+                            </td>
+                            <td>
+                                &lt;=25
+                            </td>
+                            <td>
+                                &lt;=8
+                            </td>
+                            <td>
+                                &lt;=105
+                            </td>
+                            <td>
+                                &lt;=3
+                            </td>
+                            <td>
+                                合格
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                III级
+                            </td>
+                            <td>
+                                &lt;=45
+                            </td>
+                            <td>
+                                &lt;=15
+                            </td>
+                            <td>
+                                &lt;=115
+                            </td>
+                            <td>
+                                &lt;=3
+                            </td>
+                            <td>
+                                合格
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                测试结果
+                            </td>
+                            <td>@Html.TextBoxFor(m => m.FineDegree, new { style = "width:50px" })
+                            </td>
+                            <td>@Html.TextBoxFor(m => m.BurnLossNum, new { style = "width:50px" })
+                            </td>
+                            <td>@Html.TextBoxFor(m => m.NeedWaRate, new { style = "width:50px" })
+                            </td>
+                            <td>@Html.TextBoxFor(m => m.BatchID, new { style = "width:50px" })
+                            </td>
+                            <td>@Html.CheckBoxFor(m => m.IsUse)
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Assessor)@Html.EditorFor(m => m.Assessor)
+                </td>
+                <td>@Html.LabelFor(m => m.Principal)@Html.EditorFor(m => m.Principal)
+                </td>
+                <td>@Html.LabelFor(m => m.CommissionID)@Html.fixedDropDownListFor(m => m.CommissionID, (IEnumerable<SelectListItem>)ViewBag.Commission)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">@Html.LabelFor(m => m.ExamResult)@Html.TextArea("ExamResult", Lang.Msg_ExamResultForAIR1, 1, 90, new { })
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

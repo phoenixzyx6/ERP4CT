@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Dic, ZLERP.Model" table="Dic" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="DicID">
+		 	<generator class="assigned" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="DicName" column="DicName" />
+		<property name="TreeCode" column="TreeCode" />
+		<property name="Des" column="Des" />
+		<property name="ParentID" column="ParentID" />
+		<property name="IsLeaf" column="IsLeaf" />
+		<property name="OrderNum" column="OrderNum" />
+    <property name="SysParam" column="SysParam" />
+		<property name="Deep" column="Deep" />
+		<property name="Field1" column="Field1" />
+		<property name="Field2" column="Field2" />
+		<property name="Field3" column="Field3" />
+		<property name="Field4" column="Field4" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+	</class>
+</hibernate-mapping>

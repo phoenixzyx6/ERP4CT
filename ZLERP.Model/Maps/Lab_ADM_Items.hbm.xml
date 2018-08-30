@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.Lab_ADM_Items, ZLERP.Model" table="Lab_ADM_Items" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="ID">
+      <generator class="native" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="Lab_ADMID" column="Lab_ADMID" />
+    <property name="NO" column="NO" />
+    <property name="PH" column="PH" />
+    <property name="SL" column="SL" />
+    <property name="WSL" column="WSL" />
+    <property name="PW" column="PW" />
+    <property name="WPW" column="WPW" />
+    <property name="GWPW" column="GWPW" />
+    <property name="LD" column="LD" />
+    <property name="JS" column="JS" />
+    <property name="WS" column="WS" />
+    <property name="T" column="T" />
+    <property name="TH" column="TH" />
+    <property name="YQ" column="YQ" />
+    <property name="Q" column="Q" />
+    <property name="YG" column="YG" />
+    <property name="G" column="G" />
+    <property name="JC" column="JC" />
+    <property name="JZ" column="JZ" />
+    <property name="WC" column="WC" />
+    <property name="WZ" column="WZ" />
+    <property name="J3dH1" column="J3dH1" />
+    <property name="J3dH2" column="J3dH2" />
+    <property name="J3dH3" column="J3dH3" />
+    <property name="J3dD1" column="J3dD1" />
+    <property name="J3dD2" column="J3dD2" />
+    <property name="J3dD3" column="J3dD3" />
+    <property name="J7dH1" column="J7dH1" />
+    <property name="J7dH2" column="J7dH2" />
+    <property name="J7dH3" column="J7dH3" />
+    <property name="J7dD1" column="J7dD1" />
+    <property name="J7dD2" column="J7dD2" />
+    <property name="J7dD3" column="J7dD3" />
+    <property name="J28dH1" column="J28dH1" />
+    <property name="J28dH2" column="J28dH2" />
+    <property name="J28dH3" column="J28dH3" />
+    <property name="J28dD1" column="J28dD1" />
+    <property name="J28dD2" column="J28dD2" />
+    <property name="J28dD3" column="J28dD3" />
+    <property name="W3dH1" column="W3dH1" />
+    <property name="W3dH2" column="W3dH2" />
+    <property name="W3dH3" column="W3dH3" />
+    <property name="W3dD1" column="W3dD1" />
+    <property name="W3dD2" column="W3dD2" />
+    <property name="W3dD3" column="W3dD3" />
+    <property name="W7dH1" column="W7dH1" />
+    <property name="W7dH2" column="W7dH2" />
+    <property name="W7dH3" column="W7dH3" />
+    <property name="W7dD1" column="W7dD1" />
+    <property name="W7dD2" column="W7dD2" />
+    <property name="W7dD3" column="W7dD3" />
+    <property name="W28dH1" column="W28dH1" />
+    <property name="W28dH2" column="W28dH2" />
+    <property name="W28dH3" column="W28dH3" />
+    <property name="W28dD1" column="W28dD1" />
+    <property name="W28dD2" column="W28dD2" />
+    <property name="W28dD3" column="W28dD3" />
+    <property name="J1" column="J1" />
+    <property name="J2" column="J2" />
+    <property name="J3" column="J3" />
+    <property name="J4" column="J4" />
+    <property name="J5" column="J5" />
+    <property name="J6" column="J6" />
+    <property name="J7" column="J7" />
+    <property name="J8" column="J8" />
+    <property name="J9" column="J9" />
+    <property name="J10" column="J10" />
+    <property name="J11" column="J11" />
+    <property name="J12" column="J12" />
+    <property name="J13" column="J13" />
+    <property name="W1" column="W1" />
+    <property name="W2" column="W2" />
+    <property name="W3" column="W3" />
+    <property name="W4" column="W4" />
+    <property name="W5" column="W5" />
+    <property name="W6" column="W6" />
+    <property name="W7" column="W7" />
+    <property name="W8" column="W8" />
+    <property name="W9" column="W9" />
+    <property name="W10" column="W10" />
+    <property name="W11" column="W11" />
+    <property name="W12" column="W12" />
+    <property name="W13" column="W13" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+
+    <many-to-one name="Lab_ADM" column="Lab_ADMID" class="Lab_ADM" update="false" insert="false"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,226 @@
+﻿@model ZLERP.Model.ADM2Exam 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/ADM2Exam/ADM2Exam.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            adm2examIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("试验编号")@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.StuffID)@Html.fixedDropDownListFor(m => m.StuffID, (IEnumerable<SelectListItem>)ViewBag.ADMStuff)
+                </td>
+                <td>@Html.LabelFor(m => m.ExamTime)@Html.EditorFor(m => m.ExamTime)
+                </td>
+                <td>@Html.LabelFor(m => m.ReportTime)@Html.EditorFor(m => m.ReportTime)
+                </td>
+            </tr>
+            <tr>
+            <td>@Html.LabelFor(m => m.CommissionID)@Html.fixedDropDownListFor(m => m.CommissionID, (IEnumerable<SelectListItem>)ViewBag.Commission)
+                </td>
+                <td>@Html.LabelFor(m => m.DeputyNum)@Html.EditorFor(m => m.DeputyNum)
+                </td>
+                <td>@Html.LabelFor(m => m.OutID)@Html.EditorFor(m => m.OutID)
+                </td>
+                <td>@Html.LabelFor(m => m.OutDate)@Html.EditorFor(m => m.OutDate)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.InDate)@Html.EditorFor(m => m.InDate)
+                </td>
+                <td>@Html.LabelFor(m => m.SampDate)@Html.EditorFor(m => m.SampDate)
+                </td>
+                <td>@Html.LabelFor(m => m.MoldDate)@Html.EditorFor(m => m.MoldDate)
+                </td>
+                <td>@Html.LabelFor(m => m.CementBreed)@Html.EditorFor(m => m.CementBreed)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ConStrength)@Html.EditorFor(m => m.ConStrength)
+                </td>
+                <td>@Html.LabelFor(m => m.BatchNo)@Html.EditorFor(m => m.BatchNo)
+                </td>
+                <td>@Html.LabelFor(m => m.SurArea)@Html.EditorFor(m => m.SurArea)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <h2>
+                        1.细度</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Method)@Html.EditorFor(m => m.Method)
+                </td>
+                <td>@Html.LabelFor(m => m.SampWeight)@Html.EditorFor(m => m.SampWeight)
+                </td>
+                <td>@Html.LabelFor(m => m.SuDryWeight)@Html.EditorFor(m => m.SuDryWeight)
+                </td>
+                <td>@Html.LabelFor(m => m.SuPer)@Html.EditorFor(m => m.SuPer)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <h2>
+                        2.凝结时间</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AddWaTime)@Html.EditorFor(m => m.AddWaTime)
+                </td>
+                <td>@Html.LabelFor(m => m.BeginFreTime)@Html.EditorFor(m => m.BeginFreTime)
+                </td>
+                <td>@Html.LabelFor(m => m.EndFreTime)@Html.EditorFor(m => m.EndFreTime)
+                </td>
+                <td>@Html.LabelFor(m => m.BoTime)@Html.EditorFor(m => m.BoTime)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.PinBoTime)@Html.EditorFor(m => m.PinBoTime)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <h2>
+                        3.限制膨胀率</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Wa7L0)@Html.EditorFor(m => m.Wa7L0)
+                </td>
+                <td>@Html.LabelFor(m => m.Wa7L)@Html.EditorFor(m => m.Wa7L)
+                </td>
+                <td>@Html.LabelFor(m => m.Wa7L1)@Html.EditorFor(m => m.Wa7L1)
+                </td>
+                <td>@Html.LabelFor(m => m.Wa7Lim)@Html.EditorFor(m => m.Wa7Lim)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Air21L0)@Html.EditorFor(m => m.Air21L0)
+                </td>
+                <td>@Html.LabelFor(m => m.Air21L)@Html.EditorFor(m => m.Air21L)
+                </td>
+                <td>@Html.LabelFor(m => m.Air21L1)@Html.EditorFor(m => m.Air21L1)
+                </td>
+                <td>@Html.LabelFor(m => m.Air21Lim)@Html.EditorFor(m => m.Air21Lim)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Wa28L0)@Html.EditorFor(m => m.Wa28L0)
+                </td>
+                <td>@Html.LabelFor(m => m.Wa28L)@Html.EditorFor(m => m.Wa28L)
+                </td>
+                <td>@Html.LabelFor(m => m.Wa28L1)@Html.EditorFor(m => m.Wa28L1)
+                </td>
+                <td>@Html.LabelFor(m => m.Wa28Lim)@Html.EditorFor(m => m.Wa28Lim)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Other)@Html.EditorFor(m => m.Other)
+                </td>
+                <td>@Html.LabelFor(m => m.LimCon)@Html.EditorFor(m => m.LimCon)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <h2>
+                        4.强度试验</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Temp3)@Html.EditorFor(m => m.Temp3)
+                </td>
+                <td>@Html.LabelFor(m => m.Hum3)@Html.EditorFor(m => m.Hum3)
+                </td>
+                <td>@Html.LabelFor(m => m.ExamTime3)@Html.EditorFor(m => m.ExamTime3)
+                </td>
+                <td>@Html.LabelFor(m => m.Imz3)@Html.EditorFor(m => m.Imz3)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Str3)@Html.EditorFor(m => m.Str3)
+                </td>
+                <td>@Html.LabelFor(m => m.Imy3)@Html.EditorFor(m => m.Imy3)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Temp7)@Html.EditorFor(m => m.Temp7)
+                </td>
+                <td>@Html.LabelFor(m => m.Hum7)@Html.EditorFor(m => m.Hum7)
+                </td>
+                <td>@Html.LabelFor(m => m.ExamTime7)@Html.EditorFor(m => m.ExamTime7)
+                </td>
+                <td>@Html.LabelFor(m => m.Imz7)@Html.EditorFor(m => m.Imz7)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Str7)@Html.EditorFor(m => m.Str7)
+                </td>
+                <td>@Html.LabelFor(m => m.Imy7)@Html.EditorFor(m => m.Imy7)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Temp28)@Html.EditorFor(m => m.Temp28)
+                </td>
+                <td>@Html.LabelFor(m => m.Hum28)@Html.EditorFor(m => m.Hum28)
+                </td>
+                <td>@Html.LabelFor(m => m.ExamTime28)@Html.EditorFor(m => m.ExamTime28)
+                </td>
+                <td>@Html.LabelFor(m => m.Imz28)@Html.EditorFor(m => m.Imz28)
+                </td>
+            </tr>
+            <tr>
+                
+                <td>@Html.LabelFor(m => m.Str28)@Html.EditorFor(m => m.Str28)
+                </td>
+                <td>@Html.LabelFor(m => m.Imy28)@Html.EditorFor(m => m.Imy28)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.TempQe)@Html.EditorFor(m => m.TempQe)
+                </td>
+                <td>@Html.LabelFor(m => m.HumQe)@Html.EditorFor(m => m.HumQe)
+                </td>
+                <td>@Html.LabelFor(m => m.ExamTimeQe)@Html.EditorFor(m => m.ExamTimeQe)
+                </td>
+                <td>@Html.LabelFor(m => m.ImzQe)@Html.EditorFor(m => m.ImzQe)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.StrQe)@Html.EditorFor(m => m.StrQe)
+                </td>
+                <td>@Html.LabelFor(m => m.ImyQe)@Html.EditorFor(m => m.ImyQe)
+                </td>
+                <td>@Html.LabelFor(m => m.AvaTime)@Html.EditorFor(m => m.AvaTime)
+                </td>
+                <td>@Html.LabelFor(m => m.StandJudge)@Html.EditorFor(m => m.StandJudge)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Assessor)@Html.EditorFor(m => m.Assessor)
+                </td>
+                <td>@Html.LabelFor(m => m.Principal)@Html.EditorFor(m => m.Principal)
+                </td>
+                <td>@Html.LabelFor(m => m.IsUse)@Html.CheckBoxFor(m => m.IsUse)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">@Html.LabelFor(m => m.ExamGist)@Html.TextAreaFor(m => m.ExamGist, 1, 90, new { @Value = Lang.Msg_ExamGistForCE.ToString() })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">@Html.LabelFor(m => m.ExamResult)@Html.TextAreaFor(m => m.ExamResult, 1, 90, new { @Value = Lang.Msg_ExamResultForCe.ToString() })
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

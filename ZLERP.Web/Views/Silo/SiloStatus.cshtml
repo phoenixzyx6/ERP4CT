@@ -1,0 +1,138 @@
+﻿@model IList<ZLERP.Model.Silo>
+@section HeaderSection{
+    <script type="text/javascript">
+        $(function () {
+            $(".silostatus .silo").each(function (index, el) {
+                var curcontent = parseFloat($(el).attr("curcontent"));
+                var minwarm = parseFloat($(el).attr("minwarm"));
+                var maxwarm = parseFloat($(el).attr("maxwarm"));
+                if (curcontent > minwarm && curcontent <= maxwarm) {
+                    $(el).removeClass("minwarm");
+                } else {
+                    $(el).addClass("minwarm");
+                }
+            });
+        });
+    </script>
+}
+<style type="text/css">
+    .silostatus li
+    {
+        display: inline;
+        width: 100px;
+        float: left;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+    .silostatus .title
+    {
+        text-align: center;
+        font-weight: bold;
+        display: block;
+        overflow: hidden;
+        height: 1.5em;
+    }
+    .silostatus .empty
+    {
+        background: #efefef;
+        border-radius: 0 0 10px 10px;
+        text-align: center;
+    }
+    .silostatus .silo
+    {
+        height: 200px;
+        width: 100px;
+        background: #79b7e7;
+        border: 1px solid #ccc;
+        border-radius: 0 0 10px 10px;
+    }
+    .silostatus .minwarm
+    {
+        background: #F97B7B;
+        
+   }
+    .silostatus
+    {
+        width: 100%;
+    }
+</style>
+<div>
+    @functions{
+        decimal GetRate(decimal content, decimal maxContent)
+        {
+            var rate = 0m;
+            if (content < 0) content = 0;
+            if (maxContent > 0 && content > 0)
+            {
+                rate = Math.Round(content / maxContent, 2);
+            }
+            else if (content > maxContent)
+            {
+                rate = 1;
+            }
+            if (rate > 1)
+            {
+                rate = 1;
+            }
+            return rate;
+        }
+        string GetHeight(decimal content, decimal maxContent)
+        {
+            decimal height = 1 - GetRate(content, maxContent);
+            if (height > 1)
+            {
+                return "100%";
+            }
+            else if (height < 0)
+            {
+                return "0%";
+            }
+            else
+                return height.ToString("P1");
+        }
+    }
+    <table>
+        @foreach (ZLERP.Model.ProductLine p in ViewBag.ProductLine)
+        {     
+            <tr>
+                <th style="font-size: large; color: Red">
+                    【@p.ProductLineName】
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <ul class="silostatus">
+                        @foreach (ZLERP.Model.SiloProductLine sp in ViewBag.SiloProductLine)
+                        {
+                            if (p.IsUsed && sp.ProductLineID == p.ID && sp.Silo.StuffInfo != null && (sp.Silo.MinWarm > 0 || sp.Silo.MaxWarm > 0))
+                            {
+                                decimal Content = Math.Round(sp.Silo.Content / 1000, 2);
+                                decimal MaxContent = sp.Silo.MaxContent == null ? 0 : Math.Round((decimal)sp.Silo.MaxContent / 1000, 2);
+                                decimal minWarm = Math.Round((decimal)sp.Silo.MinWarm / 1000, 2);
+                                decimal maxWarm = Math.Round((decimal)sp.Silo.MaxWarm / 1000, 2);
+     
+                            <li>
+                                <div>
+                                    <div class="title" title="@sp.Silo.SiloName">@sp.Silo.SiloName</div>
+                                    <div class="title" title="@sp.Silo.StuffName">
+                                        (@sp.Silo.StuffName)</div>
+                                    <div class="title" style="color: Blue">@Content 吨</div>
+                                    <div class="silo"  title="当前库存：@Content 吨
+筒仓容量:@MaxContent 吨
+最小报警容量:@minWarm 吨
+最大报警容量:@maxWarm 吨" minwarm="@minWarm" maxwarm="@maxWarm" curcontent="@Content">
+                                        <div  class="empty" style="height:@(GetHeight(sp.Silo.Content, sp.Silo.MaxContent ?? 0))">
+                                            @GetRate(sp.Silo.Content, sp.Silo.MaxContent ?? 0).ToString("P1")
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+       
+                            }
+                        }
+                    </ul>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

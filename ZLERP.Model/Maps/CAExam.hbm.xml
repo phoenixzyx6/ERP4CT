@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.CAExam, ZLERP.Model" table="CAExam" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="CAExamID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="ExamTime" column="ExamTime" />
+    <property name="ReportTime" column="ReportTime" />
+    <property name="DeputyNum" column="DeputyNum" />
+    <property name="ClayRate" column="ClayRate" />
+    <property name="ClayMete" column="ClayMete" />
+    <property name="SurDensity" column="SurDensity" />
+    <property name="StackDensity" column="StackDensity" />
+    <property name="TightDensity" column="TightDensity" />
+    <property name="RadioExamID" column="RadioExamID" />
+    <property name="ReportID" column="ReportID" />
+    <property name="DrinkRate" column="DrinkRate" />
+    <property name="GrainContent" column="GrainContent" />
+    <property name="CrushVal" column="CrushVal" />
+    <property name="CarpGradeReg" column="CarpGradeReg" />
+    <property name="DrySampWeight" column="DrySampWeight" />
+    <property name="WetSampWeight" column="WetSampWeight" />
+    <property name="AvaRate" column="AvaRate" />
+    <property name="S100" column="S100" />
+    <property name="S800" column="S800" />
+    <property name="S630" column="S630" />
+    <property name="S500" column="S500" />
+    <property name="S400" column="S400" />
+    <property name="S315" column="S315" />
+    <property name="S250" column="S250" />
+    <property name="S200" column="S200" />
+    <property name="S160" column="S160" />
+    <property name="S10" column="S10" />
+    <property name="S50" column="S50" />
+    <property name="S25" column="S25" />
+    <property name="Sy_1" column="Sy_1" />
+    
+    <property name="Sy100" column="Sy100" />
+    <property name="Sy800" column="Sy800" />
+    <property name="Sy630" column="Sy630" />
+    <property name="Sy500" column="Sy500" />
+    <property name="Sy400" column="Sy400" />
+    <property name="Sy315" column="Sy315" />
+    <property name="Sy250" column="Sy250" />
+    <property name="Sy200" column="Sy200" />
+    <property name="Sy160" column="Sy160" />
+    <property name="Sy10" column="Sy10" />
+    <property name="Sy50" column="Sy50" />
+    <property name="Sy25" column="Sy25" />
+    <property name="Sy_2" column="Sy_2" />
+
+    <property name="Ss100" column="Ss100" />
+    <property name="Ss800" column="Ss800" />
+    <property name="Ss630" column="Ss630" />
+    <property name="Ss500" column="Ss500" />
+    <property name="Ss400" column="Ss400" />
+    <property name="Ss315" column="Ss315" />
+    <property name="Ss250" column="Ss250" />
+    <property name="Ss200" column="Ss200" />
+    <property name="Ss160" column="Ss160" />
+    <property name="Ss10" column="Ss10" />
+    <property name="Ss50" column="Ss50" />
+    <property name="Ss25" column="Ss25" />
+    <property name="Sy_3" column="Sy_3" />
+    
+    
+    <property name="TotalNum" column="TotalNum" />
+    <property name="AvaTime" column="AvaTime" />
+    <property name="CarpJudge" column="CarpJudge" />
+    <property name="Assessor" column="Assessor" />
+    <property name="Principal" column="Principal" />
+    <property name="IsUse" column="IsUse" />
+    <property name="ExamGist" column="ExamGist" />
+    <property name="ExamResult" column="ExamResult" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="CommissionID" column="CommissionID" />
+    <many-to-one name="Commission" column="CommissionID" class="Commission" update="false" insert="false"/>
+    <property name="StuffID" column="StuffID" />
+    <many-to-one name="StuffInfo" column="StuffID" class="StuffInfo" update="false" insert="false"/>
+  </class>
+</hibernate-mapping>

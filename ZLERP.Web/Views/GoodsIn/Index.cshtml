@@ -1,0 +1,58 @@
+﻿@*物资入库*@
+@model ZLERP.Model.GoodsIn 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/GoodsIn/GoodsIn.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            goodsinIndexInit({
+                storeUrl:'@Url.Action("Find")',
+                DocHisUrl: '@Url.Action("Find", "GoodsInHistory")'
+                });
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    @Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })
+    <tr> 
+        <td>@Html.LabelFor(m => m.GoodsID)@Html.AutoComplete("GoodsID", "GoodsName", "Combo", "GoodsInfo", "ID", "GoodsName","", new { style = "width:102px" })</td>
+        <td>@Html.LabelFor(m=>m.InPrice)@Html.TextBoxFor(m => m.InPrice, new {Value = 0 })</td>
+        @*<td>@Html.Label("采购合同")@Html.DropDownList("purchaseContract", Enumerable.Empty<SelectListItem>(), new { @data_val_required = "采购合同 字段是必需的", data_val = "true", zlerp = "combobox" })</td>*@
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.InNum)@Html.EditorFor(m=>m.InNum)</td>
+        <td>
+        @Html.LabelFor(m=>m.TransportName)      
+        @Html.AutoComplete("TransportID", "TransportName", "Combo", "SupplyInfo", "ID", "ShortName", "SupplyName", "supplykind in ('Su3','Su5') and IsUsed =1 ", null)
+        </td>   
+        
+   
+    </tr>
+    <tr>     
+        <td>@Html.LabelFor(m=>m.Operator)@Html.TextBoxFor(m => m.Operator, new { Value = ViewBag.Name})</td>       
+        @*<td>@Html.Label("单价")@Html.TextBox("uprice")</td>*@
+        <td>
+        @Html.LabelFor(m=>m.SupplyName)
+        @*@Html.EditorFor(m=>m.SupplyName)*@
+        @Html.AutoComplete("SupplyID", "SupplyName", "Combo", "SupplyInfo", "ID", "ShortName", "SupplyName", "supplykind in ('Su1','Su5') and IsUsed =1 ", null)
+        </td>
+    </tr>
+    <tr>
+    <td>@Html.LabelFor(m=>m.InTime)@Html.EditorFor(m => m.InTime, "DateTimeWithTime", new { id = "InTime", defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+    <td></td>
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m=>m.Remark)@Html.TextAreaFor(m => m.Remark, new { style = "width:345px;" })
+        </td>        
+    </tr>
+</table>
+}
+</div>
+
+<div id="DocHisWindow" style="display: none;">
+    <div id="DocHisGrid">
+    </div>
+</div>

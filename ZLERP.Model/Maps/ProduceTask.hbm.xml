@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.ProduceTask, ZLERP.Model" table="ProduceTasks" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30"  optimistic-lock="version">
+    <id name="ID" column="TaskID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="ProjectID" column="ProjectID"/>
+    <property name="ProjectName" column="ProjectName" />
+    <property name="ProjectAddr" column="ProjectAddr" />
+    <property name="Seller" column="Seller" />
+    <property name="ConstructUnit" column="ConstructUnit" />
+    <property name="ConsPosType" column="ConsPosType" />
+    <property name="ConsPos" column="ConsPos" />
+    <property name="ContractItemsID" column="ContractItemsID" update="false"/>
+    <property name="PlanCube" column="PlanCube" />
+    <property name="NeedTimes" column="NeedTimes" />
+    <property name="PumpType" column="PumpType" />
+    <property name="NeedDate" column="NeedDate" />
+    <property name="OpenTime" column="OpenTime" />
+    <property name="BuildUnit" column="BuildUnit" />
+    <property name="SupplyUnit" column="SupplyUnit" />
+    <property name="SupplyUnitTel" column="SupplyUnitTel" />
+    <property name="IsCommission" column="IsCommission" />
+    <property name="CompPrincipal" column="CompPrincipal" />
+    <property name="LinkMan" column="LinkMan" />
+    <property name="Tel" column="Tel" />
+    <property name="IsDatum" column="IsDatum" />
+    <property name="CarpGrade" column="CarpGrade" />
+    <property name="CarpRadii" column="CarpRadii" />
+    <property name="BetonTag" column="BetonTag" />
+    <property name="CementBreed" column="CementBreed" />
+    <property name="ConStrength" column="ConStrength" />
+    <property name="Slump" column="Slump" />
+    <property name="CastMode" column="CastMode" />
+    <property name="OtherDemand" column="OtherDemand" />
+    <property name="Auditor" column="Auditor" />
+    <property name="AuditTime" column="AuditTime" />
+    <property name="AuditStatus" column="AuditStatus" />
+    <property name="AuditInfo" column="AuditInfo" />
+    <property name="IsCompleted" column="IsCompleted" />
+    <property name="CompleteDate" column="CompleteDate" />
+    <property name="Remark" column="Remark" />
+    <property name="Distance" column="Distance" />
+    <property name="IsSlurry" column="IsSlurry" />
+    <property name="SlurryFormula" column="SlurryFormula" />
+    <property name="TaskType" column="TaskType" />
+    <property name="CementType" column="CementType" />
+    <property name="BetonFormula" column="BetonFormula" />
+    <!--<property name="IsFormulaSend" column="IsFormulaSend"/>-->
+    <property name="CustMixpropID" column="CustMixpropID" />
+    <property name="ImpGrade" column="ImpGrade" />
+    <property name="ImyGrade" column="ImyGrade" />
+    <property name="ImdGrade" column="ImdGrade" />
+    <property name="ImyCriterion" column="ImyCriterion" />
+    <property name="ImzCriterion" column="ImzCriterion" />
+    <property name="IsImpExp" column="IsImpExp" />
+    <property name="IsImzExp" column="IsImzExp" />
+    <property name="AdditiveType" column="AdditiveType" />
+    <property name="MixpropRate" column="MixpropRate" />
+    <property name="WCRate" column="WCRate" />
+    <property name="Carper" column="Carper" />
+    <property name="PlanClass" column="PlanClass" />
+    <property name="ProductPrincipal" column="ProductPrincipal" />
+    <property name="ForkLift" column="ForkLift" />
+    <property name="SIWRate" column="SIWRate" />
+    <property name="RIWRate" column="RIWRate" />
+    <property name="RIWRate1" column="RIWRate1" />
+    <property name="SIRRate" column="SIRRate" />
+    <property name="Field1" column="Field1" />
+    <property name="Field2" column="Field2" />
+    <property name="Field3" column="Field3" />
+    <property name="Field4" column="Field4" />
+    <property name="Field5" column="Field5" />
+    <property name="IsOut" column="IsOut" />
+    <property name="Exception" column="Exception" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="RegionID" column="RegionID" />    
+    <property name="FormulaStatus" formula="(SELECT COUNT(*) FROM ConsMixprop WHERE TaskID = ConsMixprop.TaskID)" update="false" insert="false" />
+    <property name="ContractID" column="ContractID" />
+
+    <property name="DemandChecker" column="DemandChecker" />
+    <property name="ResponsibleParty" column="ResponsibleParty" />
+    <property name="DemandCheckTime" column="DemandCheckTime" />
+    <property name="DemandSlump" column="DemandSlump" />
+    <property name="RealChecker" column="RealChecker" />
+    <property name="RealCheckTime" column="RealCheckTime" />
+    <property name="RealSlump" column="RealSlump" />
+    
+    <many-to-one name="Contract" column="ContractID" fetch="join" class="Contract" update="false" insert="false" />
+    <many-to-one name="Region" column="RegionID" class="Region" update="false" insert="false" />
+    <many-to-one name="CustMixprop" column="CustMixpropID" class="CustMixprop" not-found="ignore" update="false" insert="false" />
+    <many-to-one name="BetonFormulaInfo" column="BetonFormula" class="Formula" not-found="ignore" update="false" insert="false" />
+    <many-to-one name="SlurryFormulaInfo" column="SlurryFormula" class="Formula" not-found="ignore" update="false" insert="false" />
+    <many-to-one name="ContractItem" column="ContractItemsID" class="ContractItem" update="false" insert="false" />
+    <bag name="ConsMixprops" lazy="true" batch-size="30" inverse="true" >
+      <key column="TaskID"></key>
+      <one-to-many class="ConsMixprop"></one-to-many>
+    </bag>
+    <bag name="DispatchLists" lazy="true" batch-size="30" inverse="true" >
+      <key column="TaskID"></key>
+      <one-to-many class="DispatchList"></one-to-many>
+    </bag>
+    <bag name="ProducePlans" lazy="true" batch-size="30" inverse="true"  >
+      <key column="TaskID"></key>
+      <one-to-many class="ProducePlan"></one-to-many>
+    </bag>
+    <bag name="AlkaliReports" lazy="true" batch-size="30" inverse="true" >
+      <key column="TaskID"></key>
+      <one-to-many class="AlkaliReport"></one-to-many>
+    </bag>
+    <bag name="OpenChecks" lazy="true" batch-size="30" inverse="true" >
+      <key column="TaskID"></key>
+      <one-to-many class="OpenCheck"></one-to-many>
+    </bag>
+    <idbag name="TaskIdentities" table="TaskIdentity" batch-size="30" >
+      <collection-id column="TaskIdentityID" type="Int32">
+        <generator class="native"/>
+      </collection-id>
+      <key column="TaskID"></key>
+      <many-to-many column="IdentitySettingID" class="IdentitySetting"/>
+    </idbag>
+		<bag name="PumpWorks" lazy="true" batch-size="30" inverse="true" >
+			<key column="TaskID"></key>
+			<one-to-many class="PumpWork"></one-to-many>
+		</bag>
+    <bag name="ConStrAssesses" lazy="true" batch-size="30" inverse="true" >
+      <key column="TaskID"></key>
+      <one-to-many class="ConStrAssess"></one-to-many>
+    </bag>    
+    <bag name="ShippingDocuments" batch-size="30" lazy="true" inverse="true" >
+      <key column="TaskID"></key>
+      <one-to-many class="ShippingDocument"></one-to-many>
+    </bag>
+    <bag name="InsteadProducts" batch-size="30" lazy="true" inverse="true" >
+      <key column="TaskID"></key>
+      <one-to-many class="InsteadProduct"></one-to-many>
+    </bag>
+  </class>
+</hibernate-mapping>

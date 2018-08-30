@@ -1,0 +1,1326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{772D60F4-C404-41B5-BDF3-000A8BA87F52}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZLERP.Model</RootNamespace>
+    <AssemblyName>ZLERP.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>../ZOOMLION.ERP3.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\AssemblyVersion.cs">
+      <Link>Properties\AssemblyVersion.cs</Link>
+    </Compile>
+    <Compile Include="AlarmLog.cs" />
+    <Compile Include="CarAss.cs" />
+    <Compile Include="CarChangeLog.cs" />
+    <Compile Include="CarDriverPrice.cs" />
+    <Compile Include="CarDriverPriceMain.cs" />
+    <Compile Include="CarIMA.cs" />
+    <Compile Include="CarLeaseCostSet.cs" />
+    <Compile Include="CarOilPriceSetting.cs" />
+    <Compile Include="CarProjectCube.cs" />
+    <Compile Include="CarProjectCubeCar.cs" />
+    <Compile Include="CarProjectCubeMain.cs" />
+    <Compile Include="CarProjectPrice.cs" />
+    <Compile Include="CarProjectPriceMain.cs" />
+    <Compile Include="CarRepair.cs" />
+    <Compile Include="CarTimesReward.cs" />
+    <Compile Include="CarTimesRewardMain.cs" />
+    <Compile Include="CarTrafficPoliceFine.cs" />
+    <Compile Include="ContractDZ.cs" />
+    <Compile Include="ContractJS.cs" />
+    <Compile Include="ContractProduct.cs" />
+    <Compile Include="CustomerPlan.cs" />
+    <Compile Include="DispatchListHistory.cs" />
+    <Compile Include="distance.cs" />
+    <Compile Include="distanceByShip.cs" />
+    <Compile Include="DutyPlan.cs" />
+    <Compile Include="Enums\AuditStatus.cs" />
+    <Compile Include="Enums\CementType.cs" />
+    <Compile Include="Enums\SqlErrorNumbers.cs" />
+    <Compile Include="Enums\TaskType.cs" />
+    <Compile Include="Enums\CarGpsStatus.cs" />
+    <Compile Include="ExtraPump.cs" />
+    <Compile Include="FinalStuffType.cs" />
+    <Compile Include="FuncRole.cs" />
+    <Compile Include="Generated\_AlarmLog.cs" />
+    <Compile Include="Generated\_CarChangeLog.cs" />
+    <Compile Include="Generated\_CarDriverPrice.cs" />
+    <Compile Include="Generated\_CarDriverPriceMain.cs" />
+    <Compile Include="Generated\_CarIMA.cs" />
+    <Compile Include="Generated\_CarLeaseCostSet.cs" />
+    <Compile Include="Generated\_CarOilPriceSetting.cs" />
+    <Compile Include="Generated\_CarProjectCube.cs" />
+    <Compile Include="Generated\_CarProjectCubeCar.cs" />
+    <Compile Include="Generated\_CarProjectCubeMain.cs" />
+    <Compile Include="Generated\_CarProjectPrice.cs" />
+    <Compile Include="Generated\_CarProjectPriceMain.cs" />
+    <Compile Include="Generated\_CarRepair.cs" />
+    <Compile Include="Generated\_CarTimesReward.cs" />
+    <Compile Include="Generated\_CarTimesRewardMain.cs" />
+    <Compile Include="Generated\_CarTrafficPoliceFine.cs" />
+    <Compile Include="Generated\_ContractDZ.cs" />
+    <Compile Include="Generated\_ContractJS.cs" />
+    <Compile Include="Generated\_ContractProduct.cs" />
+    <Compile Include="Generated\_DispatchListHistory.cs" />
+    <Compile Include="Generated\_distance.cs" />
+    <Compile Include="Generated\_distanceByShip.cs" />
+    <Compile Include="Generated\_DutyPlan.cs" />
+    <Compile Include="Generated\_ExtraPump.cs" />
+    <Compile Include="Generated\_FinalStuffType.cs" />
+    <Compile Include="Generated\_FuncRole.cs" />
+    <Compile Include="Generated\_GoodsAccount.cs" />
+    <Compile Include="Generated\_GoodsAccountMain.cs" />
+    <Compile Include="Generated\_GoodsBorrow.cs" />
+    <Compile Include="Generated\_GoodsCheck.cs" />
+    <Compile Include="Generated\_GoodsIn.cs" />
+    <Compile Include="Generated\_GoodsInfo.cs" />
+    <Compile Include="Generated\_GoodsInvalidate.cs" />
+    <Compile Include="Generated\_GoodsInvoice.cs" />
+    <Compile Include="Generated\_GoodsOut.cs" />
+    <Compile Include="Generated\_GoodsPay.cs" />
+    <Compile Include="Generated\_GoodsRevert.cs" />
+    <Compile Include="Generated\_GoodsType.cs" />
+    <Compile Include="Generated\_GpsInfos.cs" />
+    <Compile Include="Generated\_GPS_HotMark.cs" />
+    <Compile Include="Generated\_GPS_IconLayer.cs" />
+    <Compile Include="Generated\_HandleRecord.cs" />
+    <Compile Include="Generated\_CarAss.cs" />
+    <Compile Include="Generated\_CustomerPlan.cs" />
+    <Compile Include="Generated\_Lab_ActiveInfo.cs" />
+    <Compile Include="Generated\_Lab_ADM_Items.cs" />
+    <Compile Include="Generated\_Lab_Air2ActiveInfo.cs" />
+    <Compile Include="Generated\_Lab_Air2Density.cs" />
+    <Compile Include="Generated\_Lab_Air2Origin.cs" />
+    <Compile Include="Generated\_Lab_Air2Report.cs" />
+    <Compile Include="Generated\_Lab_AirOrigin.cs" />
+    <Compile Include="Generated\_Lab_AirReport.cs" />
+    <Compile Include="Generated\_Lab_BurntInfo.cs" />
+    <Compile Include="Generated\_Lab_DependInfo.cs" />
+    <Compile Include="Generated\_Lab_Record.cs" />
+    <Compile Include="Generated\_LinkManRecord.cs" />
+    <Compile Include="Generated\_ManualProduce.cs" />
+    <Compile Include="Generated\_MonthAccount.cs" />
+    <Compile Include="Generated\_Msg.cs" />
+    <Compile Include="Generated\_MsgUser.cs" />
+    <Compile Include="Generated\_MyMsg.cs" />
+    <Compile Include="Generated\_OilResistance.cs" />
+    <Compile Include="Generated\_ProduceTaskOtherPrice.cs" />
+    <Compile Include="Generated\_ProjectRoute.cs" />
+    <Compile Include="Generated\_PurchasePlan.cs" />
+    <Compile Include="Generated\_PurchasePlanByEquip.cs" />
+    <Compile Include="Generated\_Remindinfo.cs" />
+    <Compile Include="Generated\_ReportDatum.cs" />
+    <Compile Include="Generated\_Reward.cs" />
+    <Compile Include="Generated\_Role.cs" />
+    <Compile Include="Generated\_RouteDetail.cs" />
+    <Compile Include="Generated\_StockPactPriceSet.cs" />
+    <Compile Include="Generated\_StuffAccount.cs" />
+    <Compile Include="Generated\_StuffAccountMain.cs" />
+    <Compile Include="Generated\_StuffExam.cs" />
+    <Compile Include="Generated\_StuffInHistory.cs" />
+    <Compile Include="Generated\_StuffInPriceAdjust.cs" />
+    <Compile Include="Generated\_StuffPayableAdjust.cs" />
+    <Compile Include="Generated\_SystemMsg.cs" />
+    <Compile Include="Generated\_TplManage.cs" />
+    <Compile Include="Generated\_Training.cs" />
+    <Compile Include="Generated\_TrainRecord.cs" />
+    <Compile Include="Generated\_TranAcc.cs" />
+    <Compile Include="Generated\_RateSet.cs" />
+    <Compile Include="Generated\_SiloLedgerContent_InAndCheck.cs" />
+    <Compile Include="Generated\_ShippingDocumentHistory.cs" />
+    <Compile Include="Generated\_LastestGpsInfo.cs" />
+    <Compile Include="Generated\_LimitRegion.cs" />
+    <Compile Include="Generated\_UnloadRecord.cs" />
+    <Compile Include="Generated\_UserRole.cs" />
+    <Compile Include="Generated\_YearAccount.cs" />
+    <Compile Include="Generated\_CarHisotry.cs" />
+    <Compile Include="Generated\_TZRalationHistory.cs" />
+    <Compile Include="Generated\_GoodsInHistory.cs" />
+    <Compile Include="Generated\_Synmonitor.cs" />
+    <Compile Include="Generated\_PurchaseMain.cs" />
+    <Compile Include="Generated\_Purchase.cs" />
+    <Compile Include="Generated\_PurchaseContract.cs" />
+    <Compile Include="Generated\ThreadTable.cs" />
+    <Compile Include="Generated\_StockPactChild.cs" />
+    <Compile Include="Generated\_StockPactChildChild.cs" />
+    <Compile Include="Generated\_StuffInfoPrice.cs" />
+    <Compile Include="Generated\_ProjectItem.cs" />
+    <Compile Include="Generated\_PriceSetting.cs" />
+    <Compile Include="Generated\_InsteadProduct.cs" />
+    <Compile Include="Generated\_AdvanceMoney.cs" />
+    <Compile Include="Generated\_ThreadID.cs" />
+    <Compile Include="Generated\_ContractJSTZ.cs" />
+    <Compile Include="Generated\_ContractPay.cs" />
+    <Compile Include="Generated\_Lab_ADM.cs" />
+    <Compile Include="Generated\_Lab_FA.cs" />
+    <Compile Include="Generated\_Lab_FA_Items.cs" />
+    <Compile Include="Generated\_Lab_CA.cs" />
+    <Compile Include="Generated\_Lab_CA_Items.cs" />
+    <Compile Include="GoodsAccount.cs" />
+    <Compile Include="GoodsAccountMain.cs" />
+    <Compile Include="GoodsBorrow.cs" />
+    <Compile Include="GoodsCheck.cs" />
+    <Compile Include="GoodsIn.cs" />
+    <Compile Include="GoodsInfo.cs" />
+    <Compile Include="GoodsInvalidate.cs" />
+    <Compile Include="GoodsInvoice.cs" />
+    <Compile Include="GoodsOut.cs" />
+    <Compile Include="GoodsPay.cs" />
+    <Compile Include="GoodsRevert.cs" />
+    <Compile Include="GoodsType.cs" />
+    <Compile Include="GpsInfos.cs" />
+    <Compile Include="GPS_HotMark.cs" />
+    <Compile Include="GPS_IconLayer.cs" />
+    <Compile Include="HandleRecord.cs" />
+    <Compile Include="Lab_ActiveInfo.cs" />
+    <Compile Include="Lab_ADM_Items.cs" />
+    <Compile Include="Lab_Air2ActiveInfo.cs" />
+    <Compile Include="Lab_Air2Density.cs" />
+    <Compile Include="Lab_Air2Origin.cs" />
+    <Compile Include="Lab_Air2Report.cs" />
+    <Compile Include="Lab_AirOrigin.cs" />
+    <Compile Include="Lab_AirReport.cs" />
+    <Compile Include="Lab_BurntInfo.cs" />
+    <Compile Include="Lab_DependInfo.cs" />
+    <Compile Include="Lab_Record.cs" />
+    <Compile Include="LinkManRecord.cs" />
+    <Compile Include="ManualProduce.cs" />
+    <Compile Include="ManualProductItems.cs" />
+    <Compile Include="MonthAccount.cs" />
+    <Compile Include="Msg.cs" />
+    <Compile Include="MsgUser.cs" />
+    <Compile Include="MyMsg.cs" />
+    <Compile Include="OilResistance.cs" />
+    <Compile Include="ProduceTaskOtherPrice.cs" />
+    <Compile Include="ProjectRoute.cs" />
+    <Compile Include="PurchasePlan.cs" />
+    <Compile Include="PurchasePlanByEquip.cs" />
+    <Compile Include="Remindinfo.cs" />
+    <Compile Include="ReportDatum.cs" />
+    <Compile Include="Reward.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="RouteDetail.cs" />
+    <Compile Include="StockPactPriceSet.cs" />
+    <Compile Include="StuffAccount.cs" />
+    <Compile Include="StuffAccountMain.cs" />
+    <Compile Include="StuffInHistory.cs" />
+    <Compile Include="StuffInPriceAdjust.cs" />
+    <Compile Include="StuffPayableAdjust.cs" />
+    <Compile Include="SystemMsg.cs" />
+    <Compile Include="TaskAss.cs" />
+    <Compile Include="ADM2Exam.cs" />
+    <Compile Include="ADMExam.cs" />
+    <Compile Include="AIR1Exam.cs" />
+    <Compile Include="AIR2Exam.cs" />
+    <Compile Include="AlkaliReport.cs" />
+    <Compile Include="APBill.cs" />
+    <Compile Include="ARBill.cs" />
+    <Compile Include="Attachment.cs" />
+    <Compile Include="Bank.cs" />
+    <Compile Include="CAExam.cs" />
+    <Compile Include="Capacity.cs" />
+    <Compile Include="CapacityItem.cs" />
+    <Compile Include="Car.cs" />
+    <Compile Include="CarCard.cs" />
+    <Compile Include="CarCategory.cs" />
+    <Compile Include="CarCategoryItem.cs" />
+    <Compile Include="CarClass.cs" />
+    <Compile Include="CarClassItem.cs" />
+    <Compile Include="CarLend.cs" />
+    <Compile Include="CarLendFoot.cs" />
+    <Compile Include="CarLendItem.cs" />
+    <Compile Include="CarOil.cs" />
+    <Compile Include="CEExam.cs" />
+    <Compile Include="CheckInfo.cs" />
+    <Compile Include="CheckItem.cs" />
+    <Compile Include="ClassB.cs" />
+    <Compile Include="ClassM.cs" />
+    <Compile Include="Classs.cs" />
+    <Compile Include="COMConfig.cs" />
+    <Compile Include="Commission.cs" />
+    <Compile Include="CommissionItem.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="ConPrice.cs" />
+    <Compile Include="ConsMixprop.cs" />
+    <Compile Include="ConsMixpropItem.cs" />
+    <Compile Include="ConsMixpropItemsHistory.cs" />
+    <Compile Include="ConStrAssess.cs" />
+    <Compile Include="ConStrAssessItem.cs" />
+    <Compile Include="ConStrength.cs" />
+    <Compile Include="Contract.cs" />
+    <Compile Include="ContractItem.cs" />
+    <Compile Include="ContractOtherPrice.cs" />
+    <Compile Include="ContractPump.cs" />
+    <Compile Include="CustMixprop.cs" />
+    <Compile Include="CustMixpropItem.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="CustSilo.cs" />
+    <Compile Include="EmailAttribute.cs" />
+    <Compile Include="Department.cs" />
+    <Compile Include="Dic.cs" />
+    <Compile Include="DispatchList.cs" />
+    <Compile Include="DriverForCar.cs" />
+    <Compile Include="EntityBase.cs" />
+    <Compile Include="Enums\AttachmentType.cs" />
+    <Compile Include="Enums\CacheKeys.cs" />
+    <Compile Include="Enums\Consts.cs" />
+    <Compile Include="Enums\ContractValuationType.cs" />
+    <Compile Include="Enums\DicEnum.cs" />
+    <Compile Include="Enums\ReturnType.cs" />
+    <Compile Include="Enums\StuffTypeEnum.cs" />
+    <Compile Include="Enums\SysConfigEnum.cs" />
+    <Compile Include="Enums\ActionType.cs" />
+    <Compile Include="Enums\CarType.cs" />
+    <Compile Include="Enums\CarStatus.cs" />
+    <Compile Include="Enums\SysLogType.cs" />
+    <Compile Include="Enums\TyreStatus.cs" />
+    <Compile Include="Enums\PartPlanStatus.cs" />
+    <Compile Include="Enums\UserType.cs" />
+    <Compile Include="Enums\SupplyType.cs" />
+    <Compile Include="Equipment.cs" />
+    <Compile Include="EquipmentItem.cs" />
+    <Compile Include="EquipMtLy.cs" />
+    <Compile Include="EquipMtLyItem.cs" />
+    <Compile Include="EquipMtLyReturn.cs" />
+    <Compile Include="EquipMtLyReturnItem.cs" />
+    <Compile Include="EquipTermlyMt.cs" />
+    <Compile Include="EquipTermlyMtItem.cs" />
+    <Compile Include="FAExam.cs" />
+    <Compile Include="Formula.cs" />
+    <Compile Include="FormulaItem.cs" />
+    <Compile Include="Generated\_TaskAss.cs" />
+    <Compile Include="Generated\_ADM2Exam.cs" />
+    <Compile Include="Generated\_ADMExam.cs" />
+    <Compile Include="Generated\_AIR1Exam.cs" />
+    <Compile Include="Generated\_AIR2Exam.cs" />
+    <Compile Include="Generated\_AlkaliReport.cs" />
+    <Compile Include="Generated\_APBill.cs" />
+    <Compile Include="Generated\_ARBill.cs" />
+    <Compile Include="Generated\_Attachment.cs" />
+    <Compile Include="Generated\_Bank.cs" />
+    <Compile Include="Generated\_CAExam.cs" />
+    <Compile Include="Generated\_Capacity.cs" />
+    <Compile Include="Generated\_CapacityItem.cs" />
+    <Compile Include="Generated\_Car.cs" />
+    <Compile Include="Generated\_CarCard.cs" />
+    <Compile Include="Generated\_CarCategory.cs" />
+    <Compile Include="Generated\_CarCategoryItem.cs" />
+    <Compile Include="Generated\_CarClass.cs" />
+    <Compile Include="Generated\_CarClassItem.cs" />
+    <Compile Include="Generated\_CarLend.cs" />
+    <Compile Include="Generated\_CarLendFoot.cs" />
+    <Compile Include="Generated\_CarLendItem.cs" />
+    <Compile Include="Generated\_CarOil.cs" />
+    <Compile Include="Generated\_CEExam.cs" />
+    <Compile Include="Generated\_CheckInfo.cs" />
+    <Compile Include="Generated\_CheckItem.cs" />
+    <Compile Include="Generated\_ClassB.cs" />
+    <Compile Include="Generated\_ClassM.cs" />
+    <Compile Include="Generated\_Classs.cs" />
+    <Compile Include="Generated\_COMConfig.cs" />
+    <Compile Include="Generated\_Commission.cs" />
+    <Compile Include="Generated\_CommissionItem.cs" />
+    <Compile Include="Generated\_Company.cs" />
+    <Compile Include="Generated\_ConPrice.cs" />
+    <Compile Include="Generated\_ConsMixprop.cs" />
+    <Compile Include="Generated\_ConsMixpropItem.cs" />
+    <Compile Include="Generated\_ConsMixpropItemsHistory.cs" />
+    <Compile Include="Generated\_ConStrAssess.cs" />
+    <Compile Include="Generated\_ConStrAssessItem.cs" />
+    <Compile Include="Generated\_ConStrength.cs" />
+    <Compile Include="Generated\_Contract.cs" />
+    <Compile Include="Generated\_ContractItem.cs" />
+    <Compile Include="Generated\_ContractOtherPrice.cs" />
+    <Compile Include="Generated\_ContractPump.cs" />
+    <Compile Include="Generated\_CustMixprop.cs" />
+    <Compile Include="Generated\_CustMixpropItem.cs" />
+    <Compile Include="Generated\_Customer.cs" />
+    <Compile Include="Generated\_CustSilo.cs" />
+    <Compile Include="Generated\_Department.cs" />
+    <Compile Include="Generated\_Dic.cs" />
+    <Compile Include="Generated\_DispatchList.cs" />
+    <Compile Include="Generated\_DriverForCar.cs" />
+    <Compile Include="Generated\_Equipment.cs" />
+    <Compile Include="Generated\_EquipmentItem.cs" />
+    <Compile Include="Generated\_EquipMtLy.cs" />
+    <Compile Include="Generated\_EquipMtLyItem.cs" />
+    <Compile Include="Generated\_EquipMtLyReturn.cs" />
+    <Compile Include="Generated\_EquipMtLyReturnItem.cs" />
+    <Compile Include="Generated\_EquipTermlyMt.cs" />
+    <Compile Include="Generated\_EquipTermlyMtItem.cs" />
+    <Compile Include="Generated\_FAExam.cs" />
+    <Compile Include="Generated\_Formula.cs" />
+    <Compile Include="Generated\_FormulaItem.cs" />
+    <Compile Include="Generated\_Identity.cs" />
+    <Compile Include="Generated\_IdentitySetting.cs" />
+    <Compile Include="Generated\_M1AssessItem.cs" />
+    <Compile Include="Generated\_Maintenance.cs" />
+    <Compile Include="Generated\_ManualRecord.cs" />
+    <Compile Include="Generated\_Manufacture.cs" />
+    <Compile Include="Generated\_ManufactureItem.cs" />
+    <Compile Include="Generated\_MeasureInfo.cs" />
+    <Compile Include="Generated\_MntZl.cs" />
+    <Compile Include="Generated\_MntZlItem.cs" />
+    <Compile Include="Generated\_OilMech.cs" />
+    <Compile Include="Generated\_OpenCheck.cs" />
+    <Compile Include="Generated\_Notice.cs" />
+    <Compile Include="Generated\_PartBorrow.cs" />
+    <Compile Include="Generated\_PartBorrowItem.cs" />
+    <Compile Include="Generated\_PartBorrowReturn.cs" />
+    <Compile Include="Generated\_PartIn.cs" />
+    <Compile Include="Generated\_PartInfo.cs" />
+    <Compile Include="Generated\_PartInItem.cs" />
+    <Compile Include="Generated\_PartInventory.cs" />
+    <Compile Include="Generated\_PartInventoryDetail.cs" />
+    <Compile Include="Generated\_PartPlan.cs" />
+    <Compile Include="Generated\_PartReturn.cs" />
+    <Compile Include="Generated\_PartReturnDetail.cs" />
+    <Compile Include="Generated\_PartStock.cs" />
+    <Compile Include="Generated\_PartStockContract.cs" />
+    <Compile Include="Generated\_PartStockContractItem.cs" />
+    <Compile Include="Generated\_PartStockPlan.cs" />
+    <Compile Include="Generated\_PartStockPlanDetail.cs" />
+    <Compile Include="Generated\_PayBill.cs" />
+    <Compile Include="Generated\_ProducePlan.cs" />
+    <Compile Include="Generated\_ProduceTask.cs" />
+    <Compile Include="Generated\_ProduceTasksHistory.cs" />
+    <Compile Include="Generated\_ProductLine.cs" />
+    <Compile Include="Generated\_ProductRecord.cs" />
+    <Compile Include="Generated\_ProductRecordItem.cs" />
+    <Compile Include="Generated\_Project.cs" />
+    <Compile Include="Generated\_PumpWork.cs" />
+    <Compile Include="Generated\_QualityExam.cs" />
+    <Compile Include="Generated\_QualityExamItem.cs" />
+    <Compile Include="Generated\_ReceiveBill.cs" />
+    <Compile Include="Generated\_Region.cs" />
+    <Compile Include="Generated\_RentCarPrice.cs" />
+    <Compile Include="Generated\_Settlement.cs" />
+    <Compile Include="Generated\_SettlementBill.cs" />
+    <Compile Include="Generated\_SettlementItem.cs" />
+    <Compile Include="Generated\_ShippingDocument.cs" />
+    <Compile Include="Generated\_Silo.cs" />
+    <Compile Include="Generated\_SiloProductLine.cs" />
+    <Compile Include="Generated\_SiloTune.cs" />
+    <Compile Include="Generated\_StockAppItem.cs" />
+    <Compile Include="Generated\_StockApply.cs" />
+    <Compile Include="Generated\_StockPact.cs" />
+    <Compile Include="Generated\_StockPlan.cs" />
+    <Compile Include="Generated\_StuffIn.cs" />
+    <Compile Include="Generated\_StuffInfo.cs" />
+    <Compile Include="Generated\_StuffPrice.cs" />
+    <Compile Include="Generated\_StuffSell.cs" />
+    <Compile Include="Generated\_StuffType.cs" />
+    <Compile Include="Generated\_SupplyInfo.cs" />
+    <Compile Include="Generated\_SysConfig.cs" />
+    <Compile Include="Generated\_SysFunc.cs" />
+    <Compile Include="Generated\_SysLog.cs" />
+    <Compile Include="Generated\_TransPrice.cs" />
+    <Compile Include="Generated\_TyreChange.cs" />
+    <Compile Include="Generated\_TyreInfo.cs" />
+    <Compile Include="Generated\_TyreRepair.cs" />
+    <Compile Include="Generated\_TZRalation.cs" />
+    <Compile Include="Generated\_User.cs" />
+    <Compile Include="Identity.cs" />
+    <Compile Include="IdentitySetting.cs" />
+    <Compile Include="ITreeGridable.cs" />
+    <Compile Include="JqGridData.cs" />
+    <Compile Include="JqGridJson.cs" />
+    <Compile Include="M1AssessItem.cs" />
+    <Compile Include="Maintenance.cs" />
+    <Compile Include="ManualRecord.cs" />
+    <Compile Include="Manufacture.cs" />
+    <Compile Include="ManufactureItem.cs" />
+    <Compile Include="MeasureInfo.cs" />
+    <Compile Include="MntZl.cs" />
+    <Compile Include="MntZlItem.cs" />
+    <Compile Include="MyRequiredAttributeAdapter.cs" />
+    <Compile Include="OilMech.cs" />
+    <Compile Include="OpenCheck.cs" />
+    <Compile Include="Notice.cs" />
+    <Compile Include="PartBorrow.cs" />
+    <Compile Include="PartBorrowItem.cs" />
+    <Compile Include="PartBorrowReturn.cs" />
+    <Compile Include="PartIn.cs" />
+    <Compile Include="PartInfo.cs" />
+    <Compile Include="PartInItem.cs" />
+    <Compile Include="PartInventory.cs" />
+    <Compile Include="PartInventoryDetail.cs" />
+    <Compile Include="PartPlan.cs" />
+    <Compile Include="PartReturn.cs" />
+    <Compile Include="PartReturnDetail.cs" />
+    <Compile Include="PartStock.cs" />
+    <Compile Include="PartStockContract.cs" />
+    <Compile Include="PartStockContractItem.cs" />
+    <Compile Include="PartStockPlan.cs" />
+    <Compile Include="PartStockPlanDetail.cs" />
+    <Compile Include="PayBill.cs" />
+    <Compile Include="ProducePlan.cs" />
+    <Compile Include="ProduceTask.cs" />
+    <Compile Include="ProduceTasksHistory.cs" />
+    <Compile Include="ProductLine.cs" />
+    <Compile Include="ProductRecord.cs" />
+    <Compile Include="ProductRecordItem.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PumpWork.cs" />
+    <Compile Include="QualityExam.cs" />
+    <Compile Include="QualityExamItem.cs" />
+    <Compile Include="ReceiveBill.cs" />
+    <Compile Include="Region.cs" />
+    <Compile Include="RentCarPrice.cs" />
+    <Compile Include="ResultInfo.cs" />
+    <Compile Include="Settlement.cs" />
+    <Compile Include="SettlementBill.cs" />
+    <Compile Include="SettlementItem.cs" />
+    <Compile Include="ShippingDocument.cs" />
+    <Compile Include="Silo.cs" />
+    <Compile Include="SiloProductLine.cs" />
+    <Compile Include="SiloTune.cs" />
+    <Compile Include="StockAppItem.cs" />
+    <Compile Include="StockApply.cs" />
+    <Compile Include="StockPact.cs" />
+    <Compile Include="StockPlan.cs" />
+    <Compile Include="StuffAmount.cs" />
+    <Compile Include="StuffIn.cs" />
+    <Compile Include="StuffInfo.cs" />
+    <Compile Include="StuffPrice.cs" />
+    <Compile Include="StuffSell.cs" />
+    <Compile Include="StuffType.cs" />
+    <Compile Include="SupplyInfo.cs" />
+    <Compile Include="SysConfig.cs" />
+    <Compile Include="SysFunc.cs" />
+    <Compile Include="SysLog.cs" />
+    <Compile Include="TplManage.cs" />
+    <Compile Include="Training.cs" />
+    <Compile Include="TrainRecord.cs" />
+    <Compile Include="TranAcc.cs" />
+    <Compile Include="TransPrice.cs" />
+    <Compile Include="TyreChange.cs" />
+    <Compile Include="TyreInfo.cs" />
+    <Compile Include="TyreRepair.cs" />
+    <Compile Include="TZRalation.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserRole.cs" />
+    <Compile Include="ViewModels\CarAndDriver.cs" />
+    <Compile Include="ViewModels\CarDriverPriceViewModel.cs" />
+    <Compile Include="ViewModels\ClassBMS.cs" />
+    <Compile Include="ViewModels\ConsmixPropModify.cs" />
+    <Compile Include="ViewModels\ContractAndItems.cs" />
+    <Compile Include="ViewModels\CustMixAndItems.cs" />
+    <Compile Include="ViewModels\CustomerAndContract.cs" />
+    <Compile Include="ViewModels\EquipmentAndItems.cs" />
+    <Compile Include="ViewModels\DBTableInfo.cs" />
+    <Compile Include="ViewModels\EquipMtLyAndItem.cs" />
+    <Compile Include="ViewModels\EquipTermlyMtAndItem.cs" />
+    <Compile Include="ViewModels\FormulaAndItems.cs" />
+    <Compile Include="ViewModels\GeometryModels.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\IconLayerAndHotMark.cs" />
+    <Compile Include="ViewModels\LogOnUserModel.cs" />
+    <Compile Include="ViewModels\MntZlAndItem.cs" />
+    <Compile Include="ViewModels\ProjInfoVm.cs" />
+    <Compile Include="ViewModels\SchedulerViewModel.cs" />
+    <Compile Include="ViewModels\ConsMixAndItems.cs" />
+    <Compile Include="ViewModels\CheckAndItems.cs" />
+    <Compile Include="ViewModels\ShipAndProductRecordAndItems.cs" />
+    <Compile Include="ViewModels\CommissionAndItems.cs" />
+    <Compile Include="ViewModels\PartStockViewModel.cs" />
+    <Compile Include="ViewModels\ConStrAssessAndItems.cs" />
+    <Compile Include="ViewModels\PartStockContractViewModel.cs" />
+    <Compile Include="ViewModels\CarLendAndItems.cs" />
+    <Compile Include="ViewModels\CarLendFootAndItems.cs" />
+    <Compile Include="ViewModels\FormulaDesignModel.cs" />
+    <Compile Include="ViewModels\CarClassAndItems.cs" />
+    <Compile Include="ViewModels\PartBorrowViewModel.cs" />
+    <Compile Include="ViewModels\PartInAndItem.cs" />
+    <Compile Include="ViewModels\PartInventoryAndDetail.cs" />
+    <Compile Include="StuffExam.cs" />
+    <Compile Include="RateSet.cs" />
+    <Compile Include="SiloLedgerContent_InAndCheck.cs" />
+    <Compile Include="ShippingDocumentHistory.cs" />
+    <Compile Include="ViewModels\QualityExamAndItems.cs" />
+    <Compile Include="ViewModels\StockPackAndPrices.cs" />
+    <Compile Include="ViewModels\TasksVm.cs" />
+    <Compile Include="ViewModels\TreeNode.cs" />
+    <Compile Include="ViewModels\GPS_CarAlarmInfo.cs" />
+    <Compile Include="LastestGpsInfo.cs" />
+    <Compile Include="LimitRegion.cs" />
+    <Compile Include="UnloadRecord.cs" />
+    <Compile Include="DailyReport.cs" />
+    <Compile Include="ViewModels\CarOilPrice.cs" />
+    <Compile Include="ViewModels\UserToRole.cs" />
+    <Compile Include="YearAccount.cs" />
+    <Compile Include="CarHistory.cs" />
+    <Compile Include="TZRalationHistory.cs" />
+    <Compile Include="GoodsInHistory.cs" />
+    <Compile Include="Synmonitor.cs" />
+    <Compile Include="PurchaseMain.cs" />
+    <Compile Include="Purchase.cs" />
+    <Compile Include="PurchaseContract.cs" />
+    <Compile Include="ThreadTable.cs" />
+    <Compile Include="StockPactChild.cs" />
+    <Compile Include="StockPactChildChild.cs" />
+    <Compile Include="StuffInfoPrice.cs" />
+    <Compile Include="ProjectItem.cs" />
+    <Compile Include="PriceSetting.cs" />
+    <Compile Include="InsteadProduct.cs" />
+    <Compile Include="AdvanceMoney.cs" />
+    <Compile Include="ThreadID.cs" />
+    <Compile Include="ContractJSTZ.cs" />
+    <Compile Include="ContractPay.cs" />
+    <Compile Include="Generated\_ManualProductItems.cs" />
+    <Compile Include="Lab_ADM.cs" />
+    <Compile Include="Lab_FA.cs" />
+    <Compile Include="Lab_FA_Items.cs" />
+    <Compile Include="Lab_CA.cs" />
+    <Compile Include="Lab_CA_Items.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZLERP.Resources\ZLERP.Resources.csproj">
+      <Project>{2DA438E1-73E3-4C05-9742-380BA99A2D81}</Project>
+      <Name>ZLERP.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Dic.hbm.xml" />
+    <EmbeddedResource Include="Maps\SysConfig.hbm.xml" />
+    <EmbeddedResource Include="Maps\SysFunc.hbm.xml" />
+    <EmbeddedResource Include="Maps\User.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Company.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\Department.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\StuffInfo.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Silo.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\StuffIn.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\SiloTune.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Bank.hbm.xml" />
+    <EmbeddedResource Include="Maps\Capacity.hbm.xml" />
+    <EmbeddedResource Include="Maps\CapacityItem.hbm.xml" />
+    <EmbeddedResource Include="Maps\Car.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\ConsMixprop.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\ConsMixpropItem.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\ConStrength.hbm.xml" />
+    <EmbeddedResource Include="Maps\Contract.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\ContractItem.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\ContractPump.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\CustMixprop.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\CustMixpropItem.hbm.xml" />
+    <EmbeddedResource Include="Maps\DispatchList.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\DriverForCar.hbm.xml" />
+    <EmbeddedResource Include="Maps\Formula.hbm.xml" />
+    <EmbeddedResource Include="Maps\FormulaItem.hbm.xml" />
+    <EmbeddedResource Include="Maps\Identity.hbm.xml" />
+    <EmbeddedResource Include="Maps\IdentitySetting.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\ManualRecord.hbm.xml" />
+    <EmbeddedResource Include="Maps\Manufacture.hbm.xml" />
+    <EmbeddedResource Include="Maps\ManufactureItem.hbm.xml" />
+    <EmbeddedResource Include="Maps\ProducePlan.hbm.xml" />
+    <EmbeddedResource Include="Maps\ProduceTask.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\ProductLine.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\Project.hbm.xml" />
+    <EmbeddedResource Include="Maps\Region.hbm.xml" />
+    <EmbeddedResource Include="Maps\ShippingDocument.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\SiloProductLine.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\StockAppItem.hbm.xml" />
+    <EmbeddedResource Include="Maps\StockApply.hbm.xml" />
+    <EmbeddedResource Include="Maps\StockPact.hbm.xml" />
+    <EmbeddedResource Include="Maps\StockPlan.hbm.xml" />
+    <EmbeddedResource Include="Maps\StuffType.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\SupplyInfo.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\TZRalation.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Customer.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarCategory.hbm.xml" />
+    <EmbeddedResource Include="Maps\CarCategoryItem.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\StuffPrice.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CheckItem.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CheckInfo.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ProductRecord.hbm.xml" />
+    <EmbeddedResource Include="Maps\ProductRecordItem.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ConPrice.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\OpenCheck.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Attachment.hbm.xml" />
+    <EmbeddedResource Include="Maps\Notice.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\SysLog.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Commission.hbm.xml" />
+    <EmbeddedResource Include="Maps\CommissionItem.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\APBill.hbm.xml" />
+    <EmbeddedResource Include="Maps\ARBill.hbm.xml" />
+    <EmbeddedResource Include="Maps\ContractOtherPrice.hbm.xml" />
+    <EmbeddedResource Include="Maps\PayBill.hbm.xml" />
+    <EmbeddedResource Include="Maps\ReceiveBill.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\Settlement.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\SettlementBill.hbm.xml" />
+    <EmbeddedResource Include="Maps\SettlementItem.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\QualityExam.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\QualityExamItem.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CEExam.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\FAExam.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\TyreChange.hbm.xml" />
+    <EmbeddedResource Include="Maps\TyreInfo.hbm.xml" />
+    <EmbeddedResource Include="Maps\TyreRepair.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CAExam.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\AIR2Exam.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\AIR1Exam.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ADMExam.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ADM2Exam.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\AlkaliReport.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ProduceTasksHistory.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ConsMixpropItemsHistory.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\PumpWork.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\PartInfo.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\PartPlan.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\PartStockPlan.hbm.xml" />
+    <EmbeddedResource Include="Maps\PartStockPlanDetail.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\PartStockContract.hbm.xml" />
+    <EmbeddedResource Include="Maps\PartStockContractItem.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\PartIn.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\PartInItem.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\PartInventory.hbm.xml" />
+    <EmbeddedResource Include="Maps\PartInventoryDetail.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\PartReturn.hbm.xml" />
+    <EmbeddedResource Include="Maps\PartReturnDetail.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\PartBorrow.hbm.xml" />
+    <EmbeddedResource Include="Maps\PartBorrowItem.hbm.xml" />
+    <EmbeddedResource Include="Maps\PartBorrowReturn.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ConStrAssess.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\ConStrAssessItem.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\M1AssessItem.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarOil.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\TransPrice.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ClassB.hbm.xml" />
+    <EmbeddedResource Include="Maps\ClassM.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\Classs.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\Equipment.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Maintenance.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\EquipmentItem.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\StuffSell.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\MntZl.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\MntZlItem.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarLend.hbm.xml" />
+    <EmbeddedResource Include="Maps\CarLendFoot.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\CarLendItem.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\EquipMtLy.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\EquipMtLyItem.hbm.xml" />
+    <EmbeddedResource Include="Maps\EquipMtLyReturn.hbm.xml" />
+    <EmbeddedResource Include="Maps\EquipMtLyReturnItem.hbm.xml" />
+    <EmbeddedResource Include="Maps\EquipTermlyMt.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\EquipTermlyMtItem.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarCard.hbm.xml" />
+    <EmbeddedResource Include="Maps\OilMech.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\PartStock.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\COMConfig.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\RentCarPrice.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarClass.hbm.xml" />
+    <EmbeddedResource Include="Maps\CarClassItem.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CustSilo.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\TaskAss.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarAss.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\MeasureInfo.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CustomerPlan.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ProduceTaskOtherPrice.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\HandleRecord.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\StuffExam.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\TranAcc.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarRepair.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\GoodsBorrow.hbm.xml" />
+    <EmbeddedResource Include="Maps\GoodsCheck.hbm.xml" />
+    <EmbeddedResource Include="Maps\GoodsIn.hbm.xml" />
+    <EmbeddedResource Include="Maps\GoodsInfo.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\GoodsInvalidate.hbm.xml" />
+    <EmbeddedResource Include="Maps\GoodsOut.hbm.xml" />
+    <EmbeddedResource Include="Maps\GoodsRevert.hbm.xml" />
+    <EmbeddedResource Include="Maps\GoodsType.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\RateSet.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\SiloLedgerContent_InAndCheck.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarChangeLog.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\FinalStuffType.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\LinkManRecord.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\DispatchListHistory.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Reward.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Training.hbm.xml" />
+    <EmbeddedResource Include="Maps\TrainRecord.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ShippingDocumentHistory.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Msg.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\MsgUser.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\SystemMsg.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\MyMsg.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ReportDatum.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\TplManage.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\AlarmLog.hbm.xml" />
+    <EmbeddedResource Include="Maps\GPS_GPSInfos.hbm.xml" />
+    <EmbeddedResource Include="Maps\GPS_HotMark.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\GPS_IconLayer.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\GPS_LastestGpsInfo.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\LimitRegion.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\OilResistance.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\UnloadRecord.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ProjectRoute.hbm.xml" />
+    <EmbeddedResource Include="Maps\RouteDetail.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\YearAccount.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarHistory.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\DutyPlan.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Remindinfo.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ManualProduce.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\TZRalationHistory.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\GoodsInHistory.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Synmonitor.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\PurchasePlan.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\PurchaseMain.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Purchase.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\PurchaseContract.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ThreadTable.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\StockPactChildChild.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\StuffInfoPrice.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\StockPactChild.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\PurchasePlanByEquip.hbm.xml" />
+    <EmbeddedResource Include="Maps\ThreadID.hbm.xml" />
+    <EmbeddedResource Include="Maps\AdvanceMoney.hbm.xml" />
+    <EmbeddedResource Include="Maps\InsteadProduct.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\PriceSetting.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\ProjectItem.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ContractJSTZ.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ContractPay.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarOliPriceSetting.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\MonthAccount.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ContractProduct.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Role.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\FuncRole.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\UserRole.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\StockPactPriceSet.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarIMA.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\GoodsPay.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\distance.hbm.xml" />
+    <EmbeddedResource Include="Maps\distanceByShip.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ContractJS.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarDriverPrice.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarDriverPriceMain.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarTimesRewardMain.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarTimesReward.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ExtraPump.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarProjectPrice.hbm.xml" />
+    <EmbeddedResource Include="Maps\CarProjectPriceMain.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarLeaseCostSet.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\StuffInPriceAdjust.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarProjectCube.hbm.xml" />
+    <EmbeddedResource Include="Maps\CarProjectCubeMain.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarProjectCubeCar.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\CarTrafficPoliceFine.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\StuffAccount.hbm.xml" />
+    <EmbeddedResource Include="Maps\StuffAccountMain.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ContractDZ.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\GoodsInvoice.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\ManualProductItems.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\StuffPayableAdjust.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\StuffInHistory.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\GoodsAccount.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\GoodsAccountMain.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Lab_Record.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Lab_ADM.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Lab_AirReport.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Lab_ADM_Items.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Lab_AirOrigin.hbm.xml" />
+    <EmbeddedResource Include="Maps\Lab_BurntInfo.hbm.xml" />
+    <EmbeddedResource Include="Maps\Lab_DependInfo.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Lab_ActiveInfo.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Lab_FA.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Lab_FA_Items.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Lab_Air2Report.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Lab_Air2Origin.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Lab_Air2ActiveInfo.hbm.xml" />
+    <EmbeddedResource Include="Maps\Lab_Air2Density.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Lab_CA.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\Lab_CA_Items.hbm.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

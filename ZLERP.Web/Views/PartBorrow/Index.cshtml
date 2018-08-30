@@ -1,0 +1,60 @@
+﻿@model ZLERP.Model.ViewModels.PartBorrowViewModel
+@section HeaderSection{
+<script type="text/javascript">
+    
+</script>
+<script src="@Url.Content("~/Scripts/Views/PartBorrow/PartBorrow.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        var options = { storeUrl: '@Url.Action("Find")' , 
+						partBorrowItemUrl: '@Url.Action("Find","PartBorrowItem")',
+						updatPortBorrwItemItem: '@Url.Action("Update","PartBorrowItem")',
+                        listUserUrl:'@Url.Action("ListData", "User")'
+		};
+        $(function () {
+            partborrowIndexInit(options);
+        });
+</script>
+}
+<div id="MyJqGrid" style="float: left; width: 42%"></div>
+<div id="itemGrid" style="float: right; width: 56%"></div>
+
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+ @Html.HiddenFor(m => m.PartBorrow.ID)
+<table class="mvcform"> 
+   <tr> 
+    <td>@Html.LabelFor(m => m.PartBorrow.Days)@Html.TextBoxFor(m => m.PartBorrow.Days, new { @Value = "0" })</td>
+   <td>@Html.LabelFor(m => m.PartBorrow.BorrowDate)@Html.EditorFor(m => m.PartBorrow.BorrowDate, new { defaultValue = DateTime.Now.ToString("yyyy-MM-dd") })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartBorrow.DepartmentID)@Html.DropDownListFor(m => m.PartBorrow.DepartmentID, (SelectList)ViewBag.DeprtInfoDics, new { stype = "width:130px;" })</td>
+   <td>@Html.LabelFor(m => m.PartBorrow.Borrower)@Html.DropDownListFor(m => m.PartBorrow.Borrower, Enumerable.Empty<SelectListItem>(), new { stype = "width:130px;" })</td>
+   
+    </tr>
+    
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m => m.PartBorrow.Remark)@Html.TextAreaFor(m => m.PartBorrow.Remark, 1, 50, new { @class = "text" })</td>
+    </tr>
+</table>
+}
+</div>
+
+<div id="itemFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+ @Html.HiddenFor(m => m.PartBorrowItem.BorrowID)
+ @Html.HiddenFor(m => m.PartBorrowItem.ID)
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartBorrowItem.PartID)@Html.DropDownListFor(m => m.PartBorrowItem.PartID, (SelectList)ViewBag.PartInfoDics, new { stype = "width:130px;" })</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PartBorrowItem.BorrowNum)@Html.EditorFor(m => m.PartBorrowItem.BorrowNum)</td>
+    </tr>
+    
+</table>
+
+}
+</div>

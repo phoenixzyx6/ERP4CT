@@ -1,0 +1,142 @@
+﻿@model ZLERP.Model.ViewModels.MntZlAndItem 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/MntZl/MntZl.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            mntzlIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                itemstoreUrl: '@Url.Action("Find","MntZlItem")',
+                itemAddUrl: '@Url.Action("Add","MntZlItem")',
+                listClassMUrl: '@Url.Action("ListData","ClassM")',
+                listClassSUrl: '@Url.Action("ListData","ClassS")',
+                listEquipUrl: '@Url.Action("ListData","Equipment")',
+                listPartInfoUrl: '@Url.Action("ListData","PartInfo")',
+                listMaintenanceUrl: '@Url.Action("ListData","Maintenance")',
+                classTypeID: '@Request.RequestContext.RouteData.Values["id"]',
+                p1: '@ViewBag.PartType'
+            });
+
+        });
+</script>
+}
+<div id="MntZlGrid" style="float:left; width:60%;"></div>
+<div id="MntZlItemGrid" style="float:right; width:40%;"></div>
+@*配件支领表单*@
+<div id="MntZlForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+@Html.TextBoxFor(m => m.MntZl.ID, new { style = "display:none;" })
+<table class="mvcform paddingStyle" style="width:100%"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.MntZl.ZlDate)@Html.EditorFor(m => m.MntZl.ZlDate, "DateTime", new { DefaultValue = @DateTime.Now.ToString("yyyy-MM-dd")})</td>
+ 
+        <td>@Html.LabelFor(m => m.MntZl.UserID)@Html.DropDownListFor(m => m.MntZl.UserID, (IEnumerable<SelectListItem>)ViewBag.Users, new { style = "width:100px;" })</td>
+   
+        <td>@Html.LabelFor(m => m.MntZl.DepartmentID)@Html.DropDownListFor(m => m.MntZl.DepartmentID, ViewBag.Departments as IEnumerable<SelectListItem>, new { style = "width:100px;" })</td>
+    </tr>
+    <tr> 
+        
+        <td>@Html.LabelFor(m => m.MntZl.ClassBID)@Html.DropDownListFor(m => m.MntZl.ClassBID, (IEnumerable<SelectListItem>)ViewBag.ClassB, "", new { style="width:100px;"})</td>
+ 
+        <td>@Html.LabelFor(m => m.MntZl.ClassMID)@Html.DropDownListFor(m => m.MntZl.ClassMID, Enumerable.Empty<SelectListItem>(), new { style = "width:100px;" })</td>
+        <td>@Html.LabelFor(m => m.MntZl.ClassSID)@Html.DropDownListFor(m => m.MntZl.ClassSID, Enumerable.Empty<SelectListItem>(), new { style = "width:100px;" })</td>
+    </tr>
+    <tr> 
+        
+        <td>@Html.LabelFor(m => m.MntZl.EquipmentID)@Html.DropDownListFor(m => m.MntZl.EquipmentID, Enumerable.Empty<SelectListItem>(), new { style = "width:100px;"})</td>
+ 
+        <td colspan="2">@Html.Label("建立人")@Html.TextBoxFor(m => m.MntZl.Builder, new { disabled ="true", Value=@User.UserName()})</td>
+    </tr>
+    <tr>
+        <td colspan="3">@Html.LabelFor(m => m.MntZl.Remark)@Html.TextAreaFor(m => m.MntZl.Remark, 3, 35, new { })</td>
+    </tr>
+</table>
+    <div id='hr' style="height:20px;"></div>
+    <button id="next" class="tbtn ui-icon-arrowthick-1-e" onclick="NextStep();return false;">添加支领明细</button>
+}
+</div>
+@*支领明细表单*@
+<div id="MntZlItemForm" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+@Html.TextBoxFor(m => m.MntZlItem.ID, new { style = "display:none;" })
+@Html.Hidden("sbbid");
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.LabelFor(m => m.MntZlItem.MntZlID)@Html.TextBoxFor(m => m.MntZlItem.MntZlID, new { readOnly="true"})</td>
+ 
+        <td>@Html.LabelFor(m => m.MntZlItem.IsAssess)@Html.CheckBoxFor(m => m.MntZlItem.IsAssess)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.MntZlItem.MaintenanceID)@Html.DropDownListFor(m => m.MntZlItem.MaintenanceID, Enumerable.Empty<SelectListItem>())</td>
+        <td>@Html.LabelFor(m => m.MntZlItem.ClassBID)@Html.DropDownListFor(m => m.MntZlItem.ClassBID, ViewBag.ClassBPart as IEnumerable<SelectListItem>)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.MntZlItem.ClassMID)@Html.DropDownListFor(m => m.MntZlItem.ClassMID, ViewBag.ClassMPartInit as IEnumerable<SelectListItem>)</td>
+ 
+        <td>@Html.LabelFor(m => m.MntZlItem.ClassSID)@Html.DropDownListFor(m => m.MntZlItem.ClassSID, ViewBag.ClassSPartInit as IEnumerable<SelectListItem>)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.MntZlItem.PurposeMill)@Html.DicEditorFor(m => m.MntZlItem.PurposeMill, DicEnum.PartApplication)</td>
+        <td>@Html.LabelFor(m => m.MntZlItem.PartID)@Html.DropDownListFor(m => m.MntZlItem.PartID, ViewBag.PartInfo as IEnumerable<SelectListItem>)</td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.MntZlItem.Unit)@Html.EditorFor(m => m.MntZlItem.Unit)</td>
+        <td>@Html.Label("库存数量")@Html.TextBox("库存数量", "",new {disabled="true" })</td>
+        
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.MntZlItem.amount)@Html.EditorFor(m => m.MntZlItem.amount)</td>
+        <td>@Html.LabelFor(m => m.MntZlItem.Remark)@Html.EditorFor(m => m.MntZlItem.Remark)</td>
+    </tr>
+</table>
+
+}
+</div>
+@*支领审核*@
+<div id="AuditForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        @Html.TextBoxFor(m => m.MntZl.ID, new { @class = "text", style = "display:none;" })
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.MntZl.EquipmentName)@Html.TextBoxFor(m => m.MntZl.EquipmentName, new { disabled = "true" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.MntZl.AuditStatus)@Html.DicEditorFor(m => m.MntZl.AuditStatus, DicEnum.AuditStatus)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.MntZl.AuditInfo)@Html.TextAreaFor(m => m.MntZl.AuditInfo)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+
+@*支领二次审核*@
+<div id="reAuditForm" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        @Html.TextBoxFor(m => m.MntZl.ID, new { @class = "text", style = "display:none;" })
+        <table class="mvcform">
+            <tr>
+                <td>@Html.LabelFor(m => m.MntZl.EquipmentName)@Html.TextBoxFor(m => m.MntZl.EquipmentName, new { disabled = "true" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.MntZl.ReAuditStatus)@Html.DicEditorFor(m => m.MntZl.ReAuditStatus, DicEnum.AuditStatus)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.MntZl.ReAuditInfo)@Html.TextAreaFor(m => m.MntZl.ReAuditInfo)
+                </td>
+            </tr>
+        </table>
+    }
+</div>

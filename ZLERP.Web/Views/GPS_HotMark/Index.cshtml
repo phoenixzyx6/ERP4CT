@@ -1,0 +1,63 @@
+﻿
+
+
+@model ZLERP.Model.ViewModels.IconLayerAndHotMark
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/IconLayerAndHotMark/IconLayerAndHotMark.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            IconLayerAndHotMarkIndexInit({ 
+                    IconLayerStoreUrl:'@Url.Action("Find","GPS_IconLayer")',
+                    HotMarkStoreUrl: '@Url.Action("Find","GPS_HotMark")',
+                    IconLayerStatusUrl: '@Url.Action("IconLayerUseStatus","GPS_IconLayer")'
+            });
+        });
+    </script>
+}
+<div id="IconLayerForm" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+     
+    <tr> 
+        <td>@Html.HiddenFor(m=>m.IconLayer.ID)
+            @Html.LabelFor(m=>m.IconLayer.Name)@Html.TextBoxFor(m => m.IconLayer.Name, new { @class = "text" })</td>
+        <td>@Html.LabelFor(m => m.IconLayer.IsUsed)@Html.CheckBoxFor(m => m.IconLayer.IsUsed, new { @checked = true })</td>
+    </tr>
+     
+</table>
+}
+</div>
+
+<div id="HotMarkForm" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform">
+    <tr> 
+        <td>@Html.HiddenFor(m=>m.HotMark.IconLayerID)@Html.HiddenFor(m => m.HotMark.ID)
+            @Html.LabelFor(m=>m.HotMark.Name)@Html.TextBoxFor(m => m.HotMark.Name, new { @class = "text" })</td>
+         
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m=>m.HotMark.Longtidue)@Html.TextBoxFor(m => m.HotMark.Longtidue)</td>
+        <td>@Html.LabelFor(m=>m.HotMark.Latitude)@Html.TextBoxFor(m => m.HotMark.Latitude)</td>
+    </tr>
+    <tr>
+        <td colspan = "2">
+            <fieldset class="ui-widget-content ui-corner-all " style="padding: 8px;">
+                <legend>样式：</legend>
+                <div class="margintop20" id = "IconArea">
+                </div>
+            </fieldset>
+        </td>
+    </tr>
+</table>
+}
+</div>
+
+<div id="IconLayerGriddiv" style="float: left; width: 40%">
+</div>
+
+<!-- 右边Grid -->
+<div id="HotMarkGridDiv" style="float: right; width: 58%">
+</div>

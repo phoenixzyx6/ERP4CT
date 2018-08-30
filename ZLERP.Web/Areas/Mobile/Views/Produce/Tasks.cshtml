@@ -1,0 +1,34 @@
+﻿@model IList<ZLERP.Model.ProduceTask>
+@{
+    ViewBag.Title = "今日任务";
+ }
+    
+         <div id="container">
+	     <div class="grupo box">
+ 
+        <h1>今日任务</h1>
+   <div class="pie_format">
+  	<div class="txt">计划数：<span>@Model.Count</span>   &nbsp;&nbsp;&nbsp;&nbsp;总方量：<span>@Model.Sum(p => p.PlanCube)</span></div>
+  </div>
+   
+     @foreach (var plan in Model)
+     { 
+           
+      
+    <div class="terminales">
+     
+         
+        <h3>@plan.ProjectName </h3>
+        <p><span class="precio"><span class="desde">[@plan.NeedDate]</span>@plan.PlanCube</span></p>
+        <p><span class="caracteristica">@plan.ConstructUnit</span></p>
+        <p><span class="promocion"> @plan.ConStrength - @plan.ConsPos - @plan.CastMode</span></p>
+     
+    </div>
+     } 
+    
+  </div> 
+ 	
+</div>
+
+ 
+ 

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.ADM2Exam, ZLERP.Model" table="ADM2Exam" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="ADM2ExamID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="ExamTime" column="ExamTime" />
+    <property name="ReportTime" column="ReportTime" />
+    <property name="DeputyNum" column="DeputyNum" />
+    <property name="OutID" column="OutID" />
+    <property name="OutDate" column="OutDate" />
+    <property name="InDate" column="InDate" />
+    <property name="SampDate" column="SampDate" />
+    <property name="MoldDate" column="MoldDate" />
+    <property name="CementBreed" column="CementBreed" />
+    <property name="ConStrength" column="ConStrength" />
+    <property name="BatchNo" column="BatchNo" />
+    <property name="SurArea" column="SurArea" />
+    <property name="Method" column="Method" />
+    <property name="SampWeight" column="SampWeight" />
+    <property name="SuDryWeight" column="SuDryWeight" />
+    <property name="SuPer" column="SuPer" />
+    <property name="AddWaTime" column="AddWaTime" />
+    <property name="BeginFreTime" column="BeginFreTime" />
+    <property name="EndFreTime" column="EndFreTime" />
+    <property name="BoTime" column="BoTime" />
+    <property name="PinBoTime" column="PinBoTime" />
+    <property name="Wa7L0" column="Wa7L0" />
+    <property name="Wa7L" column="Wa7L" />
+    <property name="Wa7L1" column="Wa7L1" />
+    <property name="Wa7Lim" column="Wa7Lim" />
+    <property name="Air21L0" column="Air21L0" />
+    <property name="Air21L" column="Air21L" />
+    <property name="Air21L1" column="Air21L1" />
+    <property name="Air21Lim" column="Air21Lim" />
+    <property name="Wa28L0" column="Wa28L0" />
+    <property name="Wa28L" column="Wa28L" />
+    <property name="Wa28L1" column="Wa28L1" />
+    <property name="Wa28Lim" column="Wa28Lim" />
+    <property name="Other" column="Other" />
+    <property name="LimCon" column="LimCon" />
+    <property name="Temp3" column="Temp3" />
+    <property name="Hum3" column="Hum3" />
+    <property name="ExamTime3" column="ExamTime3" />
+    <property name="Imz3" column="Imz3" />
+    <property name="Str3" column="Str3" />
+    <property name="Imy3" column="Imy3" />
+    <property name="Temp7" column="Temp7" />
+    <property name="Hum7" column="Hum7" />
+    <property name="ExamTime7" column="ExamTime7" />
+    <property name="Imz7" column="Imz7" />
+    <property name="Str7" column="Str7" />
+    <property name="Imy7" column="Imy7" />
+    <property name="Temp28" column="Temp28" />
+    <property name="Hum28" column="Hum28" />
+    <property name="ExamTime28" column="ExamTime28" />
+    <property name="Imz28" column="Imz28" />
+    <property name="Str28" column="Str28" />
+    <property name="Imy28" column="Imy28" />
+    <property name="TempQe" column="TempQe" />
+    <property name="HumQe" column="HumQe" />
+    <property name="ExamTimeQe" column="ExamTimeQe" />
+    <property name="ImzQe" column="ImzQe" />
+    <property name="StrQe" column="StrQe" />
+    <property name="ImyQe" column="ImyQe" />
+    <property name="AvaTime" column="AvaTime" />
+    <property name="StandJudge" column="StandJudge" />
+    <property name="Assessor" column="Assessor" />
+    <property name="Principal" column="Principal" />
+    <property name="IsUse" column="IsUse" />
+    <property name="ExamGist" column="ExamGist" />
+    <property name="ExamResult" column="ExamResult" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="CommissionID" column="CommissionID" />
+    <many-to-one name="Commission" column="CommissionID" class="Commission" update="false" insert="false"/>
+    <property name="StuffID" column="StuffID" />
+    <many-to-one name="StuffInfo" column="StuffID" class="StuffInfo" update="false" insert="false"/>
+  </class>
+</hibernate-mapping>

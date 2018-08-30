@@ -1,0 +1,793 @@
+﻿@model ZLERP.Model.ProduceTask
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/ProduceTask/ProduceTask.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            produceTaskIndexInit({ storeUrl: '@Url.Action("Find")',
+                listContractUrl: '@Url.Action("ListData", "Contract")', //listContractUrl
+                listContractItemUrl: '@Url.Action("ListData", "ContractItem")', //listContractItemUrl
+                listAllConStrength:'@Url.Action("ListData", "ConStrength")',
+                listProjectUrl: '@Url.Action("ListData", "Project")', //listProjectUrl 
+                getProjectUrl: '@Url.Action("Get", "Project")', //getProjectUrl
+                saveTaskIdentitiesUrl: '@Url.Action("SaveTaskIdentities")',
+                findIdentitySettingsUrl: '@Url.Action("FindIdentitySettings", "Identitysetting")', //getProduceTaskUrl
+                TaskHisStoreUrl: '@Url.Action("Find", "ProduceTasksHistory")',
+                //查询砼强度下拉数据的url(toolbar search)
+                conStrengthSelectUrl: '@Html.Raw(Url.Action("SearchSelect", "ConStrength", new { textField = "ConStrengthCode", valueField = "ConStrengthCode", orderby = "ConStrengthCode" }))',
+                //'/ConStrength.mvc/SearchSelect?textField=ConStrengthCode&valueField=ConStrengthCode&orderby=ConStrengthCode&ascending=true',
+                //检查合同审核状态
+                checkContractAuditStatusUrl: '@Url.Action("CheckContractAuditStatus")',
+                HandleTodayPlanUrl: '@Url.Action("UpdateTodayPlan")',
+                ContractOtherPrice: '@Url.Action("getOtherPriceChoose","ContractOtherPrice")',
+                ProduceTaskOtherPrice: '@Url.Action("Find","ProduceTaskOtherPrice")',
+                OtherPriceSave: '@Url.Action("Add","ProduceTaskOtherPrice")',
+                itemDeleteUrl: '@Url.Action("Delete","ProduceTaskOtherPrice")',
+                itemUpdateUrl: '@Url.Action("Update","ProduceTaskOtherPrice")',
+                CopyUrl: '@Url.Action("CopyTask")',
+                getSysConfigUrl: '@Url.Action("GetSysConfig","SysConfig")',
+                handleBatchAuditUrl: '@Url.Action("BatchAudit")'
+            });            
+        });
+    </script>
+    <style type="text/css">
+        .tinfo th
+        {
+            text-align: right;
+            padding-right: .5em;
+            width: 8em;
+            color: #2E6E9E;
+            font-weight: normal; 
+            
+        }
+        .tinfo th,.tinfo td{border:1px solid #A6C9E2; padding:3px;}
+        .itemhover
+        {
+            background-color:#FFAE48;
+            color:Black;
+        }
+        .itemDelhover
+        {
+            background-color:#E2C753;
+            color:Black;
+            }
+    </style>
+  
+  <script id="tmplTask" type="text/x-jquery-tmpl">
+  <table class="mvcform tinfo" border="1">
+    <tr> 
+        <th>任务单号</th><td>${ID}</td>
+ 
+        <th>合同编号</th><td>${ContractID}</td>
+ 
+        <th>工程名称</th><td>${ProjectName}</td>
+   
+    </tr>
+    <tr> 
+        <th>项目地址</th><td>${ProjectAddr}</td>
+ 
+        <th>销售员</th><td>${Seller}</td>
+ 
+        <th>施工单位</th><td>${ConstructUnit}</td>
+   
+    </tr>
+    <tr> 
+        <th>施工部位类型</th><td>${ConsPosType}</td>
+ 
+        <th>施工部位</th><td>${ConsPos}</td>
+ 
+        <th>合同明细编号</th><td>${ContractItemsID}</td>
+   
+    </tr>
+    <tr> 
+        <th>计划方量</th><td>${PlanCube}</td>
+ 
+        <th>计划车数</th><td>${NeedTimes}</td>
+ 
+        <th>泵车类型</th><td>${PumpType}</td>
+   
+    </tr>
+    <tr> 
+        <th>用砼时间</th><td>${NeedDate}</td>
+ 
+        <th>建设单位</th><td>${BuildUnit}</td>
+ 
+        <th>供应单位</th><td>${SupplyUnit}</td>
+   
+    </tr>
+    <tr> 
+        <th>供应单位电话</th><td>${SupplyUnitTel}</td>
+        <th>是否代外生产</th><td>${IsCommission}</td>
+ 
+        <th>公司负责人</th><td>${CompPrincipal}</td>
+   
+    </tr>
+    <tr> 
+        <th>工地联系人</th><td>${LinkMan}</td>
+ 
+        <th>工地电话</th><td>${Tel}</td>
+        <th>出资料否</th><td>${IsDatum}</td>
+   
+    </tr>
+    <tr> 
+        <th>级配</th><td>${CarpGrade}</td>
+ 
+        <th>骨料</th><td>${Carper}</td>
+ 
+        <th>骨料粒径</th><td>${CarpRadii}</td>
+   
+    </tr>
+    <tr> 
+        <th>砼标记</th><td>${BetonTag}</td>
+ 
+        <th>水泥品种</th><td>${CementBreed}</td>
+ 
+        <th>砼强度</th><td>${ConStrength}</td>
+   
+    </tr>
+    <tr> 
+        <th>水灰比</th><td>${WCRate}</td>
+ 
+        <th>配合比例</th><td>${MixpropRate}</td>
+ 
+        <th>坍落度</th><td>${Slump}</td>
+   
+    </tr>
+    <tr> 
+        <th>浇筑方式</th><td>${CastMode}</td>
+ 
+        <th>其他技术要求</th><td>${OtherDemand}</td>
+ 
+        <th>审核人</th><td>${Auditor}</td>
+   
+    </tr>
+    <tr> 
+        <th>审核时间</th><td>${AuditTime}</td>
+ 
+        <th>审核状态</th><td>${AuditStatus}</td>
+        <th>是否完成</th><td>${IsCompleted}</td>
+   
+    </tr>
+    <tr> 
+        <th>完成日期</th><td>${CompleteDate}</td>
+ 
+        <th>备注</th><td>${Remark}</td>
+ 
+        <th>工程运距</th><td>${Distance}</td>
+   
+    </tr>
+    <tr> 
+        <th>区间</th><td>${RegionID}</td>
+        <th>是否含砂浆</th><td>${IsSlurry}</td>
+ 
+        <th>砂浆配比</th><td>${SlurryFormula}</td>
+   
+    </tr>
+    <tr> 
+        <th>任务单类型</th><td>${TaskType}</td>
+ 
+        <th>混凝土类别</th><td>${CementType}</td>
+ 
+        <th>混凝土配比</th><td>${BetonFormula}</td>
+   
+    </tr>
+    <tr>        <th>配比是否下发</th><td>${IsFormulaSend}</td>
+ 
+        <th>客户配比号</th><td>${CustMixpropID}</td>
+ 
+        <th>抗渗等级</th><td>${ImpGrade}</td>
+   
+    </tr>
+    <tr> 
+        <th>抗压等级</th><td>${ImyGrade}</td>
+ 
+        <th>抗冻等级</th><td>${ImdGrade}</td>
+ 
+        <th>抗压规范</th><td>${ImyCriterion}</td>
+   
+    </tr>
+    <tr> 
+        <th>抗折规范</th><td>${ImzCriterion}</td>
+        <th>是否产生抗压实验</th><td>${IsImpExp}</td>
+        <th>是否产生抗折实验</th><td>${IsImzExp}</td>
+   
+    </tr>
+    <tr> 
+        <th>外加剂品种</th><td>${AdditiveType}</td>
+ 
+        <th>特性参数</th><td>${IdentityValue}</td>
+ 
+        <th>计划班组</th><td>${PlanClass}</td>
+   
+    </tr>
+    <tr> 
+        <th>生产负责人</th><td>${ProductPrincipal}</td>
+ 
+        <th>上料员</th><td>${ForkLift}</td>
+ 
+        <th>扩展字段1</th><td>${Field1}</td>
+   
+    </tr>
+    <tr> 
+        <th>扩展字段2</th><td>${Field2}</td>
+ 
+        <th>扩展字段3</th><td>${Field3}</td>
+ 
+        <th>扩展字段4</th><td>${Field4}</td>
+   
+    </tr>
+    <tr> 
+        <th>扩展字段5</th><td>${Field5}</td>
+        <th></th> <td></td><th></th> <td></td>
+    </tr>
+</table>
+    </script>
+}
+<div id="MyFormDiv" style="display: none;">
+    <div id="MyFormDiv1" style="float: left; width: 100%">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <table class="mvcform">
+                <tr>
+                    <td>@Html.Label("CustomerID", "客户")@Html.AutoComplete("CustomerID", "CustName", "ComboByKey", "Customer", "ID", "ShortName", "CustName", "IsUse=1", null)
+                    </td>
+                    <td>@Html.Label("ContractID","合同名称")@Html.fixedDropDownListFor(m => m.ContractID, Enumerable.Empty<SelectListItem>())
+                        @Html.Hidden("ContractName","ZL")
+                    </td>
+                    <td>@Html.Label("ContractItemsID","砼强度")@Html.DropDownListFor(m => m.ContractItemsID, Enumerable.Empty<SelectListItem>())
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProjectID)@Html.fixedDropDownListFor(m => m.ProjectID, Enumerable.Empty<SelectListItem>())
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProjectAddr)@Html.TextBoxFor(m => m.ProjectAddr)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProjectName)@Html.TextBoxFor(m => m.ProjectName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ConstructUnit)@Html.TextBoxFor(m => m.ConstructUnit, new { @data_val_required = "施工单位 字段是必需的" })
+                    </td>
+                    <td>@Html.LabelFor(m => m.BuildUnit)@Html.TextBoxFor(m => m.BuildUnit)
+                    </td>
+                    <td>@*@Html.LabelFor(m => m.SupplyUnit)@Html.DropDownListFor(m => m.SupplyUnit, (IEnumerable<SelectListItem>)ViewBag.SupplyUnit)*@
+                    @Html.LabelFor(m => m.SupplyUnit)@Html.DicComboBoxFor(m => m.SupplyUnit, DicEnum.SupplyUnitSupplyUnit)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.LinkMan)@Html.DropDownListFor(m => m.LinkMan, (IEnumerable<SelectListItem>)ViewBag.LinkManList, new { zlerp = "combobox" })
+                    </td>
+                    <td>@Html.LabelFor(m => m.Tel)@Html.TextBoxFor(m => m.Tel)
+                    </td>
+                    <td>@Html.LabelFor(m => m.SupplyUnitTel)@Html.TextBoxFor(m => m.SupplyUnitTel)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.CastMode)@Html.DicComboBoxFor(m => m.CastMode, DicEnum.CastMode)
+                    </td>
+                    <td>@Html.LabelFor(m => m.PumpType)@Html.DicEditorFor(m => m.PumpType, DicEnum.PumpType, "")
+                    </td>
+                    <td>@Html.LabelFor(m => m.Slump)@Html.DicComboBoxFor(m => m.Slump, DicEnum.Slump)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.NeedDate)@Html.EditorFor(m => m.NeedDate, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })
+                    </td>
+                    <td>@Html.LabelFor(m => m.PlanCube)@Html.TextBoxFor(m => m.PlanCube)
+                    </td>
+                    <td>@Html.LabelFor(m => m.NeedTimes)@Html.TextBoxFor(m => m.NeedTimes)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.TaskType) 合同任务单 @Html.TextBoxFor(m => m.TaskType, new { style = "display:none", Value = "TCon" })
+                    </td>
+                    <td>@Html.LabelFor(m => m.ConsPosType)@Html.DicEditorFor(m => m.ConsPosType, DicEnum.ConsPos)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ConsPos)@Html.TextBoxFor(m => m.ConsPos)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.CarpGrade)@Html.DicEditorFor(m => m.CarpGrade, DicEnum.JP)
+                    </td>
+                    <td>@Html.LabelFor(m => m.IsSlurry)@Html.CheckBoxFor(m => m.IsSlurry)
+                    </td>
+                    <td>@Html.LabelFor(m => m.BetonTag)@Html.DicEditorFor(m => m.BetonTag, DicEnum.BetonTag)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.CementType)@Html.DicEditorFor(m => m.CementType, DicEnum.CType)
+                    </td>
+                    <td colspan="2">@Html.LabelFor(m => m.OtherDemand)@Html.TextAreaFor(m => m.OtherDemand, 1, 55, null)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.CompPrincipal)@Html.TextBoxFor(m => m.CompPrincipal)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProductPrincipal)@Html.TextBoxFor(m => m.ProductPrincipal)
+                    </td>
+                    <td>@Html.LabelFor(m => m.Seller)@Html.DropDownListFor(m => m.Seller, (IEnumerable<SelectListItem>)ViewBag.Sales, null, null)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.RegionID)@Html.DropDownListFor(m => m.RegionID, (IEnumerable<SelectListItem>)ViewBag.Regions)
+                    </td>
+                    <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 1, 55, new { @class = "text" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.IdentityValue)@Html.TextBoxFor(m => m.IdentityValue)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ImpGrade)@Html.TextBoxFor(m => m.ImpGrade)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ImyGrade)@Html.TextBoxFor(m => m.ImyGrade)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ImdGrade)@Html.TextBoxFor(m => m.ImdGrade)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ForkLift)@Html.AutoComplete("TrueName", "ForkLift", "Combo", "User", "TrueName", "TrueName", "IsUsed=1 AND  UserType='50'", new { allowCache = false })
+                    </td>
+                    <td>@Html.LabelFor(m => m.PlanClass)@Html.DicEditorFor(m => m.PlanClass, DicEnum.PlanClass, "")
+                    </td>
+                </tr>
+                <tr>
+                    <td style="display: none">@Html.LabelFor(m => m.ID)@Html.TextBoxFor(m => m.ID)
+                    </td>
+                    <td>@Html.LabelFor(m => m.IsCommission)@Html.CheckBoxFor(m => m.IsCommission)
+                    </td>
+                </tr>
+                <tr>
+                </tr>
+            </table>
+
+        }
+    </div>
+    <div id="rightdiv" style="float: right; width: 19%">
+    </div>
+</div>
+
+<div id="MyEditForm" style="display: none;">
+    <div id="EditForm" style="float: left; width: 98%">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <table class="mvcform">
+                <tr>
+                    <td>@Html.Label("CustomerID", "客户")@Html.TextBox("CustomerID", "", new { disabled = true })
+                    </td>
+                    <td>@Html.Label("ContractID", "合同名称")@Html.TextBoxFor(m => m.ContractID, new { disabled = true })
+                    </td>
+                    <td>@Html.LabelFor(m => m.ContractItemsID)@Html.TextBoxFor(m => m.ContractItemsID, new { disabled = true })
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ConStrength)@Html.TextBoxFor(m => m.ConStrength, new { disabled = true })
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProjectAddr)@Html.TextBoxFor(m => m.ProjectAddr)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProjectName)@Html.TextBoxFor(m => m.ProjectName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ConstructUnit)@Html.TextBoxFor(m => m.ConstructUnit, new { @data_val_required = "施工单位 字段是必需的" })
+                    </td>
+                    <td>@Html.LabelFor(m => m.BuildUnit)@Html.TextBoxFor(m => m.BuildUnit)
+                    </td>
+                    <td>@*@Html.LabelFor(m => m.SupplyUnit)@Html.DicEditorFor(m => m.SupplyUnit, DicEnum.SupplyUnitSupplyUnit)*@
+                    @Html.LabelFor(m => m.SupplyUnit)@Html.DicComboBoxFor(m => m.SupplyUnit, DicEnum.SupplyUnitSupplyUnit)
+                   @* @Html.DropDownListFor(m => m.SupplyUnit, (IEnumerable<SelectListItem>)ViewBag.SupplyUnit123, new { zlerp = "combobox" })*@
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.LinkMan)@Html.DropDownListFor(m => m.LinkMan, (IEnumerable<SelectListItem>)ViewBag.LinkManList, new { zlerp = "combobox" })
+                    </td>
+                    <td>@Html.LabelFor(m => m.Tel)@Html.TextBoxFor(m => m.Tel)
+                    </td>
+                    <td>@Html.LabelFor(m => m.SupplyUnitTel)@Html.TextBoxFor(m => m.SupplyUnitTel)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.CastMode)@Html.DicComboBoxFor(m => m.CastMode, DicEnum.CastMode)
+                    </td>
+                    <td>@Html.LabelFor(m => m.PumpType)@Html.DicEditorFor(m => m.PumpType, DicEnum.PumpType, "")
+                    </td>
+                    <td>@Html.LabelFor(m => m.Slump)@Html.DicComboBoxFor(m => m.Slump, DicEnum.Slump)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.NeedDate)@Html.EditorFor(m => m.NeedDate, "DateTimeWithTime", new { id = "edit_NeedDate" })
+                    </td>
+                    <td>@Html.LabelFor(m => m.PlanCube)@Html.TextBoxFor(m => m.PlanCube)
+                    </td>
+                    <td>@Html.LabelFor(m => m.NeedTimes)@Html.TextBoxFor(m => m.NeedTimes)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.TaskType)@Html.DicEditorFor(m => m.TaskType, DicEnum.TType)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ConsPosType)@Html.DicEditorFor(m => m.ConsPosType, DicEnum.ConsPos)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ConsPos)@Html.TextBoxFor(m => m.ConsPos)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.CarpGrade)@Html.DicEditorFor(m => m.CarpGrade, DicEnum.JP, "")
+                    </td>
+                    <td>@Html.LabelFor(m => m.IsSlurry)@Html.EditorFor(m => m.IsSlurry)
+                    </td>
+                    <td>@Html.LabelFor(m => m.BetonTag)@Html.DicComboBoxFor(m => m.BetonTag, DicEnum.BetonTag)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.CementType)@Html.DicComboBoxFor(m => m.CementType, DicEnum.CType)
+                    </td>
+                    <td colspan="2">@Html.LabelFor(m => m.OtherDemand)@Html.TextAreaFor(m => m.OtherDemand, 1, 50, new { @class = "text", id = "edit_OtherDemand" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.CompPrincipal)@Html.TextBoxFor(m => m.CompPrincipal)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProductPrincipal)@Html.TextBoxFor(m => m.ProductPrincipal)
+                    </td>
+                    <td>@Html.LabelFor(m => m.Seller)@Html.DropDownListFor(m => m.Seller, (IEnumerable<SelectListItem>)ViewBag.Sales, null, null)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.RegionID)@Html.fixedDropDownListFor(m => m.RegionID, (IEnumerable<SelectListItem>)ViewBag.Regions)
+                    </td>
+                    <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 1, 50, new { @class = "text", id = "edit_Remark" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.IdentityValue)@Html.TextBoxFor(m => m.IdentityValue)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ImpGrade)@Html.TextBoxFor(m => m.ImpGrade)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ImyGrade)@Html.TextBoxFor(m => m.ImyGrade)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ImdGrade)@Html.TextBoxFor(m => m.ImdGrade)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ForkLift)@Html.AutoComplete("TrueName", "ForkLift", "Combo", "User", "TrueName", "TrueName", "IsUsed=1 AND  UserType='50'", new { allowCache = false })
+                    </td>
+                    <td>@Html.LabelFor(m => m.PlanClass)@Html.DicEditorFor(m => m.PlanClass, DicEnum.PlanClass, "")
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.HiddenFor(m => m.ID)
+                    @Html.LabelFor(m => m.IsCommission)@Html.CheckBoxFor(m => m.IsCommission)
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                </tr>
+            </table>
+
+        }
+    </div>
+    <div id="rightdiv1" style="float: right; width: 19%">
+    </div>
+</div>
+
+<div id="CrashForm" style="display: none;">
+    <div id="CrashForm1" style="float: left; width: 80%">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <table class="mvcform">
+                <tr>
+                    <td>@Html.Label("CustomerID", "客户")@Html.AutoComplete("CustomerID", "CustName", "ComboByKey", "Customer", "ID", "ShortName", "CustName", "IsUse=1", new { allowCache = false })
+                    </td>
+                    <td>@Html.LabelFor(m => m.ContractName)@Html.DropDownListFor(m => m.ContractName, Enumerable.Empty<SelectListItem>(), new { zlerp = "combobox" })@Html.Hidden("ContractID", "HT000000")
+                    </td>
+                    <td>@Html.LabelFor(m => m.ConStrength)@Html.DropDownListFor(m => m.ConStrength, Enumerable.Empty<SelectListItem>(), new { @data_val_required = "砼强度 字段是必需的", data_val = "true", zlerp = "combobox" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProjectID)@Html.fixedDropDownListFor(m => m.ProjectID, Enumerable.Empty<SelectListItem>())
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProjectAddr)@Html.TextBoxFor(m => m.ProjectAddr)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProjectName)@Html.TextBoxFor(m => m.ProjectName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ConstructUnit)@Html.TextBoxFor(m => m.ConstructUnit, new { @data_val_required = "施工单位 字段是必需的" })
+                    </td>
+                    <td>@Html.LabelFor(m => m.BuildUnit)@Html.TextBoxFor(m => m.BuildUnit)
+                    </td>
+                    <td>@Html.LabelFor(m => m.SupplyUnit)@Html.DicEditorFor(m => m.SupplyUnit, DicEnum.SupplyUnitSupplyUnit)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.LinkMan)@Html.DropDownListFor(m => m.LinkMan, (IEnumerable<SelectListItem>)ViewBag.LinkManList, new { zlerp = "combobox" })
+                    </td>
+                    <td>@Html.LabelFor(m => m.Tel)@Html.TextBoxFor(m => m.Tel)
+                    </td>
+                    <td>@Html.LabelFor(m => m.SupplyUnitTel)@Html.TextBoxFor(m => m.SupplyUnitTel)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.CastMode)@Html.DicComboBoxFor(m => m.CastMode, DicEnum.CastMode)
+                    </td>
+                    <td>@Html.LabelFor(m => m.PumpType)@Html.DicEditorFor(m => m.PumpType, DicEnum.PumpType, "")
+                    </td>
+                    <td>@Html.LabelFor(m => m.Slump)@Html.DicComboBoxFor(m => m.Slump, DicEnum.Slump)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.NeedDate)@Html.EditorFor(m => m.NeedDate, "DateTimeWithTime", new { id = "crash_NeedDate", defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })
+                    </td>
+                    <td>@Html.LabelFor(m => m.PlanCube)@Html.TextBoxFor(m => m.PlanCube)
+                    </td>
+                    <td>@Html.LabelFor(m => m.NeedTimes)@Html.TextBoxFor(m => m.NeedTimes)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.TaskType)现金任务单 @Html.TextBoxFor(m => m.TaskType, new { style = "display:none", Value = "TCash" })
+                    </td>
+                    <td>@Html.LabelFor(m => m.ConsPosType)@Html.DicEditorFor(m => m.ConsPosType, DicEnum.ConsPos)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ConsPos)@Html.TextBoxFor(m => m.ConsPos)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.CarpGrade)@Html.DicEditorFor(m => m.CarpGrade, DicEnum.JP)
+                    </td>
+                    <td>@Html.LabelFor(m => m.IsSlurry)@Html.CheckBoxFor(m => m.IsSlurry)
+                    </td>
+                    <td>@Html.LabelFor(m => m.BetonTag)@Html.DicComboBoxFor(m => m.BetonTag, DicEnum.BetonTag)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.CementType)@Html.DicEditorFor(m => m.CementType, DicEnum.CType)
+                    </td>
+                    <td colspan="2">@Html.LabelFor(m => m.OtherDemand)@Html.TextAreaFor(m => m.OtherDemand, 1, 50, null)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.CompPrincipal)@Html.TextBoxFor(m => m.CompPrincipal)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ProductPrincipal)@Html.TextBoxFor(m => m.ProductPrincipal)
+                    </td>
+                    <td>@Html.LabelFor(m => m.Seller)@Html.DropDownListFor(m => m.Seller, (IEnumerable<SelectListItem>)ViewBag.Sales, null, null)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.RegionID)@Html.DropDownListFor(m => m.RegionID, (IEnumerable<SelectListItem>)ViewBag.Regions, new { @class = "text", id = "crash_RegionID" })
+                    </td>
+                    <td colspan="2">@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, 1, 50, new { @class = "text" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.IdentityValue)@Html.TextBoxFor(m => m.IdentityValue)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ImpGrade)@Html.TextBoxFor(m => m.ImpGrade)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ImyGrade)@Html.TextBoxFor(m => m.ImyGrade)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ImdGrade)@Html.TextBoxFor(m => m.ImdGrade)
+                    </td>
+                    <td>@Html.LabelFor(m => m.ForkLift)@Html.AutoComplete("TrueName", "ForkLift", "Combo", "User", "TrueName", "TrueName", "IsUsed=1 AND  UserType='50'", new { allowCache = false })
+                    </td>
+                    <td>@Html.LabelFor(m => m.PlanClass)@Html.DicEditorFor(m => m.PlanClass, DicEnum.PlanClass, "")
+                    </td>
+                </tr>
+                <tr>
+                    <td style="display: none">@Html.LabelFor(m => m.ID)@Html.TextBoxFor(m => m.ID)
+                    </td>
+                    <td>@Html.LabelFor(m => m.IsCommission)@Html.CheckBoxFor(m => m.IsCommission)
+                    </td>
+                </tr>
+                <tr>
+                </tr>
+            </table>
+
+        }
+    </div>
+    <div id="rightdiv3" style="float: right; width: 19%">
+    </div>
+</div>
+
+<div id="first-grid" style="width:100%;">
+</div>
+
+@*任务单历史记录弹出框*@
+<div id="taskHisWindow" style="display: none;">
+    <div id="taskHisGrid">
+    </div>
+</div>
+<div id="AuditingFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("任务单号")@Html.TextBoxFor(m => m.ID, new { readOnly = true })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AuditStatus)@Html.DicEditorFor(m => m.AuditStatus, DicEnum.AuditStatus)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AuditInfo)@Html.TextAreaFor(m => m.AuditInfo)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*生产任务管理/更新时间*@
+<div id="TaskPlanFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("任务单号")@Html.TextBoxFor(m => m.ID, new { readOnly = true })
+                </td>
+                
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ProjectName)@Html.TextBoxFor(m => m.ProjectName, new { readOnly = true })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.NeedDate)@Html.EditorFor(m => m.NeedDate, "DateTimeWithTime", new { id = "plan_NeedDate", defaultValue = @DateTime.Now.ToString("yyyy-MM-dd") })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Remark)@Html.TextAreaFor(m => m.Remark, new { id = "plan_Remark" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<div id="dlgProduceTask">
+</div>
+
+ @*其他加价设定表格与表单*@
+<div id="otherPriceWindow" style="display: none;">
+    <div id="otherPriceGrid">
+    </div>
+    <div id="blank" style="height: 2px;">
+    </div>
+    <div id="produceTaskOtherpriceForm" class="mvcform" style="width: 98%">
+        @using (Html.BeginForm("Add", "ProduceTaskOtherPrice", FormMethod.Post, new { id = "otherPriceFormsss" }))
+        {@Html.ValidationSummary()
+             <table class="mvcform paddingStyle">
+                 <tr>
+                    <td style="width:200px">@Html.Label("加价项目")@Html.DropDownList("OtherPriceID", Enumerable.Empty<SelectListItem>(), new { @data_val_required = "加价项目 字段是必需的", data_val = "true" })
+                    </td>
+                     <td style="width:100px"> 
+                      @Html.Hidden("ProduceTaskID")
+                    </td>
+                    <td>@Html.Label("数量/百分比")@Html.Editor("Num", "Num", "Num", new { @data_val_number = "数量 字段是必需是数字" })
+                    </td>
+                 </tr>
+                 <tr>
+                     <td colspan="5">
+                         <button class="tbtn add" title="任务单管理/保存其他加价" role="button" aria-disabled="false"
+                                        type="button" onclick="ProduceTaskotherPriceSave();return false;">
+                                        <span class="ui-button-icon-primary ui-icon ui-icon-plus"></span><span class="ui-button-text">
+                                            保存</span></button>
+                    </td>
+                 </tr>
+                 
+            </table>
+
+
+        }
+    </div>
+</div>
+
+ 
+<div id="todayPlanSettingForm" class="mvcform" style="display:none;">
+ @using (Html.BeginForm())
+ {
+     
+<table class="mvcform">
+    
+    <tr> 
+        <td>
+        @Html.Hidden("ID") 
+        
+         @Html.Label("ConfigValue", "方量")@Html.TextBox("ConfigValue", "", new { @class = "text" })</td>   
+         
+    </tr>
+     
+</table> 
+ }  
+</div> 
+
+@*异常信息*@
+<div id="ExceptionForm" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        @Html.ValidationSummary()
+        <table  class="mvcform">
+            <tr>
+                <td>@Html.TextBoxFor(m => m.ID, new { hidden = true })
+                </td>  
+            </tr>
+            <tr>
+                <td>@Html.TextAreaFor(m => m.Exception, 10, 58, new { @data_val_required = "异常信息 字段是必需的", data_val = "true" })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+@*模版选择*@
+<div id="SelectTpl" class="mvcform" style="display: none;">
+    <div id="allTpl">
+    <fieldset  id="New" style = " padding-left:10px; padding-bottom:3px; border:1px dashed #A6C9E2" >
+        <legend id="border-title"><b>新模版</b></legend>
+        <div id="newTpl"></div>
+    </fieldset>
+    </div>
+    <div id="hisTpl">
+    <fieldset  id="His" style = " padding-left:10px; border:1px dashed #A6C9E2" >
+        <legend id="border-title"><b>历史数据</b></legend>
+        <div id="onehisTpl"></div>
+    </fieldset>
+    </div>
+</div>
+@*自定义时间*@
+<div id="SelectTimeForm" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        @Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>@Html.Label("起始时间")@Html.Editor("pBeginTime", "DateTimeWithTime")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("终止时间")@Html.Editor("pEndTime", "DateTimeWithTime")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("自动关闭")@Html.CheckBox("pIsAutoClose")
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*要求出机塌落度*@
+<div id="DemandSlumpForm" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        @Html.ValidationSummary()
+        <table  class="mvcform">
+            @Html.TextBoxFor(m => m.ID, new { hidden = true })
+            @Html.TextBoxFor(m => m.DemandChecker, new { hidden = true, Value = @User.UserID() })
+            @Html.TextBoxFor(m => m.DemandCheckTime, new { hidden = true, Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })
+            <tr>
+                <td>@Html.LabelFor(m => m.DemandSlump)@Html.DicComboBoxFor(m => m.DemandSlump, DicEnum.Slump)
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@*实测出机塌落度*@
+<div id="RealSlumpForm" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    { 
+        @Html.ValidationSummary()
+        <table  class="mvcform">
+            @Html.TextBoxFor(m => m.ID, new { hidden = true })
+            @Html.TextBoxFor(m => m.RealChecker, new { hidden = true, Value = @User.UserID() })
+            @Html.TextBoxFor(m => m.RealCheckTime, new { hidden = true, Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })
+            <tr>
+                <td>@Html.LabelFor(m => m.RealSlump)@Html.DicComboBoxFor(m => m.RealSlump, DicEnum.Slump)
+                </td>
+            </tr>
+        </table>
+    }
+</div>

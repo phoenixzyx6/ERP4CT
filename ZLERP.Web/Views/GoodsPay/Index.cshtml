@@ -1,0 +1,99 @@
+﻿@model ZLERP.Model.GoodsPay 
+@section HeaderSection{
+
+<script src="@Url.Content("~/Scripts/Views/GoodsPay/GoodsPay.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            goodspayIndexInit('@Url.Action("Find")');
+        });
+</script>
+}
+<!-- 左边Grid -->
+<div id="MyJqGridSupply" style="float: left; width: 50%">
+</div>
+
+<!-- 右边Grid -->
+<div  style="float: right; width: 49%">
+    <div id="MyJqGrid">
+    </div>
+    <div id="MyJqGridInvoice">
+    </div>
+</div>
+
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+
+    @Html.HiddenFor(m => m.SupplyID)
+    @Html.HiddenFor(m => m.ID)
+    <tr>       
+        <td colspan="2">@Html.Label("供应商名称")<span id="SupplyName" style=" color:Red;"></span></td>
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PayDate)@Html.EditorFor(m => m.PayDate)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PayMoney)@Html.EditorFor(m => m.PayMoney)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Remark)@Html.EditorFor(m => m.Remark)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.PayType)@Html.DicEditorFor(m => m.PayType, DicEnum.ContractPayType, new { Style = "width:136px" })</td>
+   
+    </tr>
+    @*<tr> 
+        <td>@Html.LabelFor(m => m.BalanceMoney)@Html.EditorFor(m => m.BalanceMoney)</td>
+   
+    </tr>*@
+    <tr> 
+        <td>@Html.LabelFor(m => m.Manager)@Html.AutoComplete("UserID", "Manager", "Combo", "User", "ID", "TrueName")</td>
+    </tr>
+</table>
+
+}
+</div>
+
+@*录入发票*@
+<div id="MyFormDivInvoice" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+
+    @Html.Hidden("ID")
+    @Html.Hidden("SupplyID")
+    <tr>       
+        <td colspan="2">@Html.Label("供应商名称")<span id="SupplyName2" style=" color:Red;"></span></td>
+    </tr>
+    <tr>
+        <td>@Html.Label("物资类别")@Html.DropDownList("GoodsTypeId", (IEnumerable<SelectListItem>)ViewBag.GoodsType)
+        </td>
+    </tr>
+    <tr> 
+        <td>@Html.Label("开票时间")@Html.Editor("InvoiceDate")</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.Label("开票金额")@Html.Editor("InvoiceMoney")</td>
+    </tr>
+    <tr> 
+        <td>@Html.Label("经办人")@Html.AutoComplete("UserID", "Manager", "Combo", "User", "ID", "TrueName")</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.Label("备注")@Html.Editor("Meno")</td>
+   
+    </tr>
+    @*<tr> 
+        <td>@Html.LabelFor(m => m.BalanceMoney)@Html.EditorFor(m => m.BalanceMoney)</td>
+   
+    </tr>*@
+
+</table>
+
+}
+</div>

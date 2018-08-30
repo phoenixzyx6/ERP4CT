@@ -1,0 +1,9 @@
+﻿@model System.DateTime?
+@if (ViewData["id"] != null)
+{
+@Html.TextBoxFor(m => m, new { zlerp = "datetimepicker", id = ViewData["id"], Value = ViewData["defaultValue"] })
+}
+else
+{ 
+@Html.TextBoxFor(m => m, new { zlerp = "datetimepicker", Value = ViewData["defaultValue"]})    
+}

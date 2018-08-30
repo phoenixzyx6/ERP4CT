@@ -1,0 +1,31 @@
+﻿<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.ManualProduce, ZLERP.Model" table="ManualProduce" lazy="true" dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="ManualID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="DispatchID" column="DispatchID" />
+    <property name="ShipDocID" column="ShipDocID" />
+    <property name="TaskID" column="TaskID" />
+    <property name="ProductLineID" column="ProductLineID" />
+    <property name="ProductLineName" column="ProductLineName" />
+    <property name="ProjectName" column="ProjectName" />
+    <property name="ConStrength" column="ConStrength" />
+    <property name="CarID" column="CarID" />
+    <property name="SendCube" column="SendCube" />
+    <property name="ManualCube" column="ManualCube" />
+    <property name="SendPot" column="SendPot" />
+    <property name="BeginPot" column="BeginPot" />
+    <property name="ManualPot" column="ManualPot" />
+    <property name="ManualReason" column="ManualReason" />
+    <property name="Operator" column="Operator" />
+    <property name="ProduceTime" column="ProduceTime" />
+    <property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false" />
+    <property name="Builder" column="Builder" update="false" />
+    <property name="ModifyTime" column="ModifyTime" insert="false" />
+    <property name="Modifier" column="Modifier" insert="false" />
+    <property name="Lifecycle" column="Lifecycle" />
+  </class>
+</hibernate-mapping>
+

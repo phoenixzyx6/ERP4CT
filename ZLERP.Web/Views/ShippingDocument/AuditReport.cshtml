@@ -1,0 +1,32 @@
+﻿@model ZLERP.Model.ShippingDocument
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/ShippingDocument/AuditReport.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            
+        });
+
+        function info() {
+            var begin = $("#begin_ProduceDate").val();
+            var end = $("#end_ProduceDate").val();
+            var condition = " ProduceDate between '" + begin + "' and '" + end + "'";
+            $("#MyJqGrid").html("");           
+            AuditReportInit({
+                storeUrl: '@Url.Action("SumByRecord", "ShippingDocument")',
+                handleAuditUrl: '@Url.Action("HandleAudit", "ShippingDocument")',
+                condition: condition,
+                shipdocUrl: '@Url.Action("Find", "ShippingDocument")'
+            });
+        }
+    </script>
+}           
+<div>
+<table>
+<tr>
+<td>开始时间:@Html.EditorFor(m => m.ProduceDate, "DateTimeWithTime", new { id = "begin_ProduceDate", defaultValue = @DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd HH:mm:ss") })</td>
+<td>结束时间:@Html.EditorFor(m => m.ProduceDate, "DateTimeWithTime", new { id = "end_ProduceDate", defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+<td><button onclick="info();return false;">查询</button></td>
+</tr>
+</table>
+</div>
+<div id="MyJqGrid"></div>         

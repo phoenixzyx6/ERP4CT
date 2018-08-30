@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Car, ZLERP.Model" table="Car" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="CarID">
+		 	<generator class="assigned" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="CarNo" column="CarNo" />
+		<property name="CarTypeID" column="CarTypeID" />
+		<property name="PumpTypeID" column="PumpTypeID" />
+		<property name="BelongTo" column="BelongTo" />
+		<property name="Owner" column="Owner" />
+		<property name="RentCarName" column="RentCarName" />
+		<property name="LastBackTime" column="LastBackTime" />
+		<property name="CarStatus" column="CarStatus" />
+		<property name="MaxCube" column="MaxCube" />
+		<property name="CarWeight" column="CarWeight" />
+		<property name="StuffWeight" column="StuffWeight" />
+		<property name="Factory" column="Factory" />
+		<property name="BuyDate" column="BuyDate" />
+		<property name="LeaveFacDate" column="LeaveFacDate" />
+    <property name="TerminalID" column="TerminalID" />
+		<property name="FacInnerID" column="FacInnerID" />
+		<property name="EngineID" column="EngineID" />
+		<property name="ChassisID" column="ChassisID" />
+		<property name="OilConsume" column="OilConsume" />
+		<property name="Remark" column="Remark" />
+		<property name="OrderNum" column="OrderNum" />
+		<property name="IsUsed" column="IsUsed" />
+    <property name="SIM" column="SIM" />
+    <property name="GPSStatus" column="GPSStatus" />
+    <property name="CompanyID" column="CompanyID" />
+    
+    <property name="CarVINo" column="CarVINo" />
+    <property name="RegDate" column="RegDate" />
+    <property name="IssuingDate" column="IssuingDate" />
+    <property name="Insurance" column="Insurance" />
+    <property name="OperCertificate" column="OperCertificate" />
+    
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" /> 
+		<!--<bag name="DriverForCars" lazy="true" batch-size="30" inverse="true" >
+			<key column="CarID"></key>
+			<one-to-many class="DriverForCar"></one-to-many>
+		</bag>-->
+    <idbag name="DriverForCars" lazy="true" table="DriverForCar" batch-size="30" >
+      <collection-id column="DriverForCarID" type="Int32">
+        <generator class="identity"/>
+      </collection-id>
+      <key column="CarID" />
+      <composite-element class="DriverForCar">
+        <many-to-one name="User" column="UserID" update="false" insert="false" not-null="true"/>
+        <property name="Driver" />
+        <property name="PlanClass" />
+      </composite-element>
+    </idbag>
+    <property name="CarClassID" column="CarClassID" />
+    <many-to-one name="CarClass" column="CarClassID" class="CarClass" />
+    <many-to-one name="Company"  column="CompanyID" class="Company" update="false" insert="false" />
+	</class>
+</hibernate-mapping>

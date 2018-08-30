@@ -1,0 +1,47 @@
+﻿@model ZLERP.Model.GoodsInvalidate 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/GoodsInvalidate/GoodsInvalidate.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            goodsinvalidateIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                getGoodsUrl: '@Url.Action("Get","GoodsInfo")'
+            });
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.GoodsID)@Html.AutoComplete("GoodsID", "GoodsName", "Combo", "GoodsInfo", "ID", "GoodsName", "isused=1", new { style = "width:102px" })</td>
+        <td>@Html.LabelFor(m=>m.InvalidateMan)@Html.EditorFor(m=>m.InvalidateMan)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.Label("物资总量")@Html.TextBox("TotalNum", "0")</td>         
+        <td>@Html.LabelFor(m=>m.InvalidateReason)@Html.EditorFor(m=>m.InvalidateReason)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.InvalidateNum)@Html.EditorFor(m=>m.InvalidateNum)</td>
+        <td>@Html.LabelFor(m=>m.Operator)@Html.EditorFor(m=>m.Operator)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.InvalidateTime)@Html.EditorFor(m => m.InvalidateTime, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m=>m.Remark)@Html.TextAreaFor(m => m.Remark, new { style = "width:345px;" })
+        </td>        
+    </tr>
+</table>
+}
+</div>

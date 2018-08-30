@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.Formula, ZLERP.Model" table="Formula" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+		<id name="ID" column="FormulaID">
+      <generator class="ZLERP.Id.TablePrefixGenerator,ZLERP.Id" />
+		</id>
+		<version name="Version" column="Version" />
+		<property name="FormulaName" column="FormulaName" />
+		<property name="FormulaType" column="FormulaType" />
+		<property name="ConStrength" column="ConStrength" />
+		<property name="Slump" column="Slump" />
+    <property name="SlumpError" column="SlumpError" />
+		<property name="CastMode" column="CastMode" />
+		<property name="SeasonType" column="SeasonType" />
+		<property name="CementType" column="CementType" />
+		<property name="Weight" column="Weight" />
+		<property name="TuneWeight" column="TuneWeight" />
+		<property name="WCRate" column="WCRate" />
+		<property name="SCRate" column="SCRate" />
+		<property name="Mesh" column="Mesh" />
+		<property name="ImpGrade" column="ImpGrade" />
+		<property name="FlexStrength" column="FlexStrength" />
+		<property name="CarpRadii" column="CarpRadii" />
+		<property name="BetonTag" column="BetonTag" />
+		<property name="MixingTime" column="MixingTime" />
+		<property name="CementBreed" column="CementBreed" />
+		<property name="Purpose" column="Purpose" />
+		<property name="Remark" column="Remark" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+    <property name="Fce" column="Fce" />
+    <property name="DesignStrength" column="DesignStrength" />
+    <property name="CaType" column="CaType" />
+		<bag name="FormulaItems" lazy="true" batch-size="30" inverse="true" >
+			<key column="FormulaID"></key>
+			<one-to-many class="FormulaItem"></one-to-many>
+		</bag>
+	</class>
+</hibernate-mapping>

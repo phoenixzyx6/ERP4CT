@@ -1,0 +1,47 @@
+﻿@model ZLERP.Model.GoodsRevert 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/GoodsRevert/GoodsRevert.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            goodsrevertIndexInit({
+                storeUrl: '@Url.Action("Find")',
+                getGoodsUrl: '@Url.Action("Get","GoodsInfo")'
+            });
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td>@Html.TextBoxFor(m => m.ID, new { @style = "display:none;" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.GoodsID)@Html.AutoComplete("GoodsID", "GoodsName", "Combo", "GoodsInfo", "ID", "GoodsName", "isused=1", new { style = "width:102px" })</td>
+        <td>@Html.LabelFor(m=>m.RevertMan)@Html.EditorFor(m=>m.RevertMan)</td>
+
+    </tr>
+    <tr> 
+        <td>@Html.Label("借用数量")@Html.TextBox("BorrowNum", "0")</td>        
+        <td>@Html.LabelFor(m=>m.RevertReason)@Html.EditorFor(m=>m.RevertReason)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.RevertNum)@Html.EditorFor(m=>m.RevertNum)</td>
+        <td>@Html.LabelFor(m=>m.Operator)@Html.EditorFor(m=>m.Operator)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.RevertTime)@Html.EditorFor(m => m.RevertTime, "DateTimeWithTime", new { defaultValue = @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") })</td>
+
+    </tr>
+    <tr> 
+        <td colspan="2">@Html.LabelFor(m=>m.Remark)@Html.TextAreaFor(m => m.Remark, new { style = "width:345px;" })
+        </td>        
+    </tr>
+</table>
+}
+</div>

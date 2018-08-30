@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+	<class name="ZLERP.Model.distance, ZLERP.Model" table="distance" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" >
+		<id name="ID" column="routeid">
+      <generator class="native" />
+		</id>
+    <property name="projectid" column="projectid" />
+		<property name="CastModeid" column="CastModeid" />
+		<property name="distance" column="distance" />
+		
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    
+		<many-to-one name="Project" column="projectid" class="Project" update="false" insert="false"/>
+    <many-to-one name="CastMode" column="CastModeid" class="Dic" update="false" insert="false"/>
+    
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+﻿@model ZLERP.Model.MeasureInfo 
+@section HeaderSection{ 
+<script src="@Url.Content("~/Scripts/Views/MeasureInfo/MeasureInfo.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            measureinfoIndexInit({ storeUrl: '@Url.Action("Find")', updateUrl: '@Url.Action("Update")' });
+        });
+</script>
+}
+<div id="MyJqGrid"></div>
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+<table class="mvcform"> 
+    <tr> 
+        <td style="display:none;"> @Html.TextBoxFor(m=>m.ID)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.MeasureName)@Html.EditorFor(m=>m.MeasureName)</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m=>m.MaxScale)@Html.EditorFor(m=>m.MaxScale)</td>
+    </tr>
+</table> 
+}
+</div>

@@ -1,0 +1,104 @@
+﻿@model ZLERP.Model.StuffAccount 
+@section HeaderSection{
+<script src="@Url.Content("~/Scripts/Views/StuffAccount/StuffAccount.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        IndexInit({
+            storeUrl: '@Url.Action("Find")',
+            findSiloUrl: '@Html.Raw(Url.Action("ListData", "Silo", new {textField="SiloName", valueField="ID"}))'
+        });
+</script>
+}
+
+<!-- 左边Grid -->
+<div id="MyJqGridMain" style="float: left; width: 35%">
+</div>
+
+<!-- 右边Grid -->
+<div id="MyJqGrid" style="float: right; width: 64%">
+</div>
+
+<div id="MyFormDivMain" class="mvcform" style="display:none;">
+@using (Html.BeginForm())
+    {@Html.ValidationSummary()
+    <table class="mvcform"> 
+        <tr> 
+            <td >@Html.Hidden("ID")
+           </td>
+        </tr>
+        <tr> 
+            <td>@Html.Label("月份")@*@Html.Editor("Month", "", new {@data_val_required = "月份 字段是必需的", data_val = "true", defaultValue = @DateTime.Now.ToString("yyyyMM") })*@
+            <select id="Month" name="Month">
+               <option value="201601">201601</option>
+               <option value="201602">201602</option>
+               <option value="201603">201603</option>
+               <option value="201604">201604</option>
+               <option value="201605">201605</option>
+               <option value="201606">201606</option>
+               <option value="201607">201607</option>
+               <option value="201608">201608</option>
+               <option value="201609">201609</option>
+               <option value="201610">201610</option>
+               <option value="201611">201611</option>
+               <option value="201612">201612</option>
+               <option value="201701">201701</option>
+               <option value="201702">201702</option>
+               <option value="201703">201703</option>
+               <option value="201704">201704</option>
+               <option value="201705">201705</option>
+               <option value="201707">201707</option>
+               <option value="201707">201707</option>
+               <option value="201708">201708</option>
+               <option value="201709">201709</option>
+               <option value="201710">201710</option>
+               <option value="201711">201711</option>
+               <option value="201712">201712</option>
+            </select>
+            </td>
+        </tr>
+        <tr> 
+            <td>@Html.Label("备  注")@Html.TextBox("Meno", "", new { })</td>
+        </tr>
+    </table>
+
+    }
+</div>
+
+<div id="MyFormDiv" class="mvcform" style="display:none;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        @Html.Hidden("ID")
+        <table class="mvcform"> 
+            <tr>
+                <td>@Html.LabelFor(m => m.StuffId)@Html.DropDownListFor(m => m.StuffId, (IEnumerable<SelectListItem>)ViewBag.StuffList, "", null)
+                </td>
+                @*<td>@Html.LabelFor(m => m.StuffId)@Html.AutoComplete("StuffId", "StuffName", "Combo", "StuffInfo", "ID", "StuffName")
+                </td>*@
+                
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.SiloId)@Html.DropDownListFor(m => m.SiloId, Enumerable.Empty<SelectListItem>())
+                </td> 
+            </tr>
+            <tr>
+                
+                <td>@Html.LabelFor(m => m.CurrentCount)@Html.EditorFor(m => m.CurrentCount)
+                </td>
+                
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CurrentMoney)@Html.EditorFor(m => m.CurrentMoney)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Meno)@Html.EditorFor(m => m.Meno)
+                </td>
+            </tr>
+            <tr> 
+            <td style="display: none">@Html.LabelFor(m => m.StuffAccountMainId)@Html.EditorFor(m => m.StuffAccountMainId)</td>
+   
+        </tr>
+    </table>
+
+    }
+</div>

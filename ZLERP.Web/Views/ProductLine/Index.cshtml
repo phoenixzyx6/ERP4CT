@@ -1,0 +1,70 @@
+﻿@model ZLERP.Model.ProductLine
+            
+@section HeaderSection{ 
+    <script src="@Url.Content("~/Scripts/Views/ProductLine.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        var _measureOptions = '@Html.Raw(ViewBag.MeasureOptions)';
+        $(function () { 
+            productLineInit({
+                findSiloStoreUrl: '@Url.Action("FindAvailableSilo")',
+                storeUrl: '@Url.Action("Find")',
+                findSiloUrl: '@Url.Action("FindSilo")',
+                updateSiloProductLineUrl: '@Url.Action("UpdateSiloProductLine")',
+                assignSiloUrl: '@Url.Action("AssignSilo")'
+            });
+        }); 
+    </script>
+}
+<div id="productline-form" style="display:none;">
+@using (Html.BeginForm())
+{
+<table class="mvcform">
+    <tr> 
+        <td>@Html.LabelFor(m => m.ID)@Html.TextBoxFor(m => m.ID, new { @class = "text" })</td>
+ 
+        <td>@Html.LabelFor(m => m.ProductLineName)@Html.TextBoxFor(m => m.ProductLineName, new { @class = "text" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.DishNum)@Html.TextBoxFor(m => m.DishNum, new { @class = "text" })</td>
+ 
+        <td>@Html.LabelFor(m => m.HourNum)@Html.TextBoxFor(m => m.HourNum, new { @class = "text" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.Remark)@Html.TextBoxFor(m => m.Remark, new { @class = "text" })</td>
+        <td>@Html.LabelFor(m => m.IsUsed)@Html.CheckBoxFor(m => m.IsUsed, new { @class = "text" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.IP)@Html.TextBoxFor(m => m.IP, new { @class = "text" })</td>
+ 
+        <td>@Html.LabelFor(m => m.Port)@Html.TextBoxFor(m => m.Port, new { @class = "text" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.KZType)@Html.TextBoxFor(m => m.KZType, new { @class = "text" })</td>
+ 
+        <td>@Html.LabelFor(m => m.KZVersion)@Html.TextBoxFor(m => m.KZVersion, new { @class = "text" })</td>
+   
+    </tr>
+    <tr> 
+        <td>@Html.LabelFor(m => m.OrderNum)@Html.TextBoxFor(m => m.OrderNum, new { @class = "text" })</td>
+        <td></td>
+    </tr>
+</table>
+
+}
+</div>
+
+<div id="productLineGrid"></div>
+
+<div id="baleproductlineGrid"  style="margin-top:10px;"></div> 
+<div id="silogrid-dialog" style="display:none;">
+    <div id="silogrid"></div>
+</div>
+ 
+
+ 
+
+ 

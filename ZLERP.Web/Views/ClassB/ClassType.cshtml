@@ -1,0 +1,80 @@
+﻿@model ZLERP.Model.ViewModels.ClassBMS
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/ClassType/ClassType.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        var options = {
+            bstoreUrl: '@Url.Action("Find")'
+            , mstoreUrl: '@Url.Action("Find","ClassM")'
+            , sstoreUrl: '@Url.Action("Find","Classs")'
+            , classbUpdateUrl: '@Url.Action("Update","ClassB")'
+            , classmUpdateUrl: '@Url.Action("Update","ClassM")' 
+            , classsUpdateUrl: '@Url.Action("Update","ClassS")' 
+            , classTypeID: '@ViewBag.classType'
+        };
+        $(function () {
+            classbIndexInit(options);
+        });
+    </script>
+}        
+
+<div id="left" style="float: left; width: 50%;">
+    <div id="BGridAndForm">
+        <div id="BForm" class="mvcform">
+        @using (Html.BeginForm("", "", FormMethod.Post, new { id = "ClassBForms" }))
+        { 
+            @Html.ValidationSummary()
+            @Html.HiddenFor(m => m.ClassB.ClassID, new { Value = @ViewBag.classType })
+            <table class="mvcform paddingStyle" style="width:100%;">
+                <tr>
+                    <td>@Html.Label("大类编号")@Html.TextBoxFor(m => m.ClassB.ID, new {style="width:80px;"})</td>
+                    <td>@Html.LabelFor(m => m.ClassB.ClassBName)@Html.TextBoxFor(m => m.ClassB.ClassBName)</td>
+                    <td><button id="bb" class="tbtn save" title="大类/保存" role="button" aria-disabled="false" type ="button" onclick="SaveB();return false;">保存</button><button id="sbb" class="tbtn ui-icon-search" style=" margin:0px;" title="大类/查询" role="button" aria-disabled="false" type ="button" onclick="Search('B');return false;">查询</button></td>
+                </tr>
+            </table>
+        }
+        </div>
+        <div id="BGrid">
+        </div>
+    </div>
+</div>
+<div id="right" style=" float:right; width:49.8%;">
+    <div id ="MGridAndForm">
+        <div id="MForm" class="mvcform">
+        @using (Html.BeginForm("", "", FormMethod.Post, new { id = "ClassMForms" })) { 
+            @Html.ValidationSummary()
+            @Html.HiddenFor(m => m.ClassM.ClassID, new { Value = @ViewBag.classType })
+            @Html.HiddenFor(m => m.ClassM.ClassBID)
+            <table class="mvcform paddingStyle" style="width:100%;">
+                <tr>
+                    <td>@Html.Label("中类编号")@Html.TextBoxFor(m => m.ClassM.ID, new { style = "width:80px;" })</td>
+                    <td>@Html.LabelFor(m => m.ClassM.ClassMName)@Html.TextBoxFor(m => m.ClassM.ClassMName)</td>
+                    <td><button id="mb" class="tbtn save" title="中类/保存" role="button" aria-disabled="false" type ="button" disabled=disabled onclick="SaveM();return false;">保存</button><button id="smb" class="tbtn ui-icon-search" style=" margin:0px;" title="中类/查询" role="button" aria-disabled="false" type ="button" onclick="Search('M');return false;">查询</button></td>
+                </tr>
+            </table>
+        }
+        </div>
+        <div id="MGrid">
+        </div>
+    </div>
+    <div id="hr" style=" height:1px;"></div>
+    <div id ="SGridAndForm">
+        <div id="SForm" class="mvcform">
+        @using (Html.BeginForm("", "", FormMethod.Post, new { id = "ClasssForms" }))
+        { 
+            @Html.ValidationSummary()
+            @Html.HiddenFor(m => m.Classs.ClassID, new { Value = @ViewBag.classType })
+            @Html.HiddenFor(m => m.Classs.ClassMID)
+            @Html.HiddenFor(m => m.Classs.ClassBID)
+            <table class="mvcform paddingStyle" style="width:100%;">
+                <tr>
+                    <td>@Html.Label("细类编号")@Html.TextBoxFor(m => m.Classs.ID, new { style = "width:80px;" })</td>
+                    <td>@Html.LabelFor(m => m.Classs.ClassSName)@Html.TextBoxFor(m => m.Classs.ClassSName)</td>
+                    <td><button id="sb" class="tbtn save" title="细类/保存" role="button" aria-disabled="false" type ="button" disabled=disabled onclick="SaveS();return false;">保存</button><button id="ssb" class="tbtn ui-icon-search" style=" margin:0px;" title="细类/查询" role="button" aria-disabled="false" type ="button" onclick="Search('s');return false;">查询</button></td>
+                </tr>
+            </table>
+        }
+        </div>
+        <div id="SGrid">
+        </div>
+    </div>
+</div>

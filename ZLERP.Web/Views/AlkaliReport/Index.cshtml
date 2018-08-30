@@ -1,0 +1,143 @@
+﻿@model ZLERP.Model.AlkaliReport 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/AlkaliReport/AlkaliReport.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            alkalireportIndexInit('@Url.Action("Find")');
+        });
+    </script>
+}
+<div id="MyJqGrid">
+</div>
+<div id="MyFormDiv" class="mvcform" style="display: none;">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td style="display: none">@Html.LabelFor(m => m.ID)@Html.EditorFor(m => m.ID)
+                </td>
+                <td>@Html.LabelFor(m => m.CustMixpropID)@Html.AutoComplete("CustMixpropID", "MixpropCode", "Combo", "CustMixprop", "ID", "MixpropCode")
+                </td>
+                <td>@Html.LabelFor(m => m.TaskID)@Html.AutoComplete("TaskID", "ProjectName", "Combo", "ProduceTask", "ID", "ProjectName")
+                </td>
+                <td>@Html.LabelFor(m => m.ConStrength)@Html.EditorFor(m => m.ConStrength)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CEStuffID)@Html.DropDownListFor(m => m.CEStuffID, (IEnumerable<SelectListItem>)ViewBag.CEStuff)
+                </td>
+                <td>@Html.LabelFor(m => m.CEExamID)@Html.DropDownListFor(m => m.CEExamID, (IEnumerable<SelectListItem>)ViewBag.CEExam)
+                </td>
+                <td>@Html.LabelFor(m => m.CESupplyID)@Html.EditorFor(m => m.CESupplyID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.CEAmount)@Html.EditorFor(m => m.CEAmount)
+                </td>
+                <td>@Html.LabelFor(m => m.CEAlkPer)@Html.EditorFor(m => m.CEAlkPer)
+                </td>
+                <td>@Html.Label("碱含量KG")@Html.TextBox("CEAlkAmount", 0)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ADM1StuffID)@Html.DropDownListFor(m => m.ADM1StuffID, (IEnumerable<SelectListItem>)ViewBag.ADMStuff)
+                </td>
+                <td>@Html.LabelFor(m => m.ADM1ExamID)@Html.DropDownListFor(m => m.ADM1ExamID, (IEnumerable<SelectListItem>)ViewBag.ADMExam)
+                </td>
+                <td>@Html.LabelFor(m => m.ADM1SupplyID)@Html.EditorFor(m => m.ADM1SupplyID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ADM1Amount)@Html.EditorFor(m => m.ADM1Amount)
+                </td>
+                <td>@Html.LabelFor(m => m.ADM1AlkPer)@Html.EditorFor(m => m.ADM1AlkPer)
+                </td>
+                <td>@Html.Label("碱含量KG")@Html.TextBox("ADM1AlkAmount", 0)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AIR1StuffID)@Html.DropDownListFor(m => m.AIR1StuffID, (IEnumerable<SelectListItem>)ViewBag.AIRStuff)
+                </td>
+                <td>@Html.LabelFor(m => m.AIR1ExamID)@Html.DropDownListFor(m => m.AIR1ExamID, (IEnumerable<SelectListItem>)ViewBag.AIR1Exam)
+                </td>
+                <td>@Html.LabelFor(m => m.AIR1SupplyID)@Html.EditorFor(m => m.AIR1SupplyID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AIR1Amount)@Html.EditorFor(m => m.AIR1Amount)
+                </td>
+                <td>@Html.LabelFor(m => m.AIR1AlkPer)@Html.EditorFor(m => m.AIR1AlkPer)
+                </td>
+                <td>@Html.Label("碱含量KG")@Html.TextBox("AIR1AlkAmount", 0)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AIR2StuffID)@Html.DropDownListFor(m => m.AIR2StuffID, (IEnumerable<SelectListItem>)ViewBag.AIRStuff)
+                </td>
+                <td>@Html.LabelFor(m => m.AIR2ExamID)@Html.DropDownListFor(m => m.AIR2ExamID, (IEnumerable<SelectListItem>)ViewBag.AIR2Exam)
+                </td>
+                <td>@Html.LabelFor(m => m.AIR2SupplyID)@Html.EditorFor(m => m.AIR2SupplyID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AIR2Amount)@Html.EditorFor(m => m.AIR2Amount)
+                </td>
+                <td>@Html.LabelFor(m => m.AIR2AlkPer)@Html.EditorFor(m => m.AIR2AlkPer)
+                </td>
+                <td>@Html.Label("碱含量KG")@Html.TextBox("AIR2AlkAmount", 0)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ADM2StuffID)@Html.DropDownListFor(m => m.ADM2StuffID, (IEnumerable<SelectListItem>)ViewBag.ADMStuff)
+                </td>
+                <td>@Html.LabelFor(m => m.ADM2ExamID)@Html.DropDownListFor(m => m.ADM2ExamID, (IEnumerable<SelectListItem>)ViewBag.ADM2Exam)
+                </td>
+                <td>@Html.LabelFor(m => m.ADM2SupplyID)@Html.EditorFor(m => m.ADM2SupplyID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ADM2Amount)@Html.EditorFor(m => m.ADM2Amount)
+                </td>
+                <td>@Html.LabelFor(m => m.ADM2AlkPer)@Html.EditorFor(m => m.ADM2AlkPer)
+                </td>
+                <td>@Html.Label("碱含量KG")@Html.TextBox("ADM2AlkAmount", 0)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ADM3StuffID)@Html.EditorFor(m => m.ADM3StuffID)
+                </td>
+                <td>@Html.LabelFor(m => m.ADM3ExamID)@Html.EditorFor(m => m.ADM3ExamID)
+                </td>
+                <td>@Html.LabelFor(m => m.ADM3SupplyID)@Html.EditorFor(m => m.ADM3SupplyID)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ADM3Amount)@Html.EditorFor(m => m.ADM3Amount)
+                </td>
+                <td>@Html.LabelFor(m => m.ADM3AlkPer)@Html.EditorFor(m => m.ADM3AlkPer)
+                </td>
+                <td>@Html.Label("碱含量KG")@Html.TextBox("ADM3AlkAmount", 0)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.AlkAmount)@Html.EditorFor(m => m.AlkAmount)
+                </td>
+                <td colspan="2">@Html.LabelFor(m => m.ExamResult)@Html.TextArea("ExamResult", "每立方混凝土中碱含量小于3.0kg", 1, 50, new { })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Assessor)@Html.EditorFor(m => m.Assessor)
+                </td>
+                <td>@Html.LabelFor(m => m.Principal)@Html.EditorFor(m => m.Principal)
+                </td>
+                <td>@Html.LabelFor(m => m.Accountor)@Html.EditorFor(m => m.Accountor)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">@Html.LabelFor(m => m.Remark)@Html.TextArea("Remark", "合格", 1, 90, new { })
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>

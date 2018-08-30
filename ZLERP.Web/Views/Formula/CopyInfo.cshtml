@@ -1,0 +1,40 @@
+﻿@model ZLERP.Model.Dic
+ 
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/FormulaCopy.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            formulaCopyInit('@Url.Action("GetSourceList", "Formula")');
+            var postUrl = '@Url.Action("StartCopy", "Formula")';
+            var btn = $("#begincopy");
+            btn.bind('click', function (event) {
+                startCopy('@Url.Action("StartCopy", "Formula")');
+            });
+        });
+    </script>
+}
+
+<div id="CopyFormDiv" class="mvcform">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary()
+        <table class="mvcform">
+            <tr>
+                <td>
+                @Html.Label("复制方式")@Html.DicEditorFor(m => m.TreeCode, DicEnum.CopyOp, "")
+                </td>
+                <td>
+                @Html.Label("源配比代号")
+                @Html.DropDownList("sid", Enumerable.Empty<SelectListItem>(), new { id = "source-id" })
+                </td>
+                <td>
+                @Html.Label("目标配比代号")
+                @Html.TextBox("tid")
+                </td>
+                <td style="padding-left:10px;">   
+            <button id="begincopy" class="tbtn ui-icon-copy" title="配比复制/开始复制" role="button" aria-disabled="false" type ="button">开始复制</button>
+            </td>
+            </tr>
+             
+        </table>
+    }
+</div>

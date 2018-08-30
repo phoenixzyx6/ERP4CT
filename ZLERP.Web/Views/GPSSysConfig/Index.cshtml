@@ -1,0 +1,77 @@
+﻿@model ZLERP.Model.SysConfig　
+@section HeaderSection{
+    <script src="@Url.Content("~/Scripts/Views/GPSSysConfig.js")" type="text/javascript" language="javascript"> </script>
+    <script type="text/javascript">
+        $(function () {
+            sysConfigInit({
+                storeUrl: '@Url.Action("Find","SysConfig")',
+                updateUrl: '@Url.Action("Update","SysConfig")'
+            });
+
+            $("#tabs").tabs();
+
+            $("#tabs input").bind("change", function () {
+                var name = this.name;
+                var val = this.type == "checkbox" ? this.checked : this.value;
+                if (val.toString().length == 0) { showError("内容不能为空，请重新输入"); return; }
+                ajaxRequest('@Url.Action("UpdateByName","SysConfig")', { configName: name, value: val }, true, function () {
+                });
+            });
+        });
+    </script>
+}
+<div id="grid" style="display: none;">
+</div>
+<div id="tabs">
+    <div id="tabs-setsys">
+        <table class="mvcform paddingStyle" style="margin: 3px; width: auto">
+            <tr>
+                <th style="width: 50px">
+                    序号
+                </th>
+                <th style="width: 200">
+                    名称
+                </th>
+                <th style="width: 200px">
+                    当前值
+                </th>
+                <th style="width: 400px">
+                    备注
+                </th>
+                <th style="width: 50px">
+                    类型
+                </th>
+            </tr>
+            @foreach (ZLERP.Model.SysConfig s in ViewBag.SysConfigs)
+            {
+                 
+                <tr>
+                    <td>
+                        @s.ID
+                    </td>
+                    <td>
+                        @s.ConfigInfo
+                    </td>
+                    <td>
+                        @if (@s.DateType == "bool")
+                        {
+                            @Html.CheckBox(@s.ConfigName, @s.ConfigValue == "true" ? true : false, null)     
+                        }
+                        else
+                        {
+                            @Html.TextBox(@s.ConfigName, @s.ConfigValue, new { style = "width:180px" })
+                        }
+                    </td>
+                    <td>
+                        @s.Remark
+                    </td>
+                    <td>
+                        @s.DateType
+                    </td>
+                </tr>
+               
+            }
+        </table>
+    </div>
+</div>
+ 

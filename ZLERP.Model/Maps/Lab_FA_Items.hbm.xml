@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ZLERP.Model" assembly="ZLERP.Model">
+  <class name="ZLERP.Model.Lab_FA_Items, ZLERP.Model" table="Lab_FA_Items" lazy="true"
+    dynamic-insert="true" dynamic-update="true" batch-size="30" optimistic-lock="version">
+    <id name="ID" column="ID">
+      <generator class="native" />
+    </id>
+    <version name="Version" column="Version" />
+    <property name="Lab_FAID" column="Lab_FAID" />
+    <property name="NO" column="NO" />
+    <property name="R" column="R" />
+    <property name="YRQ" column="YRQ" />
+    <property name="YRH" column="YRH" />
+    <property name="S1" column="S1" />
+    <property name="S2" column="S2" />
+    <property name="S3" column="S3" />
+    <property name="S4" column="S4" />
+    <property name="S5" column="S5" />
+    <property name="S6" column="S6" />
+    <property name="SD" column="SD" />
+    <property name="LQ" column="LQ" />
+    <property name="LH" column="LH" />
+    <property name="LKQ" column="LKQ" />
+    <property name="LKH" column="LKH" />
+    <property name="SHA" column="SHA" />
+    <property name="YSP" column="YSP" />
+    <property name="SP" column="SP" />
+    <property name="DG" column="DG" />
+    <property name="DV" column="DV" />
+    <property name="DTS" column="DTS" />
+    <property name="JG" column="JG" />
+    <property name="JV" column="JV" />
+    <property name="JTS" column="JTS" />
+    <property name="Y1" column="Y1" />
+    <property name="Y2" column="Y2" />
+    <property name="Y3" column="Y3" />
+    <property name="Y4" column="Y4" />
+    <property name="BuildTime" column="BuildTime" update="false"/>
+    <property name="Builder" column="Builder" update="false"/>
+    <property name="ModifyTime" column="ModifyTime" insert="false"/>
+    <property name="Modifier" column="Modifier" insert="false"/>
+    <property name="Lifecycle" column="Lifecycle" />
+
+    <many-to-one name="Lab_FA" column="Lab_FAID" class="Lab_FA" update="false" insert="false"/>
+  </class>
+</hibernate-mapping>
